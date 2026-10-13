@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDestination } from '../../context/DestinationContext';
 import { useLocationContext } from '../../context/LocationContext';
 import { useWishlist } from '../../context/WishlistContext';
-import { Logo } from './Logo';
-import { LocationSelector } from './LocationSelector';
 import { SearchBar } from './SearchBar';
 import { ProfileMenu } from './ProfileMenu';
 import { WishlistButton } from './WishlistButton';
@@ -23,40 +21,24 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white border-b border-[#E5EAF3] shadow-soft-sm">
-        
-        {/* ROW 1: Brand Logo / Destination Switcher | Deliver to Location */}
-        <div className="border-b border-[#E5EAF3] bg-white">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-1.5 sm:py-2 flex items-center justify-between gap-4">
-            
-            {/* Left: Mobile Trigger + Brand Switcher Cards */}
-            <div className="flex items-center gap-2 sm:gap-3">
+      <header className="sticky top-[49px] sm:top-[53px] z-40 bg-white border-b border-[#E5EAF3] shadow-soft-sm">
+        {/* ROW: Search Bar | User Actions (Profile, Wishlist, Cart) */}
+        <div className="bg-white">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-3 sm:gap-4 lg:gap-8">
+            {/* Search Bar + Mobile Drawer Trigger */}
+            <div className="flex-1 max-w-4xl flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-1.5 -ml-1 text-zinc-600 hover:text-zinc-900 rounded-lg hover:bg-zinc-100 transition-colors"
+                className="lg:hidden p-1.5 -ml-1 text-zinc-600 hover:text-zinc-900 rounded-lg hover:bg-zinc-100 transition-colors shrink-0"
                 aria-label="Toggle mobile menu"
               >
                 {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
 
-              <Logo />
-            </div>
-
-            {/* Right: Location Selector */}
-            <div className="flex items-center gap-2">
-              <LocationSelector />
-            </div>
-          </div>
-        </div>
-
-        {/* ROW 2: Search Bar | User Actions (Profile, Wishlist, Cart) */}
-        <div className="bg-white">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-1.5 sm:py-2 flex items-center justify-between gap-4 lg:gap-8">
-            
-            {/* Search Bar */}
-            <div className="flex-1 max-w-4xl">
-              <SearchBar />
+              <div className="flex-1">
+                <SearchBar />
+              </div>
             </div>
 
             {/* Actions */}
@@ -69,6 +51,7 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
         </div>
+
 
         {/* ROW 3: Category Navigation */}
         <CategoryNavigation />

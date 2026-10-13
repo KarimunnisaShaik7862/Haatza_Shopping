@@ -81,7 +81,7 @@ export const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-8">
       <div className="pb-6 border-b border-[#E5EAF3] mb-8">
         <h1 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight">
           Secure Checkout

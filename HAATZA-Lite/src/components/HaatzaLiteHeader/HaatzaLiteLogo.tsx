@@ -4,7 +4,7 @@ import { Zap, Sprout } from 'lucide-react';
 
 export const HaatzaLiteLogo: React.FC = () => {
   return (
-    <Link to="/" className="flex items-center gap-2 group select-none">
+    <Link to="/lite" className="flex items-center gap-2 group select-none">
       <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#238636] to-emerald-800 text-white flex items-center justify-center shadow-md shadow-emerald-900/10 group-hover:scale-105 transition-transform">
         <Sprout className="w-5 h-5 text-white" />
       </div>

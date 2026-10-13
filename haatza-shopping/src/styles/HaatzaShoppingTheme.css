@@ -20,16 +20,18 @@
   --haatza-shopping-success: #16A34A;
   --haatza-shopping-error: #DC2626;
 
-  /* Horizontal Container Spacing Tokens (Source of truth: Lite Header specification) */
-  --haatza-shopping-pad-mobile: 16px;
-  --haatza-shopping-pad-tablet: 24px;
-  --haatza-shopping-pad-desktop: 32px;
+  /* Horizontal Container Spacing Tokens */
+  --haatza-shopping-pad-mobile: 24px;
+  --haatza-shopping-pad-tablet: 40px;
+  --haatza-shopping-pad-desktop: 56px;
+  --haatza-shopping-pad-xl: 64px;
   --haatza-shopping-container-max: 1440px;
 
   /* Dual layer banner padding */
-  --haatza-shopping-nested-mobile: 32px;
-  --haatza-shopping-nested-tablet: 48px;
-  --haatza-shopping-nested-desktop: 64px;
+  --haatza-shopping-nested-mobile: 48px;
+  --haatza-shopping-nested-tablet: 80px;
+  --haatza-shopping-nested-desktop: 112px;
+  --haatza-shopping-nested-xl: 128px;
 }
 
 /* Scoped Soft UI & Glassmorphism Utilities */

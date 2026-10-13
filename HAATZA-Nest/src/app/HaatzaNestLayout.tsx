@@ -19,7 +19,7 @@ export const HaatzaNestLayout: React.FC = () => {
 
       {/* HAATZA Nest Footer */}
       <footer className="bg-white border-t border-zinc-200 mt-12 py-8">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 space-y-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-zinc-100 pb-6">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-[#6C3FC5] text-white flex items-center justify-center">
@@ -32,8 +32,8 @@ export const HaatzaNestLayout: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-6 text-xs font-semibold text-zinc-600">
-              <Link to="/services" className="hover:text-[#6C3FC5]">All Services</Link>
-              <Link to="/bookings" className="hover:text-[#6C3FC5]">My Bookings</Link>
+              <Link to="/nest/services" className="hover:text-[#6C3FC5]">All Services</Link>
+              <Link to="/nest/bookings" className="hover:text-[#6C3FC5]">My Bookings</Link>
               <a href="#" className="hover:text-[#6C3FC5]">Safety & Background Checks</a>
             </div>
           </div>

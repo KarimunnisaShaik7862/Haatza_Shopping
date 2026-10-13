@@ -58,7 +58,7 @@ export const ProductDetailsPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-8 space-y-6">
         <LoadingSkeleton type="text" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="aspect-square bg-zinc-200 rounded-2xl animate-pulse" />
@@ -70,7 +70,7 @@ export const ProductDetailsPage: React.FC = () => {
 
   if (!product) {
     return (
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-16 text-center">
         <h2 className="text-2xl font-bold text-[#172033] mb-2 font-heading">Product Not Found</h2>
         <p className="text-sm text-[#64748B] mb-6 font-body">The product you are looking for might have been moved or is unavailable.</p>
         <Link to="/" className="px-6 py-2.5 bg-[#2962FF] hover:bg-[#1E4ED8] text-white font-bold rounded-xl transition-colors shadow-soft-sm font-heading">
@@ -108,7 +108,7 @@ export const ProductDetailsPage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} className="mb-6" />
 
       {/* Main Product Showcase Grid */}

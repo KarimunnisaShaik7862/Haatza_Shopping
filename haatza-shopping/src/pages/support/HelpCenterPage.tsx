@@ -37,7 +37,7 @@ export const HelpCenterPage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-8 space-y-10 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} />
 
       {/* Hero Banner */}

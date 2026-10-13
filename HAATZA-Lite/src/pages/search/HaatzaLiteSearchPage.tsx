@@ -29,7 +29,7 @@ export const HaatzaLiteSearchPage: React.FC = () => {
   }, [query]);
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 space-y-6">
       <div className="flex items-center justify-between border-b border-zinc-200/80 pb-3">
         <div>
           <h1 className="text-xl sm:text-2xl font-black text-[#172033] font-heading">
@@ -48,7 +48,7 @@ export const HaatzaLiteSearchPage: React.FC = () => {
           title={`No results found for "${query}"`}
           description="Try searching for everyday terms like 'milk', 'mango', 'paneer', or 'bread'."
           actionText="Browse Categories"
-          actionLink="/categories"
+          actionLink="/lite/categories"
         />
       ) : (
         <HaatzaLiteProductGrid products={products} />

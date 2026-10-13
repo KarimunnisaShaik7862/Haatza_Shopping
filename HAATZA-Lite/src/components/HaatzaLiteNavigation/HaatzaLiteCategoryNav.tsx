@@ -5,11 +5,11 @@ import { haatzaLiteCategories } from '../../data/liteData';
 export const HaatzaLiteCategoryNav: React.FC = () => {
   return (
     <nav className="bg-white border-b border-zinc-200/70 overflow-x-auto scrollbar-none py-2">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 sm:gap-3 shrink-0">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 flex items-center gap-2 sm:gap-3 shrink-0">
         {haatzaLiteCategories.map((cat) => (
           <Link
             key={cat.id}
-            to={`/categories/${cat.slug}`}
+            to={`/lite/categories/${cat.slug}`}
             className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-zinc-200/80 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all text-xs font-bold text-zinc-700 hover:text-[#238636] shrink-0"
           >
             <img

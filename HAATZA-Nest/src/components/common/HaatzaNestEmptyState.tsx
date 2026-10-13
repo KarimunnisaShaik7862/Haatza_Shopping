@@ -14,7 +14,7 @@ export const HaatzaNestEmptyState: React.FC<HaatzaNestEmptyStateProps> = ({
   title = 'No home services found',
   description = 'We could not find any service matching your query or selected category.',
   actionText = 'View All Services',
-  actionLink = '/services',
+  actionLink = '/nest/services',
 }) => {
   return (
     <div className="flex flex-col items-center justify-center p-12 text-center bg-white rounded-3xl border border-zinc-100 max-w-md mx-auto my-8">

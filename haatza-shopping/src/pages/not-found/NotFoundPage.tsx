@@ -4,7 +4,7 @@ import { Home } from 'lucide-react';
 
 export const NotFoundPage: React.FC = () => {
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-20 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-20 pb-24 sm:pb-16">
       <div className="max-w-xl mx-auto text-center space-y-6">
       <div className="w-20 h-20 rounded-3xl bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] flex items-center justify-center font-black text-3xl mx-auto shadow-soft-sm">
         404

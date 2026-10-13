@@ -20,7 +20,7 @@ export const PageContainer: React.FC<PageContainerProps> = ({
   };
 
   return (
-    <div className={cn(sizeMap[size], 'mx-auto px-4 sm:px-6 lg:px-8', className)}>
+    <div className={cn(sizeMap[size], 'mx-auto px-6 sm:px-10 lg:px-14 xl:px-16', className)}>
       {children}
     </div>
   );

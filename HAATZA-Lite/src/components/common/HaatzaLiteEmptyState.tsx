@@ -14,7 +14,7 @@ export const HaatzaLiteEmptyState: React.FC<HaatzaLiteEmptyStateProps> = ({
   title = 'No items found',
   description = 'We could not find any grocery items matching your criteria.',
   actionText = 'Browse Categories',
-  actionLink = '/categories',
+  actionLink = '/lite/categories',
 }) => {
   return (
     <div className="flex flex-col items-center justify-center p-12 text-center bg-white rounded-2xl border border-zinc-100 max-w-md mx-auto my-8">

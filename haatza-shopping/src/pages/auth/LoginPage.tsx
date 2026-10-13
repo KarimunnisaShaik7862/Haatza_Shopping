@@ -29,7 +29,7 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-16 pb-24 sm:pb-16">
       <div className="max-w-md mx-auto bg-white rounded-3xl border border-[#E5EAF3] p-8 shadow-soft space-y-6">
         <div className="text-center space-y-1">
           <div className="w-12 h-12 rounded-2xl bg-[#EEF3FF] text-[#2962FF] font-black text-2xl flex items-center justify-center mx-auto mb-3 shadow-soft-sm">

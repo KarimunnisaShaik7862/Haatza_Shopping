@@ -60,7 +60,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-8 space-y-6">
         <HaatzaLiteLoading type="grid" count={6} />
       </div>
     );
@@ -70,8 +70,8 @@ export const HaatzaLiteHomePage: React.FC = () => {
     <div className="pb-24 sm:pb-16 space-y-6 bg-zinc-50/40 min-h-screen">
       
       {/* 10-15 Min Express Delivery Announcement Bar */}
-      <div className="bg-[#238636] text-white py-2.5 px-4 shadow-sm border-b border-emerald-700">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
+      <div className="bg-[#238636] text-white py-2.5 shadow-sm border-b border-emerald-700">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
           <div className="flex items-center gap-2.5">
             <span className="flex items-center gap-1.5 font-black uppercase tracking-wider bg-emerald-900/60 px-2.5 py-1 rounded-lg text-emerald-200">
               <Zap className="w-3.5 h-3.5 fill-yellow-300 text-yellow-300" />
@@ -98,7 +98,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
       <HaatzaLiteHeroBanner slides={heroSlides} />
 
       {/* Quick Category Circles / Grid */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -108,7 +108,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
               <p className="text-xs text-zinc-500 font-medium">Explore everyday essentials stocked fresh daily</p>
             </div>
             <Link
-              to="/categories"
+              to="/lite/categories"
               className="text-xs font-bold text-[#238636] hover:underline flex items-center gap-1"
             >
               <span>View All</span>
@@ -120,7 +120,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
             {categories.map((cat) => (
               <Link
                 key={cat.id}
-                to={`/categories/${cat.slug}`}
+                to={`/lite/categories/${cat.slug}`}
                 className="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-[#EAF6EC] transition-all duration-200"
               >
                 <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-zinc-50 group-hover:bg-white overflow-hidden p-1.5 mb-2 border border-zinc-100 shadow-2xs group-hover:shadow-xs group-hover:scale-105 transition-all">
@@ -143,7 +143,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
       </div>
 
       {/* Flash Deals / Super Savers in 10-15 Mins */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs">
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2.5">
@@ -158,7 +158,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
               </div>
             </div>
             <Link
-              to="/categories/all"
+              to="/lite/categories/all"
               className="text-xs font-bold text-[#238636] hover:underline flex items-center gap-1"
             >
               <span>See All Deals</span>
@@ -180,7 +180,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
       )}
 
       {/* Fresh Fruits & Vegetables Aisle */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs">
           <div className="flex items-center justify-between mb-5">
             <div>
@@ -194,7 +194,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
               <p className="text-xs text-zinc-500 font-medium">Naturally ripened, inspected for crisp sweetness</p>
             </div>
             <Link
-              to="/categories/fruits-vegetables"
+              to="/lite/categories/fruits-vegetables"
               className="text-xs font-bold text-[#238636] hover:underline flex items-center gap-1"
             >
               <span>Explore Fruits</span>
@@ -211,7 +211,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
       </div>
 
       {/* Household Cleaning & Personal Care Aisle */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs">
           <div className="flex items-center justify-between mb-5">
             <div>
@@ -221,7 +221,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
               <p className="text-xs text-zinc-500 font-medium">Detergents, floor cleansers, dishwashing gels & soaps</p>
             </div>
             <Link
-              to="/categories/household-cleaning"
+              to="/lite/categories/household-cleaning"
               className="text-xs font-bold text-[#238636] hover:underline flex items-center gap-1"
             >
               <span>View All</span>
@@ -238,7 +238,7 @@ export const HaatzaLiteHomePage: React.FC = () => {
       </div>
 
       {/* LITE Quality Guarantees */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-[#EAF6EC]/60 border border-emerald-200/80 rounded-3xl">
           <div className="flex items-center gap-3.5">
             <div className="w-12 h-12 rounded-2xl bg-white text-[#238636] flex items-center justify-center shadow-xs shrink-0">

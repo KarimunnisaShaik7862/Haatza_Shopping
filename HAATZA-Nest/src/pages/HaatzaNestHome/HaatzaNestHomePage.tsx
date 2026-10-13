@@ -69,7 +69,7 @@ export const HaatzaNestHomePage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-8 space-y-6">
         <HaatzaNestLoading type="skeleton" count={6} />
       </div>
     );
@@ -79,7 +79,7 @@ export const HaatzaNestHomePage: React.FC = () => {
     <div className="pb-20 space-y-8 bg-[#FAF8FD] min-h-screen">
       
       {/* Hero Banner Section */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 pt-4">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#6C3FC5] via-[#522ba0] to-indigo-950 text-white shadow-xl min-h-[360px] sm:min-h-[420px] flex items-center p-6 sm:p-12">
           {/* Background Glow */}
           <div className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-[#FFD54F]/20 blur-3xl pointer-events-none" />
@@ -150,7 +150,7 @@ export const HaatzaNestHomePage: React.FC = () => {
       </div>
 
       {/* Service Category Switcher */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
@@ -160,7 +160,7 @@ export const HaatzaNestHomePage: React.FC = () => {
               <p className="text-xs text-zinc-500 font-medium">Select a category to filter expert services</p>
             </div>
             <Link
-              to="/services"
+              to="/nest/services"
               className="text-xs font-bold text-[#6C3FC5] hover:underline flex items-center gap-1"
             >
               <span>View All</span>
@@ -200,7 +200,7 @@ export const HaatzaNestHomePage: React.FC = () => {
       </div>
 
       {/* Services Grid */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
@@ -222,7 +222,7 @@ export const HaatzaNestHomePage: React.FC = () => {
       </div>
 
       {/* NEST Trust & Assurance */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 sm:p-8 bg-[#F2ECFC] border border-purple-200/80 rounded-3xl">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-2xl bg-white text-[#6C3FC5] flex items-center justify-center shadow-xs shrink-0">
@@ -255,7 +255,7 @@ export const HaatzaNestHomePage: React.FC = () => {
       </div>
 
       {/* FAQs Section */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/90 shadow-2xs space-y-6">
           <div className="text-center max-w-xl mx-auto space-y-1">
             <h3 className="text-xl sm:text-2xl font-black text-zinc-900 font-heading">

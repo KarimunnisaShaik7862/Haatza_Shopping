@@ -252,7 +252,7 @@ export const CategoryNavigation: React.FC = () => {
       aria-label="Category navigation"
       className="bg-white border-b border-zinc-200/80 shadow-2xs relative z-30 group/nav"
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 relative">
         {/* 
           HORIZONTAL ROW OF CATEGORIES:
           - Dynamically displays the maximum number of categories that can fit in available space.

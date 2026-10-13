@@ -7,10 +7,10 @@ import { Zap } from 'lucide-react';
 
 export const HaatzaLiteHeader: React.FC = () => {
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-zinc-200/80 shadow-xs">
+    <header className="sticky top-[49px] sm:top-[53px] z-40 bg-white border-b border-zinc-200/80 shadow-xs">
       {/* 10-15 Min Express Delivery Notification Top Bar */}
-      <div className="bg-[#238636] text-white py-1.5 px-4 text-xs font-semibold">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="bg-[#238636] text-white py-1.5 text-xs font-semibold">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1 font-black uppercase text-[10px] tracking-wider bg-emerald-900/60 px-2 py-0.5 rounded text-emerald-200">
               <Zap className="w-3 h-3 fill-yellow-300 text-yellow-300" />
@@ -27,7 +27,7 @@ export const HaatzaLiteHeader: React.FC = () => {
       </div>
 
       {/* Main Header Content */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-6">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-6">
         <div className="flex items-center gap-3 sm:gap-6 shrink-0">
           <HaatzaLiteLogo />
           <div className="hidden md:block">

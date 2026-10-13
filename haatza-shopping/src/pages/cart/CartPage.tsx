@@ -15,7 +15,7 @@ export const CartPage: React.FC = () => {
 
   if (cart.length === 0 && savedForLater.length === 0) {
     return (
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-12">
         <EmptyState
           icon={ShoppingBag}
           title="Your Shopping Cart is Empty"
@@ -28,7 +28,7 @@ export const CartPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} className="mb-4" />
 
       <div className="flex items-center justify-between pb-6 border-b border-zinc-200">

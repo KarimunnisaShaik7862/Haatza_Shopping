@@ -49,7 +49,7 @@ export const HaatzaNestServicesPage: React.FC = () => {
   }, [categoryParam, queryParam]);
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 space-y-6">
       {/* Category Filter Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
         <button
@@ -88,7 +88,7 @@ export const HaatzaNestServicesPage: React.FC = () => {
           title="No services match your criteria"
           description="Try selecting another category or clearing your search keywords."
           actionText="Show All Services"
-          actionLink="/services"
+          actionLink="/nest/services"
         />
       ) : (
         <HaatzaNestServiceGrid

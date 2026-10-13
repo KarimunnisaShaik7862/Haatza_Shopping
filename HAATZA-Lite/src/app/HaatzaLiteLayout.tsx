@@ -15,7 +15,7 @@ export const HaatzaLiteLayout: React.FC = () => {
 
       {/* HAATZA Lite Dedicated Footer */}
       <footer className="bg-white border-t border-zinc-200 mt-12 py-8">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 space-y-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-zinc-100 pb-6">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-[#238636] text-white flex items-center justify-center">
@@ -28,8 +28,8 @@ export const HaatzaLiteLayout: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-6 text-xs font-semibold text-zinc-600">
-              <Link to="/categories" className="hover:text-[#238636]">Categories</Link>
-              <Link to="/search" className="hover:text-[#238636]">Search Aisles</Link>
+              <Link to="/lite/categories" className="hover:text-[#238636]">Categories</Link>
+              <Link to="/lite/search" className="hover:text-[#238636]">Search Aisles</Link>
               <a href="#" className="hover:text-[#238636]">Terms & Hygiene Standards</a>
             </div>
           </div>

@@ -48,7 +48,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = React.memo(({ slides }) => 
   const slide = slides[currentSlide];
 
   return (
-    <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+    <div className="relative max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 pt-4 pb-2">
       <div
         className={`relative rounded-3xl overflow-hidden bg-gradient-to-r ${slide.bgGradient} text-white shadow-xl min-h-[360px] sm:min-h-[440px] flex items-center transition-all duration-700`}
       >

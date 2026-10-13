@@ -39,7 +39,7 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-16 pb-24 sm:pb-16">
       <div className="max-w-md mx-auto bg-white rounded-3xl border border-[#E5EAF3] p-8 shadow-soft space-y-6">
         <div className="text-center space-y-1">
           <h1 className="text-2xl font-black text-[#172033] tracking-tight">

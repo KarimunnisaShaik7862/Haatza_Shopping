@@ -10,10 +10,12 @@ export const HaatzaNestRouter: React.FC = () => {
     <Routes>
       <Route element={<HaatzaNestLayout />}>
         <Route path="/" element={<HaatzaNestHomePage />} />
-        <Route path="/nest" element={<Navigate to="/" replace />} />
+        <Route path="/nest" element={<HaatzaNestHomePage />} />
         <Route path="/services" element={<HaatzaNestServicesPage />} />
+        <Route path="/nest/services" element={<HaatzaNestServicesPage />} />
         <Route path="/bookings" element={<HaatzaNestBookingsPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/nest/bookings" element={<HaatzaNestBookingsPage />} />
+        <Route path="*" element={<Navigate to="/nest" replace />} />
       </Route>
     </Routes>
   );

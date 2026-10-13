@@ -16,7 +16,7 @@ export const OrderConfirmationPage: React.FC = () => {
   }, [orderId]);
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-12 pb-24 sm:pb-16">
       <div className="max-w-3xl mx-auto bg-white rounded-3xl border border-[#E5EAF3] p-8 sm:p-12 shadow-soft text-center space-y-6">
         
         {/* Success Icon */}

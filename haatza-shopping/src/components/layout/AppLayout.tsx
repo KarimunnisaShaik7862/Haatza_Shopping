@@ -32,7 +32,7 @@ export const AppLayout: React.FC = () => {
         <ErrorBoundary>
           <React.Suspense
             fallback={
-              <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+              <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-8 space-y-8">
                 <LoadingSkeleton type="grid" count={4} />
               </div>
             }

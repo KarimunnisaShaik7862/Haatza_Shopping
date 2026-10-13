@@ -50,11 +50,11 @@ export const HaatzaLiteCategoriesPage: React.FC = () => {
   }, [activeSlug]);
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 space-y-6">
       {/* Category Pills Header */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
         <Link
-          to="/categories"
+          to="/lite/categories"
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 ${
             activeSlug === 'all'
               ? 'bg-[#238636] text-white shadow-sm'
@@ -68,7 +68,7 @@ export const HaatzaLiteCategoriesPage: React.FC = () => {
           .map((cat) => (
             <Link
               key={cat.id}
-              to={`/categories/${cat.slug}`}
+              to={`/lite/categories/${cat.slug}`}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 ${
                 activeSlug === cat.slug
                   ? 'bg-[#238636] text-white shadow-sm'
@@ -87,7 +87,7 @@ export const HaatzaLiteCategoriesPage: React.FC = () => {
           title={`No items in ${currentCategory?.name || 'this category'}`}
           description="Check back shortly or explore other aisles."
           actionText="All Groceries"
-          actionLink="/categories"
+          actionLink="/lite/categories"
         />
       ) : (
         <HaatzaLiteProductGrid

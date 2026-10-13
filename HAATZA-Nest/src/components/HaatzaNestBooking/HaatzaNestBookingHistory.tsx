@@ -13,7 +13,7 @@ export const HaatzaNestBookingHistory: React.FC = () => {
         title="No bookings yet"
         description="Book your first deep clean or home maintenance service with a verified pro."
         actionText="Browse Home Services"
-        actionLink="/services"
+        actionLink="/nest/services"
       />
     );
   }

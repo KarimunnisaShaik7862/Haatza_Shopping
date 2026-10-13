@@ -11,7 +11,7 @@ import { PaymentMethods } from './PaymentMethods';
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-gradient-to-b from-[#1E40AF] via-[#1D4ED8] to-[#1E3A8A] text-blue-100 py-8 sm:py-10 border-t border-blue-400/30">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         
         {/* Value Propositions Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-white/15">

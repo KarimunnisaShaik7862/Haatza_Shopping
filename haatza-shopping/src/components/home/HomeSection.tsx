@@ -21,7 +21,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
 }) => {
   return (
     <section className={`py-6 sm:py-10 ${className}`}>
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
         {/* Section Header */}
         <div className="flex items-end justify-between mb-5 sm:mb-7 gap-4">
           <div>

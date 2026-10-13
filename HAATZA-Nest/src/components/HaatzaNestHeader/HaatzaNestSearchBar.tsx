@@ -9,7 +9,7 @@ export const HaatzaNestSearchBar: React.FC = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/services?q=${encodeURIComponent(query.trim())}`);
+      navigate(`/nest/services?q=${encodeURIComponent(query.trim())}`);
     }
   };
 

@@ -9,7 +9,7 @@ export const HaatzaLiteSearchBar: React.FC = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+      navigate(`/lite/search?q=${encodeURIComponent(query.trim())}`);
     }
   };
 

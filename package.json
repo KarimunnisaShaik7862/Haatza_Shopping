@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm --prefix haatza-shopping run dev",
-    "build": "npm run build:shopping && npm run build:lite && npm run build:nest",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
     "dev:shopping": "npm --prefix haatza-shopping run dev",
     "build:shopping": "npm --prefix haatza-shopping run build",
     "dev:lite": "npm --prefix HAATZA-Lite run dev",

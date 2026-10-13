@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -8,6 +9,14 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@shopping': path.resolve(__dirname, './haatza-shopping/src'),
+      '@lite': path.resolve(__dirname, './HAATZA-Lite/src'),
+      '@nest': path.resolve(__dirname, './HAATZA-Nest/src'),
+    },
+  },
   build: {
     rollupOptions: {
       output: {
@@ -19,3 +28,4 @@ export default defineConfig({
     },
   },
 })
+

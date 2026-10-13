@@ -10,11 +10,14 @@ export const HaatzaLiteRouter: React.FC = () => {
     <Routes>
       <Route element={<HaatzaLiteLayout />}>
         <Route path="/" element={<HaatzaLiteHomePage />} />
-        <Route path="/lite" element={<Navigate to="/" replace />} />
+        <Route path="/lite" element={<HaatzaLiteHomePage />} />
         <Route path="/categories" element={<HaatzaLiteCategoriesPage />} />
+        <Route path="/lite/categories" element={<HaatzaLiteCategoriesPage />} />
         <Route path="/categories/:slug" element={<HaatzaLiteCategoriesPage />} />
+        <Route path="/lite/categories/:slug" element={<HaatzaLiteCategoriesPage />} />
         <Route path="/search" element={<HaatzaLiteSearchPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/lite/search" element={<HaatzaLiteSearchPage />} />
+        <Route path="*" element={<Navigate to="/lite" replace />} />
       </Route>
     </Routes>
   );

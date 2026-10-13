@@ -62,17 +62,21 @@ export const DestinationProvider: React.FC<{ children: React.ReactNode }> = ({ c
     const path = location.pathname.toLowerCase();
     if (path.startsWith('/lite') || path.startsWith('/light')) {
       setDestinationState('lite');
-    } else if (path.startsWith('/nest') || path.startsWith('/next')) {
+    } else if (path.startsWith('/nest') || path.startsWith('/next') || path.startsWith('/services') || path.startsWith('/bookings')) {
       setDestinationState('nest');
-    } else if (path.startsWith('/haatza') || path === '/') {
+    } else {
       setDestinationState('haatza');
     }
   }, [location.pathname]);
 
   const setDestination = (dest: DestinationType) => {
     setDestinationState(dest);
-    const targetPath = `/${dest}`;
-    if (!location.pathname.toLowerCase().startsWith(targetPath)) {
+    const targetPath = dest === 'haatza' ? '/' : `/${dest}`;
+    if (dest === 'haatza') {
+      if (location.pathname.startsWith('/lite') || location.pathname.startsWith('/nest') || location.pathname.startsWith('/haatza')) {
+        navigate('/');
+      }
+    } else if (!location.pathname.toLowerCase().startsWith(targetPath)) {
       navigate(targetPath);
     }
   };

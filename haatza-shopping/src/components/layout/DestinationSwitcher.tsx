@@ -66,7 +66,7 @@ export const DestinationSwitcher: React.FC<DestinationSwitcherProps> = ({ classN
         return (
           <Link
             key={dest.id}
-            to={`/${dest.id}`}
+            to={dest.id === 'haatza' ? '/' : `/${dest.id}`}
             onClick={() => setDestination(dest.id)}
             className={`group relative flex items-center gap-2 w-[122px] sm:w-[138px] h-9 sm:h-10 px-2.5 sm:px-3 rounded-md sm:rounded-lg border transition-all duration-200 cursor-pointer select-none text-left shadow-2xs shrink-0 ${
               isActive
