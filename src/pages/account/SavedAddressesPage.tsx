@@ -36,15 +36,15 @@ export const SavedAddressesPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} className="mb-4" />
 
-      <div className="flex items-center justify-between pb-6 border-b border-zinc-200">
+      <div className="flex items-center justify-between pb-6 border-b border-[#E5EAF3]">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#202124] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight">
             Saved Delivery Addresses
           </h1>
-          <p className="text-xs text-[#5F6368] mt-1">
+          <p className="text-xs text-[#64748B] mt-1">
             Manage your delivery destinations for fast one-tap checkout
           </p>
         </div>
@@ -52,7 +52,7 @@ export const SavedAddressesPage: React.FC = () => {
         <button
           type="button"
           onClick={handleOpenAdd}
-          className="px-4 py-2.5 rounded-xl bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-bold transition-all shadow-2xs flex items-center gap-1.5"
+          className="px-4 py-2.5 rounded-xl bg-[#2962FF] hover:bg-[#1E4ED8] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center gap-1.5"
         >
           <Plus className="w-4 h-4" />
           <span>Add New Address</span>
@@ -64,51 +64,51 @@ export const SavedAddressesPage: React.FC = () => {
           <div
             key={addr.id}
             className={`p-5 rounded-3xl border-2 transition-all bg-white relative ${
-              addr.isDefault ? 'border-[#E53935] shadow-xs' : 'border-zinc-200'
+              addr.isDefault ? 'border-[#2962FF] shadow-soft-sm bg-[#F5F7FF]/30' : 'border-[#E5EAF3] hover:border-[#DBEAFE]'
             }`}
           >
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-sm text-zinc-900">{addr.fullName}</span>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-100 text-zinc-600">
+                <span className="font-bold text-sm text-[#172033]">{addr.fullName}</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#F5F7FF] text-[#64748B] border border-[#E5EAF3]">
                   {addr.addressType}
                 </span>
               </div>
               {addr.isDefault && (
-                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#E53935] bg-[#FFEBEE] px-2.5 py-0.5 rounded-full">
+                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#2962FF] bg-[#EEF3FF] border border-[#DBEAFE] px-2.5 py-0.5 rounded-full">
                   <CheckCircle2 className="w-3.5 h-3.5" /> Default Address
                 </span>
               )}
             </div>
 
-            <p className="text-xs text-zinc-600 leading-relaxed">
+            <p className="text-xs text-[#64748B] leading-relaxed">
               {addr.addressLine1}, {addr.addressLine2 ? `${addr.addressLine2}, ` : ''}
               {addr.landmark ? `Near ${addr.landmark}, ` : ''}
-              {addr.city}, {addr.state} - <strong>{addr.pincode}</strong>
+              {addr.city}, {addr.state} - <strong className="text-[#172033]">{addr.pincode}</strong>
             </p>
 
-            <p className="text-xs text-zinc-500 font-medium mt-3">
+            <p className="text-xs text-[#64748B] font-medium mt-3">
               Contact: {addr.phone} {addr.altPhone ? `(Alt: ${addr.altPhone})` : ''}
             </p>
 
-            <div className="flex items-center justify-between pt-4 mt-4 border-t border-zinc-100 text-xs">
+            <div className="flex items-center justify-between pt-4 mt-4 border-t border-[#E5EAF3] text-xs">
               {!addr.isDefault ? (
                 <button
                   type="button"
                   onClick={() => setDefaultAddress(addr.id)}
-                  className="font-bold text-[#E53935] hover:underline"
+                  className="font-bold text-[#2962FF] hover:underline"
                 >
                   Set as Default
                 </button>
               ) : (
-                <span className="text-[11px] text-zinc-400">Primary Delivery Point</span>
+                <span className="text-[11px] text-[#64748B]">Primary Delivery Point</span>
               )}
 
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => handleOpenEdit(addr)}
-                  className="p-1.5 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors flex items-center gap-1"
+                  className="p-1.5 text-[#64748B] hover:text-[#2962FF] hover:bg-[#EEF3FF] rounded-lg transition-colors flex items-center gap-1"
                 >
                   <Edit2 className="w-3.5 h-3.5" />
                   <span>Edit</span>

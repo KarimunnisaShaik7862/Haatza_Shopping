@@ -1,0 +1,108 @@
+/* ==========================================================================
+   HAATZA NEST - HORIZONTAL SPACING & CONTAINER PADDING
+   Source of Truth Reference: HAATZA Lite Header Spacing Specification
+   ========================================================================== */
+
+:root {
+  /* Responsive horizontal padding design tokens per container layer */
+  --nest-pad-mobile: 16px;   /* < 640px (1rem / px-4) */
+  --nest-pad-tablet: 24px;   /* 640px - 1023px (1.5rem / sm:px-6) */
+  --nest-pad-desktop: 32px;  /* >= 1024px (2rem / lg:px-8) */
+
+  /* Combined nested dual-layer horizontal padding */
+  --nest-nested-mobile: 32px;  /* 16px + 16px */
+  --nest-nested-tablet: 48px;  /* 24px + 24px */
+  --nest-nested-desktop: 64px; /* 32px + 32px */
+
+  /* Standard maximum container width */
+  --nest-container-max: 1440px;
+}
+
+/* --------------------------------------------------------------------------
+   Standard Page & Section Container for HAATZA Nest
+   Applies max-w-[1440px] mx-auto with exact responsive horizontal padding:
+   - Mobile:  16px
+   - Tablet:  24px
+   - Desktop: 32px
+   -------------------------------------------------------------------------- */
+.nest-container {
+  width: 100%;
+  max-width: var(--nest-container-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--nest-pad-mobile, 16px);
+  padding-right: var(--nest-pad-mobile, 16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .nest-container {
+    padding-left: var(--nest-pad-tablet, 24px);
+    padding-right: var(--nest-pad-tablet, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .nest-container {
+    padding-left: var(--nest-pad-desktop, 32px);
+    padding-right: var(--nest-pad-desktop, 32px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero Banner Container for HAATZA Nest
+   Aligns with the Lite Header Banner boundary
+   -------------------------------------------------------------------------- */
+.nest-banner-container {
+  width: 100%;
+  max-width: var(--nest-container-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--nest-pad-mobile, 16px);
+  padding-right: var(--nest-pad-mobile, 16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .nest-banner-container {
+    padding-left: var(--nest-pad-tablet, 24px);
+    padding-right: var(--nest-pad-tablet, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .nest-banner-container {
+    padding-left: var(--nest-pad-desktop, 32px);
+    padding-right: var(--nest-pad-desktop, 32px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Card and Category Interior Padding for HAATZA Nest
+   Matches Lite card interior spacing (p-5 sm:p-6)
+   -------------------------------------------------------------------------- */
+.nest-card-inner {
+  padding: 1.25rem; /* 20px on mobile */
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .nest-card-inner {
+    padding: 1.5rem; /* 24px on tablet/desktop */
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero Service Banner Interior Padding for HAATZA Nest
+   Matches Lite Hero Banner interior spacing (p-6 sm:p-12)
+   -------------------------------------------------------------------------- */
+.nest-hero-inner {
+  padding: 1.5rem; /* 24px on mobile */
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .nest-hero-inner {
+    padding: 3rem; /* 48px on tablet/desktop */
+  }
+}

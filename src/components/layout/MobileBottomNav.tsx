@@ -9,7 +9,7 @@ export const MobileBottomNav: React.FC = () => {
   const { itemCount: cartCount } = useCart();
   const { itemCount: wishlistCount } = useWishlist();
   const { theme } = useDestination();
-  const brandPrimary = theme?.primary || '#A60000';
+  const brandPrimary = theme?.primary || '#2962FF';
 
   return (
     <nav className="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-zinc-200 z-40 md:hidden py-1.5 px-2 shadow-lg">

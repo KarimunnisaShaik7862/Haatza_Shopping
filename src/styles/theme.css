@@ -1,0 +1,42 @@
+/* HAATZA Theme: Premium White & Blue Tokens and Soft UI Utilities */
+
+:root {
+  --color-haatza-blue: #2962FF;
+  --color-haatza-blue-hover: #1E4ED8;
+  --color-haatza-blue-light: #F5F7FF;
+  --color-haatza-blue-surface: #EEF3FF;
+  --color-haatza-blue-highlight: #DBEAFE;
+  --color-haatza-page-bg: #F7F9FC;
+  --color-haatza-surface: #FFFFFF;
+  --color-haatza-text: #172033;
+  --color-haatza-text-muted: #64748B;
+  --color-haatza-border: #E5EAF3;
+  --color-haatza-success: #16A34A;
+  --color-haatza-error: #DC2626;
+}
+
+/* Premium Soft UI & Glassmorphism Utilities */
+.shadow-soft {
+  box-shadow: 0 8px 30px rgba(37, 71, 140, 0.08);
+}
+.shadow-soft-sm {
+  box-shadow: 0 4px 16px rgba(37, 71, 140, 0.05);
+}
+.shadow-soft-lg {
+  box-shadow: 0 14px 40px rgba(37, 71, 140, 0.12);
+}
+.focus-ring-blue {
+  box-shadow: 0 0 0 3px rgba(41, 98, 255, 0.14);
+}
+.glass-surface {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(229, 234, 243, 0.90);
+}
+.glass-blue {
+  background: rgba(238, 243, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(219, 234, 254, 0.80);
+}

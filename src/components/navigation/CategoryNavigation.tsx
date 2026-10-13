@@ -40,7 +40,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 };
 
 const CATEGORY_STYLES: Record<string, { bg: string; text: string }> = {
-  all: { bg: 'bg-[#A60000] text-white', text: '#A60000' },
+  all: { bg: 'bg-[#2962FF] text-white', text: '#2962FF' },
   'men-fashion': { bg: 'bg-blue-50 text-blue-600', text: '#2563EB' },
   'women-fashion': { bg: 'bg-pink-50 text-pink-500', text: '#DB2777' },
   electronics: { bg: 'bg-sky-50 text-sky-600', text: '#0284C7' },
@@ -90,7 +90,7 @@ export const CategoryNavigation: React.FC = () => {
     setIsMoreExpanded(false);
   }, [destination]);
 
-  const activeColor = theme?.primary || '#A60000';
+  const activeColor = theme?.primary || '#2962FF';
   const productCategories = categories.filter((c) => c.slug !== 'more');
 
   // Dynamically calculate the maximum number of categories that fit in the container
@@ -303,7 +303,7 @@ export const CategoryNavigation: React.FC = () => {
                   } ${
                     isAll
                       ? destination === 'haatza'
-                        ? 'bg-[#A60000] text-white shadow-xs'
+                        ? 'bg-[#2962FF] text-white shadow-xs'
                         : destination === 'lite'
                         ? 'bg-[#238636] text-white shadow-xs'
                         : 'bg-[#6C3FC5] text-white shadow-xs'

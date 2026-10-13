@@ -22,11 +22,11 @@ interface DestinationContextType {
 
 const THEMES: Record<DestinationType, DestinationTheme> = {
   haatza: {
-    primary: '#A60000',
-    primaryHover: '#880000',
-    accent: '#D99A9A',
-    lightBg: '#F5DCDC',
-    text: '#202124',
+    primary: '#2962FF',
+    primaryHover: '#1E4ED8',
+    accent: '#DBEAFE',
+    lightBg: '#EEF3FF',
+    text: '#172033',
     tagline: 'General E-Commerce Marketplace',
     name: 'HAATZA',
   },

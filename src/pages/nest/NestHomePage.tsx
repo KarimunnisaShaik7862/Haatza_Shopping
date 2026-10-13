@@ -130,18 +130,18 @@ export const NestHomePage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#FAF8FE] min-h-screen text-[#202124]">
+    <div className="bg-[#FAF8FE] min-h-screen text-[#202124] space-y-6 pb-24 sm:pb-16">
       
       {/* ========================================================
           HERO SECTION: "Home help, made simple." (Pronto/Snabbit Style)
           ======================================================== */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#6C3FC5] via-[#5A2DBE] to-[#421B9B] text-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-        {/* Subtle decorative circles */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#6C3FC5] via-[#5A2DBE] to-[#421B9B] text-white shadow-xl">
+          {/* Subtle decorative circles */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
 
-        <div className="max-w-[1440px] mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-12 w-full">
             
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-[#FFD54F]">
@@ -250,13 +250,13 @@ export const NestHomePage: React.FC = () => {
             </div>
 
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* ========================================================
           SERVICE CATEGORIES STRIP (Pronto / Snabbit Style)
           ======================================================== */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-[#202124] tracking-tight">
@@ -314,8 +314,8 @@ export const NestHomePage: React.FC = () => {
           POPULAR SERVICES CAROUSEL / HIGHLIGHT (Pronto / Snabbit)
           ======================================================== */}
       {selectedCategory === 'all' && !searchQuery && (
-        <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="bg-white rounded-3xl p-6 border border-zinc-200/90 shadow-2xs">
+        <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFD54F]/30 text-amber-900 text-[11px] font-extrabold mb-1">
@@ -394,7 +394,7 @@ export const NestHomePage: React.FC = () => {
       {/* ========================================================
           ALL / FILTERED SERVICES CATALOGUE (Pronto / Snabbit)
           ======================================================== */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h3 className="text-xl sm:text-2xl font-black text-[#202124] tracking-tight">
@@ -497,8 +497,8 @@ export const NestHomePage: React.FC = () => {
       {/* ========================================================
           HOW IT WORKS SECTION (Pronto / Snabbit Inspired)
           ======================================================== */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-zinc-200/90 shadow-2xs">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-3xl p-6 sm:p-12 border border-zinc-200/90 shadow-2xs">
           <div className="text-center max-w-xl mx-auto mb-10">
             <span className="text-xs font-extrabold uppercase tracking-wider text-[#6C3FC5] bg-[#F2ECFC] px-3 py-1 rounded-full">
               EFFORTLESS PROCESS
@@ -558,7 +558,7 @@ export const NestHomePage: React.FC = () => {
       {/* ========================================================
           CUSTOMER REVIEWS / TESTIMONIALS (Pronto / Snabbit)
           ======================================================== */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-8">
           <h3 className="text-2xl font-black text-[#202124] tracking-tight">
             Real Reviews From Real Homes
@@ -628,8 +628,8 @@ export const NestHomePage: React.FC = () => {
       {/* ========================================================
           FREQUENTLY ASKED QUESTIONS (Accordion)
           ======================================================== */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/90 shadow-2xs">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/90 shadow-2xs">
           <h3 className="text-xl font-black text-[#202124] tracking-tight mb-2 text-center">
             Frequently Asked Questions
           </h3>
@@ -670,8 +670,8 @@ export const NestHomePage: React.FC = () => {
       {/* ========================================================
           STRONG CALL TO ACTION BANNER (Bottom)
           ======================================================== */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="rounded-3xl bg-gradient-to-r from-[#6C3FC5] to-[#4A209B] text-white p-8 sm:p-12 text-center shadow-xl relative overflow-hidden">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="rounded-3xl bg-gradient-to-r from-[#6C3FC5] to-[#4A209B] text-white p-6 sm:p-12 text-center shadow-xl relative overflow-hidden">
           <div className="relative z-10 max-w-xl mx-auto space-y-4">
             <h3 className="text-2xl sm:text-4xl font-black tracking-tight">
               Ready to reclaim your free time?

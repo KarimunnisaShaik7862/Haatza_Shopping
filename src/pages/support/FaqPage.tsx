@@ -58,14 +58,14 @@ export const FaqPage: React.FC = () => {
   const breadcrumbs = [{ label: 'Help', link: '/help' }, { label: 'FAQ' }];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} />
 
-      <div className="pb-6 border-b border-zinc-200">
-        <h1 className="text-2xl sm:text-3xl font-black text-[#202124] tracking-tight">
+      <div className="pb-6 border-b border-[#E5EAF3]">
+        <h1 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight">
           Frequently Asked Questions
         </h1>
-        <p className="text-xs text-[#5F6368] mt-1">
+        <p className="text-xs text-[#64748B] mt-1">
           Quick answers to common questions about orders, payments, destinations, and returns
         </p>
       </div>
@@ -73,7 +73,7 @@ export const FaqPage: React.FC = () => {
       <div className="space-y-8">
         {FAQS.map((group, groupIdx) => (
           <div key={groupIdx} className="space-y-3">
-            <h3 className="font-bold text-sm text-[#E53935] uppercase tracking-wider">
+            <h3 className="font-bold text-sm text-[#2962FF] uppercase tracking-wider">
               {group.category}
             </h3>
 
@@ -84,23 +84,23 @@ export const FaqPage: React.FC = () => {
                 return (
                   <div
                     key={itemIdx}
-                    className="border border-zinc-200 rounded-2xl bg-white overflow-hidden transition-all shadow-2xs"
+                    className="border border-[#E5EAF3] rounded-2xl bg-white overflow-hidden transition-all shadow-soft-sm"
                   >
                     <button
                       type="button"
                       onClick={() => toggle(id)}
-                      className="w-full p-4 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-zinc-900 hover:text-[#E53935] transition-colors"
+                      className="w-full p-4 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-[#172033] hover:text-[#2962FF] transition-colors"
                     >
                       <span>{item.q}</span>
                       <ChevronDown
-                        className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${
-                          isOpen ? 'rotate-180 text-[#E53935]' : ''
+                        className={`w-4 h-4 text-[#64748B] transition-transform duration-200 ${
+                          isOpen ? 'rotate-180 text-[#2962FF]' : ''
                         }`}
                       />
                     </button>
 
                     {isOpen && (
-                      <div className="px-4 pb-4 text-xs text-zinc-600 leading-relaxed border-t border-zinc-100 pt-3 bg-zinc-50/50">
+                      <div className="px-4 pb-4 text-xs text-[#64748B] leading-relaxed border-t border-[#E5EAF3] pt-3 bg-[#F5F7FF]/60">
                         {item.a}
                       </div>
                     )}

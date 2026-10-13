@@ -33,10 +33,10 @@ export const ProductGallery: React.FC<ProductGalleryProps> = React.memo(({
                 key={idx}
                 type="button"
                 onClick={() => setSelectedIndex(idx)}
-                className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all bg-zinc-50 shrink-0 ${
+                className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all bg-white shrink-0 ${
                   isSelected
-                    ? 'border-[#E53935] shadow-xs scale-102'
-                    : 'border-zinc-200 hover:border-zinc-300 opacity-70 hover:opacity-100'
+                    ? 'border-[#2962FF] shadow-xs scale-102 ring-2 ring-[#2962FF]/20'
+                    : 'border-[#E5EAF3] hover:border-[#DBEAFE] opacity-70 hover:opacity-100'
                 }`}
               >
                 <img
@@ -55,7 +55,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = React.memo(({
       )}
 
       {/* Main Image Stage */}
-      <div className="relative flex-1 aspect-square rounded-2xl overflow-hidden bg-zinc-100 border border-zinc-200 shadow-xs">
+      <div className="relative flex-1 aspect-square rounded-2xl overflow-hidden bg-white border border-[#E5EAF3] shadow-soft-sm">
         <img
           src={optimizeImageUrl(activeImage, { width: 700, quality: 80 })}
           alt={productName}

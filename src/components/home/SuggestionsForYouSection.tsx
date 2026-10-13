@@ -36,11 +36,11 @@ export const SuggestionsForYouSection: React.FC<SuggestionsForYouSectionProps> =
   if (!products || products.length === 0) return null;
 
   return (
-    <section className="bg-gradient-to-b from-[#A60000]/6 via-[#F5DCDC]/30 to-white rounded-3xl p-5 sm:p-7 border border-[#D99A9A]/40 shadow-2xs">
+    <section className="bg-gradient-to-b from-[#EEF3FF] via-[#F5F7FF] to-white rounded-3xl p-5 sm:p-7 border border-[#E5EAF3] shadow-soft-sm">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#A60000] to-[#D99A9A] text-white flex items-center justify-center shadow-md">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#2962FF] to-[#DBEAFE] text-white flex items-center justify-center shadow-md">
             <Sparkles className="w-5 h-5 fill-current" />
           </div>
           <div>
@@ -48,12 +48,12 @@ export const SuggestionsForYouSection: React.FC<SuggestionsForYouSectionProps> =
               <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
                 Suggestions for You
               </h2>
-              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#F5DCDC] text-[#A60000] border border-[#D99A9A]/40 text-[10px] font-black uppercase tracking-wider">
+              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] text-[10px] font-black uppercase tracking-wider">
                 Personalized
               </span>
             </div>
             <p className="text-xs text-zinc-500 mt-0.5 flex items-center gap-1.5">
-              <Compass className="w-3.5 h-3.5 text-[#A60000]" />
+              <Compass className="w-3.5 h-3.5 text-[#2962FF]" />
               <span>{reason}</span>
             </p>
           </div>
@@ -61,7 +61,7 @@ export const SuggestionsForYouSection: React.FC<SuggestionsForYouSectionProps> =
 
         <Link
           to="/category/all"
-          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] transition-colors group self-start sm:self-auto"
+          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] transition-colors group self-start sm:self-auto"
         >
           <span>Explore More Curations</span>
           <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

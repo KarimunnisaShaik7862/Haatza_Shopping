@@ -45,15 +45,15 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
     (filter.maxPrice !== undefined && filter.maxPrice < 10000);
 
   return (
-    <aside className={`bg-white rounded-2xl border border-zinc-200 p-5 space-y-6 ${className}`}>
+    <aside className={`bg-white rounded-2xl border border-[#E5EAF3] p-5 space-y-6 shadow-2xs ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between pb-4 border-b border-zinc-100">
-        <h3 className="font-bold text-sm uppercase tracking-wider text-[#202124]">Filters</h3>
+        <h3 className="font-bold text-sm uppercase tracking-wider text-[#172033]">Filters</h3>
         {hasActiveFilters && (
           <button
             type="button"
             onClick={onReset}
-            className="text-xs font-bold text-[#E53935] hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-[#DC2626] hover:underline flex items-center gap-1"
           >
             <X className="w-3.5 h-3.5" />
             <span>Reset All</span>
@@ -69,7 +69,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             type="checkbox"
             checked={!!filter.inStockOnly}
             onChange={(e) => onChange({ ...filter, inStockOnly: e.target.checked })}
-            className="w-4 h-4 rounded text-[#E53935] focus:ring-[#E53935] border-zinc-300"
+            className="w-4 h-4 rounded text-[#2962FF] focus:ring-[#2962FF] border-[#E5EAF3]"
           />
           <span>Exclude Out of Stock</span>
         </label>
@@ -93,7 +93,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
                   minPrice: e.target.value ? Number(e.target.value) : undefined,
                 })
               }
-              className="w-full px-2.5 py-1.5 rounded-lg border border-zinc-200 text-xs focus:border-[#E53935] focus:outline-hidden"
+              className="w-full px-2.5 py-1.5 rounded-lg border border-[#E5EAF3] text-xs focus:border-[#2962FF] focus:ring-2 focus:ring-[#2962FF]/15 focus:outline-hidden"
             />
           </div>
           <span className="text-zinc-400 text-xs mt-4">-</span>
@@ -111,7 +111,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
                   maxPrice: e.target.value ? Number(e.target.value) : undefined,
                 })
               }
-              className="w-full px-2.5 py-1.5 rounded-lg border border-zinc-200 text-xs focus:border-[#E53935] focus:outline-hidden"
+              className="w-full px-2.5 py-1.5 rounded-lg border border-[#E5EAF3] text-xs focus:border-[#2962FF] focus:ring-2 focus:ring-[#2962FF]/15 focus:outline-hidden"
             />
           </div>
         </div>
@@ -127,13 +127,13 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               return (
                 <label
                   key={brand}
-                  className="flex items-center gap-2.5 text-xs text-zinc-700 cursor-pointer select-none hover:text-[#202124]"
+                  className="flex items-center gap-2.5 text-xs text-zinc-700 cursor-pointer select-none hover:text-[#172033]"
                 >
                   <input
                     type="checkbox"
                     checked={checked}
                     onChange={() => handleBrandToggle(brand)}
-                    className="w-4 h-4 rounded text-[#E53935] focus:ring-[#E53935] border-zinc-300"
+                    className="w-4 h-4 rounded text-[#2962FF] focus:ring-[#2962FF] border-[#E5EAF3]"
                   />
                   <span className="truncate">{brand}</span>
                 </label>
@@ -156,7 +156,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
                 onClick={() => handleRatingSelect(stars)}
                 className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors text-left ${
                   isSelected
-                    ? 'bg-[#FFEBEE] text-[#E53935] font-bold'
+                    ? 'bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] font-bold'
                     : 'hover:bg-zinc-50 text-zinc-700'
                 }`}
               >
@@ -188,13 +188,13 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             return (
               <label
                 key={disc}
-                className="flex items-center gap-2.5 text-xs text-zinc-700 cursor-pointer select-none hover:text-[#202124]"
+                className="flex items-center gap-2.5 text-xs text-zinc-700 cursor-pointer select-none hover:text-[#172033]"
               >
                 <input
                   type="checkbox"
                   checked={isSelected}
                   onChange={() => handleDiscountToggle(disc)}
-                  className="w-4 h-4 rounded text-[#E53935] focus:ring-[#E53935] border-zinc-300"
+                  className="w-4 h-4 rounded text-[#2962FF] focus:ring-[#2962FF] border-[#E5EAF3]"
                 />
                 <span>{disc}% off or more</span>
               </label>

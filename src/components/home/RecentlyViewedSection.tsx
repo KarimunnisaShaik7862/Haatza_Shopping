@@ -59,23 +59,23 @@ export const RecentlyViewedSection: React.FC<RecentlyViewedSectionProps> = React
   if (combinedItems.length === 0) return null;
 
   return (
-    <section className="space-y-4" aria-label="Recently Viewed by You">
+    <section className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs space-y-4" aria-label="Recently Viewed by You">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-zinc-900 text-white flex items-center justify-center shadow-xs">
-            <History className="w-5 h-5 text-rose-300" />
+          <div className="w-10 h-10 rounded-2xl bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] flex items-center justify-center shadow-soft-sm">
+            <History className="w-5 h-5 text-[#2962FF]" />
           </div>
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight font-heading">
+              <h2 className="text-xl sm:text-2xl font-black text-[#172033] tracking-tight font-heading">
                 Recently Viewed by You
               </h2>
-              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-[10px] font-bold uppercase tracking-wider font-heading">
+              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#F5F7FF] text-[#64748B] border border-[#E5EAF3] text-[10px] font-bold uppercase tracking-wider font-heading">
                 {combinedItems.length} Items Saved & Viewed
               </span>
             </div>
-            <p className="text-xs text-zinc-500 mt-0.5 font-body">
+            <p className="text-xs text-[#64748B] mt-0.5 font-body">
               Pick up where you left off. Products you recently explored, saved to your wishlist, or have in your cart.
             </p>
           </div>
@@ -83,7 +83,7 @@ export const RecentlyViewedSection: React.FC<RecentlyViewedSectionProps> = React
 
         <Link
           to="/wishlist"
-          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] transition-colors group self-start sm:self-auto font-heading"
+          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] transition-colors group self-start sm:self-auto font-heading"
         >
           <span>View All Saved Items</span>
           <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

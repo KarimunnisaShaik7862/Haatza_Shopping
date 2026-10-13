@@ -49,7 +49,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
           <button
             type="button"
             onClick={() => handleScroll('left')}
-            className="absolute -left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-lg border border-zinc-200 text-zinc-700 hover:text-[#E53935] flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute -left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-soft border border-[#E5EAF3] text-[#172033] hover:text-[#2962FF] hover:bg-[#EEF3FF] hover:border-[#DBEAFE] flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all"
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -71,7 +71,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
           <button
             type="button"
             onClick={() => handleScroll('right')}
-            className="absolute -right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-lg border border-zinc-200 text-zinc-700 hover:text-[#E53935] flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute -right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-soft border border-[#E5EAF3] text-[#172033] hover:text-[#2962FF] hover:bg-[#EEF3FF] hover:border-[#DBEAFE] flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all"
             aria-label="Scroll right"
           >
             <ChevronRight className="w-5 h-5" />

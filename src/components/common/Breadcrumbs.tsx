@@ -14,10 +14,10 @@ interface BreadcrumbsProps {
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
   return (
-    <nav className={`flex items-center text-xs text-[#5F6368] overflow-x-auto no-scrollbar py-2 ${className}`} aria-label="Breadcrumb">
+    <nav className={`flex items-center text-xs text-[#64748B] overflow-x-auto no-scrollbar py-2 ${className}`} aria-label="Breadcrumb">
       <Link
         to="/"
-        className="flex items-center gap-1 hover:text-[#E53935] transition-colors shrink-0"
+        className="flex items-center gap-1 hover:text-[#2962FF] transition-colors shrink-0"
       >
         <Home className="w-3.5 h-3.5" />
         <span>Home</span>
@@ -29,13 +29,13 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' 
           <React.Fragment key={index}>
             <ChevronRight className="w-3 h-3 mx-1.5 text-zinc-400 shrink-0" />
             {isLast || !item.link ? (
-              <span className="font-semibold text-[#202124] shrink-0 truncate max-w-[200px]">
+              <span className="font-semibold text-[#172033] shrink-0 truncate max-w-[200px]">
                 {item.label}
               </span>
             ) : (
               <Link
                 to={item.link}
-                className="hover:text-[#E53935] transition-colors shrink-0 truncate max-w-[150px]"
+                className="hover:text-[#2962FF] transition-colors shrink-0 truncate max-w-[150px]"
               >
                 {item.label}
               </Link>

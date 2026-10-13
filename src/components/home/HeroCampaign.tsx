@@ -34,7 +34,7 @@ const SPOTLIGHT_CAMPAIGNS: SpotlightCampaign[] = [
     ctaLink: '/category/fashion',
     floatingImage: optimizeImageUrl('https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=480&q=75', { width: 480, quality: 75 }),
     floatingAlt: 'Pure Linen Artisan Shirt',
-    accentBg: 'from-[#8C0000] via-[#A60000] to-[#590000]',
+    accentBg: 'from-[#0F2042] via-[#1E40AF] to-[#2962FF]',
     tagline: 'Limited Stock • Free Express Shipping',
   },
   {
@@ -47,7 +47,7 @@ const SPOTLIGHT_CAMPAIGNS: SpotlightCampaign[] = [
     ctaLink: '/category/electronics',
     floatingImage: optimizeImageUrl('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=480&q=75', { width: 480, quality: 75 }),
     floatingAlt: 'AcousticPro Studio ANC Headphones',
-    accentBg: 'from-[#7A0000] via-[#8C0000] to-[#400000]',
+    accentBg: 'from-[#0B1A3A] via-[#1E4ED8] to-[#1D4ED8]',
     tagline: 'Instant 10% Bank Discount Applied',
   },
   {
@@ -60,7 +60,7 @@ const SPOTLIGHT_CAMPAIGNS: SpotlightCampaign[] = [
     ctaLink: '/category/beauty',
     floatingImage: optimizeImageUrl('https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=480&q=75', { width: 480, quality: 75 }),
     floatingAlt: 'Radiance Glow Vitamin C Serum',
-    accentBg: 'from-[#940000] via-[#750000] to-[#380000]',
+    accentBg: 'from-[#0A1931] via-[#1E3A8A] to-[#2962FF]',
     tagline: 'Clean & Cruelty-Free Formulations',
   },
 ];
@@ -87,7 +87,7 @@ const RIGHT_BANNERS_DATA: CoordinatedBanner[] = [
     image: optimizeImageUrl('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=720&q=75', { width: 720, quality: 75 }),
     ctaText: 'Explore Tech',
     ctaLink: '/category/mobiles',
-    bgGradient: 'from-[#610000] via-[#850000] to-neutral-900',
+    bgGradient: 'from-[#0F2042] via-[#1E40AF] to-[#2962FF]',
   },
   {
     id: 'right-banner-2',
@@ -98,7 +98,7 @@ const RIGHT_BANNERS_DATA: CoordinatedBanner[] = [
     image: optimizeImageUrl('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=720&q=75', { width: 720, quality: 75 }),
     ctaText: 'Shop Home',
     ctaLink: '/category/home-living',
-    bgGradient: 'from-[#500000] via-[#730000] to-zinc-900',
+    bgGradient: 'from-[#0B1A3A] via-[#1E3A8A] to-[#2563EB]',
   },
   {
     id: 'right-banner-3',
@@ -109,7 +109,7 @@ const RIGHT_BANNERS_DATA: CoordinatedBanner[] = [
     image: optimizeImageUrl('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=720&q=75', { width: 720, quality: 75 }),
     ctaText: 'View Footwear',
     ctaLink: '/category/fashion',
-    bgGradient: 'from-[#6E0000] via-[#8A0000] to-[#450000]',
+    bgGradient: 'from-[#0A1931] via-[#1D4ED8] to-[#1E3A8A]',
   },
 ];
 
@@ -184,7 +184,7 @@ export const HeroCampaign: React.FC<HeroCampaignProps> = React.memo(({
         {/* ========================================================= */}
         <div className="lg:col-span-4 xl:col-span-4 flex flex-col">
           <div
-            className={`relative flex-1 rounded-3xl bg-gradient-to-br ${currentSpotlight.accentBg} text-white p-5 sm:p-7 flex flex-col justify-between overflow-hidden shadow-sm border border-white/10 transition-all duration-500 min-h-[380px] sm:min-h-[440px]`}
+            className={`relative flex-1 rounded-3xl bg-gradient-to-br ${currentSpotlight.accentBg} text-white p-6 sm:p-8 flex flex-col justify-between overflow-hidden shadow-sm border border-white/10 transition-all duration-500 min-h-[380px] sm:min-h-[440px]`}
           >
             {/* Top Row: Badge & Progress Indicator */}
             <div className="relative z-10 flex items-center justify-between gap-2">
@@ -250,7 +250,7 @@ export const HeroCampaign: React.FC<HeroCampaignProps> = React.memo(({
                   className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 font-extrabold text-xs sm:text-sm transition-all duration-200 shadow-sm hover:scale-105 active:scale-95 group/btn font-heading"
                 >
                   <span>{currentSpotlight.ctaText}</span>
-                  <ArrowRight className="w-4 h-4 text-[#A60000] group-hover/btn:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 text-[#2962FF] group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
 
                 <div className="flex items-center gap-1.5 bg-black/25 backdrop-blur-xs p-1 rounded-full border border-white/10">
@@ -295,7 +295,7 @@ export const HeroCampaign: React.FC<HeroCampaignProps> = React.memo(({
               {RIGHT_BANNERS_DATA.map((banner, index) => (
                 <div
                   key={banner.id}
-                  className={`min-w-full h-full relative shrink-0 overflow-hidden bg-gradient-to-r ${banner.bgGradient} text-white flex items-center p-6 sm:p-9 lg:p-10`}
+                  className={`min-w-full h-full relative shrink-0 overflow-hidden bg-gradient-to-r ${banner.bgGradient} text-white flex items-center p-6 sm:p-12`}
                 >
                   {/* Background Image without heavy black shadow/filter */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
@@ -333,7 +333,7 @@ export const HeroCampaign: React.FC<HeroCampaignProps> = React.memo(({
                         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-black text-xs transition-all duration-200 shadow-sm hover:scale-105 active:scale-95 group/rbtn font-heading"
                       >
                         <span>{banner.ctaText}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-[#A60000] group-hover/rbtn:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3.5 h-3.5 text-[#2962FF] group-hover/rbtn:translate-x-1 transition-transform" />
                       </Link>
                     </div>
                   </div>
@@ -361,7 +361,7 @@ export const HeroCampaign: React.FC<HeroCampaignProps> = React.memo(({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4.5">
             
             {/* Sub-Banner 1: Luxury Beauty & Fragrances */}
-            <div className="group relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#7A0000] via-[#940000] to-[#500000] text-white p-5 sm:p-6 flex flex-col justify-between shadow-sm border border-white/10 min-h-[170px]">
+            <div className="group relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0F2042] via-[#1E40AF] to-[#2962FF] text-white p-5 sm:p-6 flex flex-col justify-between shadow-sm border border-white/10 min-h-[170px]">
               <div className="absolute inset-0 z-0">
                 <img
                   src={optimizeImageUrl("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=500&q=75", { width: 500, quality: 75 })}
@@ -376,7 +376,7 @@ export const HeroCampaign: React.FC<HeroCampaignProps> = React.memo(({
               </div>
 
               <div className="relative z-10">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-rose-200 bg-white/15 px-2 py-0.5 rounded-md font-heading">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-blue-200 bg-white/15 px-2 py-0.5 rounded-md font-heading">
                   Luxury Beauty
                 </span>
                 <h4 className="text-base sm:text-lg font-black text-white mt-1.5 leading-snug font-heading">
@@ -402,7 +402,7 @@ export const HeroCampaign: React.FC<HeroCampaignProps> = React.memo(({
             </div>
 
             {/* Sub-Banner 2: Smart Living & Kitchenware */}
-            <div className="group relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#650000] via-[#850000] to-neutral-900 text-white p-5 sm:p-6 flex flex-col justify-between shadow-sm border border-white/10 min-h-[170px]">
+            <div className="group relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0B1A3A] via-[#1E3A8A] to-[#2563EB] text-white p-5 sm:p-6 flex flex-col justify-between shadow-sm border border-white/10 min-h-[170px]">
               <div className="absolute inset-0 z-0">
                 <img
                   src={optimizeImageUrl("https://images.unsplash.com/photo-1585659722983-3a675dabf23d?auto=format&fit=crop&w=500&q=75", { width: 500, quality: 75 })}
@@ -417,7 +417,7 @@ export const HeroCampaign: React.FC<HeroCampaignProps> = React.memo(({
               </div>
 
               <div className="relative z-10">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-200 bg-white/15 px-2 py-0.5 rounded-md font-heading">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-sky-200 bg-white/15 px-2 py-0.5 rounded-md font-heading">
                   Kitchen & Appliances
                 </span>
                 <h4 className="text-base sm:text-lg font-black text-white mt-1.5 leading-snug font-heading">

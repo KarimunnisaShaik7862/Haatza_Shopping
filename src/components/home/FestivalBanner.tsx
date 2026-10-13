@@ -28,7 +28,7 @@ const FESTIVAL_CAMPAIGNS: FestivalCampaign[] = [
     offerText: 'FLAT 50% - 70% OFF',
     ctaText: 'Explore Dussehra Deals',
     ctaLink: '/category/fashion',
-    bgGradient: 'from-[#8A0000] via-[#A60000] to-[#5C0000]',
+    bgGradient: 'from-[#0F2042] via-[#1E40AF] to-[#2962FF]',
     accentBadgeColor: 'bg-amber-400 text-stone-950',
     image: optimizeImageUrl('https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=75', { width: 900, quality: 75 }),
     tagline: '✨ Special Festive Perks: Extra ₹300 Bank Discount + Assured Gold Coin on ₹2999+',
@@ -42,7 +42,7 @@ const FESTIVAL_CAMPAIGNS: FestivalCampaign[] = [
     offerText: 'UP TO 65% OFF + GIFT HAMPERS',
     ctaText: 'Shop Harvest Collection',
     ctaLink: '/category/home-living',
-    bgGradient: 'from-[#A60000] via-[#850000] to-amber-950',
+    bgGradient: 'from-[#1E3A8A] via-[#2962FF] to-[#0284C7]',
     accentBadgeColor: 'bg-emerald-400 text-stone-950',
     image: optimizeImageUrl('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=900&q=75', { width: 900, quality: 75 }),
     tagline: '🌾 Celebrate the Harvest with Free Express Delivery Across India',
@@ -56,7 +56,7 @@ const FESTIVAL_CAMPAIGNS: FestivalCampaign[] = [
     offerText: 'UP TO 75% OFF + NO-COST EMI',
     ctaText: 'Grab Diwali Offers',
     ctaLink: '/category/electronics',
-    bgGradient: 'from-[#730000] via-[#940000] to-[#400000]',
+    bgGradient: 'from-[#0B1A3A] via-[#1E4ED8] to-[#1D4ED8]',
     accentBadgeColor: 'bg-amber-300 text-stone-950',
     image: optimizeImageUrl('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=75', { width: 900, quality: 75 }),
     tagline: '🪔 Instant 10% Off with HDFC & ICICI Cards • Zero Cost EMI up to 12 Months',
@@ -70,7 +70,7 @@ const FESTIVAL_CAMPAIGNS: FestivalCampaign[] = [
     offerText: 'BUY 1 GET 1 FREE',
     ctaText: 'Shop Clearance',
     ctaLink: '/category/all',
-    bgGradient: 'from-neutral-950 via-[#8A0000] to-zinc-900',
+    bgGradient: 'from-[#0A1931] via-[#1E3A8A] to-[#2962FF]',
     accentBadgeColor: 'bg-rose-400 text-stone-950',
     image: optimizeImageUrl('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&q=75', { width: 900, quality: 75 }),
     tagline: '⚡ Last 48 Hours • Stocks Refreshing Rapidly',
@@ -144,7 +144,7 @@ export const FestivalBanner: React.FC = React.memo(() => {
 
   return (
     <div
-      className="relative w-full rounded-2xl overflow-hidden shadow-sm group select-none transition-all"
+      className="relative w-full rounded-3xl overflow-hidden shadow-xl group select-none transition-all"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
@@ -152,9 +152,9 @@ export const FestivalBanner: React.FC = React.memo(() => {
       aria-roledescription="carousel"
       aria-label="Festival Promotional Banners"
     >
-      {/* Background slide container */}
+      {/* Background slide container with exact Lite Header Banner padding (p-6 sm:p-12) */}
       <div
-        className={`relative w-full bg-gradient-to-r ${current.bgGradient} text-white p-4 sm:p-5 lg:px-7 lg:py-5.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-500 overflow-hidden`}
+        className={`relative w-full bg-gradient-to-r ${current.bgGradient} text-white p-6 sm:p-12 flex flex-col sm:flex-row sm:items-center justify-between gap-6 transition-all duration-500 overflow-hidden`}
       >
         {/* Decorative background image overlay */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -206,7 +206,7 @@ export const FestivalBanner: React.FC = React.memo(() => {
             className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-black text-xs sm:text-sm transition-all duration-200 shadow-md hover:scale-105 active:scale-95 group/btn font-heading"
           >
             <span>{current.ctaText}</span>
-            <ArrowRight className="w-4 h-4 text-[#A60000] group-hover/btn:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-[#2962FF] group-hover/btn:translate-x-1 transition-transform" />
           </Link>
 
           {/* Navigation Controls */}

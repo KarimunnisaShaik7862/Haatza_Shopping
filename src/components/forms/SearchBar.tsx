@@ -69,12 +69,12 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
   }, []);
 
   // Destination theme-aware focus styles
-  const activeColor = theme?.primary || (destination === 'lite' ? '#238636' : destination === 'nest' ? '#6C3FC5' : '#A60000');
+  const activeColor = theme?.primary || (destination === 'lite' ? '#238636' : destination === 'nest' ? '#6C3FC5' : '#2962FF');
   const activeRingClass = destination === 'lite'
     ? 'focus:border-[#238636] focus:ring-2 focus:ring-[#238636]/20'
     : destination === 'nest'
     ? 'focus:border-[#6C3FC5] focus:ring-2 focus:ring-[#6C3FC5]/20'
-    : 'focus:border-[#A60000] focus:ring-2 focus:ring-[#A60000]/20';
+    : 'focus:border-[#2962FF] focus:ring-3 focus:ring-[#2962FF]/14';
 
   // Compute matched autocomplete suggestions
   const suggestions: SearchSuggestion[] = useMemo(() => {
@@ -359,7 +359,7 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
           onKeyDown={handleKeyDown}
           placeholder={getPlaceholder()}
           aria-label="Search products, brands and categories"
-          className={`w-full pl-10 pr-20 py-2 bg-zinc-100/90 hover:bg-zinc-100 focus:bg-white text-sm text-[#202124] rounded-lg border border-zinc-200 focus:outline-hidden transition-all shadow-2xs placeholder:text-zinc-500 font-normal ${activeRingClass}`}
+          className={`w-full pl-10 pr-20 py-2 bg-white hover:bg-zinc-50/50 focus:bg-white text-sm text-[#172033] rounded-xl border border-[#E5EAF3] focus:outline-hidden transition-all shadow-2xs placeholder:text-slate-400 font-normal ${activeRingClass}`}
         />
 
         {/* Right action buttons container (Clear + Microphone) */}

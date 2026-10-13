@@ -18,11 +18,11 @@ export const DealsOfTheDaySection: React.FC<DealsOfTheDaySectionProps> = React.m
   if (!deals || deals.length === 0) return null;
 
   return (
-    <section className="space-y-4" aria-label="Deals of the Day">
+    <section className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs space-y-4" aria-label="Deals of the Day">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#A60000] to-[#D99A9A] text-white flex items-center justify-center shadow-xs">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#2962FF] to-[#DBEAFE] text-white flex items-center justify-center shadow-xs">
             <Zap className="w-5 h-5 fill-current" />
           </div>
           <div>
@@ -46,7 +46,7 @@ export const DealsOfTheDaySection: React.FC<DealsOfTheDaySectionProps> = React.m
 
         <Link
           to="/category/deals"
-          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] transition-colors group self-start sm:self-auto font-heading"
+          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] transition-colors group self-start sm:self-auto font-heading"
         >
           <span>View All Deals</span>
           <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

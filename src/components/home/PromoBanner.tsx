@@ -70,12 +70,12 @@ export const PromoBanner: React.FC<PromoBannerProps> = ({ banner, splitBanners }
           )}
           <h3 className="text-2xl sm:text-3xl font-black tracking-tight">{banner.title}</h3>
           <p className="text-sm text-zinc-300 leading-relaxed">{banner.subtitle}</p>
-          <p className="text-xl font-black text-rose-400">{banner.discountText}</p>
+          <p className="text-xl font-black text-[#DBEAFE]">{banner.discountText}</p>
 
           <div className="pt-2">
             <Link
               to={banner.ctaLink}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-xs sm:text-sm transition-all shadow-md group"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#2962FF] hover:bg-[#1E4ED8] text-white font-bold text-xs sm:text-sm transition-all shadow-soft group"
             >
               <span>{banner.ctaText}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

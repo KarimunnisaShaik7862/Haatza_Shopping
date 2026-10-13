@@ -44,25 +44,25 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ showCheckoutButton = t
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-zinc-200 p-6 space-y-6 shadow-2xs">
-      <h3 className="font-bold text-base text-[#202124] pb-3 border-b border-zinc-100">
+    <div className="bg-white rounded-3xl border border-[#E5EAF3] p-6 space-y-6 shadow-soft-sm">
+      <h3 className="font-bold text-base text-[#172033] pb-3 border-b border-zinc-100">
         Order Summary
       </h3>
 
       {/* Free Delivery Tracker */}
-      <div className="p-3.5 bg-zinc-50 rounded-2xl border border-zinc-200 space-y-2">
+      <div className="p-3.5 bg-[#F5F7FF] rounded-2xl border border-[#DBEAFE] space-y-2">
         <div className="flex items-center justify-between text-xs font-semibold">
           <span className="flex items-center gap-1.5 text-zinc-700">
-            <Truck className="w-4 h-4 text-[#E53935]" />
+            <Truck className="w-4 h-4 text-[#2962FF]" />
             {amountNeededForFreeDelivery > 0
               ? `Add ${formatINR(amountNeededForFreeDelivery)} more for FREE Delivery`
               : 'You have unlocked FREE Standard Delivery!'}
           </span>
-          <span className="text-[#E53935]">{freeDeliveryProgress}%</span>
+          <span className="text-[#2962FF] font-bold">{freeDeliveryProgress}%</span>
         </div>
-        <div className="w-full bg-zinc-200 h-1.5 rounded-full overflow-hidden">
+        <div className="w-full bg-[#DBEAFE] h-1.5 rounded-full overflow-hidden">
           <div
-            className="bg-[#E53935] h-full transition-all duration-500 rounded-full"
+            className="bg-[#2962FF] h-full transition-all duration-500 rounded-full"
             style={{ width: `${freeDeliveryProgress}%` }}
           />
         </div>
@@ -102,7 +102,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ showCheckoutButton = t
                   setCouponError('');
                 }}
                 placeholder="HAATZA100 or WELCOME200"
-                className="w-full pl-9 pr-3 py-2 text-xs uppercase font-medium rounded-xl border border-zinc-200 focus:outline-hidden focus:border-[#E53935]"
+                className="w-full pl-9 pr-3 py-2 text-xs uppercase font-medium rounded-xl border border-[#E5EAF3] focus:outline-hidden focus:border-[#2962FF] focus:ring-2 focus:ring-[#2962FF]/15"
               />
             </div>
             <button
@@ -125,7 +125,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ showCheckoutButton = t
                 key={code}
                 type="button"
                 onClick={() => setCouponCode(code)}
-                className="text-[10px] font-bold text-zinc-600 bg-zinc-100 hover:bg-[#FFEBEE] hover:text-[#E53935] px-2 py-0.5 rounded-md transition-colors"
+                className="text-[10px] font-bold text-zinc-600 bg-zinc-100 hover:bg-[#EEF3FF] hover:text-[#2962FF] px-2 py-0.5 rounded-md transition-colors"
               >
                 {code}
               </button>
@@ -159,9 +159,9 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ showCheckoutButton = t
           </span>
         </div>
 
-        <div className="flex justify-between text-sm font-extrabold text-[#202124] pt-3 border-t border-zinc-200">
+        <div className="flex justify-between text-sm font-extrabold text-[#172033] pt-3 border-t border-zinc-200">
           <span>Total Amount</span>
-          <span className="text-lg text-[#E53935]">{formatINR(total)}</span>
+          <span className="text-lg text-[#2962FF] font-black">{formatINR(total)}</span>
         </div>
       </div>
 
@@ -170,7 +170,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ showCheckoutButton = t
         <div className="pt-2">
           <Link
             to="/checkout"
-            className="w-full py-3.5 px-4 rounded-xl bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-sm transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
+            className="w-full py-3.5 px-4 rounded-xl bg-[#2962FF] hover:bg-[#1E4ED8] text-white font-bold text-sm transition-all shadow-soft hover:shadow-soft-lg flex items-center justify-center gap-2 group"
           >
             <span>Proceed to Checkout</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -39,13 +39,13 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto px-4 py-16">
-      <div className="bg-white rounded-3xl border border-zinc-200 p-8 shadow-md space-y-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-24 sm:pb-16">
+      <div className="max-w-md mx-auto bg-white rounded-3xl border border-[#E5EAF3] p-8 shadow-soft space-y-6">
         <div className="text-center space-y-1">
-          <h1 className="text-2xl font-black text-[#202124] tracking-tight">
+          <h1 className="text-2xl font-black text-[#172033] tracking-tight">
             Create an Account
           </h1>
-          <p className="text-xs text-[#5F6368]">
+          <p className="text-xs text-[#64748B]">
             Join HAATZA for express delivery & exclusive festive savings
           </p>
         </div>
@@ -58,11 +58,11 @@ export const RegisterPage: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-[#172033] uppercase tracking-wider mb-1.5">
               Full Name *
             </label>
             <div className="relative">
-              <User className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <User className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={name}
@@ -71,18 +71,18 @@ export const RegisterPage: React.FC = () => {
                   setError('');
                 }}
                 placeholder="e.g. Priya Sharma"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-300 text-xs focus:outline-hidden focus:border-[#E53935]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E5EAF3] bg-white text-xs text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-[#172033] uppercase tracking-wider mb-1.5">
               Email Address *
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 value={email}
@@ -91,18 +91,18 @@ export const RegisterPage: React.FC = () => {
                   setError('');
                 }}
                 placeholder="name@example.in"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-300 text-xs focus:outline-hidden focus:border-[#E53935]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E5EAF3] bg-white text-xs text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-[#172033] uppercase tracking-wider mb-1.5">
               10-Digit Mobile Number *
             </label>
             <div className="relative">
-              <Phone className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Phone className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="tel"
                 value={phone}
@@ -111,18 +111,18 @@ export const RegisterPage: React.FC = () => {
                   setError('');
                 }}
                 placeholder="+91 98765 43210"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-300 text-xs focus:outline-hidden focus:border-[#E53935]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E5EAF3] bg-white text-xs text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-[#172033] uppercase tracking-wider mb-1.5">
               Create Password *
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 value={password}
@@ -131,7 +131,7 @@ export const RegisterPage: React.FC = () => {
                   setError('');
                 }}
                 placeholder="At least 6 characters"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-300 text-xs focus:outline-hidden focus:border-[#E53935]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E5EAF3] bg-white text-xs text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
                 required
               />
             </div>
@@ -140,16 +140,16 @@ export const RegisterPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-4 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 px-4 bg-[#2962FF] hover:bg-[#1E4ED8] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-soft hover:shadow-soft-lg flex items-center justify-center gap-2 disabled:opacity-50"
           >
             <span>{loading ? 'Creating Account...' : 'Agree & Register'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
-        <p className="text-center text-xs text-zinc-500">
+        <p className="text-center text-xs text-[#64748B]">
           Already registered?{' '}
-          <Link to="/login" className="font-bold text-[#E53935] hover:underline">
+          <Link to="/login" className="font-bold text-[#2962FF] hover:underline">
             Sign In Here
           </Link>
         </p>

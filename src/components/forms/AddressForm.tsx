@@ -73,7 +73,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-semibold text-zinc-700 mb-1">
+          <label className="block text-xs font-semibold text-[#172033] mb-1">
             Full Name *
           </label>
           <input
@@ -81,13 +81,13 @@ export const AddressForm: React.FC<AddressFormProps> = ({
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             placeholder="e.g. Rahul Sharma"
-            className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-300 focus:outline-hidden focus:border-[#E53935]"
+            className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5EAF3] bg-white text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
           />
           {errors.fullName && <p className="text-[11px] text-rose-600 mt-0.5">{errors.fullName}</p>}
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-zinc-700 mb-1">
+          <label className="block text-xs font-semibold text-[#172033] mb-1">
             10-digit Mobile Number *
           </label>
           <input
@@ -95,7 +95,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+91 98765 43210"
-            className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-300 focus:outline-hidden focus:border-[#E53935]"
+            className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5EAF3] bg-white text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
           />
           {errors.phone && <p className="text-[11px] text-rose-600 mt-0.5">{errors.phone}</p>}
         </div>
@@ -103,7 +103,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-xs font-semibold text-zinc-700 mb-1">
+          <label className="block text-xs font-semibold text-[#172033] mb-1">
             PIN Code *
           </label>
           <input
@@ -112,38 +112,38 @@ export const AddressForm: React.FC<AddressFormProps> = ({
             value={pincode}
             onChange={(e) => handlePincodeChange(e.target.value)}
             placeholder="e.g. 400001"
-            className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-300 focus:outline-hidden focus:border-[#E53935]"
+            className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5EAF3] bg-white text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
           />
           {errors.pincode && <p className="text-[11px] text-rose-600 mt-0.5">{errors.pincode}</p>}
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-zinc-700 mb-1">
+          <label className="block text-xs font-semibold text-[#172033] mb-1">
             City *
           </label>
           <input
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-300 focus:outline-hidden focus:border-[#E53935]"
+            className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5EAF3] bg-white text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-zinc-700 mb-1">
+          <label className="block text-xs font-semibold text-[#172033] mb-1">
             State *
           </label>
           <input
             type="text"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-300 focus:outline-hidden focus:border-[#E53935]"
+            className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5EAF3] bg-white text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-zinc-700 mb-1">
+        <label className="block text-xs font-semibold text-[#172033] mb-1">
           Flat, House No., Building, Apartment *
         </label>
         <input
@@ -151,14 +151,14 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           value={addressLine1}
           onChange={(e) => setAddressLine1(e.target.value)}
           placeholder="e.g. Flat 402, Sea Green Apartments"
-          className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-300 focus:outline-hidden focus:border-[#E53935]"
+          className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5EAF3] bg-white text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
         />
         {errors.addressLine1 && <p className="text-[11px] text-rose-600 mt-0.5">{errors.addressLine1}</p>}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-semibold text-zinc-700 mb-1">
+          <label className="block text-xs font-semibold text-[#172033] mb-1">
             Area, Street, Sector (Optional)
           </label>
           <input
@@ -166,12 +166,12 @@ export const AddressForm: React.FC<AddressFormProps> = ({
             value={addressLine2}
             onChange={(e) => setAddressLine2(e.target.value)}
             placeholder="e.g. Marine Drive, Fort"
-            className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-300 focus:outline-hidden focus:border-[#E53935]"
+            className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5EAF3] bg-white text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-zinc-700 mb-1">
+          <label className="block text-xs font-semibold text-[#172033] mb-1">
             Landmark (Optional)
           </label>
           <input
@@ -179,26 +179,26 @@ export const AddressForm: React.FC<AddressFormProps> = ({
             value={landmark}
             onChange={(e) => setLandmark(e.target.value)}
             placeholder="e.g. Opposite Oval Maidan"
-            className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-300 focus:outline-hidden focus:border-[#E53935]"
+            className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5EAF3] bg-white text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
           />
         </div>
       </div>
 
       {/* Type of Address */}
       <div>
-        <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+        <label className="block text-xs font-semibold text-[#172033] mb-1.5">
           Address Type
         </label>
         <div className="flex gap-4">
           {(['home', 'work', 'other'] as const).map((type) => (
-            <label key={type} className="flex items-center gap-1.5 text-xs text-zinc-700 capitalize cursor-pointer">
+            <label key={type} className="flex items-center gap-1.5 text-xs text-[#64748B] capitalize cursor-pointer">
               <input
                 type="radio"
                 name="addressType"
                 value={type}
                 checked={addressType === type}
                 onChange={() => setAddressType(type)}
-                className="text-[#E53935] focus:ring-[#E53935]"
+                className="text-[#2962FF] focus:ring-[#2962FF]"
               />
               <span>{type}</span>
             </label>
@@ -207,28 +207,28 @@ export const AddressForm: React.FC<AddressFormProps> = ({
       </div>
 
       <div className="pt-2">
-        <label className="flex items-center gap-2 text-xs text-zinc-700 cursor-pointer">
+        <label className="flex items-center gap-2 text-xs text-[#64748B] cursor-pointer">
           <input
             type="checkbox"
             checked={isDefault}
             onChange={(e) => setIsDefault(e.target.checked)}
-            className="rounded text-[#E53935] focus:ring-[#E53935]"
+            className="rounded text-[#2962FF] focus:ring-[#2962FF]"
           />
           <span>Make this my default delivery address</span>
         </label>
       </div>
 
-      <div className="flex justify-end gap-3 pt-4 border-t border-zinc-200">
+      <div className="flex justify-end gap-3 pt-4 border-t border-[#E5EAF3]">
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 text-xs font-semibold text-zinc-600 hover:text-zinc-900 rounded-xl hover:bg-zinc-100"
+          className="px-4 py-2 text-xs font-semibold text-[#64748B] hover:text-[#172033] rounded-xl hover:bg-[#F5F7FF] transition-colors"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-bold rounded-xl transition-colors shadow-2xs"
+          className="px-6 py-2 bg-[#2962FF] hover:bg-[#1E4ED8] text-white text-xs font-bold rounded-xl transition-colors shadow-soft-sm"
         >
           Save Address
         </button>

@@ -28,7 +28,7 @@ export const CartPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} className="mb-4" />
 
       <div className="flex items-center justify-between pb-6 border-b border-zinc-200">
@@ -58,7 +58,7 @@ export const CartPage: React.FC = () => {
               <div className="pt-4">
                 <Link
                   to="/"
-                  className="inline-flex items-center gap-2 text-xs font-bold text-[#E53935] hover:underline"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#2962FF] hover:underline"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   <span>Continue Shopping</span>
@@ -66,9 +66,9 @@ export const CartPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="p-8 text-center bg-white rounded-2xl border border-zinc-200">
+            <div className="p-8 text-center bg-white rounded-2xl border border-[#E5EAF3] shadow-soft-sm">
               <p className="text-sm font-semibold text-zinc-600">Your cart is currently empty.</p>
-              <Link to="/" className="mt-3 inline-block text-xs font-bold text-[#E53935] hover:underline">
+              <Link to="/" className="mt-3 inline-block text-xs font-bold text-[#2962FF] hover:underline">
                 Explore Products →
               </Link>
             </div>
@@ -76,10 +76,10 @@ export const CartPage: React.FC = () => {
 
           {/* Saved For Later Section */}
           {savedForLater.length > 0 && (
-            <div className="pt-8 border-t border-zinc-200 mt-8 space-y-4">
+            <div className="pt-8 border-t border-[#E5EAF3] mt-8 space-y-4">
               <div className="flex items-center gap-2">
-                <Bookmark className="w-4 h-4 text-[#E53935]" />
-                <h3 className="font-bold text-base text-[#202124]">
+                <Bookmark className="w-4 h-4 text-[#2962FF]" />
+                <h3 className="font-bold text-base text-[#172033]">
                   Saved for Later ({savedForLater.length})
                 </h3>
               </div>
@@ -90,7 +90,7 @@ export const CartPage: React.FC = () => {
                   return (
                     <div
                       key={saved.id}
-                      className="flex items-center justify-between p-4 bg-white rounded-2xl border border-zinc-200 gap-4"
+                      className="flex items-center justify-between p-4 bg-white rounded-2xl border border-[#E5EAF3] shadow-soft-sm gap-4"
                     >
                       <div className="flex items-center gap-3">
                         <img
@@ -116,7 +116,7 @@ export const CartPage: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => moveToCartFromSaved(saved.id)}
-                          className="px-3 py-1.5 rounded-lg bg-zinc-900 text-white text-xs font-bold hover:bg-[#E53935] transition-colors cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-[#2962FF] text-white text-xs font-bold hover:bg-[#1E4ED8] transition-colors cursor-pointer"
                         >
                           Move to Cart
                         </button>

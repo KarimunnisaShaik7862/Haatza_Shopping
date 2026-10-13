@@ -28,7 +28,7 @@ export const OrderTrackingPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <LoadingSkeleton type="text" />
       </div>
     );
@@ -36,10 +36,10 @@ export const OrderTrackingPage: React.FC = () => {
 
   if (!order) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-xl font-bold text-zinc-900 mb-2">Order Not Found</h2>
-        <p className="text-xs text-zinc-500 mb-4">No tracking details found for order #{orderId}.</p>
-        <Link to="/orders" className="text-xs font-bold text-[#E53935] hover:underline">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <h2 className="text-xl font-bold text-[#172033] mb-2">Order Not Found</h2>
+        <p className="text-xs text-[#64748B] mb-4">No tracking details found for order #{orderId}.</p>
+        <Link to="/orders" className="text-xs font-bold text-[#2962FF] hover:underline">
           Return to Orders
         </Link>
       </div>
@@ -47,25 +47,25 @@ export const OrderTrackingPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 py-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} className="mb-4" />
 
-      <div className="flex items-center justify-between pb-6 border-b border-zinc-200">
+      <div className="flex items-center justify-between pb-6 border-b border-[#E5EAF3]">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#E53935]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#2962FF]">
             Courier Partner: Blue Dart Express (AWB #8392109)
           </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#202124] tracking-tight mt-1">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight mt-1">
             Tracking Order #{order.orderNumber}
           </h1>
-          <p className="text-xs text-[#5F6368] mt-1 font-medium">
+          <p className="text-xs text-[#64748B] mt-1 font-medium">
             Expected Delivery by: <strong className="text-emerald-700">{order.estimatedDelivery}</strong>
           </p>
         </div>
 
         <Link
           to="/orders"
-          className="text-xs font-bold text-zinc-600 hover:text-zinc-900 flex items-center gap-1.5"
+          className="text-xs font-bold text-[#64748B] hover:text-[#2962FF] flex items-center gap-1.5 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Orders</span>
@@ -73,10 +73,10 @@ export const OrderTrackingPage: React.FC = () => {
       </div>
 
       {/* Main Tracking Milestone Timeline */}
-      <div className="bg-white rounded-3xl border border-zinc-200 p-6 sm:p-8 mt-6 space-y-8 shadow-2xs">
-        <h3 className="font-bold text-base text-[#202124]">Live Shipment Timeline</h3>
+      <div className="bg-white rounded-3xl border border-[#E5EAF3] p-6 sm:p-8 mt-6 space-y-8 shadow-soft">
+        <h3 className="font-bold text-base text-[#172033]">Live Shipment Timeline</h3>
 
-        <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-zinc-200">
+        <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#E5EAF3]">
           {order.trackingSteps.map((step, idx) => (
             <div key={idx} className="relative group">
               {/* Dot icon */}
@@ -85,7 +85,7 @@ export const OrderTrackingPage: React.FC = () => {
                   step.completed
                     ? 'bg-emerald-600 ring-4 ring-emerald-50'
                     : step.current
-                    ? 'bg-[#E53935] ring-4 ring-rose-50 animate-pulse'
+                    ? 'bg-[#2962FF] ring-4 ring-[#DBEAFE] animate-pulse'
                     : 'bg-zinc-300 ring-4 ring-zinc-50'
                 }`}
               >
@@ -98,14 +98,14 @@ export const OrderTrackingPage: React.FC = () => {
 
               <div>
                 <div className="flex items-center gap-3">
-                  <h4 className={`text-sm font-bold ${step.completed || step.current ? 'text-zinc-900' : 'text-zinc-400'}`}>
+                  <h4 className={`text-sm font-bold ${step.completed || step.current ? 'text-[#172033]' : 'text-zinc-400'}`}>
                     {step.title}
                   </h4>
-                  <span className="text-[11px] font-semibold text-zinc-400">
+                  <span className="text-[11px] font-semibold text-[#64748B]">
                     {step.date}
                   </span>
                 </div>
-                <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
+                <p className="text-xs text-[#64748B] mt-1 leading-relaxed">
                   {step.description}
                 </p>
               </div>
@@ -116,32 +116,32 @@ export const OrderTrackingPage: React.FC = () => {
 
       {/* Destination & Items card */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <div className="bg-white rounded-2xl border border-zinc-200 p-5 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-400">
-            <MapPin className="w-4 h-4 text-[#E53935]" />
+        <div className="bg-white rounded-2xl border border-[#E5EAF3] p-5 space-y-3 shadow-soft-sm">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#64748B]">
+            <MapPin className="w-4 h-4 text-[#2962FF]" />
             <span>Delivery Address</span>
           </div>
           <div>
-            <p className="text-sm font-bold text-zinc-900">{order.shippingAddress.fullName}</p>
-            <p className="text-xs text-zinc-600 mt-1">
+            <p className="text-sm font-bold text-[#172033]">{order.shippingAddress.fullName}</p>
+            <p className="text-xs text-[#64748B] mt-1">
               {order.shippingAddress.addressLine1}, {order.shippingAddress.city}, {order.shippingAddress.state} - {order.shippingAddress.pincode}
             </p>
-            <p className="text-xs text-zinc-500 mt-1">Phone: {order.shippingAddress.phone}</p>
+            <p className="text-xs text-[#64748B] mt-1">Phone: {order.shippingAddress.phone}</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-zinc-200 p-5 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-400">
-            <Package className="w-4 h-4 text-[#E53935]" />
+        <div className="bg-white rounded-2xl border border-[#E5EAF3] p-5 space-y-3 shadow-soft-sm">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#64748B]">
+            <Package className="w-4 h-4 text-[#2962FF]" />
             <span>Items in this Shipment</span>
           </div>
           <div className="space-y-2 max-h-36 overflow-y-auto no-scrollbar pr-1">
             {order.items.map((item, i) => (
               <div key={i} className="flex items-center justify-between text-xs">
-                <span className="font-medium text-zinc-800 line-clamp-1 max-w-[200px]">
+                <span className="font-medium text-[#172033] line-clamp-1 max-w-[200px]">
                   {item.product.name} (×{item.quantity})
                 </span>
-                <span className="font-bold text-zinc-900">{formatINR(item.price * item.quantity)}</span>
+                <span className="font-bold text-[#172033]">{formatINR(item.price * item.quantity)}</span>
               </div>
             ))}
           </div>

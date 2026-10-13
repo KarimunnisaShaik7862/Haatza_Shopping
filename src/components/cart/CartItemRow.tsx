@@ -23,11 +23,11 @@ export const CartItemRow: React.FC<CartItemRowProps> = React.memo(({ item }) => 
   const optimizedThumb = optimizeImageUrl(product.mainImage, { width: 160, quality: 70 });
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 p-4 sm:p-5 bg-white rounded-2xl border border-zinc-200/90 shadow-2xs transition-all hover:border-zinc-300">
+    <div className="flex flex-col sm:flex-row gap-4 p-4 sm:p-5 bg-white rounded-2xl border border-[#E5EAF3] shadow-soft-sm transition-all hover:border-[#DBEAFE]">
       {/* Product Image */}
       <Link
         to={`/product/${product.slug || product.id}`}
-        className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-zinc-50 border border-zinc-100 shrink-0"
+        className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-[#FAFAFA] border border-[#E5EAF3] shrink-0"
       >
         <img
           src={optimizedThumb || ''}
@@ -50,7 +50,7 @@ export const CartItemRow: React.FC<CartItemRowProps> = React.memo(({ item }) => 
               </span>
               <Link
                 to={`/product/${product.slug || product.id}`}
-                className="block text-sm sm:text-base font-bold text-[#202124] hover:text-[#E53935] line-clamp-2 leading-snug"
+                className="block text-sm sm:text-base font-bold text-[#172033] hover:text-[#2962FF] line-clamp-2 leading-snug transition-colors"
               >
                 {product.name || 'Product'}
               </Link>

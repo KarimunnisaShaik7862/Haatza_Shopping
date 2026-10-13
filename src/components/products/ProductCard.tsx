@@ -68,7 +68,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
 
   return (
     <div
-      className={`group relative bg-white rounded-2xl border border-zinc-200/80 hover:border-[#D99A9A] transition-all duration-300 flex flex-col justify-between overflow-hidden ${className}`}
+      className={`group relative bg-white rounded-2xl border border-[#E5EAF3] hover:border-[#DBEAFE] hover:shadow-soft transition-all duration-300 flex flex-col justify-between overflow-hidden ${className}`}
     >
       {/* Product Image Container (Clean, Bright, Natural without dark shadows) */}
       <div className="relative aspect-square w-full bg-[#FAFAFA] overflow-hidden">
@@ -87,7 +87,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
         {/* Badges Overlay */}
         <div className="absolute top-2 left-2 flex flex-col gap-1 items-start z-10 pointer-events-none">
           {dealBadge && (
-            <span className="px-2 py-0.5 rounded-md bg-[#A60000] text-white text-[10px] font-black tracking-wider uppercase font-heading">
+            <span className="px-2 py-0.5 rounded-md bg-[#2962FF] text-white text-[10px] font-black tracking-wider uppercase font-heading">
               {dealBadge}
             </span>
           )}
@@ -114,8 +114,8 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
           onClick={handleWishlistToggle}
           className={`absolute top-2 right-2 w-7.5 h-7.5 rounded-full flex items-center justify-center transition-all z-10 ${
             isFavorited
-              ? 'bg-[#A60000] text-white'
-              : 'bg-white/90 text-zinc-600 hover:text-[#A60000] hover:bg-white border border-zinc-200/60'
+              ? 'bg-[#2962FF] text-white'
+              : 'bg-white/90 text-zinc-600 hover:text-[#2962FF] hover:bg-white border border-[#E5EAF3]'
           }`}
           aria-label={isFavorited ? 'Remove from wishlist' : 'Save to wishlist'}
         >
@@ -126,7 +126,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
         <button
           type="button"
           onClick={handleQuickView}
-          className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white/95 hover:bg-white text-zinc-800 hover:text-[#A60000] text-xs font-semibold px-3 py-1 rounded-full border border-zinc-200/80 opacity-0 group-hover:opacity-100 transition-all duration-200 items-center gap-1.5 hidden sm:inline-flex z-10"
+          className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white/95 hover:bg-white text-zinc-800 hover:text-[#2962FF] text-xs font-semibold px-3 py-1 rounded-full border border-[#E5EAF3] opacity-0 group-hover:opacity-100 transition-all duration-200 items-center gap-1.5 hidden sm:inline-flex z-10 shadow-2xs"
         >
           <Eye className="w-3.5 h-3.5" />
           <span>Quick View</span>
@@ -158,7 +158,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
           {/* Product Name */}
           <Link
             to={`/product/${product.slug}`}
-            className="block text-xs sm:text-sm font-semibold text-zinc-900 hover:text-[#A60000] transition-colors line-clamp-2 leading-snug h-9 font-body"
+            className="block text-xs sm:text-sm font-semibold text-[#172033] hover:text-[#2962FF] transition-colors line-clamp-2 leading-snug h-9 font-body"
             title={product.name}
           >
             {product.name}
@@ -184,7 +184,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
             className={`w-full py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 font-heading ${
               isAddedRecently
                 ? 'bg-emerald-600 text-white'
-                : 'bg-zinc-900 hover:bg-[#A60000] text-white active:scale-95'
+                : 'bg-[#2962FF] hover:bg-[#1E4ED8] text-white active:scale-95 shadow-2xs hover:shadow-xs'
             }`}
           >
             {isAddedRecently ? (

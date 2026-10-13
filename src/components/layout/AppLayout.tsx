@@ -23,10 +23,10 @@ export const AppLayout: React.FC = () => {
       ? 'bg-gradient-to-b from-[#F2FAF4] via-[#F8FCF9] to-white'
       : destination === 'nest'
       ? 'bg-gradient-to-b from-[#F6F2FC] via-[#FAF8FD] to-white'
-      : 'bg-gradient-to-b from-[#FAF2F2] via-[#FDF9F9] to-[#FFFFFF]';
+      : 'bg-gradient-to-b from-[#F7F9FC] via-[#F5F7FF] to-[#FFFFFF]';
 
   return (
-    <div className={`min-h-screen flex flex-col ${bgGradient} text-[#202124] transition-colors duration-300`}>
+    <div className={`min-h-screen flex flex-col ${bgGradient} text-[#172033] transition-colors duration-300`}>
       <Header />
       <main className="flex-1 pb-16 md:pb-0">
         <ErrorBoundary>

@@ -73,10 +73,10 @@ export const ProductGrid: React.FC<ProductGridProps> = React.memo(({
           <button
             type="button"
             onClick={handleLoadMore}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200/90 font-bold text-xs sm:text-sm transition-all duration-200 shadow-2xs hover:border-[#D99A9A] active:scale-95 group cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-[#F5F7FF] text-[#172033] border border-[#E5EAF3] font-bold text-xs sm:text-sm transition-all duration-200 shadow-2xs hover:border-[#DBEAFE] hover:text-[#2962FF] active:scale-95 group cursor-pointer"
           >
             <span>Load More Products</span>
-            <ChevronDown className="w-4 h-4 text-[#A60000] group-hover:translate-y-0.5 transition-transform" />
+            <ChevronDown className="w-4 h-4 text-[#2962FF] group-hover:translate-y-0.5 transition-transform" />
           </button>
           <span className="text-[11px] text-zinc-500 font-medium">
             Showing {displayedProducts.length} of {products.length} products

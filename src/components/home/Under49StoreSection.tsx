@@ -33,11 +33,11 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
   };
 
   return (
-    <section className="bg-gradient-to-r from-[#A60000]/8 via-[#F5DCDC]/40 to-white rounded-3xl p-5 sm:p-7 border border-[#D99A9A]/40 shadow-xs relative overflow-hidden">
+    <section className="bg-gradient-to-r from-[#EEF3FF] via-[#F5F7FF] to-white rounded-3xl p-5 sm:p-7 border border-[#E5EAF3] shadow-soft-sm relative overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-[#A60000] text-white flex items-center justify-center font-black text-lg shadow-md">
+          <div className="w-10 h-10 rounded-2xl bg-[#2962FF] text-white flex items-center justify-center font-black text-lg shadow-md">
             ₹49
           </div>
           <div>
@@ -45,7 +45,7 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
               <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
                 ₹49 Store
               </h2>
-              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#F5DCDC] text-[#A60000] border border-[#D99A9A]/40 text-[10px] font-black uppercase tracking-wider">
+              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] text-[10px] font-black uppercase tracking-wider">
                 Unbeatable Budget Finds
               </span>
             </div>
@@ -58,7 +58,7 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
         {/* Top See All Link */}
         <Link
           to="/category/under-49"
-          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] transition-colors group shrink-0"
+          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] transition-colors group shrink-0"
         >
           <span>See All ({products.length}+)</span>
           <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -109,8 +109,8 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
                     aria-label={isFav ? 'Remove from wishlist' : 'Save to wishlist'}
                     className={`absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center transition-all z-10 ${
                       isFav
-                        ? 'bg-[#A60000] text-white shadow-md'
-                        : 'bg-white/90 text-zinc-600 hover:text-[#A60000] hover:bg-white shadow-xs'
+                        ? 'bg-[#2962FF] text-white shadow-md'
+                        : 'bg-white/90 text-zinc-600 hover:text-[#2962FF] hover:bg-white border border-[#E5EAF3]'
                     }`}
                   >
                     <Heart className={`w-3.5 h-3.5 ${isFav ? 'fill-current' : ''}`} />
@@ -125,7 +125,7 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
                     </span>
                     <Link
                       to={`/product/${item.slug}`}
-                      className="block text-xs sm:text-sm font-bold text-zinc-900 hover:text-[#A60000] line-clamp-2 leading-snug mt-0.5"
+                      className="block text-xs sm:text-sm font-bold text-zinc-900 hover:text-[#2962FF] line-clamp-2 leading-snug mt-0.5"
                     >
                       {item.name}
                     </Link>
@@ -150,7 +150,7 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
                       className={`w-full py-1.5 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 shadow-2xs ${
                         isAdded
                           ? 'bg-emerald-600 text-white'
-                          : 'bg-zinc-900 hover:bg-amber-600 text-white active:scale-95'
+                          : 'bg-[#2962FF] hover:bg-[#1E4ED8] text-white active:scale-95'
                       }`}
                     >
                       {isAdded ? (
@@ -172,21 +172,21 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
           })}
 
           {/* Dedicated "See All" Card at end of scroll row */}
-          <div className="w-[170px] sm:w-[195px] shrink-0 bg-white/90 hover:bg-white rounded-2xl border-2 border-dashed border-[#D99A9A] hover:border-[#A60000] transition-all duration-300 flex flex-col items-center justify-center p-6 text-center group cursor-pointer shadow-2xs">
+          <div className="w-[170px] sm:w-[195px] shrink-0 bg-white/90 hover:bg-white rounded-2xl border-2 border-dashed border-[#DBEAFE] hover:border-[#2962FF] transition-all duration-300 flex flex-col items-center justify-center p-6 text-center group cursor-pointer shadow-2xs">
             <Link
               to="/category/under-49"
               className="flex flex-col items-center justify-center w-full h-full"
             >
-              <div className="w-12 h-12 rounded-full bg-[#F5DCDC] text-[#A60000] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="w-12 h-12 rounded-full bg-[#EEF3FF] text-[#2962FF] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-2xs">
                 <ArrowRight className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-bold text-zinc-900 group-hover:text-[#A60000] transition-colors">
+              <h4 className="text-sm font-bold text-zinc-900 group-hover:text-[#2962FF] transition-colors">
                 View Entire ₹49 Store
               </h4>
               <p className="text-xs text-zinc-500 mt-1">
                 Explore all budget deals & everyday steals
               </p>
-              <span className="mt-3 text-xs font-black text-[#A60000] inline-flex items-center gap-1">
+              <span className="mt-3 text-xs font-black text-[#2962FF] inline-flex items-center gap-1">
                 <span>See All Items</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </span>

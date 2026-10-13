@@ -5,7 +5,7 @@ import { optimizeImageUrl } from '../../utils/imageOptimizer';
 
 export const CampaignBannerSection: React.FC = React.memo(() => {
   return (
-    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#A60000] via-[#780000] to-neutral-950 text-white shadow-xl border border-white/10">
+    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0F2042] via-[#1E40AF] to-[#2962FF] text-white shadow-xl border border-white/10">
       {/* Ambient background glow & image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -17,7 +17,7 @@ export const CampaignBannerSection: React.FC = React.memo(() => {
           width="1000"
           height="360"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-[#A60000]/60 to-transparent sm:w-2/3" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-[#1E3A8A]/60 to-transparent sm:w-2/3" />
       </div>
 
       <div className="relative z-10 p-6 sm:p-10 lg:p-12 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
@@ -46,7 +46,7 @@ export const CampaignBannerSection: React.FC = React.memo(() => {
               className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-black text-xs sm:text-sm transition-all duration-200 shadow-xl hover:scale-105 active:scale-95 group font-heading"
             >
               <span>Explore Collection</span>
-              <ArrowRight className="w-4 h-4 text-[#A60000] group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-[#2962FF] group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <span className="text-xs font-bold text-white/80 hidden sm:inline-flex items-center gap-1.5">
@@ -58,7 +58,7 @@ export const CampaignBannerSection: React.FC = React.memo(() => {
 
         {/* Right side floating promotional pill badge */}
         <div className="hidden lg:flex flex-col items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl text-center space-y-2 shrink-0">
-          <div className="w-12 h-12 rounded-2xl bg-white text-[#A60000] flex items-center justify-center shadow-lg font-black text-xl">
+          <div className="w-12 h-12 rounded-2xl bg-white text-[#2962FF] flex items-center justify-center shadow-lg font-black text-xl">
             %
           </div>
           <span className="text-xs font-bold uppercase tracking-wider text-amber-300">

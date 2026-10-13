@@ -30,20 +30,20 @@ export const LocationSelectorModal: React.FC = () => {
   return (
     <Modal isOpen={isModalOpen} onClose={closeLocationModal} title="Choose Delivery Location">
       <div className="space-y-5">
-        <p className="text-sm text-[#5F6368]">
+        <p className="text-sm text-[#64748B]">
           Select delivery PIN code to see product availability and delivery time estimates for your area.
         </p>
 
         {/* Current Location Badge */}
-        <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#FFEBEE] border border-[#E53935]/20">
+        <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#EEF3FF] border border-[#DBEAFE]">
           <div className="flex items-center gap-2.5">
-            <MapPin className="w-5 h-5 text-[#E53935] shrink-0" />
+            <MapPin className="w-5 h-5 text-[#2962FF] shrink-0" />
             <div>
-              <p className="text-xs text-[#5F6368]">Currently Delivering to</p>
-              <p className="text-sm font-bold text-[#202124]">{location.formattedAddress}</p>
+              <p className="text-xs text-[#64748B]">Currently Delivering to</p>
+              <p className="text-sm font-bold text-[#172033]">{location.formattedAddress}</p>
             </div>
           </div>
-          <span className="text-xs font-semibold px-2 py-1 bg-white text-[#E53935] rounded-md shadow-2xs">
+          <span className="text-xs font-semibold px-2 py-1 bg-white text-[#2962FF] border border-[#DBEAFE] rounded-md shadow-2xs">
             Active
           </span>
         </div>
@@ -56,7 +56,7 @@ export const LocationSelectorModal: React.FC = () => {
           }}
           className="space-y-2"
         >
-          <label htmlFor="pincode-input" className="block text-xs font-semibold text-[#202124]">
+          <label htmlFor="pincode-input" className="block text-xs font-semibold text-[#172033]">
             Enter 6-digit PIN code
           </label>
           <div className="flex gap-2">
@@ -72,12 +72,12 @@ export const LocationSelectorModal: React.FC = () => {
                   setErrorMsg('');
                 }}
                 placeholder="e.g. 400051 or 560001"
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-zinc-300 text-sm focus:outline-hidden focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935]"
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[#E5EAF3] bg-white text-sm text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus:ring-2 focus:ring-[#2962FF]/20"
               />
             </div>
             <button
               type="submit"
-              className="px-5 py-2.5 bg-[#E53935] hover:bg-[#D32F2F] text-white text-sm font-semibold rounded-xl transition-colors shadow-2xs"
+              className="px-5 py-2.5 bg-[#2962FF] hover:bg-[#1E4ED8] text-white text-sm font-semibold rounded-xl transition-colors shadow-soft-sm"
             >
               Apply
             </button>
@@ -87,7 +87,7 @@ export const LocationSelectorModal: React.FC = () => {
 
         {/* Popular Cities */}
         <div>
-          <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2.5">
+          <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-2.5">
             Popular Cities
           </p>
           <div className="grid grid-cols-2 gap-2">
@@ -100,15 +100,15 @@ export const LocationSelectorModal: React.FC = () => {
                   onClick={() => handleApply(metro.pincode)}
                   className={`flex items-center justify-between p-2.5 rounded-xl border text-left text-xs transition-all ${
                     isSelected
-                      ? 'border-[#E53935] bg-[#FFEBEE] text-[#E53935] font-bold'
-                      : 'border-zinc-200 hover:border-zinc-300 bg-white text-zinc-800'
+                      ? 'border-[#2962FF] bg-[#EEF3FF] text-[#2962FF] font-bold shadow-soft-sm'
+                      : 'border-[#E5EAF3] hover:border-[#DBEAFE] bg-white text-[#172033]'
                   }`}
                 >
                   <div>
                     <p className="font-semibold">{metro.city}</p>
-                    <p className="text-[11px] text-zinc-500">{metro.pincode}</p>
+                    <p className="text-[11px] text-[#64748B]">{metro.pincode}</p>
                   </div>
-                  {isSelected && <Check className="w-4 h-4 text-[#E53935]" />}
+                  {isSelected && <Check className="w-4 h-4 text-[#2962FF]" />}
                 </button>
               );
             })}

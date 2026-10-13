@@ -72,9 +72,9 @@ export const CountdownClock: React.FC<CountdownClockProps> = React.memo(({
   if (variant === 'pill') {
     return (
       <div
-        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#F5DCDC] text-[#A60000] text-[10px] font-black uppercase tracking-wider font-heading ${className}`}
+        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EEF3FF] text-[#2962FF] text-[10px] font-black uppercase tracking-wider font-heading border border-[#DBEAFE] ${className}`}
       >
-        <Clock className="w-3 h-3 text-[#A60000]" />
+        <Clock className="w-3 h-3 text-[#2962FF]" />
         <span>
           {String(timeLeft.hours).padStart(2, '0')}h {String(timeLeft.minutes).padStart(2, '0')}m {String(timeLeft.seconds).padStart(2, '0')}s remaining
         </span>
@@ -84,20 +84,20 @@ export const CountdownClock: React.FC<CountdownClockProps> = React.memo(({
 
   return (
     <div
-      className={`flex items-center gap-2 bg-[#F5DCDC]/60 border border-[#D99A9A]/60 px-3.5 py-1.5 rounded-2xl shadow-2xs self-start sm:self-auto ${className}`}
+      className={`flex items-center gap-2 bg-[#EEF3FF]/70 border border-[#DBEAFE] px-3.5 py-1.5 rounded-2xl shadow-2xs self-start sm:self-auto ${className}`}
     >
-      <Clock className="w-4 h-4 text-[#A60000]" />
-      <span className="text-xs font-bold text-zinc-700 font-body">{label}</span>
-      <div className="flex items-center gap-1 font-mono text-xs font-black text-[#A60000]">
-        <span className="bg-white px-1.5 py-0.5 rounded-md min-w-[24px] text-center shadow-2xs">
+      <Clock className="w-4 h-4 text-[#2962FF]" />
+      <span className="text-xs font-bold text-[#172033] font-body">{label}</span>
+      <div className="flex items-center gap-1 font-mono text-xs font-black text-[#2962FF]">
+        <span className="bg-white px-1.5 py-0.5 rounded-md min-w-[24px] text-center shadow-2xs border border-[#E5EAF3]">
           {String(timeLeft.hours).padStart(2, '0')}
         </span>
         <span>:</span>
-        <span className="bg-white px-1.5 py-0.5 rounded-md min-w-[24px] text-center shadow-2xs">
+        <span className="bg-white px-1.5 py-0.5 rounded-md min-w-[24px] text-center shadow-2xs border border-[#E5EAF3]">
           {String(timeLeft.minutes).padStart(2, '0')}
         </span>
         <span>:</span>
-        <span className="bg-white px-1.5 py-0.5 rounded-md min-w-[24px] text-center shadow-2xs">
+        <span className="bg-white px-1.5 py-0.5 rounded-md min-w-[24px] text-center shadow-2xs border border-[#E5EAF3]">
           {String(timeLeft.seconds).padStart(2, '0')}
         </span>
       </div>

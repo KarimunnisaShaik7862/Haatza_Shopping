@@ -55,7 +55,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = React.memo(({ slides }) => 
         {/* Background accent glow */}
         <div
           className="absolute -right-20 -top-20 w-96 h-96 rounded-full opacity-30 blur-3xl pointer-events-none"
-          style={{ backgroundColor: slide.accentColor || '#E53935' }}
+          style={{ backgroundColor: slide.accentColor || '#2962FF' }}
         />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-12 w-full">
@@ -74,7 +74,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = React.memo(({ slides }) => 
               {slide.title}
             </h1>
 
-            <p className="text-base sm:text-xl font-bold text-rose-300">
+            <p className="text-base sm:text-xl font-bold text-[#DBEAFE]">
               {slide.highlightText}
             </p>
 
@@ -85,7 +85,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = React.memo(({ slides }) => 
             <div className="pt-2 flex items-center gap-3">
               <Link
                 to={slide.ctaLink}
-                className="px-6 py-3 rounded-xl bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2 group"
+                className="px-6 py-3 rounded-xl bg-[#2962FF] hover:bg-[#1E4ED8] text-white font-bold text-xs sm:text-sm transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2 group"
               >
                 <span>{slide.ctaText}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -143,7 +143,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = React.memo(({ slides }) => 
                   type="button"
                   onClick={() => setCurrentSlide(idx)}
                   className={`h-2 rounded-full transition-all ${
-                    currentSlide === idx ? 'w-6 bg-[#E53935]' : 'w-2 bg-white/40 hover:bg-white/70'
+                    currentSlide === idx ? 'w-6 bg-[#2962FF]' : 'w-2 bg-white/40 hover:bg-white/70'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />

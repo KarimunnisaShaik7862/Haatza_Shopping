@@ -16,8 +16,8 @@ export const OrderConfirmationPage: React.FC = () => {
   }, [orderId]);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="bg-white rounded-3xl border border-zinc-200 p-8 sm:p-12 shadow-md text-center space-y-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-24 sm:pb-16">
+      <div className="max-w-3xl mx-auto bg-white rounded-3xl border border-[#E5EAF3] p-8 sm:p-12 shadow-soft text-center space-y-6">
         
         {/* Success Icon */}
         <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
@@ -25,30 +25,30 @@ export const OrderConfirmationPage: React.FC = () => {
         </div>
 
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
             Order Confirmed & Placed Successfully
           </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#202124] tracking-tight mt-3">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight mt-3">
             Thank You for Shopping With HAATZA!
           </h1>
-          <p className="text-xs sm:text-sm text-[#5F6368] mt-2">
+          <p className="text-xs sm:text-sm text-[#64748B] mt-2">
             A confirmation SMS and email have been dispatched with your shipment docket.
           </p>
         </div>
 
         {/* Order Details Card */}
         {order && (
-          <div className="bg-zinc-50 rounded-2xl border border-zinc-200 p-6 text-left space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-200 flex-wrap gap-2">
+          <div className="bg-[#F5F7FF] rounded-2xl border border-[#E5EAF3] p-6 text-left space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5EAF3] flex-wrap gap-2">
               <div>
-                <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
+                <p className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider">
                   Order Number
                 </p>
-                <p className="text-sm font-black text-[#202124]">{order.orderNumber}</p>
+                <p className="text-sm font-black text-[#172033]">{order.orderNumber}</p>
               </div>
 
               <div>
-                <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
+                <p className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider">
                   Estimated Delivery
                 </p>
                 <p className="text-sm font-bold text-emerald-700 flex items-center gap-1">
@@ -58,19 +58,19 @@ export const OrderConfirmationPage: React.FC = () => {
             </div>
 
             {/* Delivery address preview */}
-            <div className="flex items-start gap-2.5 text-xs text-zinc-700">
-              <MapPin className="w-4 h-4 text-[#E53935] shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2.5 text-xs text-[#172033]">
+              <MapPin className="w-4 h-4 text-[#2962FF] shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-zinc-900">{order.shippingAddress.fullName}</span>
-                <p className="text-zinc-500">
+                <span className="font-bold text-[#172033]">{order.shippingAddress.fullName}</span>
+                <p className="text-[#64748B]">
                   {order.shippingAddress.addressLine1}, {order.shippingAddress.city}, {order.shippingAddress.state} - {order.shippingAddress.pincode}
                 </p>
               </div>
             </div>
 
             {/* Items summary */}
-            <div className="pt-3 border-t border-zinc-200 space-y-2">
-              <p className="text-xs font-bold text-zinc-700">
+            <div className="pt-3 border-t border-[#E5EAF3] space-y-2">
+              <p className="text-xs font-bold text-[#172033]">
                 Purchased Items ({order.items.length})
               </p>
               <div className="space-y-2 max-h-40 overflow-y-auto pr-1 no-scrollbar">
@@ -80,21 +80,21 @@ export const OrderConfirmationPage: React.FC = () => {
                       <img
                         src={item.product.mainImage}
                         alt={item.product.name}
-                        className="w-9 h-9 rounded-md object-cover border border-zinc-200"
+                        className="w-9 h-9 rounded-md object-cover border border-[#E5EAF3]"
                       />
-                      <span className="font-medium text-zinc-800 line-clamp-1 max-w-xs">
+                      <span className="font-medium text-[#172033] line-clamp-1 max-w-xs">
                         {item.product.name} × {item.quantity}
                       </span>
                     </div>
-                    <span className="font-bold text-zinc-900">{formatINR(item.price * item.quantity)}</span>
+                    <span className="font-bold text-[#172033]">{formatINR(item.price * item.quantity)}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="pt-3 border-t border-zinc-200 flex justify-between text-sm font-bold">
-              <span>Total Paid:</span>
-              <span className="text-[#E53935] font-black">{formatINR(order.total)}</span>
+            <div className="pt-3 border-t border-[#E5EAF3] flex justify-between text-sm font-bold">
+              <span className="text-[#172033]">Total Paid:</span>
+              <span className="text-[#2962FF] font-black">{formatINR(order.total)}</span>
             </div>
           </div>
         )}
@@ -104,7 +104,7 @@ export const OrderConfirmationPage: React.FC = () => {
           {order && (
             <Link
               to={`/orders/${order.orderNumber}/track`}
-              className="px-6 py-3 rounded-xl bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2"
+              className="px-6 py-3 rounded-xl bg-[#2962FF] hover:bg-[#1E4ED8] text-white font-bold text-xs sm:text-sm transition-all shadow-soft flex items-center justify-center gap-2"
             >
               <Package className="w-4 h-4" />
               <span>Track Live Delivery Status</span>
@@ -113,7 +113,7 @@ export const OrderConfirmationPage: React.FC = () => {
 
           <Link
             to="/orders"
-            className="px-6 py-3 rounded-xl border border-zinc-300 hover:bg-zinc-100 text-zinc-700 font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5"
+            className="px-6 py-3 rounded-xl border border-[#E5EAF3] bg-white hover:bg-[#EEF3FF] hover:text-[#2962FF] text-[#172033] font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
           >
             <span>View All My Orders</span>
             <ArrowRight className="w-4 h-4" />

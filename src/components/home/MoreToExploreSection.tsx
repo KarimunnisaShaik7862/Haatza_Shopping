@@ -76,11 +76,11 @@ export const MoreToExploreSection: React.FC<MoreToExploreSectionProps> = React.m
   if (displayedProducts.length === 0) return null;
 
   return (
-    <section className="space-y-6" aria-label="More to Explore">
+    <section className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs space-y-6" aria-label="More to Explore">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#A60000] to-[#D99A9A] text-white flex items-center justify-center shadow-md">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#2962FF] to-[#DBEAFE] text-white flex items-center justify-center shadow-md">
             <Compass className="w-5 h-5" />
           </div>
           <div>
@@ -88,7 +88,7 @@ export const MoreToExploreSection: React.FC<MoreToExploreSectionProps> = React.m
               <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight font-heading">
                 More to Explore
               </h2>
-              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#F5DCDC] text-[#A60000] text-[10px] font-black uppercase tracking-wider font-heading">
+              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] text-[10px] font-black uppercase tracking-wider font-heading">
                 Endless Discovery
               </span>
             </div>
@@ -117,17 +117,17 @@ export const MoreToExploreSection: React.FC<MoreToExploreSectionProps> = React.m
             type="button"
             onClick={loadNextBatch}
             disabled={isLoadingMore}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200/90 font-black text-xs sm:text-sm transition-all duration-200 shadow-sm hover:border-[#D99A9A] active:scale-95 group disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white hover:bg-[#F5F7FF] text-[#172033] border border-[#E5EAF3] font-black text-xs sm:text-sm transition-all duration-200 shadow-sm hover:border-[#DBEAFE] hover:text-[#2962FF] active:scale-95 group disabled:opacity-50"
           >
             {isLoadingMore ? (
               <>
-                <Loader2 className="w-4 h-4 text-[#A60000] animate-spin" />
+                <Loader2 className="w-4 h-4 text-[#2962FF] animate-spin" />
                 <span>Loading more treasures...</span>
               </>
             ) : (
               <>
                 <span>Load More Products</span>
-                <ArrowDown className="w-4 h-4 text-[#A60000] group-hover:translate-y-0.5 transition-transform" />
+                <ArrowDown className="w-4 h-4 text-[#2962FF] group-hover:translate-y-0.5 transition-transform" />
               </>
             )}
           </button>

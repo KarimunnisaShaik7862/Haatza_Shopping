@@ -42,8 +42,8 @@ const OFFERS: OfferItem[] = [
     title: 'Extra 10% Instant Off',
     details: 'HDFC & ICICI Cards up to ₹500',
     code: 'BANK10',
-    accentBg: 'bg-rose-50 text-[#A60000] border-rose-200',
-    accentText: 'text-[#A60000]',
+    accentBg: 'bg-[#EEF3FF] text-[#2962FF] border-[#DBEAFE]',
+    accentText: 'text-[#2962FF]',
   },
   {
     id: 'offer-emi',
@@ -83,15 +83,15 @@ export const OfferStrip: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-gradient-to-r from-[#A60000]/4 via-white to-[#F5DCDC]/40 rounded-2xl border border-[#D99A9A]/30 py-2.5 px-3 sm:px-5">
+    <div className="w-full bg-gradient-to-r from-[#EEF3FF] via-white to-[#F5F7FF] rounded-2xl border border-[#E5EAF3] py-2.5 px-3 sm:px-5 shadow-2xs">
       <div className="flex items-center overflow-x-auto no-scrollbar divide-x divide-zinc-200/80 gap-3 sm:gap-4 scroll-smooth">
         {/* Strip Header Tag */}
         <div className="flex items-center gap-2 shrink-0 pr-3 sm:pr-4">
-          <div className="w-7 h-7 rounded-lg bg-[#A60000] text-white flex items-center justify-center shadow-xs">
+          <div className="w-7 h-7 rounded-lg bg-[#2962FF] text-white flex items-center justify-center shadow-xs">
             <Sparkles className="w-3.5 h-3.5 fill-current" />
           </div>
           <div className="leading-tight">
-            <span className="text-[10px] font-black uppercase tracking-wider text-[#A60000] block">
+            <span className="text-[10px] font-black uppercase tracking-wider text-[#2962FF] block">
               Verified Offers
             </span>
             <span className="text-xs font-extrabold text-zinc-900">
@@ -123,7 +123,7 @@ export const OfferStrip: React.FC = () => {
               {/* Offer Text */}
               <div className="text-left">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-bold text-zinc-900 group-hover:text-[#A60000] transition-colors">
+                  <span className="text-xs font-bold text-zinc-900 group-hover:text-[#2962FF] transition-colors">
                     {offer.title}
                   </span>
                   {offer.badge && (
@@ -141,7 +141,7 @@ export const OfferStrip: React.FC = () => {
                       className={`font-mono text-[10px] font-black px-1.5 py-0.2 rounded-md border flex items-center gap-0.5 transition-colors ${
                         isCopied
                           ? 'bg-emerald-600 text-white border-emerald-600'
-                          : 'bg-zinc-100 border-zinc-200 text-[#A60000] group-hover:bg-[#F5DCDC]'
+                          : 'bg-zinc-100 border-zinc-200 text-[#2962FF] group-hover:bg-[#EEF3FF]'
                       }`}
                     >
                       {isCopied ? (

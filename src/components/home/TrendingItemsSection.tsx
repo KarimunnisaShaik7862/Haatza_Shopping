@@ -39,7 +39,7 @@ export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ item
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#A60000] to-[#D99A9A] text-white flex items-center justify-center shadow-md">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#2962FF] to-[#DBEAFE] text-white flex items-center justify-center shadow-md">
             <TrendingUp className="w-5 h-5" />
           </div>
           <div>
@@ -47,7 +47,7 @@ export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ item
               <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
                 Trending Items
               </h2>
-              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#F5DCDC] text-[#A60000] border border-[#D99A9A]/40 text-[10px] font-black uppercase tracking-wider">
+              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] text-[10px] font-black uppercase tracking-wider">
                 Top Velocity
               </span>
             </div>
@@ -59,7 +59,7 @@ export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ item
 
         <Link
           to="/category/all"
-          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] transition-colors group shrink-0"
+          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] transition-colors group shrink-0"
         >
           <span>See All Trending</span>
           <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -103,8 +103,8 @@ export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ item
                   aria-label={isFav ? 'Remove from wishlist' : 'Save to wishlist'}
                   className={`absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center transition-all z-10 ${
                     isFav
-                      ? 'bg-[#A60000] text-white shadow-md'
-                      : 'bg-white/90 text-zinc-600 hover:text-[#A60000] hover:bg-white shadow-xs'
+                      ? 'bg-[#2962FF] text-white shadow-md'
+                      : 'bg-white/90 text-zinc-600 hover:text-[#2962FF] hover:bg-white border border-[#E5EAF3]'
                   }`}
                 >
                   <Heart className={`w-3.5 h-3.5 ${isFav ? 'fill-current' : ''}`} />
@@ -132,7 +132,7 @@ export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ item
 
                   <Link
                     to={`/product/${item.slug}`}
-                    className="block text-xs sm:text-sm font-bold text-zinc-900 hover:text-[#A60000] line-clamp-2 leading-snug"
+                    className="block text-xs sm:text-sm font-bold text-zinc-900 hover:text-[#2962FF] line-clamp-2 leading-snug"
                   >
                     {item.name}
                   </Link>
@@ -157,7 +157,7 @@ export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ item
                     className={`w-full py-1.5 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 shadow-2xs ${
                       isAdded
                         ? 'bg-emerald-600 text-white'
-                        : 'bg-zinc-900 hover:bg-[#A60000] text-white active:scale-95'
+                        : 'bg-[#2962FF] hover:bg-[#1E4ED8] text-white active:scale-95'
                     }`}
                   >
                     {isAdded ? (

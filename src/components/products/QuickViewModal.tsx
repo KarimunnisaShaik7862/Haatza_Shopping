@@ -112,8 +112,8 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                         onClick={() => setSelectedVariant(v)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                           isSelected
-                            ? 'bg-[#A60000] text-white border-[#A60000] shadow-xs'
-                            : 'bg-white text-zinc-700 border-zinc-200 hover:border-zinc-300'
+                            ? 'bg-[#2962FF] text-white border-[#2962FF] shadow-xs'
+                            : 'bg-white text-zinc-700 border-zinc-200 hover:border-[#DBEAFE]'
                         }`}
                       >
                         {v.value}
@@ -144,7 +144,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                 className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md ${
                   isAdded
                     ? 'bg-emerald-600 text-white'
-                    : 'bg-[#A60000] hover:bg-[#880000] text-white'
+                    : 'bg-[#2962FF] hover:bg-[#1E4ED8] text-white'
                 }`}
               >
                 {isAdded ? (
@@ -165,8 +165,8 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                 onClick={() => toggleWishlist(product)}
                 className={`p-3 rounded-xl border transition-colors ${
                   isFavorited
-                    ? 'border-[#A60000] bg-[#F5DCDC] text-[#A60000]'
-                    : 'border-zinc-200 hover:border-zinc-300 text-zinc-600'
+                    ? 'border-[#2962FF] bg-[#EEF3FF] text-[#2962FF]'
+                    : 'border-zinc-200 hover:border-[#DBEAFE] text-zinc-600'
                 }`}
                 aria-label="Wishlist"
               >
@@ -177,7 +177,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
             <Link
               to={`/product/${product.slug}`}
               onClick={onClose}
-              className="w-full text-center text-xs font-semibold text-[#5F6368] hover:text-[#A60000] py-1.5 flex items-center justify-center gap-1 transition-colors"
+              className="w-full text-center text-xs font-semibold text-[#64748B] hover:text-[#2962FF] py-1.5 flex items-center justify-center gap-1 transition-colors"
             >
               <span>View Full Details & Specifications</span>
               <ArrowRight className="w-3.5 h-3.5" />

@@ -29,16 +29,16 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto px-4 py-16">
-      <div className="bg-white rounded-3xl border border-zinc-200 p-8 shadow-md space-y-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-24 sm:pb-16">
+      <div className="max-w-md mx-auto bg-white rounded-3xl border border-[#E5EAF3] p-8 shadow-soft space-y-6">
         <div className="text-center space-y-1">
-          <div className="w-12 h-12 rounded-2xl bg-[#FFEBEE] text-[#E53935] font-black text-2xl flex items-center justify-center mx-auto mb-3">
+          <div className="w-12 h-12 rounded-2xl bg-[#EEF3FF] text-[#2962FF] font-black text-2xl flex items-center justify-center mx-auto mb-3 shadow-soft-sm">
             H
           </div>
-          <h1 className="text-2xl font-black text-[#202124] tracking-tight">
+          <h1 className="text-2xl font-black text-[#172033] tracking-tight">
             Sign In to HAATZA
           </h1>
-          <p className="text-xs text-[#5F6368]">
+          <p className="text-xs text-[#64748B]">
             Access your orders, saved wishlist, and addresses
           </p>
         </div>
@@ -51,11 +51,11 @@ export const LoginPage: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-[#172033] uppercase tracking-wider mb-1.5">
               Email or Mobile Number
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 value={email}
@@ -64,7 +64,7 @@ export const LoginPage: React.FC = () => {
                   setError('');
                 }}
                 placeholder="name@example.in"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-300 text-xs focus:outline-hidden focus:border-[#E53935]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E5EAF3] bg-white text-xs text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
                 required
               />
             </div>
@@ -72,18 +72,18 @@ export const LoginPage: React.FC = () => {
 
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-[#172033] uppercase tracking-wider">
                 Password
               </label>
               <Link
                 to="/forgot-password"
-                className="text-xs font-bold text-[#E53935] hover:underline"
+                className="text-xs font-bold text-[#2962FF] hover:underline"
               >
                 Forgot Password?
               </Link>
             </div>
             <div className="relative">
-              <Lock className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 value={password}
@@ -92,7 +92,7 @@ export const LoginPage: React.FC = () => {
                   setError('');
                 }}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-300 text-xs focus:outline-hidden focus:border-[#E53935]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E5EAF3] bg-white text-xs text-[#172033] focus:outline-hidden focus:border-[#2962FF] focus-ring-blue transition-all"
                 required
               />
             </div>
@@ -101,22 +101,22 @@ export const LoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-4 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 px-4 bg-[#2962FF] hover:bg-[#1E4ED8] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-soft hover:shadow-soft-lg flex items-center justify-center gap-2 disabled:opacity-50"
           >
             <span>{loading ? 'Signing In...' : 'Sign In'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
-        <div className="pt-2 text-center text-xs text-zinc-500 space-y-3">
+        <div className="pt-2 text-center text-xs text-[#64748B] space-y-3">
           <p>
             Don't have an account?{' '}
-            <Link to="/register" className="font-bold text-[#E53935] hover:underline">
+            <Link to="/register" className="font-bold text-[#2962FF] hover:underline">
               Create an Account
             </Link>
           </p>
 
-          <div className="p-3 bg-zinc-50 rounded-xl border border-zinc-200 text-[11px] text-zinc-400 leading-tight">
+          <div className="p-3 bg-[#F5F7FF] rounded-xl border border-[#E5EAF3] text-[11px] text-[#64748B] leading-tight">
             🛡️ Frontend Demo Environment: You can sign in directly using the pre-filled demo account.
           </div>
         </div>

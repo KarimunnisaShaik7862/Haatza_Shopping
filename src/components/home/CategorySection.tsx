@@ -13,9 +13,9 @@ export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) 
         <Link
           key={cat.id}
           to={`/category/${cat.slug}`}
-          className="group relative rounded-2xl overflow-hidden bg-white border border-zinc-200 hover:border-zinc-300 hover:shadow-lg transition-all duration-300 flex flex-col"
+          className="group relative rounded-2xl overflow-hidden bg-white border border-[#E5EAF3] hover:border-[#DBEAFE] hover:shadow-soft transition-all duration-300 flex flex-col"
         >
-          <div className="relative aspect-4/3 overflow-hidden bg-zinc-100">
+          <div className="relative aspect-4/3 overflow-hidden bg-[#F5F7FF]">
             <img
               src={cat.image}
               alt={cat.name}
@@ -28,9 +28,9 @@ export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) 
             </span>
           </div>
 
-          <div className="p-2.5 flex items-center justify-between text-[11px] text-[#5F6368] bg-white">
+          <div className="p-2.5 flex items-center justify-between text-[11px] text-[#64748B] bg-white">
             <span className="truncate">{cat.itemCount}+ Items</span>
-            <span className="text-[#E53935] font-bold group-hover:translate-x-0.5 transition-transform">
+            <span className="text-[#2962FF] font-bold group-hover:translate-x-0.5 transition-transform">
               Shop →
             </span>
           </div>

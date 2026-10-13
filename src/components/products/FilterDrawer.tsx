@@ -64,7 +64,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 py-2.5 rounded-xl bg-[#E53935] font-semibold text-xs text-white"
+            className="flex-1 py-2.5 rounded-xl bg-[#2962FF] hover:bg-[#1E4ED8] font-bold text-xs text-white shadow-xs"
           >
             Apply Filters
           </button>

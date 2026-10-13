@@ -19,13 +19,13 @@ export const NewsletterSection: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#4A0000] via-[#750000] to-[#A60000] text-white p-8 sm:p-12 shadow-xl border border-[#D99A9A]/30">
+      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0B1A3A] via-[#1E40AF] to-[#2962FF] text-white p-8 sm:p-12 shadow-xl border border-white/20">
         {/* Background ambient glow */}
-        <div className="absolute -top-24 -right-24 w-72 h-72 bg-[#D99A9A]/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#F5DCDC]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-72 h-72 bg-[#2962FF]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#DBEAFE]/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-2xl mx-auto text-center space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-[#F5DCDC]/20 text-[#F5DCDC] flex items-center justify-center mx-auto shadow-inner">
+          <div className="w-12 h-12 rounded-2xl bg-white/20 text-white flex items-center justify-center mx-auto shadow-inner">
             <Mail className="w-6 h-6" />
           </div>
 
@@ -54,7 +54,7 @@ export const NewsletterSection: React.FC = () => {
               />
               <button
                 type="submit"
-                className="px-6 py-3 rounded-xl bg-zinc-950 hover:bg-black text-white font-bold text-xs sm:text-sm transition-all shadow-md shrink-0 cursor-pointer"
+                className="px-6 py-3 rounded-xl bg-white hover:bg-zinc-100 text-[#2962FF] font-black text-xs sm:text-sm transition-all shadow-md shrink-0 cursor-pointer"
               >
                 Claim Voucher
               </button>

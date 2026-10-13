@@ -13,9 +13,9 @@ export const mockHeroSlides: HeroSlide[] = [
     ctaLink: '/category/electronics',
     tag: 'FESTIVE SPECIAL',
     badge: 'LIVE NOW',
-    bgGradient: 'from-[#A60000] via-[#880000] to-neutral-950',
+    bgGradient: 'from-[#0F2042] via-[#1E40AF] to-[#2962FF]',
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
-    accentColor: '#A60000',
+    accentColor: '#2962FF',
   },
   {
     id: 'hero-haatza-2',
@@ -28,9 +28,9 @@ export const mockHeroSlides: HeroSlide[] = [
     ctaLink: '/category/men-fashion',
     tag: 'NEW SEASON',
     badge: 'HANDPICKED',
-    bgGradient: 'from-[#A60000] via-[#D99A9A]/60 to-stone-900',
+    bgGradient: 'from-[#172554] via-[#1E3A8A] to-[#2563EB]',
     image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80',
-    accentColor: '#D99A9A',
+    accentColor: '#60A5FA',
   },
 
   // LITE HERO SLIDES (Quick Commerce & Everyday Shopping)
@@ -94,7 +94,7 @@ export const mockPromoBanners: PromoBannerData[] = [
     discountText: 'Starting @ ₹1,999',
     ctaText: 'Shop Audio & Gadgets',
     ctaLink: '/category/electronics',
-    bgClass: 'bg-gradient-to-r from-[#A60000] via-stone-900 to-neutral-950 text-white',
+    bgClass: 'bg-gradient-to-r from-[#0F2042] via-[#1E3A8A] to-[#2563EB] text-white',
     image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=500&q=80',
   },
   {
@@ -106,7 +106,7 @@ export const mockPromoBanners: PromoBannerData[] = [
     discountText: 'Special Price Today',
     ctaText: 'Discover Style',
     ctaLink: '/category/men-fashion',
-    bgClass: 'bg-gradient-to-r from-red-950 via-[#D99A9A]/40 to-neutral-900 text-white',
+    bgClass: 'bg-gradient-to-r from-[#172554] via-[#1E40AF] to-[#3B82F6] text-white',
     image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=500&q=80',
   },
 

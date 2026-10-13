@@ -77,7 +77,7 @@ export const mockMainCarouselBanners: MainCarouselBanner[] = [
     ctaLink: '/category/men-fashion',
     category: 'Fashion',
     badge: 'MEGA SALE',
-    bgGradient: 'from-[#A60000] via-[#820000] to-neutral-950',
+    bgGradient: 'from-[#0F2042] via-[#1E40AF] to-[#2962FF]',
   },
   {
     id: 'carousel-banner-2',
@@ -90,7 +90,7 @@ export const mockMainCarouselBanners: MainCarouselBanner[] = [
     ctaLink: '/category/electronics',
     category: 'Electronics',
     badge: 'FLASH DEALS',
-    bgGradient: 'from-zinc-900 via-neutral-900 to-[#A60000]/80',
+    bgGradient: 'from-slate-900 via-[#1E293B] to-[#2962FF]/80',
   },
   {
     id: 'carousel-banner-3',
@@ -103,7 +103,7 @@ export const mockMainCarouselBanners: MainCarouselBanner[] = [
     ctaLink: '/category/beauty',
     category: 'Beauty',
     badge: 'SPECIAL OFFER',
-    bgGradient: 'from-[#880000] via-[#550000] to-stone-900',
+    bgGradient: 'from-[#0B1A3A] via-[#1E3A8A] to-[#2563EB]',
   },
   {
     id: 'carousel-banner-4',
@@ -116,7 +116,7 @@ export const mockMainCarouselBanners: MainCarouselBanner[] = [
     ctaLink: '/category/home-living',
     category: 'Home & Living',
     badge: 'TRENDING NOW',
-    bgGradient: 'from-amber-950 via-stone-900 to-[#A60000]/60',
+    bgGradient: 'from-slate-950 via-[#1E293B] to-[#2962FF]/50',
   },
 ];
 
@@ -238,8 +238,8 @@ export const mockCashbackBanners: CashbackBanner[] = [
     code: 'BANK10',
     validity: 'Every Weekend',
     iconType: 'card',
-    bgGradient: 'from-rose-950 via-[#880000]/70 to-zinc-950',
-    accentColor: '#D99A9A',
+    bgGradient: 'from-blue-950 via-[#1E40AF]/70 to-[#0F172A]',
+    accentColor: '#60A5FA',
     ctaText: 'Check Eligibility',
   },
   {
@@ -442,7 +442,7 @@ export const mockSecondaryPromotions: SecondaryPromoBanner[] = [
     ctaText: 'Explore Collection',
     ctaLink: '/category/women-fashion',
     image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80',
-    bgClass: 'bg-gradient-to-r from-[#A60000] via-[#750000] to-neutral-900 text-white',
+    bgClass: 'bg-gradient-to-r from-[#0F2042] via-[#1E40AF] to-[#2962FF] text-white',
   },
   {
     id: 'sec-promo-2',
@@ -453,7 +453,7 @@ export const mockSecondaryPromotions: SecondaryPromoBanner[] = [
     ctaText: 'Upgrade Your Home',
     ctaLink: '/category/home-living',
     image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=700&q=80',
-    bgClass: 'bg-gradient-to-r from-stone-900 via-neutral-900 to-[#A60000]/60 text-white',
+    bgClass: 'bg-gradient-to-r from-slate-900 via-[#1E293B] to-[#2962FF]/60 text-white',
   },
   {
     id: 'sec-promo-3',
@@ -464,7 +464,7 @@ export const mockSecondaryPromotions: SecondaryPromoBanner[] = [
     ctaText: 'Shop Gadgets',
     ctaLink: '/category/electronics',
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80',
-    bgClass: 'bg-gradient-to-r from-neutral-950 via-zinc-900 to-[#D99A9A]/30 text-white',
+    bgClass: 'bg-gradient-to-r from-neutral-950 via-[#1E293B] to-[#2962FF]/30 text-white',
   },
 ];
 

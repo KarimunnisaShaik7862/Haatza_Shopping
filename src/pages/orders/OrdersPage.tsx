@@ -23,7 +23,7 @@ export const OrdersPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <LoadingSkeleton type="text" />
       </div>
     );
@@ -31,7 +31,7 @@ export const OrdersPage: React.FC = () => {
 
   if (orders.length === 0) {
     return (
-      <div className="max-w-5xl mx-auto px-4 py-12">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <EmptyState
           icon={Package}
           title="No Orders Found"
@@ -59,15 +59,15 @@ export const OrdersPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 py-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} className="mb-4" />
 
-      <div className="flex items-center justify-between pb-6 border-b border-zinc-200">
+      <div className="flex items-center justify-between pb-6 border-b border-[#E5EAF3]">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#202124] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight">
             My Orders
           </h1>
-          <p className="text-xs text-[#5F6368] mt-1">
+          <p className="text-xs text-[#64748B] mt-1">
             Track past and active orders, download invoices, and initiate returns
           </p>
         </div>
@@ -77,27 +77,27 @@ export const OrdersPage: React.FC = () => {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-2xs hover:border-zinc-300 transition-all"
+            className="bg-white rounded-3xl border border-[#E5EAF3] overflow-hidden shadow-soft hover:border-[#DBEAFE] transition-all"
           >
             {/* Header info */}
-            <div className="p-4 sm:p-5 bg-zinc-50 border-b border-zinc-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="p-4 sm:p-5 bg-[#F5F7FF] border-b border-[#E5EAF3] flex flex-wrap items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-6 flex-wrap">
                 <div>
-                  <p className="text-zinc-400 font-bold uppercase tracking-wider text-[10px]">Order Date</p>
-                  <p className="font-bold text-zinc-900">{formatDate(order.date)}</p>
+                  <p className="text-[#64748B] font-bold uppercase tracking-wider text-[10px]">Order Date</p>
+                  <p className="font-bold text-[#172033]">{formatDate(order.date)}</p>
                 </div>
                 <div>
-                  <p className="text-zinc-400 font-bold uppercase tracking-wider text-[10px]">Total Amount</p>
-                  <p className="font-bold text-zinc-900">{formatINR(order.total)}</p>
+                  <p className="text-[#64748B] font-bold uppercase tracking-wider text-[10px]">Total Amount</p>
+                  <p className="font-bold text-[#172033]">{formatINR(order.total)}</p>
                 </div>
                 <div>
-                  <p className="text-zinc-400 font-bold uppercase tracking-wider text-[10px]">Ship To</p>
-                  <p className="font-bold text-zinc-900">{order.shippingAddress.fullName}</p>
+                  <p className="text-[#64748B] font-bold uppercase tracking-wider text-[10px]">Ship To</p>
+                  <p className="font-bold text-[#172033]">{order.shippingAddress.fullName}</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="font-mono text-xs text-zinc-500 font-bold">#{order.orderNumber}</span>
+                <span className="font-mono text-xs text-[#64748B] font-bold">#{order.orderNumber}</span>
                 {getStatusBadge(order.status)}
               </div>
             </div>
@@ -110,19 +110,19 @@ export const OrdersPage: React.FC = () => {
                     <img
                       src={item.product.mainImage}
                       alt={item.product.name}
-                      className="w-16 h-16 rounded-xl object-cover border border-zinc-200"
+                      className="w-16 h-16 rounded-xl object-cover border border-[#E5EAF3]"
                     />
                     <div>
                       <Link
                         to={`/product/${item.product.slug}`}
-                        className="text-xs sm:text-sm font-bold text-zinc-900 hover:text-[#E53935] line-clamp-1"
+                        className="text-xs sm:text-sm font-bold text-[#172033] hover:text-[#2962FF] line-clamp-1 transition-colors"
                       >
                         {item.product.name}
                       </Link>
-                      <p className="text-xs text-zinc-500 mt-0.5">
+                      <p className="text-xs text-[#64748B] mt-0.5">
                         Qty: {item.quantity} {item.selectedVariant ? `• ${item.selectedVariant.value}` : ''}
                       </p>
-                      <p className="text-xs font-semibold text-zinc-900 mt-1">
+                      <p className="text-xs font-semibold text-[#172033] mt-1">
                         {formatINR(item.price)}
                       </p>
                     </div>
@@ -131,7 +131,7 @@ export const OrdersPage: React.FC = () => {
                   <div className="text-right shrink-0">
                     <Link
                       to={`/product/${item.product.slug}`}
-                      className="px-3 py-1.5 rounded-lg border border-zinc-200 text-xs font-semibold text-zinc-700 hover:bg-zinc-50"
+                      className="px-3 py-1.5 rounded-lg border border-[#E5EAF3] text-xs font-semibold text-[#172033] hover:bg-[#EEF3FF] hover:text-[#2962FF] transition-colors"
                     >
                       Buy Again
                     </Link>
@@ -141,8 +141,8 @@ export const OrdersPage: React.FC = () => {
             </div>
 
             {/* Order actions footer */}
-            <div className="p-4 sm:px-6 bg-zinc-50/50 border-t border-zinc-100 flex items-center justify-between flex-wrap gap-3">
-              <div className="flex items-center gap-2 text-xs text-zinc-600 font-medium">
+            <div className="p-4 sm:px-6 bg-[#F5F7FF]/50 border-t border-[#E5EAF3] flex items-center justify-between flex-wrap gap-3">
+              <div className="flex items-center gap-2 text-xs text-[#64748B] font-medium">
                 <Truck className="w-4 h-4 text-emerald-600" />
                 <span>
                   {order.status === 'delivered' ? 'Delivered on ' + formatDate(order.date) : 'Estimated delivery: ' + order.estimatedDelivery}
@@ -152,7 +152,7 @@ export const OrdersPage: React.FC = () => {
               <div className="flex items-center gap-2">
                 <Link
                   to={`/returns?order=${order.orderNumber}`}
-                  className="px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-600 hover:text-[#E53935] flex items-center gap-1 hover:bg-zinc-100 transition-colors"
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#64748B] hover:text-[#2962FF] flex items-center gap-1 hover:bg-[#EEF3FF] transition-colors"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Return/Replace</span>
@@ -160,7 +160,7 @@ export const OrdersPage: React.FC = () => {
 
                 <Link
                   to={`/orders/${order.orderNumber}/track`}
-                  className="px-4 py-2 rounded-xl bg-zinc-900 hover:bg-[#E53935] text-white text-xs font-bold transition-colors flex items-center gap-1.5 shadow-2xs"
+                  className="px-4 py-2 rounded-xl bg-[#2962FF] hover:bg-[#1E4ED8] text-white text-xs font-bold transition-colors flex items-center gap-1.5 shadow-soft-sm"
                 >
                   <span>Track Order</span>
                   <ArrowRight className="w-3.5 h-3.5" />

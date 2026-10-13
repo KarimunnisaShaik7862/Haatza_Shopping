@@ -33,17 +33,17 @@ export const PersonalizedShoppingSection: React.FC<PersonalizedShoppingSectionPr
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-rose-50 text-[#A60000] border border-rose-200 flex items-center justify-center shadow-2xs">
+              <div className="w-9 h-9 rounded-xl bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] flex items-center justify-center shadow-soft-sm">
                 <Heart className="w-4.5 h-4.5 fill-current" />
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-black text-zinc-950 tracking-tight flex items-center gap-2">
+                <h3 className="text-lg sm:text-xl font-black text-[#172033] tracking-tight flex items-center gap-2">
                   <span>From Your Wishlist</span>
-                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-rose-100 text-[#A60000]">
+                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE]">
                     {wishlist.length} Items Saved
                   </span>
                 </h3>
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-[#64748B]">
                   Ready to make them yours? Don't let your favorites slip away.
                 </p>
               </div>
@@ -51,7 +51,7 @@ export const PersonalizedShoppingSection: React.FC<PersonalizedShoppingSectionPr
 
             <Link
               to="/wishlist"
-              className="text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] inline-flex items-center gap-1 group"
+              className="text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] inline-flex items-center gap-1 group transition-colors"
             >
               <span>Go to Wishlist</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -73,17 +73,17 @@ export const PersonalizedShoppingSection: React.FC<PersonalizedShoppingSectionPr
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-800 border border-amber-200 flex items-center justify-center shadow-2xs">
+              <div className="w-9 h-9 rounded-xl bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] flex items-center justify-center shadow-soft-sm">
                 <ShoppingBag className="w-4.5 h-4.5" />
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-black text-zinc-950 tracking-tight flex items-center gap-2">
+                <h3 className="text-lg sm:text-xl font-black text-[#172033] tracking-tight flex items-center gap-2">
                   <span>Still in Your Cart</span>
-                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-900">
+                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-100">
                     Cart Value: ₹{subtotal.toLocaleString('en-IN')}
                   </span>
                 </h3>
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-[#64748B]">
                   Complete your checkout to lock in current promotional prices and fast dispatch.
                 </p>
               </div>
@@ -91,7 +91,7 @@ export const PersonalizedShoppingSection: React.FC<PersonalizedShoppingSectionPr
 
             <Link
               to="/cart"
-              className="text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] inline-flex items-center gap-1 group"
+              className="text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] inline-flex items-center gap-1 group transition-colors"
             >
               <span>View Cart & Checkout</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -111,7 +111,7 @@ export const PersonalizedShoppingSection: React.FC<PersonalizedShoppingSectionPr
       {/* 3. Recent Search Suggestions Tag Strip */}
       {hasSearches && (
         <div className="flex items-center gap-2.5 flex-wrap pt-2">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-500">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#64748B]">
             <Search className="w-3.5 h-3.5" />
             <span>Recent searches:</span>
           </div>
@@ -119,7 +119,7 @@ export const PersonalizedShoppingSection: React.FC<PersonalizedShoppingSectionPr
             <Link
               key={idx}
               to={`/search?q=${encodeURIComponent(term)}`}
-              className="px-3 py-1 rounded-full bg-zinc-100 hover:bg-[#F5DCDC] hover:text-[#A60000] text-xs font-semibold text-zinc-700 transition-colors"
+              className="px-3 py-1 rounded-full bg-white border border-[#E5EAF3] hover:bg-[#EEF3FF] hover:text-[#2962FF] hover:border-[#DBEAFE] text-xs font-semibold text-[#172033] transition-colors shadow-2xs"
             >
               {term}
             </Link>

@@ -17,11 +17,11 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = React.memo(
   if (!products || products.length === 0) return null;
 
   return (
-    <section className="space-y-4" aria-label="New Arrivals Just Landed">
+    <section className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs space-y-4" aria-label="New Arrivals Just Landed">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-[#A60000] text-white flex items-center justify-center shadow-xs">
+          <div className="w-10 h-10 rounded-2xl bg-[#2962FF] text-white flex items-center justify-center shadow-xs">
             <Sparkles className="w-5 h-5 fill-current text-amber-300" />
           </div>
           <div>
@@ -29,7 +29,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = React.memo(
               <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight font-heading">
                 Just Landed
               </h2>
-              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#F5DCDC] text-[#A60000] text-[10px] font-black uppercase tracking-wider font-heading">
+              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] text-[10px] font-black uppercase tracking-wider font-heading">
                 Fresh Drops
               </span>
             </div>
@@ -41,7 +41,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = React.memo(
 
         <Link
           to="/category/all"
-          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] transition-colors group self-start sm:self-auto font-heading"
+          className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] transition-colors group self-start sm:self-auto font-heading"
         >
           <span>Explore New Arrivals</span>
           <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

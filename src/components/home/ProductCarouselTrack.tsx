@@ -61,7 +61,7 @@ export const ProductCarouselTrack: React.FC<ProductCarouselTrackProps> = ({
           type="button"
           onClick={() => handleScroll('left')}
           aria-label="Scroll left"
-          className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-zinc-50 text-zinc-800 hover:text-[#A60000] border border-zinc-200/90 shadow-md flex items-center justify-center z-20 transition-all active:scale-95 cursor-pointer focus:outline-hidden"
+          className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-[#EEF3FF] text-[#172033] hover:text-[#2962FF] border border-[#E5EAF3] hover:border-[#DBEAFE] shadow-soft flex items-center justify-center z-20 transition-all active:scale-95 cursor-pointer focus:outline-hidden"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -82,7 +82,7 @@ export const ProductCarouselTrack: React.FC<ProductCarouselTrackProps> = ({
           type="button"
           onClick={() => handleScroll('right')}
           aria-label="Scroll right"
-          className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-zinc-50 text-zinc-800 hover:text-[#A60000] border border-zinc-200/90 shadow-md flex items-center justify-center z-20 transition-all active:scale-95 cursor-pointer focus:outline-hidden"
+          className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-[#EEF3FF] text-[#172033] hover:text-[#2962FF] border border-[#E5EAF3] hover:border-[#DBEAFE] shadow-soft flex items-center justify-center z-20 transition-all active:scale-95 cursor-pointer focus:outline-hidden"
         >
           <ChevronRight className="w-5 h-5" />
         </button>

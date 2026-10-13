@@ -25,11 +25,11 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
         {/* Section Header */}
         <div className="flex items-end justify-between mb-5 sm:mb-7 gap-4">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-[#202124] tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-[#172033] tracking-tight">
               {title}
             </h2>
             {subtitle && (
-              <p className="text-xs sm:text-sm text-[#5F6368] mt-1 font-medium">
+              <p className="text-xs sm:text-sm text-[#64748B] mt-1 font-medium">
                 {subtitle}
               </p>
             )}
@@ -38,7 +38,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
           {ctaText && ctaLink && (
             <Link
               to={ctaLink}
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#A60000] hover:text-[#880000] group shrink-0 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] group shrink-0 transition-colors"
             >
               <span>{ctaText}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
