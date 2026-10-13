@@ -1,0 +1,26 @@
+/* ==========================================================================
+   HAATZA LITE - THEME AND ANIMATION TOKENS
+   Quick Commerce (10-15 Mins) Fresh Green Palette
+   ========================================================================== */
+
+:root {
+  --haatza-lite-green: #238636;
+  --haatza-lite-green-hover: #1c6d2c;
+  --haatza-lite-green-light: #EAF6EC;
+  --haatza-lite-green-surface: #F2FAF4;
+  --haatza-lite-yellow: #FFD54F;
+  --haatza-lite-bg: #F8FCF9;
+  --haatza-lite-surface: #FFFFFF;
+  --haatza-lite-text: #172033;
+  --haatza-lite-text-muted: #64748B;
+  --haatza-lite-border: #E2ECE5;
+}
+
+@keyframes haatzaLitePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.03); }
+}
+
+.haatza-lite-pulse {
+  animation: haatzaLitePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

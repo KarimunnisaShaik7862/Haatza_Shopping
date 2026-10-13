@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import "./HaatzaLiteTheme.css";
+@import "./HaatzaLitePadding.css";
+
+@theme {
+  --color-haatza-lite-green: #238636;
+  --color-haatza-lite-green-hover: #1c6d2c;
+  --color-haatza-lite-light: #EAF6EC;
+  --color-haatza-lite-surface: #F2FAF4;
+  --color-haatza-lite-yellow: #FFD54F;
+  --color-haatza-lite-bg: #F8FCF9;
+  --color-haatza-lite-dark: #172033;
+  --color-haatza-lite-muted: #64748B;
+  --color-haatza-lite-border: #E2ECE5;
+
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@layer base {
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #F8FCF9;
+    color: #172033;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #172033;
+  }
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}

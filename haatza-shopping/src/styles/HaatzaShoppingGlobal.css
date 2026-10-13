@@ -1,0 +1,130 @@
+/* ==========================================================================
+   HAATZA SHOPPING GLOBAL STYLESHEET
+   Independent, Isolated Styles for HAATZA Shopping Marketplace
+   ========================================================================== */
+
+@import "tailwindcss";
+@import "./HaatzaShoppingTheme.css";
+@import "./HaatzaShoppingAnimations.css";
+
+@theme {
+  --color-haatza-blue: #2962FF;
+  --color-haatza-blue-hover: #1E4ED8;
+  --color-haatza-blue-light: #F5F7FF;
+  --color-haatza-blue-surface: #EEF3FF;
+  --color-haatza-blue-highlight: #DBEAFE;
+  --color-haatza-page-bg: #F7F9FC;
+  --color-haatza-surface: #FFFFFF;
+  --color-haatza-text: #172033;
+  --color-haatza-text-muted: #64748B;
+  --color-haatza-border: #E5EAF3;
+  --color-haatza-success: #16A34A;
+  --color-haatza-error: #DC2626;
+
+  --color-haatza-shopping-primary: #2962FF;
+  --color-haatza-shopping-hover: #1E4ED8;
+  --color-haatza-shopping-bg: #F7F9FC;
+  --color-haatza-shopping-surface: #FFFFFF;
+
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Scoped Container Classes for HAATZA Shopping
+   Maintains exact Lite Header alignment specification
+   -------------------------------------------------------------------------- */
+.haatza-shopping-container,
+.shopping-container,
+.haatza-container {
+  width: 100%;
+  max-width: var(--haatza-shopping-container-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--haatza-shopping-pad-mobile, 16px);
+  padding-right: var(--haatza-shopping-pad-mobile, 16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-shopping-container,
+  .shopping-container,
+  .haatza-container {
+    padding-left: var(--haatza-shopping-pad-tablet, 24px);
+    padding-right: var(--haatza-shopping-pad-tablet, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .haatza-shopping-container,
+  .shopping-container,
+  .haatza-container {
+    padding-left: var(--haatza-shopping-pad-desktop, 32px);
+    padding-right: var(--haatza-shopping-pad-desktop, 32px);
+  }
+}
+
+/* Banner container */
+.haatza-shopping-banner-container,
+.shopping-banner-container {
+  width: 100%;
+  max-width: var(--haatza-shopping-container-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--haatza-shopping-pad-mobile, 16px);
+  padding-right: var(--haatza-shopping-pad-mobile, 16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-shopping-banner-container,
+  .shopping-banner-container {
+    padding-left: var(--haatza-shopping-pad-tablet, 24px);
+    padding-right: var(--haatza-shopping-pad-tablet, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .haatza-shopping-banner-container,
+  .shopping-banner-container {
+    padding-left: var(--haatza-shopping-pad-desktop, 32px);
+    padding-right: var(--haatza-shopping-pad-desktop, 32px);
+  }
+}
+
+/* Interior card padding */
+.haatza-shopping-card-inner,
+.shopping-card-inner {
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-shopping-card-inner,
+  .shopping-card-inner {
+    padding: 1.5rem;
+  }
+}
+
+/* Hero banner interior padding */
+.haatza-shopping-hero-inner,
+.shopping-hero-inner {
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-shopping-hero-inner,
+  .shopping-hero-inner {
+    padding: 3rem;
+  }
+}
+
+/* Scrollbar helpers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

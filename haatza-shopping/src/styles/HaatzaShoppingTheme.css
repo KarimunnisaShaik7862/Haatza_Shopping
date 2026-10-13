@@ -1,0 +1,64 @@
+/* ==========================================================================
+   HAATZA SHOPPING THEME - DESIGN SYSTEM TOKENS & UTILITIES
+   Isolated White & Blue Premium Marketplace Palette
+   ========================================================================== */
+
+:root, .haatza-shopping-root {
+  /* Primary Brand Colors */
+  --haatza-shopping-primary: #2962FF;
+  --haatza-shopping-primary-hover: #1E4ED8;
+  --haatza-shopping-primary-light: #F5F7FF;
+  --haatza-shopping-primary-surface: #EEF3FF;
+  --haatza-shopping-primary-highlight: #DBEAFE;
+
+  /* Surfaces & Backgrounds */
+  --haatza-shopping-bg: #F7F9FC;
+  --haatza-shopping-surface: #FFFFFF;
+  --haatza-shopping-text: #172033;
+  --haatza-shopping-text-muted: #64748B;
+  --haatza-shopping-border: #E5EAF3;
+  --haatza-shopping-success: #16A34A;
+  --haatza-shopping-error: #DC2626;
+
+  /* Horizontal Container Spacing Tokens (Source of truth: Lite Header specification) */
+  --haatza-shopping-pad-mobile: 16px;
+  --haatza-shopping-pad-tablet: 24px;
+  --haatza-shopping-pad-desktop: 32px;
+  --haatza-shopping-container-max: 1440px;
+
+  /* Dual layer banner padding */
+  --haatza-shopping-nested-mobile: 32px;
+  --haatza-shopping-nested-tablet: 48px;
+  --haatza-shopping-nested-desktop: 64px;
+}
+
+/* Scoped Soft UI & Glassmorphism Utilities */
+.haatza-shopping-root .haatza-shopping-shadow-soft {
+  box-shadow: 0 8px 30px rgba(37, 71, 140, 0.08);
+}
+
+.haatza-shopping-root .haatza-shopping-shadow-soft-sm {
+  box-shadow: 0 4px 16px rgba(37, 71, 140, 0.05);
+}
+
+.haatza-shopping-root .haatza-shopping-shadow-soft-lg {
+  box-shadow: 0 14px 40px rgba(37, 71, 140, 0.12);
+}
+
+.haatza-shopping-root .haatza-shopping-focus-ring {
+  box-shadow: 0 0 0 3px rgba(41, 98, 255, 0.14);
+}
+
+.haatza-shopping-root .haatza-shopping-glass-surface {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(229, 234, 243, 0.90);
+}
+
+.haatza-shopping-root .haatza-shopping-glass-blue {
+  background: rgba(238, 243, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(219, 234, 254, 0.80);
+}

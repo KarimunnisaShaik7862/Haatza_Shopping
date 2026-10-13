@@ -1,0 +1,114 @@
+/* ==========================================================================
+   HAATZA LITE - HORIZONTAL SPACING & CONTAINER PADDING
+   THE SINGLE SOURCE OF TRUTH REFERENCE FOR ALL SIBLINGS
+   ========================================================================== */
+
+:root {
+  /* Exact horizontal spacing design tokens from Lite Header */
+  --haatza-lite-pad-mobile: 16px;   /* < 640px (1rem / px-4) */
+  --haatza-lite-pad-tablet: 24px;   /* 640px - 1023px (1.5rem / sm:px-6) */
+  --haatza-lite-pad-desktop: 32px;  /* >= 1024px (2rem / lg:px-8) */
+
+  /* Combined nested dual-layer horizontal padding (outer + inner banner) */
+  --haatza-lite-nested-mobile: 32px;  /* 16px + 16px */
+  --haatza-lite-nested-tablet: 48px;  /* 24px + 24px */
+  --haatza-lite-nested-desktop: 64px; /* 32px + 32px */
+
+  /* Standard maximum container width */
+  --haatza-lite-container-max: 1440px;
+
+  /* Backward-compatible aliases */
+  --lite-pad-mobile: var(--haatza-lite-pad-mobile);
+  --lite-pad-tablet: var(--haatza-lite-pad-tablet);
+  --lite-pad-desktop: var(--haatza-lite-pad-desktop);
+  --lite-container-max: var(--haatza-lite-container-max);
+}
+
+/* --------------------------------------------------------------------------
+   Standard Page & Section Container for HAATZA Lite
+   -------------------------------------------------------------------------- */
+.haatza-lite-container,
+.lite-container {
+  width: 100%;
+  max-width: var(--haatza-lite-container-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--haatza-lite-pad-mobile, 16px);
+  padding-right: var(--haatza-lite-pad-mobile, 16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-lite-container,
+  .lite-container {
+    padding-left: var(--haatza-lite-pad-tablet, 24px);
+    padding-right: var(--haatza-lite-pad-tablet, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .haatza-lite-container,
+  .lite-container {
+    padding-left: var(--haatza-lite-pad-desktop, 32px);
+    padding-right: var(--haatza-lite-pad-desktop, 32px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Lite Header Banner Container Specification
+   -------------------------------------------------------------------------- */
+.haatza-lite-banner-container,
+.lite-banner-container {
+  width: 100%;
+  max-width: var(--haatza-lite-container-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--haatza-lite-pad-mobile, 16px);
+  padding-right: var(--haatza-lite-pad-mobile, 16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-lite-banner-container,
+  .lite-banner-container {
+    padding-left: var(--haatza-lite-pad-tablet, 24px);
+    padding-right: var(--haatza-lite-pad-tablet, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .haatza-lite-banner-container,
+  .lite-banner-container {
+    padding-left: var(--haatza-lite-pad-desktop, 32px);
+    padding-right: var(--haatza-lite-pad-desktop, 32px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Lite Card and Hero Inner Padding
+   -------------------------------------------------------------------------- */
+.haatza-lite-card-inner,
+.lite-card-inner {
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-lite-card-inner,
+  .lite-card-inner {
+    padding: 1.5rem;
+  }
+}
+
+.haatza-lite-hero-inner,
+.lite-hero-inner {
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-lite-hero-inner,
+  .lite-hero-inner {
+    padding: 3rem;
+  }
+}

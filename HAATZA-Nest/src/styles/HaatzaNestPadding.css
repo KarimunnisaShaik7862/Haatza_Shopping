@@ -1,0 +1,114 @@
+/* ==========================================================================
+   HAATZA NEST - HORIZONTAL SPACING & CONTAINER PADDING
+   Source of Truth Reference: HAATZA Lite Header Spacing Specification
+   ========================================================================== */
+
+:root {
+  /* Exact horizontal spacing design tokens from Lite Header */
+  --haatza-nest-pad-mobile: 16px;   /* < 640px (1rem / px-4) */
+  --haatza-nest-pad-tablet: 24px;   /* 640px - 1023px (1.5rem / sm:px-6) */
+  --haatza-nest-pad-desktop: 32px;  /* >= 1024px (2rem / lg:px-8) */
+
+  /* Combined nested dual-layer horizontal padding */
+  --haatza-nest-nested-mobile: 32px;  /* 16px + 16px */
+  --haatza-nest-nested-tablet: 48px;  /* 24px + 24px */
+  --haatza-nest-nested-desktop: 64px; /* 32px + 32px */
+
+  /* Standard maximum container width */
+  --haatza-nest-container-max: 1440px;
+
+  /* Backward-compatible aliases */
+  --nest-pad-mobile: var(--haatza-nest-pad-mobile);
+  --nest-pad-tablet: var(--haatza-nest-pad-tablet);
+  --nest-pad-desktop: var(--haatza-nest-pad-desktop);
+  --nest-container-max: var(--haatza-nest-container-max);
+}
+
+/* --------------------------------------------------------------------------
+   Standard Page & Section Container for HAATZA Nest
+   -------------------------------------------------------------------------- */
+.haatza-nest-container,
+.nest-container {
+  width: 100%;
+  max-width: var(--haatza-nest-container-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--haatza-nest-pad-mobile, 16px);
+  padding-right: var(--haatza-nest-pad-mobile, 16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-nest-container,
+  .nest-container {
+    padding-left: var(--haatza-nest-pad-tablet, 24px);
+    padding-right: var(--haatza-nest-pad-tablet, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .haatza-nest-container,
+  .nest-container {
+    padding-left: var(--haatza-nest-pad-desktop, 32px);
+    padding-right: var(--haatza-nest-pad-desktop, 32px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero Banner Container for HAATZA Nest
+   -------------------------------------------------------------------------- */
+.haatza-nest-banner-container,
+.nest-banner-container {
+  width: 100%;
+  max-width: var(--haatza-nest-container-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--haatza-nest-pad-mobile, 16px);
+  padding-right: var(--haatza-nest-pad-mobile, 16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-nest-banner-container,
+  .nest-banner-container {
+    padding-left: var(--haatza-nest-pad-tablet, 24px);
+    padding-right: var(--haatza-nest-pad-tablet, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .haatza-nest-banner-container,
+  .nest-banner-container {
+    padding-left: var(--haatza-nest-pad-desktop, 32px);
+    padding-right: var(--haatza-nest-pad-desktop, 32px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Card and Category Interior Padding for HAATZA Nest
+   -------------------------------------------------------------------------- */
+.haatza-nest-card-inner,
+.nest-card-inner {
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-nest-card-inner,
+  .nest-card-inner {
+    padding: 1.5rem;
+  }
+}
+
+.haatza-nest-hero-inner,
+.nest-hero-inner {
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-nest-hero-inner,
+  .nest-hero-inner {
+    padding: 3rem;
+  }
+}
