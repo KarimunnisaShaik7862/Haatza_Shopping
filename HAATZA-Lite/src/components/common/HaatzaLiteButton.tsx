@@ -15,19 +15,19 @@ export const HaatzaLiteButton: React.FC<HaatzaLiteButtonProps> = ({
   children,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-bold rounded-xl transition-all duration-150 active:scale-95 cursor-pointer disabled:opacity-50 disabled:pointer-events-none';
+  const baseStyles = 'inline-flex items-center justify-center font-extrabold rounded-2xl transition-all duration-200 active:scale-95 cursor-pointer disabled:opacity-50 disabled:pointer-events-none';
 
   const sizeStyles = {
-    sm: 'px-3 py-1.5 text-xs',
-    md: 'px-4 py-2 text-sm',
-    lg: 'px-6 py-3 text-base',
+    sm: 'px-3.5 py-1.5 text-xs',
+    md: 'px-5 py-2.5 text-sm',
+    lg: 'px-6 py-3.5 text-base',
   }[size];
 
   const variantStyles = {
-    primary: 'bg-[#238636] hover:bg-[#1c6d2c] text-white shadow-sm hover:shadow',
-    secondary: 'bg-[#EAF6EC] hover:bg-[#d8edd9] text-[#238636]',
-    outline: 'border border-[#238636] text-[#238636] hover:bg-[#EAF6EC]',
-    ghost: 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100',
+    primary: 'bg-[#0C831F] hover:bg-[#09711A] text-white shadow-[0_3px_12px_rgba(12,131,31,0.25)] hover:shadow-[0_6px_20px_rgba(12,131,31,0.35)] hover:-translate-y-0.5 border border-[#0C831F]',
+    secondary: 'bg-[#EAF8ED] hover:bg-[#D8F2DD] text-[#0C831F] border border-[#CBEAD2]',
+    outline: 'border border-[#0C831F] text-[#0C831F] hover:bg-[#EAF8ED]',
+    ghost: 'text-[#111D15] hover:bg-[#F2FBF4] hover:text-[#0C831F]',
   }[variant];
 
   return (

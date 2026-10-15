@@ -38,12 +38,18 @@ export const haatzaLiteService = {
   },
 
   async getProductsByCategory(categorySlug: string, limit: number = 6): Promise<HaatzaLiteProduct[]> {
-    const term = categorySlug.toLowerCase();
+    const rawTerm = categorySlug.toLowerCase();
+    const term = rawTerm.replace(/-/g, ' ');
+    const cat = haatzaLiteCategories.find((c) => c.slug === rawTerm || c.id === rawTerm || c.slug.includes(rawTerm));
+    const catId = cat ? cat.id.toLowerCase() : '';
+
     const list = haatzaLiteProducts.filter(
       (p) =>
-        p.categoryId.toLowerCase().includes(term) ||
+        (catId && p.categoryId.toLowerCase() === catId) ||
+        p.categoryId.toLowerCase().includes(rawTerm) ||
         p.categoryName.toLowerCase().includes(term) ||
-        p.tags.some((t) => t.toLowerCase().includes(term))
+        p.categoryName.toLowerCase().includes(rawTerm) ||
+        p.tags.some((t) => t.toLowerCase().includes(term) || t.toLowerCase().includes(rawTerm))
     );
     return list.slice(0, limit);
   },

@@ -16,11 +16,11 @@ const HaatzaLiteCartContext = createContext<HaatzaLiteCartContextType | undefine
 export const HaatzaLiteCartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<HaatzaLiteCartItem[]>(() => {
     try {
-      const saved = localStorage.getItem('haatza_lite_cart');
-      return saved ? JSON.parse(saved) : [];
+      localStorage.removeItem('haatza_lite_cart');
     } catch {
-      return [];
+      // ignore
     }
+    return [];
   });
 
   const saveCart = (items: HaatzaLiteCartItem[]) => {
