@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TrendingUp, Eye, ShoppingBag, Check, Heart, ChevronRight, Award } from 'lucide-react';
 import { TrendingItemWithAnalytics } from '../../services/mock/data/promotions';
 import { useCart } from '../../context/CartContext';
@@ -13,17 +13,17 @@ interface TrendingItemsSectionProps {
 export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ items }) => {
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const navigate = useNavigate();
   const [addedIds, setAddedIds] = useState<Record<string, boolean>>({});
 
   const handleAddToCart = (e: React.MouseEvent, item: TrendingItemWithAnalytics) => {
     e.preventDefault();
     e.stopPropagation();
 
-    addToCart(item, 1);
-    setAddedIds((prev) => ({ ...prev, [item.id]: true }));
-    setTimeout(() => {
-      setAddedIds((prev) => ({ ...prev, [item.id]: false }));
-    }, 1500);
+    const success = addToCart(item, 1);
+    if (success) {
+      navigate('/cart');
+    }
   };
 
   const handleToggleWishlist = (e: React.MouseEvent, item: TrendingItemWithAnalytics) => {
@@ -153,24 +153,15 @@ export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ item
 
                   <button
                     type="button"
-                    onClick={(e) => handleAddToCart(e, item)}
-                    className={`w-full py-1.5 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 shadow-2xs ${
-                      isAdded
-                        ? 'bg-emerald-600 text-white'
-                        : 'bg-[#2962FF] hover:bg-[#1E4ED8] text-white active:scale-95'
-                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      window.location.href = `/product/${item.slug}`;
+                    }}
+                    className="w-full py-1.5 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 shadow-2xs bg-[#2962FF] hover:bg-[#1E4ED8] text-white active:scale-95 cursor-pointer"
                   >
-                    {isAdded ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 stroke-[3]" />
-                        <span>Added</span>
-                      </>
-                    ) : (
-                      <>
-                        <ShoppingBag className="w-3.5 h-3.5" />
-                        <span>Add to Cart</span>
-                      </>
-                    )}
+                    <ShoppingBag className="w-3.5 h-3.5" />
+                    <span>Add to Cart</span>
                   </button>
                 </div>
               </div>

@@ -6,11 +6,11 @@ import { useToast } from './ToastContext';
 interface CartContextType {
   cart: CartItem[];
   savedForLater: CartItem[];
-  addToCart: (product: Product, quantity?: number, variant?: ProductVariant) => void;
+  addToCart: (product: Product, quantity?: number, variant?: ProductVariant) => boolean;
   removeFromCart: (cartItemId: string) => void;
   updateQuantity: (cartItemId: string, newQuantity: number) => void;
   moveToSaveForLater: (cartItemId: string) => void;
-  moveToCartFromSaved: (savedItemId: string) => void;
+  moveToCartFromSaved: (savedItemId: string) => boolean;
   removeFromSaved: (savedItemId: string) => void;
   clearCart: () => void;
   itemCount: number;
@@ -137,8 +137,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [cart, appliedCoupon, showToast]);
 
-  const addToCart = (product: Product, quantity = 1, variant?: ProductVariant) => {
+  const MAX_CART_ENTRIES = 30;
+
+  const addToCart = (product: Product, quantity = 1, variant?: ProductVariant): boolean => {
     const cartItemId = `${product.id}-${variant?.id || 'standard'}`;
+    const exists = cart.some((item) => item.id === cartItemId);
+
+    if (!exists && cart.length >= MAX_CART_ENTRIES) {
+      showToast('Cart is full, to add new item remove one from cart', 'warning');
+      return false;
+    }
 
     setCart((prev) => {
       const existing = prev.find((item) => item.id === cartItemId);
@@ -148,6 +156,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
+      }
+      if (prev.length >= MAX_CART_ENTRIES) {
+        return prev;
       }
       return [
         ...prev,
@@ -162,7 +173,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       ];
     });
 
-    showToast(`Added "${product.name}" to cart`, 'success');
+    if (exists) {
+      showToast(`Updated quantity for "${product.name}"`, 'success');
+    } else {
+      showToast(`Added "${product.name}" to cart`, 'success');
+    }
+    return true;
   };
 
   const removeFromCart = (cartItemId: string) => {
@@ -189,12 +205,20 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const moveToCartFromSaved = (savedItemId: string) => {
+  const moveToCartFromSaved = (savedItemId: string): boolean => {
     const item = savedForLater.find((i) => i.id === savedItemId);
-    if (item) {
-      setSavedForLater((prev) => prev.filter((i) => i.id !== savedItemId));
-      addToCart(item.product, item.quantity, item.selectedVariant);
+    if (!item) return false;
+
+    const cartItemId = item.id;
+    const exists = cart.some((c) => c.id === cartItemId);
+    if (!exists && cart.length >= MAX_CART_ENTRIES) {
+      showToast('Cart is full, to add new item remove one from cart', 'warning');
+      return false;
     }
+
+    setSavedForLater((prev) => prev.filter((i) => i.id !== savedItemId));
+    addToCart(item.product, item.quantity, item.selectedVariant);
+    return true;
   };
 
   const removeFromSaved = (savedItemId: string) => {

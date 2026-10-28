@@ -30,7 +30,7 @@ export interface Product {
   categoryName: string;
   subcategoryName?: string;
   description: string;
-  fullDescription: string;
+  fullDescription?: string;
   price: number;
   mrp: number;
   discountPercentage: number;
@@ -60,6 +60,8 @@ export interface FilterState {
   minPrice?: number;
   maxPrice?: number;
   brands: string[];
+  sizes?: string[];
+  colors?: string[];
   minRating?: number;
   discountRanges: number[];
   inStockOnly?: boolean;

@@ -7,19 +7,41 @@ import { ProductGrid } from '../../components/products/ProductGrid';
 import { FilterSidebar } from '../../components/products/FilterSidebar';
 import { FilterDrawer } from '../../components/products/FilterDrawer';
 import { SortControl } from '../../components/products/SortControl';
-import { Breadcrumbs } from '../../components/common/Breadcrumbs';
 import { LoadingSkeleton } from '../../components/common/LoadingSkeleton';
-import { BenefitsSection } from '../../components/home/BenefitsSection';
-import { NewsletterSection } from '../../components/home/NewsletterSection';
 import { ProductCarouselTrack } from '../../components/home/ProductCarouselTrack';
 import { ProductCard } from '../../components/products/ProductCard';
 import { CountdownClock } from '../../components/home/CountdownClock';
 import { QuickViewModal } from '../../components/products/QuickViewModal';
 import { optimizeImageUrl } from '../../utils/imageOptimizer';
-import { SlidersHorizontal, X, Sparkles, Flame, ArrowRight, TrendingUp } from 'lucide-react';
+import { SlidersHorizontal, X, Sparkles, Flame, ArrowRight, ArrowLeft, TrendingUp } from 'lucide-react';
+import premiumMensStyleBanner from '../../assets/images/mens-fashion/premium-mens-fashion-style-banner.png';
+import { Breadcrumbs } from '../../components/common/Breadcrumbs';
+import { MensFashionDepartmentView } from '../../components/fashion/MensFashionDepartmentView';
+import { MensFashionSectionView } from '../../components/fashion/MensFashionSectionView';
+import { WomensFashionDepartmentView } from '../../components/fashion/WomensFashionDepartmentView';
+import { WomensFashionSectionView } from '../../components/fashion/WomensFashionSectionView';
+import { UniversalCategoryLandingView } from '../../components/category/UniversalCategoryLandingView';
+import { UniversalCategorySectionView } from '../../components/category/UniversalCategorySectionView';
+import {
+  getCategoryConfig,
+  getCategorySection,
+} from '../../data/categoriesNavigation.data';
+import {
+  getMajorSectionBySlug,
+  getSubcategoryBySlug,
+  SubcategoryItem,
+} from '../../data/mensFashionNavigation.data';
+import {
+  getWomensMajorSectionBySlug,
+  getWomensSubcategoryBySlug,
+} from '../../data/womensFashionNavigation.data';
 
 export const ProductListingPage: React.FC = () => {
-  const { slug } = useParams<{ slug?: string }>();
+  const { slug, sectionSlug, itemSlug } = useParams<{
+    slug?: string;
+    sectionSlug?: string;
+    itemSlug?: string;
+  }>();
   const [searchParams] = useSearchParams();
   const destQuery = searchParams.get('dest') as DestinationType | null;
   const filterQuery = searchParams.get('filter'); // e.g. 'trending', 'deals', 'bestsellers'
@@ -49,6 +71,15 @@ export const ProductListingPage: React.FC = () => {
     sortBy: 'featured',
   });
 
+  // Record shopping context for return navigation
+  useEffect(() => {
+    try {
+      sessionStorage.setItem('haatza_last_shopping_route', window.location.pathname + window.location.search);
+    } catch (e) {
+      // Ignore storage error
+    }
+  }, [slug, sectionSlug, itemSlug, destQuery, filterQuery]);
+
   // Load category details and brands
   useEffect(() => {
     async function init() {
@@ -68,13 +99,103 @@ export const ProductListingPage: React.FC = () => {
     init();
   }, [slug, destQuery]);
 
+  const isMen = slug === 'men-fashion' || slug === 'men' || slug === 'fashion';
+  const isWomen = slug === 'women-fashion' || slug === 'women';
+
+  const sectionObj = useMemo(
+    () => (isMen && sectionSlug ? getMajorSectionBySlug(sectionSlug) : undefined),
+    [isMen, sectionSlug]
+  );
+  const subItemObj = useMemo(
+    () =>
+      isMen && sectionSlug && itemSlug
+        ? getSubcategoryBySlug(sectionSlug, itemSlug)
+        : undefined,
+    [isMen, sectionSlug, itemSlug]
+  );
+
+  const womensSectionObj = useMemo(
+    () =>
+      isWomen && sectionSlug
+        ? getWomensMajorSectionBySlug(sectionSlug)
+        : undefined,
+    [isWomen, sectionSlug]
+  );
+  const womensSubItemObj = useMemo(
+    () =>
+      isWomen && sectionSlug && itemSlug
+        ? getWomensSubcategoryBySlug(sectionSlug, itemSlug)
+        : undefined,
+    [isWomen, sectionSlug, itemSlug]
+  );
+
+  const categoryConfig = useMemo(() => (slug ? getCategoryConfig(slug) : undefined), [slug]);
+  const categorySectionObj = useMemo(() => {
+    if (!categoryConfig || !sectionSlug) return undefined;
+    return getCategorySection(categoryConfig.slug, sectionSlug);
+  }, [categoryConfig, sectionSlug]);
+
+  // Fallback subcategory metadata generator so direct links and dynamic subcategories never crash
+  const fallbackSubItem = useMemo((): SubcategoryItem | undefined => {
+    if (!itemSlug) return undefined;
+    const formatted = itemSlug
+      .split('-')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' ');
+    return {
+      id: `syn-${itemSlug}`,
+      slug: itemSlug,
+      name: formatted,
+      shortTitle: formatted,
+      description: `Browse curated ${formatted} styles in our collection.`,
+      image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80',
+      badge: undefined,
+      itemCount: undefined,
+      productFilterTerm: itemSlug,
+    };
+  }, [itemSlug]);
+
+  const effectiveSubItemObj = subItemObj || (isMen && itemSlug ? fallbackSubItem : undefined);
+  const effectiveWomensSubItemObj = womensSubItemObj || (isWomen && itemSlug ? fallbackSubItem : undefined);
+
+  const currentSectionObj = isWomen ? womensSectionObj : sectionObj;
+  const currentSubItemObj = isWomen ? effectiveWomensSubItemObj : effectiveSubItemObj;
+
   // Load filtered products
   useEffect(() => {
     async function fetchFiltered() {
       setLoading(true);
-      const queryFilter = { ...filters, category: slug || filters.category };
 
-      let list = await productService.getProducts(queryFilter, destQuery || category?.destination);
+      let effectiveCategory = slug || filters.category;
+      let effectiveGender: 'men' | 'women' | undefined = undefined;
+
+      if (isMen) {
+        effectiveGender = 'men';
+        if (sectionSlug && itemSlug) {
+          effectiveCategory = currentSubItemObj?.productFilterTerm || itemSlug;
+        } else if (sectionSlug) {
+          effectiveCategory = sectionObj?.slug || sectionSlug;
+        } else {
+          effectiveCategory = 'men-fashion';
+        }
+      } else if (isWomen) {
+        effectiveGender = 'women';
+        if (sectionSlug && itemSlug) {
+          effectiveCategory = currentSubItemObj?.productFilterTerm || itemSlug;
+        } else if (sectionSlug) {
+          effectiveCategory = womensSectionObj?.slug || sectionSlug;
+        } else {
+          effectiveCategory = 'women-fashion';
+        }
+      }
+
+      const queryFilter = { ...filters, category: effectiveCategory, gender: effectiveGender };
+
+      let list = await productService.getProducts(
+        queryFilter,
+        destQuery || category?.destination,
+        effectiveGender
+      );
 
       if (selectedSubcategory) {
         const term = selectedSubcategory.toLowerCase();
@@ -99,7 +220,7 @@ export const ProductListingPage: React.FC = () => {
       setLoading(false);
     }
     fetchFiltered();
-  }, [filters, slug, destQuery, category?.destination, filterQuery, selectedSubcategory]);
+  }, [filters, slug, sectionSlug, itemSlug, subItemObj, womensSubItemObj, destQuery, category?.destination, filterQuery, selectedSubcategory]);
 
   const handleResetFilters = () => {
     setFilters({
@@ -145,6 +266,18 @@ export const ProductListingPage: React.FC = () => {
           })),
       });
     });
+    if (filters.sizes && filters.sizes.length > 0) {
+      filters.sizes.forEach((s) => {
+        chips.push({
+          label: `Size: ${s}`,
+          onRemove: () =>
+            setFilters((prev) => ({
+              ...prev,
+              sizes: prev.sizes?.filter((size) => size !== s),
+            })),
+        });
+      });
+    }
     if (filters.minPrice || filters.maxPrice) {
       chips.push({
         label: `Price: ₹${filters.minPrice || 0} - ₹${filters.maxPrice || 'Any'}`,
@@ -154,12 +287,19 @@ export const ProductListingPage: React.FC = () => {
     return chips;
   }, [filters]);
 
-  const breadcrumbs = [
-    { label: category ? category.destination.toUpperCase() : 'Products', link: '/products' },
-    ...(category ? [{ label: category.name }] : []),
-  ];
-
   const getPageTitle = () => {
+    if (isMen && sectionSlug && itemSlug) {
+      if (currentSubItemObj) return currentSubItemObj.name;
+    }
+    if (isMen && sectionSlug) {
+      if (sectionObj) return sectionObj.title;
+    }
+    if (isWomen && sectionSlug && itemSlug) {
+      if (currentSubItemObj) return currentSubItemObj.name;
+    }
+    if (isWomen && sectionSlug) {
+      if (womensSectionObj) return womensSectionObj.title;
+    }
     if (category) return category.name;
     if (filterQuery === 'deals') return 'Daily Deals & Discounts';
     if (filterQuery === 'trending') return 'Trending Products';
@@ -169,11 +309,51 @@ export const ProductListingPage: React.FC = () => {
     return 'All Products';
   };
 
+  const breadcrumbItems = useMemo(() => {
+    if (isMen) {
+      if (sectionSlug && itemSlug) {
+        return [
+          { label: 'Men Fashion', link: '/category/men-fashion' },
+          {
+            label: sectionObj ? sectionObj.title : sectionSlug,
+            link: `/category/men-fashion/${sectionSlug}`,
+          },
+          { label: currentSubItemObj ? currentSubItemObj.name : itemSlug },
+        ];
+      }
+      if (sectionSlug) {
+        return [
+          { label: 'Men Fashion', link: '/category/men-fashion' },
+          { label: sectionObj ? sectionObj.title : sectionSlug },
+        ];
+      }
+      return [{ label: 'Men Fashion' }];
+    }
+    if (isWomen) {
+      if (sectionSlug && itemSlug) {
+        return [
+          { label: "Women's Fashion", link: '/category/women-fashion' },
+          {
+            label: womensSectionObj ? womensSectionObj.title : sectionSlug,
+            link: `/category/women-fashion/${sectionSlug}`,
+          },
+          { label: currentSubItemObj ? currentSubItemObj.name : itemSlug },
+        ];
+      }
+      if (sectionSlug) {
+        return [
+          { label: "Women's Fashion", link: '/category/women-fashion' },
+          { label: womensSectionObj ? womensSectionObj.title : sectionSlug },
+        ];
+      }
+      return [{ label: "Women's Fashion" }];
+    }
+    return category ? [{ label: category.name }] : [{ label: getPageTitle() }];
+  }, [isMen, isWomen, slug, sectionSlug, itemSlug, sectionObj, womensSectionObj, currentSubItemObj, category]);
+
   // Dynamic category promotional hero banner
   const categoryBanner = useMemo(() => {
     switch (slug) {
-      case 'fashion':
-      case 'men-fashion':
       case 'women-fashion':
         return {
           tag: 'FESTIVE COUTURE EDIT',
@@ -184,6 +364,18 @@ export const ProductListingPage: React.FC = () => {
           badgeColor: 'bg-amber-400 text-stone-950',
           image: optimizeImageUrl('https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=75', { width: 1000, quality: 75 }),
           ctaText: 'Explore Fashion Deals',
+        };
+      case 'fashion':
+      case 'men-fashion':
+        return {
+          tag: 'PREMIUM MENSWEAR EDIT',
+          discount: 'FLAT 40% - 70% OFF',
+          title: "Explore Premium Men's Fashion",
+          subtitle: 'Contemporary essentials, sharp silhouettes & luxury wardrobe staples crafted for modern men.',
+          bgGradient: 'from-[#0F2042] via-[#1E40AF] to-[#2962FF]',
+          badgeColor: 'bg-amber-400 text-stone-950',
+          image: premiumMensStyleBanner,
+          ctaText: "Explore Men's Deals",
         };
       case 'electronics':
       case 'mobiles':
@@ -248,66 +440,313 @@ export const ProductListingPage: React.FC = () => {
       .slice(0, 10);
   }, [products]);
 
-  return (
-    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-6">
-      {/* 01. Breadcrumbs */}
-      <Breadcrumbs items={breadcrumbs} className="mb-2" />
+  // 01. Level 1: Dedicated Men's Fashion Landing Page (/category/men-fashion)
+  if (isMen && !sectionSlug && !itemSlug) {
+    return (
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-8">
+        <MensFashionDepartmentView />
 
-      {/* 02. Category Promotional Hero Banner - Exactly matching Lite Header Banner inner padding p-6 sm:p-12 */}
-      <section
-        className={`relative rounded-3xl overflow-hidden bg-gradient-to-r ${categoryBanner.bgGradient} text-white shadow-xl min-h-[260px] sm:min-h-[320px] flex items-center border border-white/10`}
-        aria-label="Category Promotional Banner"
-      >
-        {/* Background Image overlay */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img
-            src={categoryBanner.image}
-            alt={categoryBanner.title}
-            className="w-full h-full object-cover object-center opacity-25 mix-blend-overlay scale-105"
-            loading="eager"
-            decoding="async"
-            width="1000"
-            height="360"
+
+
+        {quickViewProduct && (
+          <QuickViewModal
+            product={quickViewProduct}
+            isOpen={!!quickViewProduct}
+            onClose={handleCloseQuickView}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:w-3/4" />
+        )}
+      </div>
+    );
+  }
+
+  // 01b. Level 1: Dedicated Women's Fashion Landing Page (/category/women-fashion)
+  if (isWomen && !sectionSlug && !itemSlug) {
+    return (
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-8">
+        <WomensFashionDepartmentView />
+
+
+
+        {quickViewProduct && (
+          <QuickViewModal
+            product={quickViewProduct}
+            isOpen={!!quickViewProduct}
+            onClose={handleCloseQuickView}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // 02. Men's Fashion Department & Category Pages (Level 2 & Level 3 unified same-page browsing)
+  if (isMen && sectionSlug) {
+    if (sectionObj) {
+      return (
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-8">
+          <MensFashionSectionView section={sectionObj} initialSubcategorySlug={itemSlug} />
         </div>
-
-        {/* Banner Content with Lite Header Banner padding p-6 sm:p-12 */}
-        <div className="relative z-10 p-6 sm:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-6 w-full">
-          <div className="max-w-2xl space-y-3">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] sm:text-xs font-black tracking-wider uppercase text-white shadow-2xs font-heading">
-                <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
-                <span>{categoryBanner.tag}</span>
-              </span>
-              <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black tracking-wider uppercase shadow-2xs ${categoryBanner.badgeColor} font-heading`}>
-                {categoryBanner.discount}
-              </span>
-            </div>
-
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight font-heading">
-              {categoryBanner.title}
-            </h1>
-
-            <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed font-body max-w-xl">
-              {categoryBanner.subtitle}
-            </p>
-
-            <div className="pt-2 flex items-center gap-3">
-              <a
-                href="#catalog-grid"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 font-extrabold text-xs sm:text-sm transition-all duration-200 shadow-md hover:scale-105 active:scale-95 group font-heading"
-              >
-                <span>{categoryBanner.ctaText}</span>
-                <ArrowRight className="w-4 h-4 text-[#2962FF] group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
+      );
+    }
+    // Meaningful recovery if department not found
+    return (
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-12 pb-24 sm:pb-16 space-y-8 text-center">
+        <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-zinc-200 shadow-2xs space-y-4">
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-blue-50 text-[#2962FF] flex items-center justify-center font-bold text-2xl">
+            404
+          </div>
+          <h2 className="text-xl font-black text-zinc-900 font-heading">Department Not Found</h2>
+          <p className="text-xs sm:text-sm text-zinc-500 font-body">
+            We couldn't find the department &ldquo;{sectionSlug}&rdquo; under Men&apos;s Fashion.
+          </p>
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              to="/category/men-fashion"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#2962FF] text-white text-xs font-bold hover:bg-[#1E40AF] transition-colors"
+            >
+              Browse Men's Fashion
+            </Link>
+            <Link
+              to="/"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-zinc-200 text-zinc-700 text-xs font-bold hover:bg-zinc-50 transition-colors"
+            >
+              Back to Marketplace
+            </Link>
           </div>
         </div>
-      </section>
+      </div>
+    );
+  }
 
-      {/* 03. Category Top Deals Carousel - Wrapped in Lite's rounded-3xl p-5 sm:p-6 card */}
-      {categoryDeals.length > 0 && (
+  // 02b. Level 2 & Level 3: Section Page for Women (e.g. /category/women-fashion/ethnic-wear)
+  if (isWomen && sectionSlug) {
+    if (womensSectionObj) {
+      return (
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-8">
+          <WomensFashionSectionView section={womensSectionObj} initialSubcategorySlug={itemSlug} />
+        </div>
+      );
+    }
+    // Meaningful recovery if department not found
+    return (
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-12 pb-24 sm:pb-16 space-y-8 text-center">
+        <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-zinc-200 shadow-2xs space-y-4">
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-pink-50 text-[#DB2777] flex items-center justify-center font-bold text-2xl">
+            404
+          </div>
+          <h2 className="text-xl font-black text-zinc-900 font-heading">Department Not Found</h2>
+          <p className="text-xs sm:text-sm text-zinc-500 font-body">
+            We couldn't find the department &ldquo;{sectionSlug}&rdquo; under Women&apos;s Fashion.
+          </p>
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              to="/category/women-fashion"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#2962FF] text-white text-xs font-bold hover:bg-[#1E40AF] transition-colors"
+            >
+              Browse Women's Fashion
+            </Link>
+            <Link
+              to="/"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-zinc-200 text-zinc-700 text-xs font-bold hover:bg-zinc-50 transition-colors"
+            >
+              Back to Marketplace
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 03a. All 15 Top-Level Categories Landing Pages (Level 1)
+  if (categoryConfig && !sectionSlug && !itemSlug) {
+    return (
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-8">
+        <UniversalCategoryLandingView config={categoryConfig} />
+        {quickViewProduct && (
+          <QuickViewModal
+            product={quickViewProduct}
+            isOpen={!!quickViewProduct}
+            onClose={handleCloseQuickView}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // 03b. All 15 Category Department & Subcategory Pages (Level 2 & 3 unified same-page browsing)
+  if (categoryConfig && sectionSlug) {
+    if (categorySectionObj) {
+      return (
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-8">
+          <UniversalCategorySectionView
+            categoryConfig={categoryConfig}
+            section={categorySectionObj}
+            initialSubcategorySlug={itemSlug}
+          />
+        </div>
+      );
+    }
+
+    // Graceful check: Is sectionSlug actually a subcategory in ANY section of this category?
+    const foundSectionWithSub = categoryConfig.sections.find((sec) =>
+      sec.subcategories.some((sub) => sub.slug === sectionSlug || sub.id === sectionSlug)
+    );
+    if (foundSectionWithSub) {
+      return (
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-8">
+          <UniversalCategorySectionView
+            categoryConfig={categoryConfig}
+            section={foundSectionWithSub}
+            initialSubcategorySlug={sectionSlug}
+          />
+        </div>
+      );
+    }
+
+    // Fallback: If section was not found, default to first section to guarantee ZERO 404
+    if (categoryConfig.sections.length > 0) {
+      return (
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-8">
+          <UniversalCategorySectionView
+            categoryConfig={categoryConfig}
+            section={categoryConfig.sections[0]}
+            initialSubcategorySlug={itemSlug}
+          />
+        </div>
+      );
+    }
+  }
+
+  // 03. Level 3 (e.g. /category/men-fashion/clothing/shirts or /category/women-fashion/ethnic-wear/sarees)
+  const isLevel3Fashion =
+    (isMen && Boolean(sectionSlug && itemSlug)) ||
+    (isWomen && Boolean(sectionSlug && itemSlug));
+  const parentSectionRoute = isWomen
+    ? `/category/women-fashion/${sectionSlug}`
+    : `/category/men-fashion/${sectionSlug}`;
+
+  // Unknown category recovery (when not fashion, not general known categories, not loading)
+  if (
+    !loading &&
+    !isMen &&
+    !isWomen &&
+    !categoryConfig &&
+    slug &&
+    slug !== 'products' &&
+    slug !== 'under-49' &&
+    !destQuery &&
+    !filterQuery &&
+    !category
+  ) {
+    return (
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-16 pb-24 space-y-8 text-center">
+        <div className="max-w-lg mx-auto bg-white rounded-3xl p-8 border border-zinc-200 shadow-2xs space-y-5">
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-blue-50 text-[#2962FF] flex items-center justify-center font-black text-2xl">
+            404
+          </div>
+          <div>
+            <h1 className="text-2xl font-black text-[#172033] font-heading">Category Not Found</h1>
+            <p className="text-sm text-zinc-500 mt-1 font-body">
+              The category &ldquo;{slug}&rdquo; does not exist or may have been updated.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <Link
+              to="/category/men-fashion"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#2962FF] text-white text-xs font-bold hover:bg-[#1E40AF] transition-colors"
+            >
+              Explore Men's Fashion
+            </Link>
+            <Link
+              to="/category/women-fashion"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-zinc-200 text-zinc-700 text-xs font-bold hover:bg-zinc-50 transition-colors"
+            >
+              Explore Women's Fashion
+            </Link>
+            <Link
+              to="/"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-zinc-200 text-zinc-700 text-xs font-bold hover:bg-zinc-50 transition-colors"
+            >
+              Marketplace
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-6">
+      {/* Level 3 Breadcrumbs and Back Navigation */}
+      {isLevel3Fashion ? (
+        <div className="space-y-4">
+          <Breadcrumbs items={breadcrumbItems} />
+          <div className="flex items-center gap-3">
+            <Link
+              to={parentSectionRoute}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200/90 hover:border-zinc-300 bg-white hover:bg-zinc-50 text-xs font-bold text-zinc-700 transition-colors shadow-2xs"
+              title={`Back to ${currentSectionObj ? currentSectionObj.title : 'Section'}`}
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Back to {currentSectionObj ? currentSectionObj.title : 'All Categories'}</span>
+            </Link>
+          </div>
+        </div>
+      ) : (
+        /* 01. General Category Promotional Hero Banner */
+        <section
+          className={`relative rounded-3xl overflow-hidden bg-gradient-to-r ${categoryBanner.bgGradient} text-white shadow-xl min-h-[260px] sm:min-h-[320px] flex items-center border border-white/10`}
+          aria-label="Category Promotional Banner"
+        >
+          {/* Background Image overlay */}
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <img
+              src={categoryBanner.image}
+              alt={categoryBanner.title}
+              className="w-full h-full object-cover object-center opacity-25 mix-blend-overlay scale-105"
+              loading="eager"
+              decoding="async"
+              width="1000"
+              height="360"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:w-3/4" />
+          </div>
+
+          <div className="relative z-10 p-6 sm:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-6 w-full">
+            <div className="max-w-2xl space-y-3">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] sm:text-xs font-black tracking-wider uppercase text-white shadow-2xs font-heading">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+                  <span>{categoryBanner.tag}</span>
+                </span>
+                <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black tracking-wider uppercase shadow-2xs ${categoryBanner.badgeColor} font-heading`}>
+                  {categoryBanner.discount}
+                </span>
+              </div>
+
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight font-heading">
+                {categoryBanner.title}
+              </h1>
+
+              <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed font-body max-w-xl">
+                {categoryBanner.subtitle}
+              </p>
+
+              <div className="pt-2 flex items-center gap-3">
+                <a
+                  href="#catalog-grid"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 font-extrabold text-xs sm:text-sm transition-all duration-200 shadow-md hover:scale-105 active:scale-95 group font-heading"
+                >
+                  <span>{categoryBanner.ctaText}</span>
+                  <ArrowRight className="w-4 h-4 text-[#2962FF] group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* General Category Deals Carousel (Only for general categories) */}
+      {!isLevel3Fashion && categoryDeals.length > 0 && (
         <section
           className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs space-y-4"
           aria-label="Category Deals"
@@ -357,8 +796,8 @@ export const ProductListingPage: React.FC = () => {
         </section>
       )}
 
-      {/* 04. Horizontally Scrollable Subcategories Strip */}
-      {category && category.subcategories && category.subcategories.length > 0 && (
+      {/* General Category Subcategories Strip */}
+      {!isLevel3Fashion && category && category.subcategories && category.subcategories.length > 0 && (
         <div className="bg-white rounded-2xl p-3 border border-zinc-200/90 shadow-2xs flex items-center gap-2 overflow-x-auto no-scrollbar">
           <button
             type="button"
@@ -396,16 +835,29 @@ export const ProductListingPage: React.FC = () => {
         </div>
       )}
 
-      {/* 05. Main Catalog Area: Desktop Sidebar + Product Grid */}
+      {/* Main Catalog Area: Desktop Sidebar + Product Grid */}
       <div id="catalog-grid" className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs">
         {/* Header with Title and Sorting */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-zinc-200 gap-4 mb-4">
           <div>
+            {isLevel3Fashion && (
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-[#2962FF] text-[10px] font-bold uppercase tracking-wider">
+                  {currentSectionObj?.title || "Fashion Collection"}
+                </span>
+                {currentSubItemObj?.badge && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold uppercase tracking-wider">
+                    {currentSubItemObj.badge}
+                  </span>
+                )}
+              </div>
+            )}
             <h2 className="text-xl sm:text-2xl font-black text-[#202124] tracking-tight">
-              {getPageTitle()} Catalog
+              {getPageTitle()} {isLevel3Fashion ? 'Collection' : 'Catalog'}
             </h2>
             <p className="text-xs sm:text-sm text-[#5F6368] mt-1 font-medium">
               Showing {products.length} {products.length === 1 ? 'product' : 'products'}
+              {currentSubItemObj?.description ? ` • ${currentSubItemObj.description}` : ''}
             </p>
           </div>
 
@@ -476,18 +928,26 @@ export const ProductListingPage: React.FC = () => {
             ) : (
               <ProductGrid
                 products={products}
-                columns={3}
-                initialBatchSize={15}
-                emptyTitle="No Matching Products"
-                emptyDescription="We couldn't find any products matching your selected filters. Try broadening your criteria or resetting filters."
+                columns="auto"
+                initialBatchSize={16}
+                emptyTitle={
+                  isLevel3Fashion
+                    ? `No ${getPageTitle()} Found`
+                    : 'No Matching Products'
+                }
+                emptyDescription={
+                  isLevel3Fashion
+                    ? `We couldn't find any products in this specific category. Please browse other ${currentSectionObj?.title || 'Fashion'} categories.`
+                    : "We couldn't find any products matching your selected filters. Try broadening your criteria or resetting filters."
+                }
               />
             )}
           </div>
         </div>
       </div>
 
-      {/* 06. Trending in Category Carousel */}
-      {categoryTrending.length > 0 && (
+      {/* Trending in Category Carousel (Only for general categories) */}
+      {!isLevel3Fashion && categoryTrending.length > 0 && (
         <section
           className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs space-y-4"
           aria-label="Trending Category Products"
@@ -522,9 +982,7 @@ export const ProductListingPage: React.FC = () => {
         </section>
       )}
 
-      {/* 07. Benefits & Newsletter Sections */}
-      <BenefitsSection />
-      <NewsletterSection />
+
 
       {/* Mobile Drawer */}
       <FilterDrawer

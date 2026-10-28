@@ -35,9 +35,9 @@ export const PriceDisplay: React.FC<PriceDisplayProps> = ({
       discount: 'text-sm font-bold text-emerald-600',
     },
     xl: {
-      price: 'text-3xl font-extrabold text-[#202124]',
-      mrp: 'text-base text-[#5F6368] line-through',
-      discount: 'text-base font-bold text-emerald-600',
+      price: 'text-2xl sm:text-[26px] font-extrabold text-[#202124]',
+      mrp: 'text-sm sm:text-base text-[#5F6368] line-through',
+      discount: 'text-sm sm:text-base font-bold text-emerald-600',
     },
   };
 

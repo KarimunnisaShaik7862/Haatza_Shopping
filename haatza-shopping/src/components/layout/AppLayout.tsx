@@ -17,13 +17,8 @@ export const AppLayout: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
 
-  // Destination-specific smooth ambient background gradient
-  const bgGradient =
-    destination === 'lite'
-      ? 'bg-gradient-to-b from-[#F2FAF4] via-[#F8FCF9] to-white'
-      : destination === 'nest'
-      ? 'bg-gradient-to-b from-[#F6F2FC] via-[#FAF8FD] to-white'
-      : 'bg-gradient-to-b from-[#F7F9FC] via-[#F5F7FF] to-[#FFFFFF]';
+  // Pure white background across all pages
+  const bgGradient = 'bg-white';
 
   return (
     <div className={`min-h-screen flex flex-col ${bgGradient} text-[#172033] transition-colors duration-300`}>

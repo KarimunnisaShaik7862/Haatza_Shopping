@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Product, ProductVariant } from '../../types';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -23,6 +23,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
 }) => {
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const navigate = useNavigate();
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(
     product.variants?.[0]
   );
@@ -39,13 +40,11 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
   }, []);
 
   const handleAdd = () => {
-    addToCart(product, quantity, selectedVariant);
-    setIsAdded(true);
-    if (addTimeoutRef.current) clearTimeout(addTimeoutRef.current);
-    addTimeoutRef.current = setTimeout(() => {
-      setIsAdded(false);
+    const success = addToCart(product, quantity, selectedVariant);
+    if (success) {
       onClose();
-    }, 1200);
+      navigate('/cart');
+    }
   };
 
   return (

@@ -1,38 +1,35 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Product } from '../../types';
-import { promotionService } from '../../services/promotionService';
 import { productService } from '../../services/productService';
-import {
-  MainCarouselBanner,
-  DealEndingItem,
-  TrendingItemWithAnalytics,
-} from '../../services/mock/data/promotions';
+import { promotionService } from '../../services/promotionService';
+import { DealEndingItem } from '../../services/mock/data/promotions';
 
-// Modular Sections
-import { FestivalPromotions } from './sections/FestivalPromotions/FestivalPromotions';
-import { HeroPromotions } from './sections/HeroPromotions/HeroPromotions';
-import { CashbackOffers } from './sections/CashbackOffers/CashbackOffers';
-import { HurryDeals } from './sections/HurryDeals/HurryDeals';
-import { DealsOfTheDay } from './sections/DealsOfTheDay/DealsOfTheDay';
-import { RecommendedProducts } from './sections/RecommendedProducts/RecommendedProducts';
-import { TrendingProducts } from './sections/TrendingProducts/TrendingProducts';
-import { NewArrivals } from './sections/NewArrivals/NewArrivals';
-import { ShoppingOffers } from './sections/ShoppingOffers/ShoppingOffers';
-import { RecentlyViewed } from './sections/RecentlyViewed/RecentlyViewed';
-import { MoreToExplore } from './sections/MoreToExplore/MoreToExplore';
-import { BenefitsSection } from '../../components/home/BenefitsSection';
-import { NewsletterSection } from '../../components/home/NewsletterSection';
+// Independent Modular Homepage Widgets
+import {
+  AnnouncementTickerWidget,
+  HeroMarketingCarouselWidget,
+  SuperSavingsCrystalBannerWidget,
+  ShopByCategoryWidget,
+  TrendingProductsWidget,
+  DealsOfTheDayWidget,
+  HurryDealsWidget,
+  Under49StoreWidget,
+  RecentlyViewedWidget,
+  MoreToExploreWidget,
+  WhyShopWithHaatzaWidget,
+  FixedDiscountSideTab,
+  Fashion3DAnimatedBannerWidget,
+} from '../../components/home/widgets';
+
 import { LoadingSkeleton } from '../../components/common/LoadingSkeleton';
 import { QuickViewModal } from '../../components/products/QuickViewModal';
 
 export const HomePage: React.FC = () => {
-  const [carouselBanners, setCarouselBanners] = useState<MainCarouselBanner[]>([]);
-  const [dealsEnding, setDealsEnding] = useState<DealEndingItem[]>([]);
   const [dealsOfDay, setDealsOfDay] = useState<Product[]>([]);
-  const [trendingAnalytics, setTrendingAnalytics] = useState<TrendingItemWithAnalytics[]>([]);
-  const [newArrivals, setNewArrivals] = useState<Product[]>([]);
-
+  const [dealsEnding, setDealsEnding] = useState<DealEndingItem[]>([]);
+  const [trendingProducts, setTrendingProducts] = useState<Product[]>([]);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const handleQuickView = useCallback((product: Product) => {
     setQuickViewProduct(product);
@@ -42,30 +39,18 @@ export const HomePage: React.FC = () => {
     setQuickViewProduct(null);
   }, []);
 
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     async function loadHomepageData() {
       try {
-        const [
-          carouselData,
-          dealsEndingData,
-          dealsData,
-          trendingData,
-          newArrivalsData,
-        ] = await Promise.all([
-          promotionService.getMainCarouselBanners(),
-          promotionService.getDealsEndingSoon(),
+        const [dealsData, dealsEndingData, trendingData] = await Promise.all([
           productService.getDeals('haatza', 8),
-          promotionService.getTrendingItemsWithAnalytics(),
-          productService.getNewArrivals('haatza', 8),
+          promotionService.getDealsEndingSoon(),
+          productService.getTrendingProducts('haatza', 8),
         ]);
 
-        setCarouselBanners(carouselData);
-        setDealsEnding(dealsEndingData);
         setDealsOfDay(dealsData);
-        setTrendingAnalytics(trendingData);
-        setNewArrivals(newArrivalsData);
+        setDealsEnding(dealsEndingData);
+        setTrendingProducts(trendingData);
       } catch (err) {
         console.error('Failed to load HAATZA homepage data:', err);
       } finally {
@@ -86,67 +71,76 @@ export const HomePage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6 pb-24 sm:pb-16 pt-2 sm:pt-4">
-      {/* 01. Festival Banner */}
+    <div className="space-y-8 sm:space-y-12 pb-20 sm:pb-24">
+      {/* 01. Promotional Announcement Ticker (Full-width marketing marquee) */}
+      <AnnouncementTickerWidget />
+
+      {/* 02. Hero Marketing Carousel & Seamlessly Attached UPI Offers Section */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <FestivalPromotions />
+        <div className="overflow-hidden rounded-md sm:rounded-lg border border-slate-200/80 bg-white">
+          <HeroMarketingCarouselWidget className="rounded-b-none border-0 shadow-none" />
+          <SuperSavingsCrystalBannerWidget className="rounded-t-none border-0 shadow-none -mt-[1px]" />
+        </div>
       </div>
 
-      {/* 02. Hero Campaign */}
+      {/* 04. Shop by Category Discovery Cards */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <HeroPromotions banners={carouselBanners} autoplayInterval={3000} />
+        <ShopByCategoryWidget />
       </div>
 
-      {/* 03. Cashback & Offers */}
+      {/* 05. Premium 3D Animated Text Banner with Stationary Fashion Model (Flips Every 2s) */}
+      <Fashion3DAnimatedBannerWidget intervalMs={2000} />
+
+      {/* 08. Trending Collections */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <CashbackOffers />
+        <TrendingProductsWidget
+          products={trendingProducts}
+          onQuickView={handleQuickView}
+        />
       </div>
 
-      {/* 04. Hurry! Deals Ending Soon */}
+      {/* 09. Deals of the Day */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <HurryDeals deals={dealsEnding} onQuickView={handleQuickView} />
+        <DealsOfTheDayWidget
+          deals={dealsOfDay}
+          onQuickView={handleQuickView}
+        />
       </div>
 
-      {/* 05. Deals of the Day */}
+      {/* 10. Hurry Deals Ending Soon */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <DealsOfTheDay deals={dealsOfDay} onQuickView={handleQuickView} />
+        <HurryDealsWidget
+          deals={dealsEnding}
+          onQuickView={handleQuickView}
+        />
       </div>
 
-      {/* 06. Recommended Products (Perfect Picks) */}
+      {/* 11. ₹49 Store */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <RecommendedProducts onQuickView={handleQuickView} />
+        <Under49StoreWidget onQuickView={handleQuickView} />
       </div>
 
-      {/* 07. Trending Products */}
+
+      {/* 13. Recently Viewed Products */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <TrendingProducts items={trendingAnalytics} onQuickView={handleQuickView} />
+        <RecentlyViewedWidget onQuickView={handleQuickView} />
       </div>
 
-      {/* 08. Just Landed (New Arrivals) */}
+      {/* 14. More to Explore (Vertical Product Grid with Infinite Scroll) */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <NewArrivals products={newArrivals} onQuickView={handleQuickView} />
+        <MoreToExploreWidget
+          layout="vertical-grid"
+          enableInfiniteScroll={true}
+          categoryContext="all"
+          onQuickView={handleQuickView}
+        />
       </div>
 
-      {/* 09. Campaign Banner */}
+      {/* 15. Why Shop with HAATZA */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <ShoppingOffers />
+        <WhyShopWithHaatzaWidget />
       </div>
 
-      {/* 10. Recently Viewed */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <RecentlyViewed onQuickView={handleQuickView} />
-      </div>
-
-      {/* 11. More to Explore */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <MoreToExplore onQuickView={handleQuickView} />
-      </div>
-
-      {/* 12. Benefits & Newsletter */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 space-y-6">
-        <BenefitsSection />
-        <NewsletterSection />
-      </div>
 
       {/* Quick View Modal */}
       {quickViewProduct && (
@@ -156,6 +150,9 @@ export const HomePage: React.FC = () => {
           onClose={handleCloseQuickView}
         />
       )}
+
+      {/* Fixed Right Edge Promotional Discount Tab (Matching Reference Video) */}
+      <FixedDiscountSideTab />
     </div>
   );
 };

@@ -7,7 +7,8 @@ import { ChevronDown, Sparkles } from 'lucide-react';
 
 interface ProductGridProps {
   products: Product[];
-  columns?: 2 | 3 | 4;
+  columns?: 2 | 3 | 4 | 'auto';
+  variant?: 'standard' | 'fashion';
   className?: string;
   emptyTitle?: string;
   emptyDescription?: string;
@@ -16,7 +17,8 @@ interface ProductGridProps {
 
 export const ProductGrid: React.FC<ProductGridProps> = React.memo(({
   products,
-  columns = 4,
+  columns = 'auto',
+  variant = 'standard',
   className = '',
   emptyTitle = 'No Products Found',
   emptyDescription = 'Try adjusting your filters or search keywords.',
@@ -46,22 +48,28 @@ export const ProductGrid: React.FC<ProductGridProps> = React.memo(({
     return <EmptyState title={emptyTitle} description={emptyDescription} />;
   }
 
-  const columnClasses = {
-    2: 'grid-cols-2',
-    3: 'grid-cols-2 md:grid-cols-3',
-    4: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4',
+  const columnClasses: Record<string, string> = {
+    '2': 'grid-cols-2',
+    '3': 'grid-cols-2 md:grid-cols-3',
+    '4': 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4',
+    'auto': 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4',
   };
+
+  const gridClass = columns && columnClasses[String(columns)]
+    ? columnClasses[String(columns)]
+    : columnClasses.auto;
 
   const displayedProducts = products.slice(0, visibleCount);
   const hasMore = visibleCount < products.length;
 
   return (
-    <div className="space-y-6">
-      <div className={`grid ${columnClasses[columns]} gap-4 sm:gap-6 ${className}`}>
+    <div className="w-full space-y-6">
+      <div className={`grid ${gridClass} gap-3.5 sm:gap-4 md:gap-5 w-full ${className}`}>
         {displayedProducts.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
+            variant={variant}
             onQuickView={handleQuickView}
           />
         ))}

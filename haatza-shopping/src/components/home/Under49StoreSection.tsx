@@ -19,11 +19,10 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
     e.preventDefault();
     e.stopPropagation();
 
-    addToCart(product, 1);
-    setAddedIds((prev) => ({ ...prev, [product.id]: true }));
-    setTimeout(() => {
-      setAddedIds((prev) => ({ ...prev, [product.id]: false }));
-    }, 1500);
+    const success = addToCart(product, 1);
+    if (success) {
+      navigate('/cart');
+    }
   };
 
   const handleToggleWishlist = (e: React.MouseEvent, product: Product) => {
@@ -146,24 +145,15 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
 
                     <button
                       type="button"
-                      onClick={(e) => handleAddToCart(e, item)}
-                      className={`w-full py-1.5 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 shadow-2xs ${
-                        isAdded
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-[#2962FF] hover:bg-[#1E4ED8] text-white active:scale-95'
-                      }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = `/product/${item.slug}`;
+                      }}
+                      className="w-full py-1.5 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 shadow-2xs bg-[#2962FF] hover:bg-[#1E4ED8] text-white active:scale-95 cursor-pointer"
                     >
-                      {isAdded ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
-                          <span>Added</span>
-                        </>
-                      ) : (
-                        <>
-                          <ShoppingBag className="w-3.5 h-3.5" />
-                          <span>Add to Cart</span>
-                        </>
-                      )}
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Add to Cart</span>
                     </button>
                   </div>
                 </div>

@@ -51,3 +51,88 @@
     animation: none !important;
   }
 }
+
+/* ==========================================================================
+   MARQUEE ANIMATIONS (Seamless right-to-left ticker with hover pause)
+   ========================================================================== */
+@keyframes haatza-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.haatza-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: haatza-marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.haatza-marquee-track:hover,
+.haatza-marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+.haatza-marquee-track-slow {
+  display: flex;
+  width: max-content;
+  animation: haatza-marquee 48s linear infinite;
+  will-change: transform;
+}
+
+.haatza-marquee-track-slow:hover,
+.haatza-marquee-track-slow:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haatza-marquee-track,
+  .haatza-marquee-track-slow {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   UPI OFFER PROGRESS BAR ANIMATION
+   ========================================================================== */
+@keyframes haatza-progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress {
+  animation: haatza-progress 3.6s linear;
+}
+
+/* ==========================================================================
+   BORDERLESS PROMOTIONAL OFFER VERTICAL ROTATION ANIMATION
+   ========================================================================== */
+@keyframes haatza-offer-vertical {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-offer-vertical {
+  animation: haatza-offer-vertical 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-offer-vertical {
+    animation: none !important;
+  }
+}
+

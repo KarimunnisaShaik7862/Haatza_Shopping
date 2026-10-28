@@ -8,7 +8,7 @@ import {
   HeartHandshake, Armchair, Tv, Gamepad2, Dumbbell,
   BookOpen, Building, ShoppingBasket, Car, MoreHorizontal,
   Apple, Milk, Cookie, Coffee, ShieldCheck, UtensilsCrossed,
-  Sparkle, Brush, Box, Tag, ChevronsLeft
+  Sparkle, Brush, Box, Tag, ChevronsLeft, ChevronDown
 } from 'lucide-react';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -74,21 +74,155 @@ const CATEGORY_STYLES: Record<string, { bg: string; text: string }> = {
   'home-organization': { bg: 'bg-pink-50 text-pink-600', text: '#DB2777' },
 };
 
-export const CategoryNavigation: React.FC = () => {
+const CATEGORY_IMAGES: Record<string, { local?: string; fallback: string }> = {
+  all: {
+    fallback: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=160&q=80',
+  },
+  'men-fashion': {
+    local: '/images/categories/men-fashion.jpg',
+    fallback: 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=160&q=80',
+  },
+  'women-fashion': {
+    local: '/images/categories/women-fashion.jpg',
+    fallback: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=160&q=80',
+  },
+  electronics: {
+    fallback: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=160&q=80',
+  },
+  'home-living': {
+    fallback: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=160&q=80',
+  },
+  beauty: {
+    fallback: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=160&q=80',
+  },
+  appliances: {
+    fallback: 'https://images.unsplash.com/photo-1585659722983-3a675dabf23d?auto=format&fit=crop&w=160&q=80',
+  },
+  'toys-games': {
+    fallback: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=160&q=80',
+  },
+  'sports-fitness': {
+    fallback: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=160&q=80',
+  },
+  books: {
+    fallback: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=160&q=80',
+  },
+  furniture: {
+    fallback: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=160&q=80',
+  },
+  groceries: {
+    fallback: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=160&q=80',
+  },
+  automotive: {
+    fallback: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=160&q=80',
+  },
+  mobiles: {
+    fallback: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=160&q=80',
+  },
+  'baby-care': {
+    fallback: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=160&q=80',
+  },
+  'pet-supplies': {
+    fallback: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=160&q=80',
+  },
+  jewellery: {
+    fallback: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=160&q=80',
+  },
+  'gift-cards': {
+    fallback: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=160&q=80',
+  },
+  // Lite Categories
+  'fruits-vegetables': {
+    fallback: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=160&q=80',
+  },
+  'dairy-breakfast': {
+    fallback: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=160&q=80',
+  },
+  'snacks-beverages': {
+    fallback: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=160&q=80',
+  },
+  'household-cleaning': {
+    fallback: 'https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?auto=format&fit=crop&w=160&q=80',
+  },
+  'personal-care': {
+    fallback: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=160&q=80',
+  },
+  'kitchen-essentials': {
+    fallback: 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=160&q=80',
+  },
+  // Nest Categories
+  'home-cleaning': {
+    fallback: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=160&q=80',
+  },
+  'kitchen-cleaning': {
+    fallback: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=160&q=80',
+  },
+  'bathroom-cleaning': {
+    fallback: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=160&q=80',
+  },
+  'sweeping-mopping': {
+    fallback: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=160&q=80',
+  },
+  'utensil-cleaning': {
+    fallback: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=160&q=80',
+  },
+  'laundry-ironing': {
+    fallback: 'https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=160&q=80',
+  },
+  'home-organization': {
+    fallback: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=160&q=80',
+  },
+};
+
+const getCategoryPhoto = (cat: Category) => {
+  const custom = CATEGORY_IMAGES[cat.slug];
+  if (custom) return custom;
+  if (cat.image) {
+    return { local: cat.image, fallback: cat.image };
+  }
+  return null;
+};
+
+export interface CategoryNavigationProps {
+  isScrolled?: boolean;
+}
+
+export const CategoryNavigation: React.FC<CategoryNavigationProps> = ({ isScrolled = false }) => {
   const { destination, theme } = useDestination();
   const [categories, setCategories] = useState<Category[]>([]);
-  const [isMoreExpanded, setIsMoreExpanded] = useState(false);
   const [visibleCount, setVisibleCount] = useState<number>(100);
   const [needsMore, setNeedsMore] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const measureContainerRef = useRef<HTMLDivElement>(null);
+  const moreContainerRef = useRef<HTMLDivElement>(null);
+  const lastClientWidthRef = useRef<number>(0);
   const location = useLocation();
 
   useEffect(() => {
     categoryService.getCategories(destination).then(setCategories);
-    setIsMoreExpanded(false);
+    setIsDropdownOpen(false);
   }, [destination]);
+
+  useEffect(() => {
+    setIsDropdownOpen(false);
+  }, [location.pathname]);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreContainerRef.current && !moreContainerRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   const activeColor = theme?.primary || '#2962FF';
   const productCategories = categories.filter((c) => c.slug !== 'more');
@@ -110,41 +244,38 @@ export const CategoryNavigation: React.FC = () => {
 
     // The last element in the measurement container is the More control
     const moreElement = measureChildren[measureChildren.length - 1];
-    const moreWidth = moreElement.getBoundingClientRect().width || 48;
+    const moreWidth = moreElement.getBoundingClientRect().width || 44;
 
     // Category items (all except the last More control)
     const categoryElements = measureChildren.slice(0, measureChildren.length - 1);
-    const itemWidths = categoryElements.map((el) => el.getBoundingClientRect().width);
+    const itemWidths = categoryElements.map((el) => Math.ceil(el.getBoundingClientRect().width));
 
-    const MIN_GAP = 16; // Minimum comfortable gap between items
-
-    if (itemWidths.length === 0) {
-      setVisibleCount(0);
-      setNeedsMore(false);
-      return;
-    }
+    // Minimum compact gap required for clean separation without overlapping
+    const minGap = window.innerWidth >= 1024 ? 6 : 6;
 
     // Calculate total width if ALL categories are rendered together
     const totalAllWidth = itemWidths.reduce(
-      (acc, w, idx) => acc + w + (idx > 0 ? MIN_GAP : 0),
+      (acc, w, idx) => acc + w + (idx > 0 ? minGap : 0),
       0
     );
 
-    // If every category fits within the available width with minimum gap, show all and hide More completely
-    if (totalAllWidth <= availableWidth) {
+    // Case A: All categories fit within available width -> show all directly, hide "More"
+    // Allows 4px tolerance for subpixel rounding differences across displays
+    if (totalAllWidth <= availableWidth + 4) {
       setVisibleCount(itemWidths.length);
       setNeedsMore(false);
       return;
     }
 
-    // Otherwise, find the maximum number of categories that fit alongside More:
+    // Case B: Categories exceed available width -> calculate how many fit alongside "More"
+    const overflowGap = window.innerWidth >= 768 ? 10 : 8;
     let runningWidth = 0;
     let fitCount = 0;
 
     for (let i = 0; i < itemWidths.length; i++) {
       const itemWidth = itemWidths[i];
-      const gapBefore = i > 0 ? MIN_GAP : 0;
-      const widthIfIncludeThisAndMore = runningWidth + gapBefore + itemWidth + MIN_GAP + moreWidth;
+      const gapBefore = i > 0 ? overflowGap : 0;
+      const widthIfIncludeThisAndMore = runningWidth + gapBefore + itemWidth + overflowGap + moreWidth;
 
       if (widthIfIncludeThisAndMore <= availableWidth) {
         runningWidth += gapBefore + itemWidth;
@@ -154,7 +285,6 @@ export const CategoryNavigation: React.FC = () => {
       }
     }
 
-    // Ensure at least 1 category is shown
     fitCount = Math.max(1, fitCount);
 
     setVisibleCount((prev) => (prev !== fitCount ? fitCount : prev));
@@ -164,13 +294,20 @@ export const CategoryNavigation: React.FC = () => {
     });
   }, []);
 
-  // Re-measure and update visible categories on container resize, window resize, font loading, or category changes
+  // Re-measure and update visible categories on container resize, window resize, font loading, category changes, or scroll state
   useEffect(() => {
     let rafId: number;
 
     const handleResize = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
+        if (scrollRef.current) {
+          const currentWidth = scrollRef.current.clientWidth;
+          if (currentWidth > 0 && currentWidth === lastClientWidthRef.current) {
+            return; // Ignore vertical height changes from icon collapse/expand animation
+          }
+          lastClientWidthRef.current = currentWidth;
+        }
         recalculateVisibleCategories();
       });
     };
@@ -183,88 +320,43 @@ export const CategoryNavigation: React.FC = () => {
       });
     }
 
+    const resizeObserver = typeof ResizeObserver !== 'undefined' && scrollRef.current
+      ? new ResizeObserver(handleResize)
+      : null;
+
+    if (resizeObserver && scrollRef.current) {
+      resizeObserver.observe(scrollRef.current);
+    }
+
     window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', handleResize);
+      if (resizeObserver) resizeObserver.disconnect();
     };
   }, [categories, destination, recalculateVisibleCategories]);
 
-  // Visible categories:
-  // - When expanded: show all categories
-  // - When collapsed: show only the dynamically calculated count that fits
-  const visibleCategories = isMoreExpanded
-    ? productCategories
-    : productCategories.slice(0, visibleCount);
+  // Visible and overflow categories:
+  const visibleCategories = needsMore
+    ? productCategories.slice(0, visibleCount)
+    : productCategories;
 
-  const handleExpand = () => {
-    setIsMoreExpanded(true);
-    setTimeout(() => {
-      if (scrollRef.current) {
-        scrollRef.current.scrollBy({ left: 360, behavior: 'smooth' });
-      }
-    }, 50);
-  };
-
-  const handleCollapse = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-    }
-    setIsMoreExpanded(false);
-  };
-
-  // Reusable toggle control: Identical visual design for both More and Less
-  const renderToggleControl = (type: 'more' | 'less') => {
-    const isLess = type === 'less';
-    return (
-      <button
-        key={`category-toggle-${type}`}
-        type="button"
-        onClick={isLess ? handleCollapse : handleExpand}
-        className="group flex flex-col items-center shrink-0 text-center py-0.5 transition-all select-none relative focus:outline-hidden cursor-pointer"
-        title={isLess ? 'Show less categories' : 'Show more categories'}
-        aria-label={isLess ? 'Show less categories' : 'Show more categories'}
-      >
-        {/* Icon box - identical between More and Less */}
-        <div
-          className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center transition-all duration-200 mb-1 bg-zinc-100 text-zinc-600 hover:scale-105 hover:bg-zinc-200 group-hover:text-zinc-950"
-        >
-          {isLess ? (
-            <ChevronsLeft className="w-4.5 h-4.5 sm:w-5 sm:h-5 transition-transform group-hover:-translate-x-0.5" />
-          ) : (
-            <MoreHorizontal className="w-4.5 h-4.5 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" />
-          )}
-        </div>
-
-        {/* Label - identical typography, spacing, and alignment */}
-        <span
-          className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap transition-colors leading-tight text-zinc-700 group-hover:text-zinc-950"
-        >
-          {isLess ? 'Less' : 'More'}
-        </span>
-      </button>
-    );
-  };
+  const hiddenCategories = needsMore
+    ? productCategories.slice(visibleCount)
+    : [];
 
   return (
     <nav
       aria-label="Category navigation"
-      className="bg-white border-b border-zinc-200/80 shadow-2xs relative z-30 group/nav"
+      className={`relative z-30 group/nav bg-white border-t border-zinc-100 transition-shadow duration-200 ${
+        isScrolled ? 'shadow-2xs' : ''
+      }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 relative">
-        {/* 
-          HORIZONTAL ROW OF CATEGORIES:
-          - Dynamically displays the maximum number of categories that can fit in available space.
-          - When collapsed: uses justify-between so categories and More perfectly span from left to right padding.
-          - When expanded: horizontally scrollable with consistent gap-5.
-          - If all categories fit, More is completely hidden.
-        */}
         <div
           ref={scrollRef}
-          className={`w-full flex items-center ${
-            isMoreExpanded ? 'gap-5 overflow-x-auto' : 'justify-between overflow-x-hidden'
-          } no-scrollbar scroll-smooth py-2 select-none`}
+          className="w-full flex items-center justify-between no-scrollbar py-1.5 sm:py-2 select-none overflow-x-auto"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
@@ -285,40 +377,71 @@ export const CategoryNavigation: React.FC = () => {
                 : `/category/${cat.slug}`;
 
             const style = CATEGORY_STYLES[cat.slug] || { bg: 'bg-zinc-100 text-zinc-700', text: '#202124' };
+            const categoryPhoto = getCategoryPhoto(cat);
 
             return (
               <Link
-                key={cat.id || idx}
+                key={cat.id || cat.slug || idx}
                 to={targetLink}
-                className="group flex flex-col items-center shrink-0 text-center py-0.5 transition-all select-none relative focus:outline-hidden"
+                className="group flex flex-col items-center shrink-0 text-center py-0.5 select-none relative focus:outline-hidden"
               >
-                {/* Icon box - matching reference screenshot */}
+                {/* Icon box or Real Category Photo - Smooth animated slide-up & fade (Flipkart style) */}
                 <div
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center transition-all duration-200 mb-1 ${
-                    isAll && isActive
-                      ? 'shadow-xs scale-105'
-                      : isActive
-                      ? 'ring-2 ring-offset-1 scale-105 shadow-2xs'
-                      : 'hover:scale-105 transition-transform'
-                  } ${
-                    isAll
-                      ? destination === 'haatza'
-                        ? 'bg-[#2962FF] text-white shadow-xs'
-                        : destination === 'lite'
-                        ? 'bg-[#238636] text-white shadow-xs'
-                        : 'bg-[#6C3FC5] text-white shadow-xs'
-                      : style.bg
+                  className={`overflow-hidden transition-all duration-300 ease-out flex items-center justify-center shrink-0 ${
+                    isScrolled
+                      ? '-translate-y-2 opacity-0 max-h-0 mb-0 pointer-events-none'
+                      : 'translate-y-0 opacity-100 max-h-12 mb-1'
                   }`}
                   style={{
-                    outlineColor: isActive ? activeColor : undefined,
+                    willChange: 'transform, opacity, max-height',
                   }}
                 >
-                  {ICON_MAP[cat.iconName] || <LayoutGrid className="w-4.5 h-4.5 sm:w-5 sm:h-5" />}
+                  <div
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center transition-transform duration-200 relative overflow-hidden ${
+                      isAll && isActive
+                        ? 'shadow-xs scale-105'
+                        : isActive
+                        ? 'ring-2 ring-offset-1 scale-105 shadow-2xs'
+                        : 'hover:scale-105'
+                    } ${
+                      isAll
+                        ? destination === 'haatza'
+                          ? 'bg-[#2962FF] text-white shadow-xs'
+                          : destination === 'lite'
+                          ? 'bg-[#238636] text-white shadow-xs'
+                          : 'bg-[#6C3FC5] text-white shadow-xs'
+                        : categoryPhoto
+                        ? 'bg-zinc-100'
+                        : style.bg
+                    }`}
+                    style={{
+                      outlineColor: isActive ? activeColor : undefined,
+                    }}
+                  >
+                    {categoryPhoto ? (
+                      <img
+                        src={categoryPhoto.local || categoryPhoto.fallback}
+                        onError={(e) => {
+                          if (categoryPhoto.fallback && e.currentTarget.src !== categoryPhoto.fallback) {
+                            e.currentTarget.src = categoryPhoto.fallback;
+                          }
+                        }}
+                        alt={cat.name}
+                        className="w-full h-full object-cover object-center rounded-2xl group-hover:scale-110 transition-transform duration-300"
+                        loading="eager"
+                        decoding="async"
+                        width="40"
+                        height="40"
+                      />
+                    ) : (
+                      ICON_MAP[cat.iconName] || <LayoutGrid className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
+                    )}
+                  </div>
                 </div>
 
-                {/* Label text */}
+                {/* Label text - Consistent font sizing to eliminate text reflow jumping */}
                 <span
-                  className={`text-[10px] sm:text-[11px] font-semibold whitespace-nowrap transition-colors leading-tight ${
+                  className={`whitespace-nowrap transition-colors duration-200 leading-tight text-center text-[10px] sm:text-[11px] font-semibold ${
                     isActive ? 'font-black' : 'text-zinc-700 group-hover:text-zinc-950'
                   }`}
                   style={{ color: isActive ? activeColor : undefined }}
@@ -326,10 +449,10 @@ export const CategoryNavigation: React.FC = () => {
                   {cat.name}
                 </span>
 
-                {/* Active Underline Indicator Bar - spans horizontally across content area */}
+                {/* Active Underline Indicator Bar */}
                 {isActive && (
                   <span
-                    className="absolute -bottom-1.5 inset-x-0 h-0.5 rounded-full transition-all"
+                    className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full transition-all duration-200"
                     style={{ backgroundColor: activeColor }}
                   />
                 )}
@@ -337,17 +460,97 @@ export const CategoryNavigation: React.FC = () => {
             );
           })}
 
-          {/* 
-            MORE / LESS TOGGLE CONTROL:
-            - When expanded: exactly one 'Less' control at the very end
-            - When collapsed: exactly one 'More' control only if additional categories exist that don't fit
-            - If all categories fit without overflow: no toggle button is rendered
-          */}
-          {isMoreExpanded
-            ? renderToggleControl('less')
-            : needsMore
-            ? renderToggleControl('more')
-            : null}
+          {/* MORE DROPDOWN CONTROL: Rendered ONLY when needsMore is true */}
+          {needsMore && (
+            <div className="relative shrink-0" ref={moreContainerRef}>
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                className="group flex flex-col items-center py-0.5 shrink-0 text-center select-none relative focus:outline-hidden cursor-pointer"
+                title="More categories"
+                aria-label="More categories"
+                aria-expanded={isDropdownOpen}
+              >
+                {/* Icon box - Smooth animated slide-up & fade (Flipkart style) */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-out flex items-center justify-center shrink-0 ${
+                    isScrolled
+                      ? '-translate-y-2 opacity-0 max-h-0 mb-0 pointer-events-none'
+                      : 'translate-y-0 opacity-100 max-h-12 mb-1'
+                  }`}
+                  style={{
+                    willChange: 'transform, opacity, max-height',
+                  }}
+                >
+                  <div
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center transition-all duration-200 ${
+                      isDropdownOpen
+                        ? 'bg-[#2962FF] text-white shadow-xs'
+                        : 'bg-zinc-100 text-zinc-600 hover:scale-105 hover:bg-zinc-200 group-hover:text-zinc-950'
+                    }`}
+                  >
+                    <MoreHorizontal className="w-4.5 h-4.5 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" />
+                  </div>
+                </div>
+
+                <span
+                  className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap transition-colors duration-200 leading-tight text-zinc-700 group-hover:text-zinc-950 flex items-center gap-0.5"
+                >
+                  <span>More</span>
+                  <ChevronDown
+                    className={`w-3 h-3 text-zinc-500 transition-transform duration-200 ${
+                      isDropdownOpen ? 'rotate-180 text-zinc-900' : ''
+                    }`}
+                  />
+                </span>
+              </button>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && hiddenCategories.length > 0 && (
+                <div
+                  className="absolute right-0 top-full mt-2 z-50 min-w-[210px] max-w-[260px] bg-white rounded-2xl shadow-xl border border-zinc-200/90 py-2 p-1.5 space-y-1 animate-in fade-in zoom-in-95 duration-150"
+                  role="menu"
+                  aria-label="Additional categories"
+                >
+                  <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 mb-1">
+                    More Categories ({hiddenCategories.length})
+                  </div>
+                  <div className="max-h-[280px] overflow-y-auto no-scrollbar py-0.5 space-y-0.5">
+                    {hiddenCategories.map((cat) => {
+                      const catPhoto = getCategoryPhoto(cat);
+                      return (
+                        <Link
+                          key={cat.id}
+                          to={
+                            destination === 'nest'
+                              ? `/nest?category=${cat.slug}`
+                              : `/category/${cat.slug}`
+                          }
+                          onClick={() => setIsDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors group"
+                          role="menuitem"
+                        >
+                          {catPhoto ? (
+                            <img
+                              src={catPhoto.local || catPhoto.fallback}
+                              alt={cat.name}
+                              className="w-6 h-6 rounded-lg object-cover shrink-0"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="w-6 h-6 rounded-lg bg-zinc-100 flex items-center justify-center shrink-0">
+                              <LayoutGrid className="w-3.5 h-3.5 text-zinc-600" />
+                            </div>
+                          )}
+                          <span className="truncate group-hover:text-[#2962FF]">{cat.name}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -355,7 +558,7 @@ export const CategoryNavigation: React.FC = () => {
       <div
         ref={measureContainerRef}
         aria-hidden="true"
-        className="absolute -top-[9999px] -left-[9999px] invisible pointer-events-none flex items-center gap-5 whitespace-nowrap"
+        className="absolute -top-[9999px] -left-[9999px] invisible pointer-events-none flex items-center whitespace-nowrap"
         style={{
           position: 'fixed',
           top: -9999,
@@ -370,18 +573,23 @@ export const CategoryNavigation: React.FC = () => {
             className="group flex flex-col items-center shrink-0 text-center py-0.5 select-none"
           >
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl mb-1" />
-            <span className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap leading-tight">
+            <span
+              className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap leading-tight text-center"
+            >
               {cat.name}
             </span>
           </div>
         ))}
         <div
           key="measure-more-toggle"
-          className="group flex flex-col items-center shrink-0 text-center py-0.5 select-none"
+          className="group flex flex-col items-center py-0.5 shrink-0 text-center select-none"
         >
           <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl mb-1" />
-          <span className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap leading-tight">
-            More
+          <span
+            className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap leading-tight text-center flex items-center gap-0.5"
+          >
+            <span>More</span>
+            <ChevronDown className="w-3 h-3" />
           </span>
         </div>
       </div>

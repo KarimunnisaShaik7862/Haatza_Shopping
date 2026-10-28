@@ -25,7 +25,7 @@ export interface Order {
   discount: number;
   deliveryCharge: number;
   total: number;
-  paymentMethod: 'upi' | 'card' | 'netbanking' | 'cod';
+  paymentMethod: 'upi' | 'card' | 'netbanking' | 'cod' | 'wallet' | 'emi';
   paymentStatus: 'paid' | 'pending';
   shippingAddress: Address;
   status: 'placed' | 'confirmed' | 'processing' | 'shipped' | 'out_for_delivery' | 'delivered' | 'cancelled' | 'returned';

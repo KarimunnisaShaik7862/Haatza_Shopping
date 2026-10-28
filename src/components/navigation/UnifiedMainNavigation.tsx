@@ -8,7 +8,7 @@ export const UnifiedMainNavigation: React.FC = () => {
     <>
       <nav
         aria-label="HAATZA Global Experience Navigation"
-        className="bg-white border-b border-[#E5EAF3] sticky top-0 z-50 shadow-soft-sm"
+        className="bg-white sticky top-0 z-50"
       >
         <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-4">
           {/* Main Experience Navigation Cards (Screenshot 2) */}

@@ -2,6 +2,7 @@
    HAATZA SHOPPING THEME - DESIGN SYSTEM TOKENS & UTILITIES
    Isolated White & Blue Premium Marketplace Palette
    ========================================================================== */
+@import './design-tokens.css';
 
 :root, .haatza-shopping-root {
   /* Primary Brand Colors */
@@ -12,13 +13,21 @@
   --haatza-shopping-primary-highlight: #DBEAFE;
 
   /* Surfaces & Backgrounds */
-  --haatza-shopping-bg: #F7F9FC;
+  --haatza-shopping-bg: #FFFFFF;
   --haatza-shopping-surface: #FFFFFF;
   --haatza-shopping-text: #172033;
   --haatza-shopping-text-muted: #64748B;
   --haatza-shopping-border: #E5EAF3;
   --haatza-shopping-success: #16A34A;
   --haatza-shopping-error: #DC2626;
+
+  /* Haatza Brand Identity Palette */
+  --haatza-brand-red: #A60000;
+  --haatza-brand-red-hover: #880000;
+  --haatza-brand-red-light: #FFF5F5;
+  --haatza-dusty-pink: #D99A9A;
+  --haatza-blush-pink: #E8B8B8;
+  --haatza-blush-pink-light: #FDF4F4;
 
   /* Horizontal Container Spacing Tokens */
   --haatza-shopping-pad-mobile: 24px;

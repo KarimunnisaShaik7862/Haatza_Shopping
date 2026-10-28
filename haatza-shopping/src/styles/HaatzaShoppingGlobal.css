@@ -30,6 +30,10 @@
   --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 /* --------------------------------------------------------------------------
    Scoped Container Classes for HAATZA Shopping
    Unified Responsive Horizontal Spacing System

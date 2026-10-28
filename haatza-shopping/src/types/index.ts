@@ -3,6 +3,7 @@ export * from './category.types';
 export * from './cart.types';
 export * from './user.types';
 export * from './order.types';
+export * from './homepageWidgets.types';
 
 import { DestinationType } from './product.types';
 import { Address } from './user.types';

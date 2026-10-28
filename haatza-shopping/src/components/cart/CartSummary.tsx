@@ -1,58 +1,65 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { formatINR } from '../../utils/formatters';
-import { Tag, ArrowRight, ShieldCheck, Check, X, Truck } from 'lucide-react';
+import {
+  Tag, ArrowRight, ShieldCheck,
+  Truck, Package, CreditCard, Sparkles
+} from 'lucide-react';
 
 interface CartSummaryProps {
   showCheckoutButton?: boolean;
 }
 
 export const CartSummary: React.FC<CartSummaryProps> = ({ showCheckoutButton = true }) => {
+  const navigate = useNavigate();
   const {
+    cart,
     subtotal,
     discount,
     deliveryCharge,
     total,
     appliedCoupon,
-    applyCoupon,
-    removeCoupon,
   } = useCart();
 
-  const [couponCode, setCouponCode] = useState('');
-  const [couponError, setCouponError] = useState('');
-  const [isApplying, setIsApplying] = useState(false);
+  const totalUnits = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+
+  const totalMrp = cart.reduce((sum, item) => {
+    const prod = item?.product || (item as any);
+    const itemMrp = prod?.mrp || Math.round(((prod?.price || 0) + (item?.selectedVariant?.priceDelta || 0)) * 1.35);
+    return sum + itemMrp * (item?.quantity || 1);
+  }, 0);
+
+  const totalSavings = Math.max(0, totalMrp - subtotal) + discount;
 
   const freeDeliveryThreshold = 499;
   const amountNeededForFreeDelivery = Math.max(0, freeDeliveryThreshold - subtotal);
   const freeDeliveryProgress = Math.min(100, Math.round((subtotal / freeDeliveryThreshold) * 100));
 
-  const handleApply = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!couponCode.trim()) return;
-
-    setCouponError('');
-    setIsApplying(true);
-    const result = await applyCoupon(couponCode);
-    setIsApplying(false);
-
-    if (!result.success) {
-      setCouponError(result.message);
-    } else {
-      setCouponCode('');
-    }
+  const handlePlaceOrder = () => {
+    if (cart.length === 0) return;
+    // Clear any transient Buy Now session item so cart items are checked out
+    sessionStorage.removeItem('haatza_buynow_item');
+    navigate('/checkout');
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-[#E5EAF3] p-6 space-y-6 shadow-soft-sm">
-      <h3 className="font-bold text-base text-[#172033] pb-3 border-b border-zinc-100">
-        Order Summary
-      </h3>
+    <div className="bg-white rounded-lg border border-[#E5E7EB] p-5 sm:p-6 space-y-5 shadow-xs">
+      
+      {/* Header */}
+      <div className="flex items-center justify-between pb-3.5 border-b border-[#E5E7EB]">
+        <h3 className="font-extrabold text-base text-[#1F1F1F] font-heading">
+          Order Summary
+        </h3>
+        <span className="text-xs font-bold text-[#2962FF] bg-[#F5F7FF] border border-[#DBEAFE] px-2.5 py-1 rounded-full font-mono">
+          {totalUnits} items
+        </span>
+      </div>
 
       {/* Free Delivery Tracker */}
-      <div className="p-3.5 bg-[#F5F7FF] rounded-2xl border border-[#DBEAFE] space-y-2">
-        <div className="flex items-center justify-between text-xs font-semibold">
-          <span className="flex items-center gap-1.5 text-zinc-700">
+      <div className="p-3 bg-[#F5F7FF] rounded-lg border border-[#DBEAFE] space-y-1.5">
+        <div className="flex items-center justify-between text-xs font-semibold text-[#1F1F1F]">
+          <span className="flex items-center gap-1.5">
             <Truck className="w-4 h-4 text-[#2962FF]" />
             {amountNeededForFreeDelivery > 0
               ? `Add ${formatINR(amountNeededForFreeDelivery)} more for FREE Delivery`
@@ -60,7 +67,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ showCheckoutButton = t
           </span>
           <span className="text-[#2962FF] font-bold">{freeDeliveryProgress}%</span>
         </div>
-        <div className="w-full bg-[#DBEAFE] h-1.5 rounded-full overflow-hidden">
+        <div className="w-full bg-[#E5E7EB] h-1.5 rounded-full overflow-hidden">
           <div
             className="bg-[#2962FF] h-full transition-all duration-500 rounded-full"
             style={{ width: `${freeDeliveryProgress}%` }}
@@ -68,121 +75,106 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ showCheckoutButton = t
         </div>
       </div>
 
-      {/* Coupon Application Box */}
-      <div className="space-y-2">
-        <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider">
-          Apply Coupon Code
-        </label>
-
-        {appliedCoupon ? (
-          <div className="flex items-center justify-between p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs">
-            <div className="flex items-center gap-2 text-emerald-800 font-bold">
-              <Check className="w-4 h-4 text-emerald-600" />
-              <span>
-                {appliedCoupon.code} applied (Saved {formatINR(discount)})
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={removeCoupon}
-              className="text-zinc-500 hover:text-rose-600 font-semibold p-1"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleApply} className="flex gap-2">
-            <div className="relative flex-1">
-              <Tag className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={couponCode}
-                onChange={(e) => {
-                  setCouponCode(e.target.value.toUpperCase());
-                  setCouponError('');
-                }}
-                placeholder="HAATZA100 or WELCOME200"
-                className="w-full pl-9 pr-3 py-2 text-xs uppercase font-medium rounded-xl border border-[#E5EAF3] focus:outline-hidden focus:border-[#2962FF] focus:ring-2 focus:ring-[#2962FF]/15"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={isApplying || !couponCode.trim()}
-              className="px-4 py-2 bg-zinc-900 hover:bg-black text-white text-xs font-bold rounded-xl disabled:opacity-50 transition-colors"
-            >
-              {isApplying ? 'Applying...' : 'Apply'}
-            </button>
-          </form>
-        )}
-
-        {couponError && <p className="text-xs text-rose-600 font-medium">{couponError}</p>}
-
-        {/* Quick voucher suggestion tags */}
-        {!appliedCoupon && (
-          <div className="flex flex-wrap gap-1.5 pt-1">
-            {['HAATZA100', 'WELCOME200', 'FESTIVE15'].map((code) => (
-              <button
-                key={code}
-                type="button"
-                onClick={() => setCouponCode(code)}
-                className="text-[10px] font-bold text-zinc-600 bg-zinc-100 hover:bg-[#EEF3FF] hover:text-[#2962FF] px-2 py-0.5 rounded-md transition-colors"
-              >
-                {code}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Price Breakdown */}
-      <div className="space-y-2.5 text-xs text-zinc-600 pt-3 border-t border-zinc-100">
-        <div className="flex justify-between">
-          <span>Subtotal</span>
-          <span className="font-semibold text-zinc-900">{formatINR(subtotal)}</span>
+      {/* Price Rows (Clean itemized breakdown) */}
+      <div className="space-y-2.5 text-xs text-[#555555]">
+        <div className="flex items-center justify-between">
+          <span className="flex items-center gap-2">
+            <Package className="w-3.5 h-3.5 text-[#555555]" />
+            <span>Subtotal</span>
+          </span>
+          <span className="font-bold text-[#1F1F1F]">{formatINR(subtotal)}</span>
         </div>
 
-        {discount > 0 && (
-          <div className="flex justify-between text-emerald-600 font-semibold">
-            <span>Coupon Discount</span>
-            <span>-{formatINR(discount)}</span>
+        {totalMrp > subtotal && (
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-2">
+              <Tag className="w-3.5 h-3.5 text-[#555555]" />
+              <span>Total MRP</span>
+            </span>
+            <span className="line-through text-[#555555]">{formatINR(totalMrp)}</span>
           </div>
         )}
 
-        <div className="flex justify-between">
-          <span>Delivery Charges</span>
-          <span className="font-semibold text-zinc-900">
+        {totalSavings > 0 && (
+          <div className="flex items-center justify-between text-[#2962FF] font-bold">
+            <span className="flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-[#2962FF]" />
+              <span>Total Savings</span>
+            </span>
+            <span>-{formatINR(totalSavings)}</span>
+          </div>
+        )}
+
+        <div className="flex items-center justify-between">
+          <span className="flex items-center gap-2">
+            <Truck className="w-3.5 h-3.5 text-[#555555]" />
+            <span>Shipping</span>
+          </span>
+          <span className="font-bold">
             {deliveryCharge === 0 ? (
-              <span className="text-emerald-600 font-bold uppercase">Free</span>
+              <span className="text-emerald-700 font-extrabold uppercase">Free</span>
             ) : (
               formatINR(deliveryCharge)
             )}
           </span>
         </div>
 
-        <div className="flex justify-between text-sm font-extrabold text-[#172033] pt-3 border-t border-zinc-200">
-          <span>Total Amount</span>
-          <span className="text-lg text-[#2962FF] font-black">{formatINR(total)}</span>
+        <div className="flex items-center justify-between">
+          <span className="flex items-center gap-2">
+            <CreditCard className="w-3.5 h-3.5 text-[#555555]" />
+            <span>Tax (18% GST)</span>
+          </span>
+          <span className="font-medium text-[#555555]">Included in price</span>
         </div>
+
+        {discount > 0 && appliedCoupon && (
+          <div className="flex items-center justify-between text-emerald-700 font-bold bg-emerald-50 px-2 py-1 rounded-lg">
+            <span>Coupon ({appliedCoupon.code})</span>
+            <span>-{formatINR(discount)}</span>
+          </div>
+        )}
       </div>
 
-      {/* Checkout Action Button */}
+      {/* Total Amount Row */}
+      <div className="pt-3 border-t border-[#E5E7EB] flex items-baseline justify-between text-base font-extrabold text-[#1F1F1F]">
+        <span className="font-heading text-lg">Total</span>
+        <span className="text-2xl font-black text-[#2962FF] font-heading">
+          {formatINR(total)}
+        </span>
+      </div>
+
+      {/* Primary Action Button: "Place Order" */}
       {showCheckoutButton && (
-        <div className="pt-2">
-          <Link
-            to="/checkout"
-            className="w-full py-3.5 px-4 rounded-xl bg-[#2962FF] hover:bg-[#1E4ED8] text-white font-bold text-sm transition-all shadow-soft hover:shadow-soft-lg flex items-center justify-center gap-2 group"
+        <div className="pt-2 space-y-2">
+          <button
+            type="button"
+            disabled={cart.length === 0}
+            onClick={handlePlaceOrder}
+            className="w-full py-4 px-6 rounded-lg bg-[#2962FF] hover:bg-[#1747CC] disabled:bg-slate-200 disabled:text-slate-400 text-white font-extrabold text-sm tracking-wide transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 group cursor-pointer disabled:cursor-not-allowed font-heading"
           >
-            <span>Proceed to Checkout</span>
+            <span>Place Order</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </button>
+
+          <div className="text-center">
+            <Link
+              to="/"
+              className="text-xs font-bold text-[#555555] hover:text-[#2962FF] hover:underline transition-colors"
+            >
+              Continue shopping
+            </Link>
+          </div>
         </div>
       )}
 
       {/* Security note */}
-      <div className="flex items-center justify-center gap-2 text-[11px] text-zinc-500 pt-2">
+      <div className="flex items-center justify-center gap-1.5 text-[11px] text-[#555555] pt-1">
         <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
         <span>100% Safe & Secure Checkout | 256-bit SSL</span>
       </div>
+
     </div>
   );
 };
+
+export default CartSummary;

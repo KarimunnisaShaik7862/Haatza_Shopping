@@ -5,20 +5,38 @@ import { Product } from '../../types';
 import { ProductCard } from '../products/ProductCard';
 import { ProductCarouselTrack } from './ProductCarouselTrack';
 import { CountdownClock } from './CountdownClock';
+import { useScrollLinkedCardScale } from '../../hooks';
 
 interface DealsOfTheDaySectionProps {
   deals: Product[];
   onQuickView?: (product: Product) => void;
+  className?: string;
 }
 
 export const DealsOfTheDaySection: React.FC<DealsOfTheDaySectionProps> = React.memo(({
   deals,
   onQuickView,
+  className = '',
 }) => {
+  const { sectionRef, getCardStyle } = useScrollLinkedCardScale({
+    itemCount: deals?.length || 0,
+    initialScale: 0.85,
+    finalScale: 1.0,
+    initialOpacity: 0.6,
+    finalOpacity: 1.0,
+    maxTranslateY: 12,
+    staggerGap: 0.08,
+    windowSize: 0.45,
+  });
+
   if (!deals || deals.length === 0) return null;
 
   return (
-    <section className="bg-white rounded-3xl p-5 sm:p-6 border border-zinc-200/90 shadow-2xs space-y-4" aria-label="Deals of the Day">
+    <section
+      ref={sectionRef}
+      className={`w-full py-6 sm:py-8 space-y-4 ${className}`}
+      aria-label="Deals of the Day"
+    >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -45,7 +63,7 @@ export const DealsOfTheDaySection: React.FC<DealsOfTheDaySectionProps> = React.m
         </div>
 
         <Link
-          to="/category/deals"
+          to="/deals-of-the-day"
           className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#2962FF] hover:text-[#1E4ED8] transition-colors group self-start sm:self-auto font-heading"
         >
           <span>View All Deals</span>
@@ -53,11 +71,16 @@ export const DealsOfTheDaySection: React.FC<DealsOfTheDaySectionProps> = React.m
         </Link>
       </div>
 
-      {/* Standardized Carousel with Far-Edge Navigation Arrows */}
+      {/* Standardized Carousel with Scroll-Linked Small-to-Big Card Scale */}
       <ProductCarouselTrack>
-        {deals.map((product) => (
+        {deals.map((product, index) => (
           <div key={product.id} className="w-[210px] sm:w-[240px] md:w-[260px] shrink-0">
-            <ProductCard product={product} onQuickView={onQuickView} />
+            <div
+              style={getCardStyle(index)}
+              className="origin-center h-full will-change-transform"
+            >
+              <ProductCard product={product} onQuickView={onQuickView} />
+            </div>
           </div>
         ))}
       </ProductCarouselTrack>

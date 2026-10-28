@@ -10,6 +10,8 @@ interface FilterSidebarProps {
   className?: string;
 }
 
+const FASHION_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   filter,
   onChange,
@@ -22,6 +24,14 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
       ? filter.brands.filter((b) => b !== brand)
       : [...filter.brands, brand];
     onChange({ ...filter, brands });
+  };
+
+  const handleSizeToggle = (size: string) => {
+    const currentSizes = filter.sizes || [];
+    const sizes = currentSizes.includes(size)
+      ? currentSizes.filter((s) => s !== size)
+      : [...currentSizes, size];
+    onChange({ ...filter, sizes });
   };
 
   const handleRatingSelect = (rating: number) => {
@@ -41,6 +51,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
     filter.minRating !== undefined ||
     filter.discountRanges.length > 0 ||
     filter.inStockOnly ||
+    (filter.sizes && filter.sizes.length > 0) ||
     (filter.minPrice !== undefined && filter.minPrice > 0) ||
     (filter.maxPrice !== undefined && filter.maxPrice < 10000);
 
@@ -115,6 +126,43 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             />
           </div>
         </div>
+      </div>
+
+      {/* Size Filter Pills (Matching Image 5) */}
+      <div className="space-y-2.5 pt-4 border-t border-zinc-100">
+        <div className="flex items-center justify-between">
+          <h4 className="text-xs font-bold text-zinc-700 uppercase tracking-wider">Size</h4>
+          {filter.sizes && filter.sizes.length > 0 && (
+            <button
+              type="button"
+              onClick={() => onChange({ ...filter, sizes: [] })}
+              className="text-[11px] text-[#2962FF] hover:underline"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+          {FASHION_SIZES.map((size) => {
+            const isSelected = (filter.sizes || []).includes(size);
+            return (
+              <button
+                key={size}
+                type="button"
+                onClick={() => handleSizeToggle(size)}
+                className={`min-w-8 h-8 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center select-none cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#2962FF] text-white shadow-2xs'
+                    : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border border-zinc-200/80 hover:border-zinc-300'
+                }`}
+                aria-pressed={isSelected}
+              >
+                {size}
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-[10px] text-zinc-400">Also: colour, rating, discount, availability</p>
       </div>
 
       {/* Brands Filter */}

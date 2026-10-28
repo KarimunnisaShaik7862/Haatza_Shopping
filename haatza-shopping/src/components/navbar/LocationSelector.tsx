@@ -18,7 +18,9 @@ export const LocationSelector: React.FC = () => {
       <MapPin className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" style={{ color: brandPrimary }} />
       <div className="flex items-center gap-1.5 text-xs">
         <span className="text-zinc-500 font-medium hidden sm:inline">Deliver to</span>
-        <span className="font-extrabold text-[#202124] tracking-tight">{location.pincode}</span>
+        <span className="font-extrabold text-[#202124] tracking-tight">
+          {location.city ? `${location.city} ${location.pincode}` : location.pincode}
+        </span>
         <span 
           className="font-bold inline-flex items-center gap-0.5 hover:underline"
           style={{ color: brandPrimary }}

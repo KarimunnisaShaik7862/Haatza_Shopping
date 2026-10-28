@@ -20,7 +20,7 @@
   --color-haatza-blue-light: #F5F7FF;
   --color-haatza-blue-surface: #EEF3FF;
   --color-haatza-blue-highlight: #DBEAFE;
-  --color-haatza-page-bg: #F7F9FC;
+  --color-haatza-page-bg: #FFFFFF;
   --color-haatza-surface: #FFFFFF;
   --color-haatza-text: #172033;
   --color-haatza-text-muted: #64748B;
@@ -30,7 +30,7 @@
 
   --color-haatza-shopping-primary: #2962FF;
   --color-haatza-shopping-hover: #1E4ED8;
-  --color-haatza-shopping-bg: #F7F9FC;
+  --color-haatza-shopping-bg: #FFFFFF;
   --color-haatza-shopping-surface: #FFFFFF;
 
   /* Lite Colors */
@@ -175,3 +175,8 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+html, body, #root {
+  background-color: #FFFFFF !important;
+}
+

@@ -1,0 +1,123 @@
+/**
+ * ============================================================================
+ * HAATZA SHOPPING - CENTRAL DESIGN SYSTEM TOKENS
+ * Single Source of Truth for Typography, Sizing, Buttons, Cards, and Grids
+ * ============================================================================
+ */
+
+:root {
+  /* =========================================================================
+     01. COLOR PALETTE
+     ========================================================================= */
+  --haatza-color-primary: #2166F3;
+  --haatza-color-primary-hover: #1A56DB;
+  --haatza-color-primary-light: #EEF4FF;
+  --haatza-color-primary-border: #DBEAFE;
+  
+  --haatza-color-navy: #111827;
+  --haatza-color-slate: #1F2937;
+  --haatza-color-muted: #7B879B;
+  --haatza-color-subtle: #9CA3AF;
+  --haatza-color-border: #E5EAF3;
+  --haatza-color-surface: #FFFFFF;
+  --haatza-color-bg-light: #F8FAFC;
+  --haatza-color-amber: #F59E0B;
+  --haatza-color-success: #16A34A;
+
+  /* =========================================================================
+     02. SECTION TYPOGRAPHY SCALE (Standardized Across All Pages)
+     ========================================================================= */
+  --haatza-heading-font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --haatza-body-font: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Standard Section Heading */
+  --haatza-section-title-size: clamp(1.75rem, 2.8vw, 2.5rem); /* 28px - 40px */
+  --haatza-section-title-weight: 800;
+  --haatza-section-title-line-height: 1.15;
+  --haatza-section-title-letter-spacing: -0.025em;
+
+  /* Standard Section Subtitle / Description */
+  --haatza-section-desc-size: clamp(0.95rem, 1.15vw, 1.125rem); /* 15px - 18px */
+  --haatza-section-desc-color: var(--haatza-color-muted);
+  --haatza-section-desc-weight: 400;
+  --haatza-section-desc-line-height: 1.5;
+
+  /* Section Spacing Tokens */
+  --haatza-section-spacing-y: clamp(2rem, 3.5vw, 3rem); /* 32px - 48px */
+  --haatza-heading-to-desc: 0.5rem; /* 8px */
+  --haatza-desc-to-grid: clamp(1.5rem, 2vw, 2.25rem); /* 24px - 36px */
+
+  /* =========================================================================
+     03. PRODUCT CARD DESIGN TOKENS
+     ========================================================================= */
+  --haatza-card-radius: 14px;
+  --haatza-card-border: 1px solid var(--haatza-color-border);
+  --haatza-card-bg: #FFFFFF;
+  --haatza-card-padding: 0.875rem; /* 14px */
+  --haatza-card-image-aspect: 187 / 134; /* ~1.4 standard ratio */
+  --haatza-card-name-size: 0.9375rem; /* 15px */
+  --haatza-card-name-weight: 700;
+  --haatza-card-price-size: 1.125rem; /* 18px */
+  --haatza-card-price-weight: 800;
+  --haatza-card-rating-size: 0.8125rem; /* 13px */
+
+  /* =========================================================================
+     04. BUTTON DESIGN TOKENS
+     ========================================================================= */
+  --haatza-btn-height: 42px;
+  --haatza-btn-radius: 10px;
+  --haatza-btn-font-size: 0.875rem; /* 14px */
+  --haatza-btn-font-weight: 600;
+  --haatza-btn-bg: var(--haatza-color-primary);
+  --haatza-btn-bg-hover: var(--haatza-color-primary-hover);
+  --haatza-btn-text: #FFFFFF;
+
+  /* =========================================================================
+     05. GRID & RESPONSIVE BREAKPOINTS
+     ========================================================================= */
+  --haatza-grid-gap: clamp(0.875rem, 1.25vw, 1.25rem); /* 14px - 20px */
+}
+
+/* Reusable Utility Classes for the Design System */
+.haatza-section-heading {
+  font-family: var(--haatza-heading-font);
+  font-size: var(--haatza-section-title-size);
+  font-weight: var(--haatza-section-title-weight);
+  line-height: var(--haatza-section-title-line-height);
+  letter-spacing: var(--haatza-section-title-letter-spacing);
+  color: var(--haatza-color-navy);
+}
+
+.haatza-section-desc {
+  font-family: var(--haatza-body-font);
+  font-size: var(--haatza-section-desc-size);
+  color: var(--haatza-section-desc-color);
+  font-weight: var(--haatza-section-desc-weight);
+  line-height: var(--haatza-section-desc-line-height);
+  margin-top: var(--haatza-heading-to-desc);
+  margin-bottom: var(--haatza-desc-to-grid);
+}
+
+.haatza-product-btn {
+  height: var(--haatza-btn-height);
+  border-radius: var(--haatza-btn-radius);
+  font-size: var(--haatza-btn-font-size);
+  font-weight: var(--haatza-btn-font-weight);
+  background-color: var(--haatza-btn-bg);
+  color: var(--haatza-btn-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.haatza-product-btn:hover {
+  background-color: var(--haatza-btn-bg-hover);
+}
+
+.haatza-product-btn:active {
+  transform: scale(0.98);
+}

@@ -13,7 +13,7 @@ export const CartButton: React.FC = () => {
     <Link
       to="/cart"
       className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold text-zinc-800 hover:text-zinc-950 hover:bg-zinc-100 transition-colors group cursor-pointer"
-      aria-label={`Cart with ${cartCount} items`}
+      aria-label={`My Cart with ${cartCount} items`}
     >
       <div className="relative">
         <ShoppingCart className="w-4 h-4 text-zinc-600 group-hover:text-zinc-950 transition-colors" />
@@ -26,7 +26,7 @@ export const CartButton: React.FC = () => {
           </span>
         )}
       </div>
-      <span className="hidden sm:inline">Cart</span>
+      <span className="hidden sm:inline">My Cart</span>
     </Link>
   );
 };

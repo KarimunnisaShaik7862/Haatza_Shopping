@@ -1,6 +1,29 @@
 import React, { lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { HaatzaShoppingLayout } from '../layouts/HaatzaShoppingLayout';
+
+// Redirection helpers for multi-level fashion aliases
+const MenAliasRedirect: React.FC = () => {
+  const { sectionSlug, itemSlug } = useParams<{ sectionSlug?: string; itemSlug?: string }>();
+  if (sectionSlug && itemSlug) {
+    return <Navigate to={`/category/men-fashion/${sectionSlug}/${itemSlug}`} replace />;
+  }
+  if (sectionSlug) {
+    return <Navigate to={`/category/men-fashion/${sectionSlug}`} replace />;
+  }
+  return <Navigate to="/category/men-fashion" replace />;
+};
+
+const WomenAliasRedirect: React.FC = () => {
+  const { sectionSlug, itemSlug } = useParams<{ sectionSlug?: string; itemSlug?: string }>();
+  if (sectionSlug && itemSlug) {
+    return <Navigate to={`/category/women-fashion/${sectionSlug}/${itemSlug}`} replace />;
+  }
+  if (sectionSlug) {
+    return <Navigate to={`/category/women-fashion/${sectionSlug}`} replace />;
+  }
+  return <Navigate to="/category/women-fashion" replace />;
+};
 
 // Primary landing page
 import { HomePage } from '../pages/home/HomePage';
@@ -9,6 +32,7 @@ import { HomePage } from '../pages/home/HomePage';
 const ProductListingPage = lazy(() => import('../pages/category/ProductListingPage').then(m => ({ default: m.ProductListingPage })));
 const SearchPage = lazy(() => import('../pages/search/SearchPage').then(m => ({ default: m.SearchPage })));
 const ProductDetailsPage = lazy(() => import('../pages/product-details/ProductDetailsPage').then(m => ({ default: m.ProductDetailsPage })));
+const DealsOfTheDayPage = lazy(() => import('../pages/deals/DealsOfTheDayPage').then(m => ({ default: m.DealsOfTheDayPage })));
 const CartPage = lazy(() => import('../pages/cart/CartPage').then(m => ({ default: m.CartPage })));
 const WishlistPage = lazy(() => import('../pages/wishlist/WishlistPage').then(m => ({ default: m.WishlistPage })));
 const CheckoutPage = lazy(() => import('../pages/checkout/CheckoutPage').then(m => ({ default: m.CheckoutPage })));
@@ -27,10 +51,15 @@ const FaqPage = lazy(() => import('../pages/support/FaqPage').then(m => ({ defau
 const AboutUsPage = lazy(() => import('../pages/support/AboutUsPage').then(m => ({ default: m.AboutUsPage })));
 const PolicyPage = lazy(() => import('../pages/policies/PolicyPage').then(m => ({ default: m.PolicyPage })));
 const NotFoundPage = lazy(() => import('../pages/not-found/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+const ProductFullscreenImageViewerPage = lazy(() => import('../pages/product-details/ProductFullscreenImageViewerPage').then(m => ({ default: m.ProductFullscreenImageViewerPage })));
 
 export const AppRouter: React.FC = () => {
   return (
     <Routes>
+      {/* Standalone Fullscreen Product Image Viewer (Pure White Background) */}
+      <Route path="/product/:idOrSlug/fullscreen" element={<ProductFullscreenImageViewerPage />} />
+      <Route path="/product/:idOrSlug/gallery" element={<ProductFullscreenImageViewerPage />} />
+
       <Route element={<HaatzaShoppingLayout />}>
         {/* Marketplace Routes */}
         <Route path="/" element={<HomePage />} />
@@ -38,9 +67,34 @@ export const AppRouter: React.FC = () => {
 
         {/* Catalog & Search */}
         <Route path="/category/:slug" element={<ProductListingPage />} />
+        <Route path="/category/:slug/:sectionSlug" element={<ProductListingPage />} />
+        <Route path="/category/:slug/:sectionSlug/:itemSlug" element={<ProductListingPage />} />
+        <Route path="/categories/:slug" element={<ProductListingPage />} />
+        <Route path="/categories/:slug/:sectionSlug" element={<ProductListingPage />} />
+        <Route path="/categories/:slug/:sectionSlug/:itemSlug" element={<ProductListingPage />} />
         <Route path="/products" element={<ProductListingPage />} />
         <Route path="/under-49" element={<Navigate to="/category/under-49" replace />} />
-        <Route path="/deals" element={<Navigate to="/category/deals" replace />} />
+
+        {/* Fashion Multi-Level Aliases */}
+        <Route path="/men" element={<MenAliasRedirect />} />
+        <Route path="/men/:sectionSlug" element={<MenAliasRedirect />} />
+        <Route path="/men/:sectionSlug/:itemSlug" element={<MenAliasRedirect />} />
+        <Route path="/men-fashion" element={<MenAliasRedirect />} />
+        <Route path="/men-fashion/:sectionSlug" element={<MenAliasRedirect />} />
+        <Route path="/men-fashion/:sectionSlug/:itemSlug" element={<MenAliasRedirect />} />
+
+        <Route path="/women" element={<WomenAliasRedirect />} />
+        <Route path="/women/:sectionSlug" element={<WomenAliasRedirect />} />
+        <Route path="/women/:sectionSlug/:itemSlug" element={<WomenAliasRedirect />} />
+        <Route path="/women-fashion" element={<WomenAliasRedirect />} />
+        <Route path="/women-fashion/:sectionSlug" element={<WomenAliasRedirect />} />
+        <Route path="/women-fashion/:sectionSlug/:itemSlug" element={<WomenAliasRedirect />} />
+
+        <Route path="/fashion" element={<MenAliasRedirect />} />
+        <Route path="/fashion/:sectionSlug" element={<MenAliasRedirect />} />
+        <Route path="/fashion/:sectionSlug/:itemSlug" element={<MenAliasRedirect />} />
+        <Route path="/deals-of-the-day" element={<DealsOfTheDayPage />} />
+        <Route path="/deals" element={<Navigate to="/deals-of-the-day" replace />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/product/:idOrSlug" element={<ProductDetailsPage />} />
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDestination } from '../../context/DestinationContext';
 import { useLocationContext } from '../../context/LocationContext';
@@ -7,6 +7,7 @@ import { SearchBar } from './SearchBar';
 import { ProfileMenu } from './ProfileMenu';
 import { WishlistButton } from './WishlistButton';
 import { CartButton } from './CartButton';
+import { OrdersButton } from './OrdersButton';
 import { CategoryNavigation } from './CategoryNavigation';
 import { LocationSelectorModal } from '../layout/LocationSelectorModal';
 import { Menu, X, Package, Heart, MapPin, HelpCircle } from 'lucide-react';
@@ -16,17 +17,52 @@ export const Navbar: React.FC = () => {
   const { location, openLocationModal } = useLocationContext();
   const { itemCount: wishlistCount } = useWishlist();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const updateScroll = () => {
+      const currentScrollY = Math.max(0, window.scrollY);
+
+      // Flipkart-style smooth threshold with wide hysteresis deadband:
+      // When scrolled down into the page (> 60px): transition to compact text mode
+      // When returned back up near top (<= 25px): restore full icon-based navbar
+      // Between 25px and 60px: deadband prevents any toggling, flickering, or layout oscillation
+      if (currentScrollY > 60) {
+        setIsScrolled((prev) => (!prev ? true : prev));
+      } else if (currentScrollY <= 25) {
+        setIsScrolled((prev) => (prev ? false : prev));
+      }
+
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateScroll);
+      }
+    };
+
+    updateScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const brandPrimary = theme?.primary || '#2962FF';
 
   return (
     <>
-      <header className="sticky top-[49px] sm:top-[53px] z-40 bg-white border-b border-[#E5EAF3] shadow-soft-sm">
+      <header
+        className={`sticky top-[49px] sm:top-[53px] ${isSearchOpen ? 'z-50' : 'z-40'} bg-white transition-shadow duration-200`}
+      >
         {/* ROW: Search Bar | User Actions (Profile, Wishlist, Cart) */}
         <div className="bg-white">
-          <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-3 sm:gap-4 lg:gap-8">
-            {/* Search Bar + Mobile Drawer Trigger */}
-            <div className="flex-1 max-w-4xl flex items-center gap-2">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-3 sm:gap-4 lg:gap-6">
+            {/* Left side: Mobile Drawer Trigger + Search Bar */}
+            <div className="flex-1 flex items-center gap-2 sm:gap-3 min-w-0">
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -36,25 +72,37 @@ export const Navbar: React.FC = () => {
                 {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
 
-              <div className="flex-1">
-                <SearchBar />
+              {/* Search Bar */}
+              <div className="flex-1 max-w-xl lg:max-w-2xl">
+                <SearchBar isScrolled={isScrolled} onOpenChange={setIsSearchOpen} />
               </div>
             </div>
 
-            {/* Actions */}
-            <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
-              <ProfileMenu />
-              <div className="h-5 w-px bg-[#E5EAF3]" />
+            {/* Right side in exact order: 1. My List, 2. My Cart, 3. Orders, 4. Profile icon */}
+            <div className="flex items-center space-x-1 sm:space-x-2.5 lg:space-x-3 shrink-0">
+              {/* 1. My List */}
               <WishlistButton />
-              <div className="h-5 w-px bg-[#E5EAF3]" />
+
+              <div className="h-5 w-px bg-[#E5EAF3] hidden sm:block" />
+
+              {/* 2. My Cart */}
               <CartButton />
+
+              <div className="h-5 w-px bg-[#E5EAF3] hidden sm:block" />
+
+              {/* 3. Orders */}
+              <OrdersButton />
+
+              <div className="h-5 w-px bg-[#E5EAF3]" />
+
+              {/* 4. Profile icon (Last item on the right) */}
+              <ProfileMenu />
             </div>
           </div>
         </div>
 
-
         {/* ROW 3: Category Navigation */}
-        <CategoryNavigation />
+        <CategoryNavigation isScrolled={isScrolled} />
       </header>
 
       {/* Location Modal */}

@@ -5,3 +5,5 @@ export * from './useDebounce';
 export * from './useAuth';
 export * from './useDestination';
 export * from './useLocation';
+export * from './useSequentialScrollScale';
+export * from './useScrollLinkedCardScale';
