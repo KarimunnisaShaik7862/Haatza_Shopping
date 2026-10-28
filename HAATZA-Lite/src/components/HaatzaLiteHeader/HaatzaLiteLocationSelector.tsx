@@ -9,14 +9,14 @@ export const HaatzaLiteLocationSelector: React.FC = () => {
     <button
       type="button"
       onClick={openLocationModal}
-      className="flex items-center gap-1.5 py-1 px-2.5 rounded-lg border border-zinc-200/80 hover:border-emerald-300 hover:bg-emerald-50/50 transition-colors text-left max-w-[220px] sm:max-w-[280px]"
+      className="flex items-center gap-1.5 py-1 px-2.5 rounded-lg border border-zinc-200/80 hover:border-zinc-400 hover:bg-[#F5F5F0] transition-colors text-left max-w-[220px] sm:max-w-[280px]"
     >
-      <MapPin className="w-4 h-4 text-[#238636] shrink-0" />
+      <MapPin className="w-4 h-4 text-[#292929] shrink-0" />
       <div className="flex flex-col min-w-0">
-        <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider leading-none">
+        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider leading-none">
           Deliver in 10-15 Mins
         </span>
-        <span className="text-xs font-bold text-zinc-800 truncate leading-tight">
+        <span className="text-xs font-bold text-[#292929] truncate leading-tight">
           {location.locality}, {location.pincode}
         </span>
       </div>

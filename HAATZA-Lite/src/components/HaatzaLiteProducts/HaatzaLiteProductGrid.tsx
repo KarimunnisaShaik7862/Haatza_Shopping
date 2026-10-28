@@ -19,7 +19,7 @@ export const HaatzaLiteProductGrid: React.FC<HaatzaLiteProductGridProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-1">
           <div>
             {title && (
-              <h2 className="text-lg sm:text-xl font-black text-[#172033] font-heading">
+              <h2 className="text-xl sm:text-2xl font-black text-[#111D15] font-heading tracking-tight">
                 {title}
               </h2>
             )}

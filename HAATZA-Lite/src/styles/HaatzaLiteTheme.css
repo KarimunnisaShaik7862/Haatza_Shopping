@@ -1,26 +1,90 @@
 /* ==========================================================================
-   HAATZA LITE - THEME AND ANIMATION TOKENS
-   Quick Commerce (10-15 Mins) Fresh Green Palette
+   HAATZA LITE - ULTRA-PREMIUM THEME & MOTION TOKENS
+   Blinkit-Inspired Vibrant Emerald Green & Pure Crisp White Palette
    ========================================================================== */
 
 :root {
-  --haatza-lite-green: #238636;
-  --haatza-lite-green-hover: #1c6d2c;
-  --haatza-lite-green-light: #EAF6EC;
-  --haatza-lite-green-surface: #F2FAF4;
-  --haatza-lite-yellow: #FFD54F;
-  --haatza-lite-bg: #F8FCF9;
+  /* Signature Brand Green (Blinkit Quick-Commerce Standard) */
+  --haatza-lite-green: #0C831F;
+  --haatza-lite-green-dark: #09711A;
+  --haatza-lite-green-glow: rgba(12, 131, 31, 0.28);
+  --haatza-lite-green-light: #EAF8ED;
+  --haatza-lite-green-surface: #F2FBF4;
+  --haatza-lite-green-border: #CBEAD2;
+  --haatza-lite-green-accent: #159C2B;
+
+  /* Crisp Pure White System */
+  --haatza-lite-bg: #FFFFFF;
   --haatza-lite-surface: #FFFFFF;
-  --haatza-lite-text: #172033;
-  --haatza-lite-text-muted: #64748B;
-  --haatza-lite-border: #E2ECE5;
+  --haatza-lite-surface-glass: rgba(255, 255, 255, 0.82);
+  --haatza-lite-border: #E5EBE6;
+  --haatza-lite-border-glass: rgba(255, 255, 255, 0.7);
+
+  /* Typography Colors */
+  --haatza-lite-text: #111D15;
+  --haatza-lite-text-muted: #5E6E64;
+  --haatza-lite-text-faint: #8E9F94;
+
+  /* Legacy Backward Compatibility Mappings */
+  --haatza-lite-yellow: #0C831F;
+  --haatza-lite-yellow-hover: #09711A;
+  --haatza-lite-secondary: #F2FBF4;
 }
 
-@keyframes haatzaLitePulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.03); }
+/* Fluid Smooth-Parallax & Motion Curves */
+@keyframes haatzaFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
 }
 
-.haatza-lite-pulse {
-  animation: haatzaLitePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+@keyframes haatzaGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(12, 131, 31, 0.2), 0 4px 12px rgba(12, 131, 31, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(12, 131, 31, 0.38), 0 8px 20px rgba(12, 131, 31, 0.22);
+  }
+}
+
+@keyframes haatzaShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.haatza-float {
+  animation: haatzaFloat 5s ease-in-out infinite;
+}
+
+.haatza-glow-pulse {
+  animation: haatzaGlowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes haatzaConveyor {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.haatza-conveyor-track {
+  display: flex;
+  width: max-content;
+  animation: haatzaConveyor 32s linear infinite;
+  will-change: transform;
+}
+
+.haatza-conveyor-track:hover {
+  animation-play-state: paused;
+}
+
+.haatza-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.haatza-glass-dark {
+  background: rgba(17, 29, 21, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }

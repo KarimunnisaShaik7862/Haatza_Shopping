@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, Mic, X } from 'lucide-react';
 
-export const HaatzaLiteSearchBar: React.FC = () => {
+export const HaatzaLiteSearchBar: React.FC<{ className?: string }> = ({ className = '' }) => {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
 
@@ -14,17 +14,44 @@ export const HaatzaLiteSearchBar: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="relative w-full">
-      <div className="relative flex items-center">
-        <Search className="absolute left-3.5 w-4 h-4 text-zinc-400 pointer-events-none" />
+    <div className={`relative flex-1 w-full ${className}`}>
+      <form onSubmit={handleSearch} className="relative flex items-center">
+        <div className="absolute left-3.5 text-zinc-400 pointer-events-none">
+          <Search className="w-4 h-4" />
+        </div>
+
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder='Search for "mangoes", "milk", "paneer", "atta"...'
-          className="w-full pl-10 pr-4 py-2 sm:py-2.5 text-xs sm:text-sm bg-zinc-100/80 hover:bg-zinc-100 focus:bg-white border border-transparent focus:border-emerald-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all placeholder:text-zinc-400 font-medium"
+          placeholder="Search for Products, Brands and More"
+          aria-label="Search products, brands and categories"
+          className="w-full pl-10 pr-20 py-2.5 bg-white hover:bg-[#F8FAF9] focus:bg-white text-sm text-[#111D15] rounded-2xl border border-[#E5EBE6] focus:outline-hidden transition-all shadow-2xs placeholder:text-slate-400 font-normal focus:ring-2 focus:ring-[#0C831F]/25 focus:border-[#0C831F]"
         />
-      </div>
-    </form>
+
+        <div className="absolute right-2.5 flex items-center gap-1">
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery('')}
+              className="text-zinc-400 hover:text-zinc-700 p-1 rounded-full transition-colors cursor-pointer"
+              aria-label="Clear search input"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
+
+          <button
+            type="button"
+            className="p-1.5 rounded-full text-zinc-400 hover:text-zinc-700 transition-colors cursor-pointer"
+            title="Search by voice"
+            aria-label="Search by voice"
+          >
+            <Mic className="w-4 h-4" />
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
+
