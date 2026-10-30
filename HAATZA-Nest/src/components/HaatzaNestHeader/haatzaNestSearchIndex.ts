@@ -31,10 +31,10 @@ export interface SearchMatch {
 }
 
 export const STATIC_SEARCH_ITEMS: SearchItem[] = [
-  // 1. SERVICES
+  // 1. HOME SERVICES (Requirement 5: House Cleaning, Kitchen Degrease, etc.)
   {
     id: 'srv-house-cleaning',
-    title: 'House Cleaning / Deep Cleaning',
+    title: 'House Cleaning',
     subtitle: 'Room dusting, balcony pressure wash, bed rearrangement & floor care',
     category: 'service',
     categoryLabel: 'Home Service',
@@ -42,29 +42,29 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
     keywords: [
       'house cleaning', 'home cleaning', 'full home deep cleaning', 'deep clean',
       'full home', 'room', 'balcony', 'flat', 'apartment', '1bhk', '2bhk', '3bhk',
-      'dusting', 'wiping', 'furniture', 'safai', 'ghar safai'
+      'dusting', 'wiping', 'furniture', 'safai', 'ghar safai', 'cleaning'
     ],
     actionType: 'service',
     price: 99,
   },
   {
     id: 'srv-kitchen-cleaning',
-    title: 'Kitchen Chimney & Slab Deep Degreasing',
+    title: 'Kitchen Degrease',
     subtitle: 'Stubborn oil removal, chimney filters soak, stove scrub & tiles disinfection',
     category: 'service',
     categoryLabel: 'Home Service',
     serviceSlug: 'kitchen-cleaning',
     keywords: [
-      'kitchen cleaning', 'kitchen chimney', 'degreasing', 'oil stains', 'slab scrub',
+      'kitchen degrease', 'kitchen cleaning', 'kitchen chimney', 'degreasing', 'oil stains', 'slab scrub',
       'gas stove', 'burner', 'tiles', 'exhaust', 'countertop', 'sink descaling',
-      'kitchen deep degreasing', 'grease'
+      'kitchen deep degreasing', 'grease', 'kitchen'
     ],
     actionType: 'service',
     price: 799,
   },
   {
     id: 'srv-bathroom-cleaning',
-    title: 'Bathroom Deep Clean & Descaling',
+    title: 'Bathroom Cleaning & Descaling',
     subtitle: 'Hard water stain removal, WC disinfection, mirror polish & fresh lemon finish',
     category: 'service',
     categoryLabel: 'Home Service',
@@ -79,7 +79,7 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
   },
   {
     id: 'srv-sweeping-mopping',
-    title: 'Floor Brooming & Mopping',
+    title: 'Sweeping & Mopping',
     subtitle: 'On-demand broom dusting, corner debris sweep & fragrant herbal pine mopping',
     category: 'service',
     categoryLabel: 'Home Service',
@@ -94,7 +94,7 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
   },
   {
     id: 'srv-utensil-cleaning',
-    title: 'Cookware & Sink Utensil Cleaning',
+    title: 'Utensil Cleaning & Dishwashing',
     subtitle: 'Post-meal dishwashing, pan scrubbing, mesh waste clear & organized rack drying',
     category: 'service',
     categoryLabel: 'Home Service',
@@ -109,7 +109,7 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
   },
   {
     id: 'srv-laundry-ironing',
-    title: 'Doorstep Garment Steam Ironing',
+    title: 'Laundry & Ironing',
     subtitle: 'Commercial steam press, machine wash assistance & neat wardrobe folding',
     category: 'service',
     categoryLabel: 'Home Service',
@@ -124,7 +124,7 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
   },
   {
     id: 'srv-meal-assistance',
-    title: 'Meal Assistance & Food Prep Help',
+    title: 'Meal Assistance & Food Prep',
     subtitle: 'Vegetable chopping, salad prep, kneading dough, batter mix & counter cleanup',
     category: 'service',
     categoryLabel: 'Home Service',
@@ -153,10 +153,10 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
     price: 49,
   },
 
-  // 2. BOOKING OPTIONS & FLOWS
+  // 2. BOOKING OPTIONS & FLOWS (Requirement 5: Instant Booking, Schedule Visit)
   {
     id: 'opt-instant-booking',
-    title: 'Instant Booking (Help in 6-15 Mins)',
+    title: 'Instant Booking (6–15 Mins)',
     subtitle: 'Request a verified specialist at your doorstep immediately',
     category: 'booking',
     categoryLabel: 'Booking Option',
@@ -169,22 +169,22 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
   },
   {
     id: 'opt-schedule-booking',
-    title: 'Schedule a Visit (Pick Preferred Slot)',
+    title: 'Schedule Visit (Pick Preferred Slot)',
     subtitle: 'Book ahead for today, tomorrow, or upcoming slots with flexible durations',
     category: 'booking',
     categoryLabel: 'Booking Option',
     keywords: [
-      'schedule booking', 'schedule a visit', 'schedule', 'book slot', 'appointment',
+      'schedule visit', 'schedule a visit', 'schedule booking', 'schedule', 'book slot', 'appointment',
       'future booking', 'tomorrow', 'preferred time', 'pick slot', 'date and time',
       'calendar', 'book pro'
     ],
     actionType: 'booking-schedule',
   },
 
-  // 3. CUSTOMER ACCOUNT & BOOKINGS
+  // 3. CUSTOMER ACCOUNT & BOOKINGS (Requirement 5: My Bookings, Saved Addresses)
   {
     id: 'page-my-bookings',
-    title: 'My Service Bookings',
+    title: 'My Bookings',
     subtitle: 'Track upcoming appointments, professional assignments & booking history',
     category: 'account',
     categoryLabel: 'My Account',
@@ -238,10 +238,10 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
     actionType: 'location',
   },
 
-  // 4. NEST PASS & PROMOTIONS
+  // 4. NEST PASS & PROMOTIONS (Requirement 5: Nest Pass)
   {
     id: 'promo-nest-pass',
-    title: 'Nest Family Pass (15 + 2 Visits)',
+    title: 'Nest Pass (Family Pass & Offers)',
     subtitle: '17 visits, priority 6-min specialist dispatch & zero rescheduling penalty',
     category: 'pass',
     categoryLabel: 'Passes & Offers',
@@ -266,10 +266,10 @@ export const STATIC_SEARCH_ITEMS: SearchItem[] = [
     actionType: 'section',
   },
 
-  // 5. PAGES & SECTIONS
+  // 5. PAGES & SECTIONS (Requirement 5: All Services)
   {
     id: 'page-all-services',
-    title: 'All Home Help Services',
+    title: 'All Services (Home Help Catalog)',
     subtitle: 'Explore the full catalog of trusted, background-verified home services',
     category: 'page',
     categoryLabel: 'Explore',
@@ -439,14 +439,14 @@ const ALIAS_MAP: Record<string, string[]> = {
   urgent: ['instant booking'],
   now: ['instant booking'],
   fast: ['instant booking'],
-  slot: ['schedule booking'],
-  tomorrow: ['schedule booking'],
+  slot: ['schedule visit'],
+  tomorrow: ['schedule visit'],
   pass: ['nest pass', 'family pass'],
   discount: ['nest pass', 'refer and earn'],
   coupon: ['nest pass'],
   account: ['my profile', 'my bookings', 'saved addresses'],
   order: ['my bookings'],
-  appointment: ['my bookings', 'schedule booking'],
+  appointment: ['my bookings', 'schedule visit'],
   address: ['saved addresses', 'select location'],
 };
 
@@ -484,11 +484,11 @@ export function searchHaatzaNest(
 
     // 1. Exact title or category match
     if (titleLower === query) {
-      score += 200;
+      score += 250;
     } else if (titleLower.startsWith(query)) {
-      score += 120;
+      score += 150;
     } else if (titleLower.includes(query)) {
-      score += 80;
+      score += 90;
     }
 
     // 2. Subtitle check
@@ -500,10 +500,10 @@ export function searchHaatzaNest(
     for (const kw of item.keywords) {
       const kwLower = kw.toLowerCase();
       if (kwLower === query) {
-        score += 100;
+        score += 120;
         break;
       } else if (kwLower.startsWith(query)) {
-        score += 70;
+        score += 80;
       } else if (kwLower.includes(query)) {
         score += 50;
       }
@@ -517,9 +517,9 @@ export function searchHaatzaNest(
       const tokenInKeywords = item.keywords.some((k) => k.toLowerCase().includes(token));
 
       if (tokenInTitle) {
-        score += 30;
+        score += 35;
       } else if (tokenInKeywords) {
-        score += 20;
+        score += 25;
       } else if (tokenInSubtitle) {
         score += 10;
       } else {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   HaatzaNestHomeService, 
   HaatzaNestServiceCategory 
@@ -336,6 +336,7 @@ const ServiceScopeCard: React.FC<ServiceScopeCardProps> = ({
 };
 
 export const HaatzaNestHomePage: React.FC = () => {
+  const pageLocation = useLocation();
   const { location, openLocationModal } = useHaatzaNestLocation();
   const { 
     services: apiServices, 
@@ -647,6 +648,69 @@ export const HaatzaNestHomePage: React.FC = () => {
     setBookingFlowMode('none');
     setCurrentBookingSelection(null);
   };
+
+  // Handle cross-page and search bar deep-link navigation actions
+  useEffect(() => {
+    const handleAction = (action?: string, service?: string) => {
+      if (action === 'instant') {
+        if (!vendorAvailable) {
+          document.getElementById('service-scope')?.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          setBookingFlowMode('instant');
+        }
+      } else if (action === 'schedule') {
+        setBookingFlowMode('schedule');
+      } else if (action === 'pass') {
+        window.dispatchEvent(
+          new CustomEvent('haatza-nest-action', { detail: { action: 'pass' } })
+        );
+      } else if (action === 'scope' || service) {
+        const targetSlug = (service || 'house-cleaning').toLowerCase();
+        const idx = scopeServices.findIndex(
+          (s) =>
+            s.slug.toLowerCase() === targetSlug ||
+            s.id.toLowerCase() === targetSlug ||
+            s.name.toLowerCase().includes(targetSlug) ||
+            targetSlug.includes(s.slug.toLowerCase())
+        );
+        if (idx !== -1) {
+          setIsAutoRotating(false);
+          setActiveCardIndex(idx);
+          setSelectedScopeServiceId(scopeServices[idx].id);
+        }
+        const scopeEl = document.getElementById('service-scope');
+        if (scopeEl) {
+          scopeEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    };
+
+    // 1. Process URL parameters if present
+    const params = new URLSearchParams(pageLocation.search);
+    const flow = params.get('flow') || params.get('action');
+    const service = params.get('service');
+    if (flow || service) {
+      setTimeout(() => handleAction(flow || 'scope', service || undefined), 150);
+    } else if (pageLocation.hash) {
+      const id = pageLocation.hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+      }
+    }
+
+    // 2. Listen to custom event for same-page immediate trigger
+    const onCustomAction = (e: Event) => {
+      const customEvent = e as CustomEvent<{ action?: string; service?: string }>;
+      if (customEvent.detail) {
+        handleAction(customEvent.detail.action, customEvent.detail.service);
+      }
+    };
+    window.addEventListener('haatza-nest-action', onCustomAction);
+    return () => {
+      window.removeEventListener('haatza-nest-action', onCustomAction);
+    };
+  }, [pageLocation.search, pageLocation.hash, scopeServices, vendorAvailable]);
 
   if (loading && services.length === 0) {
     return (

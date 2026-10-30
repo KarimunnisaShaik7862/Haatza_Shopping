@@ -335,6 +335,17 @@ export const HaatzaNestBookingOptionsSection: React.FC<HaatzaNestBookingOptionsS
     setIsCouponDrawerOpen(true);
   };
 
+  useEffect(() => {
+    const handleAction = (e: Event) => {
+      const detail = (e as CustomEvent<{ action?: string }>).detail;
+      if (detail?.action === 'pass') {
+        handlePassBannerClick();
+      }
+    };
+    window.addEventListener('haatza-nest-action', handleAction);
+    return () => window.removeEventListener('haatza-nest-action', handleAction);
+  }, [nestpassData]);
+
   // 3D subtle tilt state for the 6 Min badge
   const [badgeTilt, setBadgeTilt] = useState({ x: 0, y: 0 });
   const [isBadgeHovered, setIsBadgeHovered] = useState(false);

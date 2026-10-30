@@ -43,6 +43,7 @@ import {
   CreateHaatzaNestBookingPayload,
   HaatzaNestServiceBooking 
 } from '../../types/haatzaNest.types';
+import bookingSpecialistImg from '../../assets/haatza_nest_booking_specialist.jpg';
 
 export interface HaatzaNestBookingSummaryProps {
   selection: NestBookingSelection;
@@ -177,7 +178,7 @@ export const HaatzaNestBookingSummary: React.FC<HaatzaNestBookingSummaryProps> =
         serviceName: selection.mode === 'instant' 
           ? `Instant 6-Min House Help (${selection.duration.durationLabel})`
           : `Scheduled Home Service (${selection.duration.durationLabel})`,
-        serviceImage: 'https://static.wixstatic.com/media/73d0ef_0b2f688068434e46a538a629de0a6e17~mv2.png',
+        serviceImage: bookingSpecialistImg,
         categoryName: selection.mode === 'instant' ? 'Instant Help' : 'Scheduled Services',
         price: result.finalPrice || selection.duration.price,
         status: (result.paymentStatus === 'Paid' ? 'confirmed' : 'pending'),

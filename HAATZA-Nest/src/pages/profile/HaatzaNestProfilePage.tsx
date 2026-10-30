@@ -10,6 +10,18 @@ import {
 import { useHaatzaNestUser, NestAddress } from '../../hooks/useHaatzaNestUser';
 import { useHaatzaNestBooking } from '../../hooks/useHaatzaNestBooking';
 import { HaatzaNestServiceBooking } from '../../types/haatzaNest.types';
+import bookingSpecialistImg from '../../assets/haatza_nest_booking_specialist.jpg';
+
+const getBookingImage = (img?: string) => {
+  if (
+    !img ||
+    img.includes('73d0ef_0b2f688068434e46a538a629de0a6e17') ||
+    img.includes('house-cleaning')
+  ) {
+    return bookingSpecialistImg;
+  }
+  return img;
+};
 
 // Friendly lightweight vector illustration for Saved Addresses empty state
 const FriendlyHouseIllustration: React.FC = () => (
@@ -1030,7 +1042,7 @@ export const HaatzaNestProfilePage: React.FC = () => {
                   >
                     <div className="flex items-start gap-3.5">
                       <img
-                        src={b.serviceImage}
+                        src={getBookingImage(b.serviceImage)}
                         alt={b.serviceName}
                         className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-cover border border-[#E5D7F7] shrink-0"
                       />
@@ -1320,7 +1332,7 @@ export const HaatzaNestProfilePage: React.FC = () => {
             {/* Service Snapshot */}
             <div className="flex items-start gap-4 p-3.5 rounded-2xl bg-[#FAF8FD] border border-[#E5D7F7]">
               <img
-                src={selectedBooking.serviceImage}
+                src={getBookingImage(selectedBooking.serviceImage)}
                 alt={selectedBooking.serviceName}
                 className="w-16 h-16 rounded-xl object-cover border border-[#E5D7F7] shrink-0"
               />
