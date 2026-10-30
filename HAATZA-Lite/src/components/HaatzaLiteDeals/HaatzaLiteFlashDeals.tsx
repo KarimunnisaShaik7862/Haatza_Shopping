@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { HaatzaLiteProduct } from '../../types/haatzaLite.types';
 import { useHaatzaLiteCart } from '../../hooks/useHaatzaLiteCart';
 import { formatCurrency } from '../../utils/formatters';
 import { 
   Zap, Plus, Minus, ChevronLeft, ChevronRight, 
-  Clock, Sparkles, ArrowRight 
+  Clock, Sparkles, ArrowRight, Star 
 } from 'lucide-react';
 
 interface HaatzaLiteFlashDealsProps {
@@ -23,6 +23,7 @@ const PRODUCT_3D_ASSETS: Record<string, string> = {
 };
 
 export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ products }) => {
+  const navigate = useNavigate();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { cart, addToCart, updateQuantity } = useHaatzaLiteCart();
 
@@ -56,12 +57,12 @@ export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ prod
   return (
     <section
       aria-label="Flash Deals in 10-15 Mins"
-      className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16"
+      className="w-full max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8"
     >
-      <div className="bg-white rounded-3xl p-5 sm:p-7 border border-[#E5EBE6] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 border border-[#E5EBE6] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-4.5">
           <div className="flex items-center gap-3">
             <span className="w-10 h-10 rounded-2xl bg-[#0C831F] text-white flex items-center justify-center font-black shadow-[0_3px_10px_rgba(12,131,31,0.35)] text-lg">
               %
@@ -168,6 +169,15 @@ export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ prod
               </div>
 
               <div>
+                <div className="flex items-center justify-between gap-1 mb-1.5">
+                  <span className="text-[10px] font-bold text-[#0C831F] uppercase tracking-wider">
+                    {spotlightProduct?.brand || 'FARM FRESH'}
+                  </span>
+                  <div className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-amber-50/90 border border-amber-200/80 text-[10px] font-black text-amber-800 shrink-0 shadow-2xs">
+                    <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+                    <span>{(spotlightProduct?.rating || 4.9).toFixed(1)}</span>
+                  </div>
+                </div>
                 <h3 className="text-xl sm:text-2xl font-black text-[#111D15] tracking-tight leading-tight font-heading">
                   Ratnagiri Alphonso Mangoes (Hapus)
                 </h3>
@@ -223,12 +233,13 @@ export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ prod
                 return (
                   <div
                     key={p.id}
+                    onClick={() => navigate(`/lite/product/${p.id || p.slug}`)}
                     className="group relative flex-none w-[175px] sm:w-[195px] bg-white rounded-2xl border border-[#E2E8F0]/90 p-3 sm:p-3.5 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-[#0C831F] hover:shadow-[0_0_26px_rgba(12,131,31,0.30),0_6px_16px_rgba(12,131,31,0.12)] hover:ring-1 hover:ring-[#0C831F]/40 hover:-translate-y-1.5 transition-all duration-150 ease-in-out flex flex-col justify-between select-none cursor-pointer"
                   >
                     <div>
                       {/* Floating Vivid 3D Product Render with Micro-Shadow */}
                       <div className="relative aspect-square w-full rounded-xl bg-[#F8FCF9] overflow-hidden mb-2.5 border border-emerald-50 flex items-center justify-center p-1.5">
-                        <Link to={`/product/${p.slug}`} className="block w-full h-full flex items-center justify-center">
+                        <Link to={`/lite/product/${p.id || p.slug}`} className="block w-full h-full flex items-center justify-center">
                           <img
                             src={render3D}
                             alt={p.name}
@@ -253,21 +264,27 @@ export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ prod
                         )}
                       </div>
 
-                      {/* Brand & Unit */}
+                      {/* Brand, Unit & Rating */}
                       <div className="flex items-center justify-between gap-1 mb-1">
                         <span className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider truncate">
                           {p.brand}
                         </span>
-                        {p.unit && (
-                          <span className="text-[10px] font-semibold text-[#0C831F] bg-[#EAF8ED] px-1.5 py-0.5 rounded">
-                            {p.unit}
-                          </span>
-                        )}
+                        <div className="flex items-center gap-1 shrink-0">
+                          {p.unit && (
+                            <span className="text-[9.5px] font-semibold text-[#0C831F] bg-[#EAF8ED] px-1 py-0.5 rounded">
+                              {p.unit}
+                            </span>
+                          )}
+                          <div className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-amber-50/90 border border-amber-200/80 text-[10px] font-black text-amber-800 shadow-2xs">
+                            <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+                            <span>{(p.rating || 4.8).toFixed(1)}</span>
+                          </div>
+                        </div>
                       </div>
 
                       {/* Product Title in Compact Bold Sans-Serif Font */}
                       <Link
-                        to={`/product/${p.slug}`}
+                        to={`/lite/product/${p.id || p.slug}`}
                         className="text-xs font-bold text-[#111D15] group-hover:text-[#0C831F] transition-colors line-clamp-2 leading-snug mb-2 font-heading"
                       >
                         {p.name}
@@ -288,7 +305,7 @@ export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ prod
                       </div>
 
                       {/* Glowing Brand Green "+ ADD" / Quantity Button */}
-                      <div>
+                      <div onClick={(e) => e.stopPropagation()}>
                         {qty === 0 ? (
                           <button
                             type="button"
@@ -297,14 +314,14 @@ export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ prod
                               e.stopPropagation();
                               addToCart(p, 1);
                             }}
-                            className="px-3 py-1.5 rounded-xl bg-[#0C831F] hover:bg-[#09711A] text-white text-xs font-black uppercase tracking-wider transition-all duration-150 shadow-[0_3px_12px_rgba(12,131,31,0.35)] hover:shadow-[0_5px_18px_rgba(12,131,31,0.5)] active:scale-95 flex items-center gap-1 cursor-pointer border border-[#0C831F]"
+                            className="group/btn px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-[0_3px_10px_rgba(16,185,129,0.3)] hover:shadow-[0_5px_16px_rgba(16,185,129,0.45)] hover:scale-105 active:scale-95 flex items-center gap-1 cursor-pointer"
                             aria-label={`Add ${p.name} to cart`}
                           >
-                            <Plus className="w-3 h-3 stroke-[3]" />
+                            <Plus className="w-3 h-3 stroke-[2.75] transition-transform duration-200 group-hover/btn:rotate-90" />
                             <span>ADD</span>
                           </button>
                         ) : (
-                          <div className="inline-flex items-center bg-[#0C831F] text-white rounded-xl shadow-[0_2px_10px_rgba(12,131,31,0.35)] overflow-hidden border border-[#09711A]">
+                          <div className="inline-flex items-center bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl shadow-[0_2px_10px_rgba(16,185,129,0.25)] overflow-hidden transition-all duration-200 hover:scale-[1.02]">
                             <button
                               type="button"
                               onClick={(e) => {
@@ -312,12 +329,12 @@ export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ prod
                                 e.stopPropagation();
                                 updateQuantity(cartItem!.id, qty - 1);
                               }}
-                              className="p-1 hover:bg-[#09711A] text-white transition-colors active:scale-90 cursor-pointer"
+                              className="px-2 py-1 hover:bg-black/15 text-white transition-colors active:scale-90 cursor-pointer"
                               aria-label="Decrease quantity"
                             >
-                              <Minus className="w-3 h-3 stroke-[3]" />
+                              <Minus className="w-2.5 h-2.5 stroke-[3]" />
                             </button>
-                            <span className="px-1.5 text-xs font-black min-w-4 text-center select-none text-white">
+                            <span className="px-1.5 text-xs font-black min-w-5 text-center select-none text-white">
                               {qty}
                             </span>
                             <button
@@ -327,7 +344,7 @@ export const HaatzaLiteFlashDeals: React.FC<HaatzaLiteFlashDealsProps> = ({ prod
                                 e.stopPropagation();
                                 updateQuantity(cartItem!.id, qty + 1);
                               }}
-                              className="p-1 hover:bg-[#09711A] text-white transition-colors active:scale-90 cursor-pointer"
+                              className="px-2 py-1 hover:bg-black/15 text-white transition-colors active:scale-90 cursor-pointer"
                               aria-label="Increase quantity"
                             >
                               <Plus className="w-3 h-3 stroke-[3]" />

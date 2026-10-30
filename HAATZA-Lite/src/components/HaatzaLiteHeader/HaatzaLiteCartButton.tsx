@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
 import { useHaatzaLiteCart } from '../../hooks/useHaatzaLiteCart';
 import { formatCurrency } from '../../utils/formatters';
@@ -7,8 +8,8 @@ export const HaatzaLiteCartButton: React.FC = () => {
   const { itemCount, total } = useHaatzaLiteCart();
 
   return (
-    <button
-      type="button"
+    <Link
+      to="/cart"
       className="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#0C831F] hover:bg-[#09711A] text-white shadow-[0_3px_12px_rgba(12,131,31,0.25)] hover:shadow-[0_6px_20px_rgba(12,131,31,0.35)] transition-all duration-150 active:scale-95 shrink-0 cursor-pointer border border-[#0C831F]"
     >
       <div className="relative flex items-center justify-center">
@@ -28,6 +29,6 @@ export const HaatzaLiteCartButton: React.FC = () => {
           {total > 0 ? formatCurrency(total) : 'My Cart'}
         </span>
       </div>
-    </button>
+    </Link>
   );
 };

@@ -30,7 +30,9 @@
   html, body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(180deg, #FFFFFF 0%, #FAFDFB 35%, #F5FAF6 100%) fixed;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFDFB 35%, #F5FAF6 100%);
+    background-color: #F5FAF6;
+    text-rendering: optimizeLegibility;
     color: #111D15;
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;

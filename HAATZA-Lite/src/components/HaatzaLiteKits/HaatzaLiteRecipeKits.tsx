@@ -58,7 +58,7 @@ export const HaatzaLiteRecipeKits: React.FC = () => {
   return (
     <section
       aria-label="Live Aisle Showcase"
-      className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16"
+      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
     >
       <div className="bg-white rounded-3xl p-5 sm:p-7 border border-[#E5EBE6] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         

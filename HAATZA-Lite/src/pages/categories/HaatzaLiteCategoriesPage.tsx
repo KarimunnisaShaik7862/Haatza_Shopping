@@ -5,11 +5,72 @@ import { haatzaLiteService } from '../../services/haatzaLiteService';
 import { HaatzaLiteProductGrid } from '../../components/HaatzaLiteProducts/HaatzaLiteProductGrid';
 import { HaatzaLiteLoading } from '../../components/common/HaatzaLiteLoading';
 import { HaatzaLiteEmptyState } from '../../components/common/HaatzaLiteEmptyState';
+import { AllForYou } from '../AllForYou';
+import { FruitsVegetables } from '../FruitsVegetables';
+import { DairyBreakfast } from '../DairyBreakfast';
+import { SnacksBeverages } from '../SnacksBeverages';
+import { HouseholdCleaning } from '../HouseholdCleaning';
+import { PersonalCare } from '../PersonalCare';
+import { KitchenEssentials } from '../KitchenEssentials';
+import { BakeryBreads } from '../BakeryBreads';
+import { StaplesCookingEssentials } from '../StaplesCookingEssentials';
+import { FrozenFoods } from '../FrozenFoods';
+import { BabyCareEssentials } from '../BabyCareEssentials';
+import { PetSupplies } from '../PetSupplies';
 import { Sparkles, Layers } from 'lucide-react';
 
 export const HaatzaLiteCategoriesPage: React.FC = () => {
   const { slug } = useParams<{ slug?: string }>();
-  const activeSlug = slug || 'all';
+  const raw = slug || 'all';
+  const activeSlug = decodeURIComponent(raw).toLowerCase().trim().replace(/[_ ]+/g, '-');
+
+  if (activeSlug === 'all' || activeSlug === 'all-for-you') {
+    return <AllForYou />;
+  }
+
+  if (activeSlug === 'fruits-vegetables' || activeSlug.includes('fruit') || activeSlug.includes('veg')) {
+    return <FruitsVegetables />;
+  }
+
+  if (activeSlug === 'dairy-breakfast' || activeSlug.includes('dairy') || activeSlug.includes('breakfast')) {
+    return <DairyBreakfast />;
+  }
+
+  if (activeSlug === 'snacks-beverages' || activeSlug.includes('snack') || activeSlug.includes('beverage')) {
+    return <SnacksBeverages />;
+  }
+
+  if (activeSlug === 'household-cleaning' || activeSlug.includes('clean') || activeSlug.includes('household')) {
+    return <HouseholdCleaning />;
+  }
+
+  if (activeSlug === 'personal-care' || activeSlug.includes('personal') || activeSlug.includes('care')) {
+    return <PersonalCare />;
+  }
+
+  if (activeSlug === 'kitchen-essentials' || activeSlug.includes('kitchen') || activeSlug.includes('essential')) {
+    return <KitchenEssentials />;
+  }
+
+  if (activeSlug === 'bakery-breads' || activeSlug.includes('bakery') || activeSlug.includes('bread')) {
+    return <BakeryBreads />;
+  }
+
+  if (activeSlug === 'staples-cooking-essentials' || activeSlug.includes('staple') || activeSlug.includes('cooking')) {
+    return <StaplesCookingEssentials />;
+  }
+
+  if (activeSlug === 'frozen-foods' || activeSlug.includes('frozen')) {
+    return <FrozenFoods />;
+  }
+
+  if (activeSlug === 'baby-care-essentials' || activeSlug.includes('baby')) {
+    return <BabyCareEssentials />;
+  }
+
+  if (activeSlug === 'pet-supplies' || activeSlug.includes('pet')) {
+    return <PetSupplies />;
+  }
 
   const [categories, setCategories] = useState<HaatzaLiteCategory[]>([]);
   const [products, setProducts] = useState<HaatzaLiteProduct[]>([]);
@@ -51,9 +112,10 @@ export const HaatzaLiteCategoriesPage: React.FC = () => {
   }, [activeSlug]);
 
   return (
-    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 sm:py-8 space-y-6">
+    <div className="bg-gradient-to-b from-white via-emerald-50/20 to-slate-50 min-h-screen">
+      <div className="w-full max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-3 sm:py-5 space-y-4">
       {/* Category Header Banner with Glassmorphism */}
-      <div className="bg-gradient-to-r from-white via-[#F2FBF4] to-white rounded-3xl p-6 sm:p-8 border border-[#CBEAD2] shadow-[0_4px_20px_rgba(12,131,31,0.05)]">
+      <div className="bg-gradient-to-r from-white via-[#F2FBF4] to-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 border border-[#CBEAD2] shadow-[0_4px_20px_rgba(12,131,31,0.05)]">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF8ED] text-[#0C831F] text-[11px] font-black uppercase tracking-wider mb-2 border border-[#0C831F]/25">
@@ -120,6 +182,7 @@ export const HaatzaLiteCategoriesPage: React.FC = () => {
           subtitle={currentCategory?.description}
         />
       )}
+      </div>
     </div>
   );
 };

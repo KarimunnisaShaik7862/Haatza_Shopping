@@ -19,6 +19,7 @@ import { HaatzaNestBookingProvider } from '@nest/context/HaatzaNestBookingContex
 
 import { HaatzaLiteTopNav } from '../components/HaatzaLiteNavigation/HaatzaLiteTopNav';
 import { HaatzaLiteRouter } from './HaatzaLiteRouter';
+import { AppInstallModal } from '../components/common/AppInstallModal';
 
 export const HaatzaLiteApp: React.FC = () => {
   return (
@@ -40,6 +41,7 @@ export const HaatzaLiteApp: React.FC = () => {
                                 <div className="flex-1">
                                   <HaatzaLiteRouter />
                                 </div>
+                                <AppInstallModal />
                               </div>
                             </HaatzaNestBookingProvider>
                           </HaatzaNestLocationProvider>
