@@ -1,8 +1,20 @@
 import React from 'react';
 import { useHaatzaNestBooking } from '../../hooks/useHaatzaNestBooking';
 import { formatCurrency } from '../../utils/formatters';
-import { Calendar, CheckCircle2, Clock, MapPin, User } from 'lucide-react';
+import { Calendar, CheckCircle2, MapPin } from 'lucide-react';
 import { HaatzaNestEmptyState } from '../common/HaatzaNestEmptyState';
+import bookingSpecialistImg from '../../assets/haatza_nest_booking_specialist.jpg';
+
+const getBookingImage = (img?: string) => {
+  if (
+    !img ||
+    img.includes('73d0ef_0b2f688068434e46a538a629de0a6e17') ||
+    img.includes('house-cleaning')
+  ) {
+    return bookingSpecialistImg;
+  }
+  return img;
+};
 
 export const HaatzaNestBookingHistory: React.FC = () => {
   const { bookings } = useHaatzaNestBooking();
@@ -27,7 +39,7 @@ export const HaatzaNestBookingHistory: React.FC = () => {
         >
           <div className="flex items-start gap-4">
             <img
-              src={b.serviceImage}
+              src={getBookingImage(b.serviceImage)}
               alt={b.serviceName}
               className="w-16 h-16 rounded-2xl object-cover shrink-0"
             />
@@ -58,7 +70,7 @@ export const HaatzaNestBookingHistory: React.FC = () => {
           </div>
 
           <div className="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto pt-3 md:pt-0 border-t md:border-t-0 border-zinc-100">
-            <span className="text-lg font-black text-[#6C3FC5]">
+            <span className="text-lg font-black text-[#7027C9]">
               {formatCurrency(b.price)}
             </span>
             <span className="text-[11px] text-zinc-400 font-medium">
