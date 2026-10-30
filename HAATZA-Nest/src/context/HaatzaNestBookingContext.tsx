@@ -6,12 +6,17 @@ import {
 } from '../types/haatzaNest.types';
 import { haatzaNestService } from '../services/haatzaNestService';
 
+import { confirmWithRetry } from '../services/haatzaNestBookingApi';
+import { getPendingConfirmation, clearPendingConfirmation } from '../services/haatzaNestPaymentService';
+
 interface HaatzaNestBookingContextType {
   bookings: HaatzaNestServiceBooking[];
   activeModalService: HaatzaNestHomeService | null;
   openBookingModal: (service: HaatzaNestHomeService, pkg?: HaatzaNestServicePackage) => void;
   closeBookingModal: () => void;
   createBooking: (booking: Omit<HaatzaNestServiceBooking, 'id' | 'bookingNumber' | 'createdAt' | 'status'>) => Promise<HaatzaNestServiceBooking>;
+  cancelBooking: (bookingId: string) => Promise<boolean>;
+  refreshBookings: () => Promise<void>;
   preselectedPackage: HaatzaNestServicePackage | null;
 }
 
@@ -22,8 +27,31 @@ export const HaatzaNestBookingProvider: React.FC<{ children: ReactNode }> = ({ c
   const [activeModalService, setActiveModalService] = useState<HaatzaNestHomeService | null>(null);
   const [preselectedPackage, setPreselectedPackage] = useState<HaatzaNestServicePackage | null>(null);
 
+  const refreshBookings = async () => {
+    const list = await haatzaNestService.getBookings();
+    setBookings(list);
+  };
+
   useEffect(() => {
-    haatzaNestService.getBookings().then(setBookings);
+    refreshBookings();
+
+    // Check for any pending confirmation from a previous session / app reload
+    const pending = getPendingConfirmation();
+    if (pending && pending.tableId && pending.paymentId && pending.signature && pending.orderId) {
+      confirmWithRetry({
+        tableId: pending.tableId,
+        orderId: pending.orderId,
+        paymentId: pending.paymentId,
+        signature: pending.signature,
+      })
+        .then(() => {
+          clearPendingConfirmation();
+          refreshBookings();
+        })
+        .catch((err) => {
+          console.warn('Startup pending confirmation check:', err);
+        });
+    }
   }, []);
 
   const openBookingModal = (service: HaatzaNestHomeService, pkg?: HaatzaNestServicePackage) => {
@@ -44,6 +72,16 @@ export const HaatzaNestBookingProvider: React.FC<{ children: ReactNode }> = ({ c
     return newBooking;
   };
 
+  const cancelBooking = async (bookingId: string) => {
+    const success = await haatzaNestService.cancelBooking(bookingId);
+    if (success) {
+      setBookings((prev) =>
+        prev.map((b) => (b.id === bookingId ? { ...b, status: 'cancelled' as const } : b))
+      );
+    }
+    return success;
+  };
+
   return (
     <HaatzaNestBookingContext.Provider
       value={{
@@ -52,6 +90,8 @@ export const HaatzaNestBookingProvider: React.FC<{ children: ReactNode }> = ({ c
         openBookingModal,
         closeBookingModal,
         createBooking,
+        cancelBooking,
+        refreshBookings,
         preselectedPackage,
       }}
     >

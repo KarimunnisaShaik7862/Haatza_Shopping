@@ -3,29 +3,37 @@
 @import "./HaatzaNestPadding.css";
 
 @theme {
-  --color-haatza-nest-purple: #6C3FC5;
-  --color-haatza-nest-purple-hover: #572fa8;
+  --color-haatza-nest-purple: #7027C9;
+  --color-haatza-nest-purple-deep: #351064;
+  --color-haatza-nest-purple-accent: #9138F5;
+  --color-haatza-nest-purple-hover: #5A1EAA;
   --color-haatza-nest-light: #F2ECFC;
-  --color-haatza-nest-surface: #F6F2FC;
-  --color-haatza-nest-yellow: #FFD54F;
-  --color-haatza-nest-bg: #FAF8FD;
-  --color-haatza-nest-dark: #172033;
-  --color-haatza-nest-muted: #64748B;
-  --color-haatza-nest-border: #E8E2F2;
+  --color-haatza-nest-lavender: #F7F1FF;
+  --color-haatza-nest-surface: #FAF8FD;
+  --color-haatza-nest-yellow: #FFD83D;
+  --color-haatza-nest-yellow-hover: #F0C419;
+  --color-haatza-nest-bg: #F7F1FF;
+  --color-haatza-nest-dark: #25212D;
+  --color-haatza-nest-muted: #625D6E;
+  --color-haatza-nest-border: #E8E0F3;
 
   --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 }
 
 @layer base {
   *, ::after, ::before {
     box-sizing: border-box;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #FAF8FD;
-    color: #172033;
+    background-color: #F7F1FF;
+    color: #25212D;
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -33,7 +41,7 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #172033;
+    color: #25212D;
   }
   #root {
     min-height: 100vh;
@@ -41,3 +49,186 @@
     flex-direction: column;
   }
 }
+
+@keyframes floatSubtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float-subtle {
+  animation: floatSubtle 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-subtle {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   CHOOSE YOUR BOOKING OPTION - SECTION SPACING
+   Creates a spacious, balanced, and premium vertical rhythm:
+   1. Clean separation between main heading and subtitle
+   2. Generous headroom whitespace between subtitle and 3D pop-out booking cards
+   ========================================================================== */
+.nest-booking-options-header {
+  margin-bottom: 2.75rem; /* 44px on mobile */
+}
+
+.nest-booking-options-heading {
+  margin-bottom: 0.875rem; /* 14px on mobile */
+}
+
+.nest-booking-options-grid {
+  padding-top: 2rem; /* 32px on mobile */
+}
+
+@media (min-width: 640px) {
+  .nest-booking-options-header {
+    margin-bottom: 3.5rem; /* 56px on tablet */
+  }
+  .nest-booking-options-heading {
+    margin-bottom: 1.125rem; /* 18px on tablet */
+  }
+  .nest-booking-options-grid {
+    padding-top: 2.75rem; /* 44px on tablet */
+  }
+}
+
+@media (min-width: 768px) {
+  .nest-booking-options-header {
+    margin-bottom: 4.5rem; /* 72px on desktop */
+  }
+  .nest-booking-options-heading {
+    margin-bottom: 1.25rem; /* 20px on desktop */
+  }
+  .nest-booking-options-grid {
+    padding-top: 3.5rem; /* 56px on desktop */
+  }
+}
+
+/* Seamless Infinite Horizontal Image Marquee (Right to Left) */
+@keyframes nestMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-nest-marquee {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  animation: nestMarquee 20s linear infinite;
+  will-change: transform;
+}
+
+.animate-nest-marquee-slow {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  animation: nestMarquee 24s linear infinite;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .animate-nest-marquee,
+  .group:hover .animate-nest-marquee-slow,
+  .animate-nest-marquee:hover,
+  .animate-nest-marquee-slow:hover {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-nest-marquee,
+  .animate-nest-marquee-slow {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   REFERRAL DRAWER ANIMATIONS
+   ========================================================================== */
+
+/* 1. Floating 3D Gift Box Animation */
+@keyframes referralGiftFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg) scale(1.02);
+  }
+}
+
+.animate-referral-gift {
+  animation: referralGiftFloat 3.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* 2. Shimmer Effect on Reward Amount */
+@keyframes textShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-text-shimmer {
+  background: linear-gradient(90deg, #7027C9 0%, #FFB800 45%, #7027C9 90%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textShimmer 3.2s ease-in-out infinite;
+}
+
+/* 3. Stepper Connector Flow Animation */
+@keyframes stepperLineFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 200%;
+  }
+}
+
+.animate-stepper-flow {
+  background: linear-gradient(180deg, #E9D8FD 0%, #7027C9 50%, #E9D8FD 100%);
+  background-size: 100% 200%;
+  animation: stepperLineFlow 2.8s linear infinite;
+}
+
+/* 4. Stepper Badge Pulse */
+@keyframes stepBadgePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(112, 39, 201, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(112, 39, 201, 0);
+  }
+}
+
+.animate-step-badge-pulse {
+  animation: stepBadgePulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-referral-gift,
+  .animate-text-shimmer,
+  .animate-stepper-flow,
+  .animate-step-badge-pulse {
+    animation: none !important;
+  }
+}
+
+
+

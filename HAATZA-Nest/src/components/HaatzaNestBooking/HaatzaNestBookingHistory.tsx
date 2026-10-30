@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHaatzaNestBooking } from '../../hooks/useHaatzaNestBooking';
 import { formatCurrency } from '../../utils/formatters';
-import { Calendar, CheckCircle2, Clock, MapPin, User } from 'lucide-react';
+import { Calendar, CheckCircle2, MapPin } from 'lucide-react';
 import { HaatzaNestEmptyState } from '../common/HaatzaNestEmptyState';
 
 export const HaatzaNestBookingHistory: React.FC = () => {
@@ -58,7 +58,7 @@ export const HaatzaNestBookingHistory: React.FC = () => {
           </div>
 
           <div className="flex md:flex-col items-center md:items-end justify-between w-full md:w-auto pt-3 md:pt-0 border-t md:border-t-0 border-zinc-100">
-            <span className="text-lg font-black text-[#6C3FC5]">
+            <span className="text-lg font-black text-[#7027C9]">
               {formatCurrency(b.price)}
             </span>
             <span className="text-[11px] text-zinc-400 font-medium">
