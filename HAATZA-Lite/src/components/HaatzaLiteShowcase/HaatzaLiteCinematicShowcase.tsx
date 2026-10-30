@@ -46,7 +46,7 @@ export const HaatzaLiteCinematicShowcase: React.FC = () => {
   return (
     <section
       aria-label="Explore Live Neighborhood Aisles"
-      className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 w-full select-none"
+      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 select-none"
     >
       <style>{`
         .cinematic-compact-card {

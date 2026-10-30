@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { HaatzaLiteSearchBar } from './HaatzaLiteSearchBar';
 import { useHaatzaLiteCart } from '../../hooks/useHaatzaLiteCart';
+import { useWishlist } from '@shopping/context/WishlistContext';
 import { ChevronDown, Heart, ShoppingCart, User, Package, MapPin } from 'lucide-react';
 
 export const HaatzaLiteHeader: React.FC = () => {
   const navigate = useNavigate();
   const { itemCount: liteCartCount } = useHaatzaLiteCart();
+  const { itemCount: wishlistCount } = useWishlist();
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef<HTMLDivElement>(null);
 
@@ -24,19 +26,6 @@ export const HaatzaLiteHeader: React.FC = () => {
     return { name: 'Rahul Sharma', email: 'rahul.sharma@example.in' };
   });
 
-  const [wishlistCount] = useState<number>(() => {
-    try {
-      const stored = localStorage.getItem('haatza_wishlist_items');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) return parsed.length;
-      }
-    } catch {
-      // fallback
-    }
-    return 0;
-  });
-
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (accountMenuRef.current && !accountMenuRef.current.contains(e.target as Node)) {
@@ -48,18 +37,20 @@ export const HaatzaLiteHeader: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-[49px] sm:top-[53px] z-40 bg-white border-b border-[#E5EAF3] shadow-soft-sm">
+    <header
+      className="relative z-20 bg-white border-b border-[#E5EAF3]"
+    >
       {/* ROW: Search Bar | User Actions (Profile, Wishlist, Cart) */}
       <div className="bg-white">
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-3 sm:gap-4 lg:gap-8">
-          
+        <div className="max-w-[1440px] mx-auto px-2.5 sm:px-6 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-1.5 sm:gap-4 lg:gap-8">
+
           {/* Search Bar */}
-          <div className="flex-1 max-w-4xl flex items-center gap-2">
+          <div className="flex-1 min-w-0 max-w-4xl flex items-center">
             <HaatzaLiteSearchBar />
           </div>
 
           {/* Actions: Profile, Wishlist, Cart */}
-          <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
             {/* User Profile */}
             <div
               ref={accountMenuRef}
@@ -73,7 +64,7 @@ export const HaatzaLiteHeader: React.FC = () => {
                   navigate('/account');
                   setIsAccountMenuOpen(false);
                 }}
-                className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-full hover:bg-zinc-100 text-zinc-800 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 p-1 sm:px-2.5 sm:py-1.5 rounded-full hover:bg-zinc-100 text-zinc-800 transition-colors cursor-pointer"
                 title="View My Profile & Account"
                 aria-label="View My Profile and Account"
               >
@@ -84,9 +75,8 @@ export const HaatzaLiteHeader: React.FC = () => {
                   {user.name.split(' ')[0]}
                 </span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 text-zinc-400 hidden sm:block transition-transform duration-200 ${
-                    isAccountMenuOpen ? 'rotate-180' : ''
-                  }`}
+                  className={`w-3.5 h-3.5 text-zinc-400 hidden sm:block transition-transform duration-200 ${isAccountMenuOpen ? 'rotate-180' : ''
+                    }`}
                 />
               </button>
 
@@ -125,12 +115,12 @@ export const HaatzaLiteHeader: React.FC = () => {
             </div>
 
             {/* Divider */}
-            <div className="h-5 w-px bg-[#E5EAF3]" />
+            <div className="h-4 w-px bg-[#E5EAF3] hidden sm:block" />
 
             {/* Wishlist */}
             <Link
               to="/wishlist"
-              className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold text-zinc-800 hover:text-zinc-950 hover:bg-zinc-100 transition-colors group cursor-pointer"
+              className="relative flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold text-zinc-800 hover:text-zinc-950 hover:bg-zinc-100 transition-colors group cursor-pointer"
               aria-label={`My List with ${wishlistCount} items`}
             >
               <div className="relative">
@@ -142,15 +132,16 @@ export const HaatzaLiteHeader: React.FC = () => {
                 )}
               </div>
               <span className="hidden sm:inline">My List</span>
+
             </Link>
 
             {/* Divider */}
-            <div className="h-5 w-px bg-[#E5EAF3]" />
+            <div className="h-4 w-px bg-[#E5EAF3] hidden sm:block" />
 
             {/* Cart */}
             <Link
               to="/cart"
-              className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold text-zinc-800 hover:text-zinc-950 hover:bg-zinc-100 transition-colors group cursor-pointer"
+              className="relative flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold text-zinc-800 hover:text-zinc-950 hover:bg-zinc-100 transition-colors group cursor-pointer"
               aria-label={`Cart with ${liteCartCount} items`}
             >
               <div className="relative">

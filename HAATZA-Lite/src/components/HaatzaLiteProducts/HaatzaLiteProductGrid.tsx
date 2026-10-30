@@ -1,6 +1,7 @@
 import React from 'react';
 import { HaatzaLiteProduct } from '../../types/haatzaLite.types';
 import { HaatzaLiteProductCard } from './HaatzaLiteProductCard';
+import { HaatzaLiteCategoryShowcase } from './HaatzaLiteCategoryShowcase';
 
 interface HaatzaLiteProductGridProps {
   products: HaatzaLiteProduct[];
@@ -11,32 +12,14 @@ interface HaatzaLiteProductGridProps {
 export const HaatzaLiteProductGrid: React.FC<HaatzaLiteProductGridProps> = ({
   products,
   title,
-  subtitle,
 }) => {
   return (
-    <section className="space-y-4">
-      {(title || subtitle) && (
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-1">
-          <div>
-            {title && (
-              <h2 className="text-xl sm:text-2xl font-black text-[#111D15] font-heading tracking-tight">
-                {title}
-              </h2>
-            )}
-            {subtitle && (
-              <p className="text-xs text-zinc-500 font-medium">
-                {subtitle}
-              </p>
-            )}
-          </div>
-        </div>
-      )}
-
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+    <HaatzaLiteCategoryShowcase title={title || 'Featured Aisles'}>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-4.5">
         {products.map((p) => (
           <HaatzaLiteProductCard key={p.id} product={p} />
         ))}
       </div>
-    </section>
+    </HaatzaLiteCategoryShowcase>
   );
 };
