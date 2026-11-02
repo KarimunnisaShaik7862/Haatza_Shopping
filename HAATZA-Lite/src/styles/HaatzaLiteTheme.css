@@ -4,21 +4,21 @@
    ========================================================================== */
 
 :root {
-  /* Signature Brand Green (Blinkit Quick-Commerce Standard) */
-  --haatza-lite-green: #0C831F;
-  --haatza-lite-green-dark: #09711A;
-  --haatza-lite-green-glow: rgba(12, 131, 31, 0.28);
-  --haatza-lite-green-light: #EAF8ED;
-  --haatza-lite-green-surface: #F2FBF4;
-  --haatza-lite-green-border: #CBEAD2;
-  --haatza-lite-green-accent: #159C2B;
+  /* Signature Brand Green - Bright Glowing Green & Pure White */
+  --haatza-lite-green: #00C853;
+  --haatza-lite-green-dark: #00B348;
+  --haatza-lite-green-glow: rgba(0, 230, 118, 0.45);
+  --haatza-lite-green-light: #F0FDF4;
+  --haatza-lite-green-surface: #E8F8EE;
+  --haatza-lite-green-border: #D1FAE5;
+  --haatza-lite-green-accent: #00E676;
 
   /* Crisp Pure White System */
   --haatza-lite-bg: #FFFFFF;
   --haatza-lite-surface: #FFFFFF;
-  --haatza-lite-surface-glass: rgba(255, 255, 255, 0.82);
-  --haatza-lite-border: #E5EBE6;
-  --haatza-lite-border-glass: rgba(255, 255, 255, 0.7);
+  --haatza-lite-surface-glass: rgba(255, 255, 255, 0.92);
+  --haatza-lite-border: #E2ECE5;
+  --haatza-lite-border-glass: rgba(255, 255, 255, 0.85);
 
   /* Typography Colors */
   --haatza-lite-text: #111D15;
@@ -26,15 +26,15 @@
   --haatza-lite-text-faint: #8E9F94;
 
   /* Legacy Backward Compatibility Mappings */
-  --haatza-lite-yellow: #0C831F;
-  --haatza-lite-yellow-hover: #09711A;
-  --haatza-lite-secondary: #F2FBF4;
+  --haatza-lite-yellow: #00E676;
+  --haatza-lite-yellow-hover: #00C853;
+  --haatza-lite-secondary: #E8F8EE;
 }
 
 /* Fluid Smooth-Parallax & Motion Curves */
 @keyframes haatzaFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  0%, 100% { transform: translate3d(0, 0px, 0); }
+  50% { transform: translate3d(0, -6px, 0); }
 }
 
 @keyframes haatzaGlowPulse {
@@ -60,8 +60,8 @@
 }
 
 @keyframes haatzaConveyor {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 .haatza-conveyor-track {
@@ -88,3 +88,261 @@
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
+
+/* Micro-Interaction Scale Tokens */
+.scale-104 {
+  transform: scale(1.04);
+}
+.group:hover .group-hover\:scale-104 {
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   Luminous Glowing Wave Ribbons Animation
+   ========================================================================== */
+@keyframes haatzaAuroraPulse {
+  0%, 100% {
+    opacity: 0.75;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.008) translate3d(0, 0, 0);
+  }
+}
+
+.haatza-aurora-waves {
+  animation: haatzaAuroraPulse 4.5s ease-in-out infinite;
+  transform-origin: center;
+  filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.75));
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ==========================================================================
+   Category Product Card Neon Emerald Halo Glow Effect
+   (Replicating the screenshot's intense mint-emerald active aura)
+   ========================================================================== */
+@keyframes haatzaCardAuraPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(110, 231, 183, 0.95),
+                0 0 26px 8px rgba(52, 211, 153, 0.8),
+                0 0 55px 16px rgba(16, 185, 129, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 2.5px rgba(167, 243, 208, 1),
+                0 0 34px 10px rgba(52, 211, 153, 0.95),
+                0 0 68px 20px rgba(16, 185, 129, 0.6);
+  }
+}
+
+.haatza-neon-aura-card {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.haatza-neon-aura-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  border-color: #6ee7b7 !important;
+  animation: haatzaCardAuraPulse 2s ease-in-out infinite;
+  z-index: 25;
+}
+
+/* ==========================================================================
+   Cinematic Product Details Keyframes & Classes
+   ========================================================================== */
+@keyframes cinematicLightRay {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.35; }
+  50% { transform: rotate(180deg) scale(1.15); opacity: 0.65; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.35; }
+}
+
+@keyframes cinematicShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes cinematicBreath {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.03); opacity: 1; }
+}
+
+.cinematic-ray {
+  animation: cinematicLightRay 22s linear infinite;
+  will-change: transform, opacity;
+}
+
+.cinematic-shimmer {
+  animation: cinematicShimmer 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.cinematic-breath {
+  animation: cinematicBreath 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   Premium Emerald Product Showcase Stage & Animation Keyframes
+   ========================================================================== */
+@keyframes emeraldAuroraFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes emeraldRaysRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.22);
+    opacity: 0.85;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 0.55;
+  }
+}
+
+@keyframes emeraldBacklightBreath {
+  0%, 100% {
+    transform: scale(0.92);
+    opacity: 0.5;
+    filter: blur(28px);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.85;
+    filter: blur(40px);
+  }
+}
+
+@keyframes emeraldParticleFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+.emerald-stage-aurora {
+  background: linear-gradient(135deg, #052e16 0%, #064e3b 25%, #0c831f 50%, #047857 75%, #022c1c 100%);
+  background-size: 240% 240%;
+  animation: emeraldAuroraFlow 14s ease-in-out infinite;
+}
+
+.emerald-rays-spin {
+  animation: emeraldRaysRotate 28s linear infinite;
+  will-change: transform, opacity;
+}
+
+.emerald-backlight-breath {
+  animation: emeraldBacklightBreath 5s ease-in-out infinite;
+  will-change: transform, opacity, filter;
+}
+
+.emerald-particle-float {
+  animation: emeraldParticleFloat 4s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Cinematic Text Shimmer Micro-Gradient Animation
+   ========================================================================== */
+@keyframes textShimmerFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: textShimmerFlow 3.5s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   HAATZA LITE - GLOBAL PREMIUM PROFESSIONAL GREEN HOVER GLOW
+   Provides a luminous emerald aura across interactive elements, cards,
+   buttons, badges and inputs that do not already have one.
+   Strictly protects product cards and inner images from nested glow.
+   ========================================================================== */
+
+/* 1. Base transition property for smooth glowing responses */
+.haatza-lite-scope button,
+.haatza-lite-scope [role="button"],
+.haatza-lite-scope .cat-item-link,
+.haatza-lite-scope .haatza-section-card,
+.haatza-lite-scope input,
+.haatza-lite-scope textarea,
+.haatza-lite-scope select {
+  transition: box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 260ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 2. Interactive Action Buttons, Pills, Badges & Controls (Outside product cards) */
+.haatza-lite-scope button:not([disabled]):not(.haatza-neon-aura-card):not(.no-glow):hover,
+.haatza-lite-scope [role="button"]:not([disabled]):not(.haatza-neon-aura-card):not(.no-glow):hover,
+.haatza-lite-scope .btn:not([disabled]):not(.haatza-neon-aura-card):not(.no-glow):hover {
+  box-shadow: 0 0 18px rgba(0, 196, 81, 0.42), 0 4px 12px rgba(0, 196, 81, 0.25) !important;
+  border-color: rgba(0, 196, 81, 0.8) !important;
+}
+
+/* 3. Category Navigation Pills & Items: Soft borderless green shade */
+.haatza-lite-scope .cat-item-link:not(.is-active):hover {
+  background: rgba(12, 131, 31, 0.045) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 14px !important;
+}
+
+/* 4. Section Cards & Dedicated Glowing Containers */
+.haatza-lite-scope .haatza-section-card:not(.haatza-neon-aura-card):not(.no-glow):hover,
+.haatza-lite-scope .haatza-glow-card:hover {
+  box-shadow: 0 0 0 1.5px rgba(0, 196, 81, 0.45), 0 8px 24px -2px rgba(0, 196, 81, 0.24), 0 2px 8px rgba(0, 196, 81, 0.14) !important;
+  border-color: rgba(0, 196, 81, 0.6) !important;
+}
+
+/* 5. Inputs, Search Bars & Textareas on Hover / Focus */
+.haatza-lite-scope input:hover:not([disabled]),
+.haatza-lite-scope input:focus,
+.haatza-lite-scope textarea:hover:not([disabled]),
+.haatza-lite-scope textarea:focus {
+  border-color: #00C451 !important;
+  box-shadow: 0 0 0 2px rgba(0, 196, 81, 0.25), 0 0 18px rgba(0, 196, 81, 0.3) !important;
+}
+
+/* 6. STRICT PRODUCT CARD IMAGE PROTECTION:
+      Preserves the outer card's existing neon glow, but prevents any nested glow
+      when clicking or hovering the product image or internal wrappers. */
+.haatza-lite-scope .haatza-neon-aura-card > div:hover,
+.haatza-lite-scope .haatza-neon-aura-card [class*="aspect-square"],
+.haatza-lite-scope .haatza-neon-aura-card [class*="aspect-square"]:hover,
+.haatza-lite-scope .haatza-neon-aura-card a,
+.haatza-lite-scope .haatza-neon-aura-card a:hover,
+.haatza-lite-scope .haatza-neon-aura-card img,
+.haatza-lite-scope .haatza-neon-aura-card img:hover {
+  box-shadow: none !important;
+}
+
+
+

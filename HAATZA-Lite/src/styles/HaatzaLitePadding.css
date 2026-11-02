@@ -4,20 +4,20 @@
    ========================================================================== */
 
 :root {
-  /* Exact horizontal spacing design tokens */
-  --haatza-lite-pad-mobile: 24px;   /* < 640px (1.5rem / px-6) */
-  --haatza-lite-pad-tablet: 40px;   /* 640px - 1023px (2.5rem / sm:px-10) */
-  --haatza-lite-pad-desktop: 56px;  /* 1024px - 1279px (3.5rem / lg:px-14) */
-  --haatza-lite-pad-xl: 64px;       /* >= 1280px (4rem / xl:px-16) */
+  /* Exact horizontal spacing design tokens - Generous side space */
+  --haatza-lite-pad-mobile: 16px;   /* < 640px */
+  --haatza-lite-pad-tablet: 24px;   /* 640px - 1023px */
+  --haatza-lite-pad-desktop: 32px;  /* 1024px - 1279px */
+  --haatza-lite-pad-xl: 40px;       /* >= 1280px */
 
-  /* Combined nested dual-layer horizontal padding (outer + inner banner) */
-  --haatza-lite-nested-mobile: 48px;
-  --haatza-lite-nested-tablet: 80px;
-  --haatza-lite-nested-desktop: 112px;
-  --haatza-lite-nested-xl: 128px;
+  /* Combined nested dual-layer horizontal padding */
+  --haatza-lite-nested-mobile: 20px;
+  --haatza-lite-nested-tablet: 32px;
+  --haatza-lite-nested-desktop: 44px;
+  --haatza-lite-nested-xl: 52px;
 
   /* Standard maximum container width */
-  --haatza-lite-container-max: 1440px;
+  --haatza-lite-container-max: 1520px;
 
   /* Backward-compatible aliases */
   --lite-pad-mobile: var(--haatza-lite-pad-mobile);
@@ -33,35 +33,35 @@
 .haatza-lite-container,
 .lite-container {
   width: 100%;
-  max-width: var(--haatza-lite-container-max, 1440px);
+  max-width: var(--haatza-lite-container-max, 1520px);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--haatza-lite-pad-mobile, 24px);
-  padding-right: var(--haatza-lite-pad-mobile, 24px);
+  padding-left: var(--haatza-lite-pad-mobile, 16px);
+  padding-right: var(--haatza-lite-pad-mobile, 16px);
   box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
   .haatza-lite-container,
   .lite-container {
-    padding-left: var(--haatza-lite-pad-tablet, 40px);
-    padding-right: var(--haatza-lite-pad-tablet, 40px);
+    padding-left: var(--haatza-lite-pad-tablet, 24px);
+    padding-right: var(--haatza-lite-pad-tablet, 24px);
   }
 }
 
 @media (min-width: 1024px) {
   .haatza-lite-container,
   .lite-container {
-    padding-left: var(--haatza-lite-pad-desktop, 56px);
-    padding-right: var(--haatza-lite-pad-desktop, 56px);
+    padding-left: var(--haatza-lite-pad-desktop, 32px);
+    padding-right: var(--haatza-lite-pad-desktop, 32px);
   }
 }
 
 @media (min-width: 1280px) {
   .haatza-lite-container,
   .lite-container {
-    padding-left: var(--haatza-lite-pad-xl, 64px);
-    padding-right: var(--haatza-lite-pad-xl, 64px);
+    padding-left: var(--haatza-lite-pad-xl, 40px);
+    padding-right: var(--haatza-lite-pad-xl, 40px);
   }
 }
 
@@ -71,35 +71,35 @@
 .haatza-lite-banner-container,
 .lite-banner-container {
   width: 100%;
-  max-width: var(--haatza-lite-container-max, 1440px);
+  max-width: var(--haatza-lite-container-max, 1520px);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--haatza-lite-pad-mobile, 24px);
-  padding-right: var(--haatza-lite-pad-mobile, 24px);
+  padding-left: var(--haatza-lite-pad-mobile, 16px);
+  padding-right: var(--haatza-lite-pad-mobile, 16px);
   box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
   .haatza-lite-banner-container,
   .lite-banner-container {
-    padding-left: var(--haatza-lite-pad-tablet, 40px);
-    padding-right: var(--haatza-lite-pad-tablet, 40px);
+    padding-left: var(--haatza-lite-pad-tablet, 24px);
+    padding-right: var(--haatza-lite-pad-tablet, 24px);
   }
 }
 
 @media (min-width: 1024px) {
   .haatza-lite-banner-container,
   .lite-banner-container {
-    padding-left: var(--haatza-lite-pad-desktop, 56px);
-    padding-right: var(--haatza-lite-pad-desktop, 56px);
+    padding-left: var(--haatza-lite-pad-desktop, 32px);
+    padding-right: var(--haatza-lite-pad-desktop, 32px);
   }
 }
 
 @media (min-width: 1280px) {
   .haatza-lite-banner-container,
   .lite-banner-container {
-    padding-left: var(--haatza-lite-pad-xl, 64px);
-    padding-right: var(--haatza-lite-pad-xl, 64px);
+    padding-left: var(--haatza-lite-pad-xl, 40px);
+    padding-right: var(--haatza-lite-pad-xl, 40px);
   }
 }
 

@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode, useMemo } from 'react';
+import { useCart } from '@shopping/context/CartContext';
 import { HaatzaLiteCartItem, HaatzaLiteProduct } from '../types/haatzaLite.types';
+import { Product } from '@shopping/types';
 
 interface HaatzaLiteCartContextType {
   cart: HaatzaLiteCartItem[];
@@ -14,70 +16,98 @@ interface HaatzaLiteCartContextType {
 const HaatzaLiteCartContext = createContext<HaatzaLiteCartContextType | undefined>(undefined);
 
 export const HaatzaLiteCartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [cart, setCart] = useState<HaatzaLiteCartItem[]>(() => {
-    try {
-      localStorage.removeItem('haatza_lite_cart');
-    } catch {
-      // ignore
-    }
-    return [];
-  });
+  const rootCart = useCart();
 
-  const saveCart = (items: HaatzaLiteCartItem[]) => {
-    setCart(items);
-    try {
-      localStorage.setItem('haatza_lite_cart', JSON.stringify(items));
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const cart: HaatzaLiteCartItem[] = useMemo(() => {
+    if (!rootCart || !rootCart.cart) return [];
+    return rootCart.cart.map((item) => {
+      const prod = item.product || (item as any) || {};
+      return {
+        id: item.id || `cart-${prod.id}`,
+        productId: item.productId || prod.id,
+        product: {
+          id: prod.id || item.productId,
+          slug: prod.slug || prod.id || item.productId,
+          name: prod.name || 'Product',
+          brand: prod.brand || 'HAATZA',
+          categoryId: prod.categoryId || 'cat-lite',
+          subcategoryId: prod.subcategoryId,
+          categoryName: prod.categoryName || 'General',
+          subcategoryName: prod.subcategoryName,
+          description: prod.description || '',
+          fullDescription: prod.fullDescription || '',
+          price: prod.price || 0,
+          mrp: prod.mrp || prod.price || 0,
+          discountPercentage: prod.discountPercentage || 0,
+          rating: prod.rating || 4.8,
+          reviewCount: prod.reviewCount || 100,
+          stock: prod.stock || 50,
+          inStock: prod.inStock ?? true,
+          unit: prod.unit || '1 unit',
+          instantDeliveryMinutes: prod.instantDeliveryMinutes || 10,
+          mainImage: prod.mainImage || '',
+          images: prod.images || [prod.mainImage || ''],
+          tags: prod.tags || [],
+          sellerName: prod.sellerName || 'Haatza Lite DarkStore #14',
+          sellerRating: prod.sellerRating || 4.9,
+          deliveryDays: prod.deliveryDays || 0,
+        },
+        quantity: item.quantity || 1,
+      };
+    });
+  }, [rootCart?.cart]);
 
   const addToCart = (product: HaatzaLiteProduct, quantity: number = 1) => {
-    const existingIndex = cart.findIndex((item) => item.productId === product.id);
-    if (existingIndex >= 0) {
-      const updated = [...cart];
-      updated[existingIndex].quantity += quantity;
-      saveCart(updated);
-    } else {
-      saveCart([
-        ...cart,
-        {
-          id: `cart-lite-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
-          productId: product.id,
-          product,
-          quantity,
-        },
-      ]);
-    }
+    if (!rootCart) return;
+    const commonProduct: Product = {
+      id: product.id,
+      slug: product.slug || product.id,
+      name: product.name,
+      brand: product.brand || 'HAATZA LITE',
+      destination: 'lite',
+      categoryId: product.categoryId || 'cat-lite',
+      subcategoryId: product.subcategoryId,
+      categoryName: product.categoryName || 'Lite Groceries',
+      subcategoryName: product.subcategoryName,
+      description: product.description || '',
+      fullDescription: product.fullDescription || '',
+      price: product.price,
+      mrp: product.mrp || product.price,
+      discountPercentage: product.discountPercentage || 0,
+      rating: product.rating || 4.8,
+      reviewCount: product.reviewCount || 100,
+      stock: product.stock || 50,
+      inStock: product.inStock ?? true,
+      images: product.images || [product.mainImage],
+      mainImage: product.mainImage,
+      tags: product.tags || [],
+      instantDeliveryMinutes: product.instantDeliveryMinutes || 10,
+      unit: product.unit,
+      sellerName: product.sellerName || 'Haatza Lite DarkStore #14',
+      sellerRating: product.sellerRating || 4.9,
+      deliveryDays: product.deliveryDays || 0,
+    };
+    rootCart.addToCart(commonProduct, quantity);
   };
 
   const updateQuantity = (itemId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(itemId);
-    } else {
-      saveCart(
-        cart.map((item) => (item.id === itemId ? { ...item, quantity } : item))
-      );
-    }
+    rootCart?.updateQuantity(itemId, quantity);
   };
 
   const removeFromCart = (itemId: string) => {
-    saveCart(cart.filter((item) => item.id !== itemId));
+    rootCart?.removeFromCart(itemId);
   };
 
   const clearCart = () => {
-    saveCart([]);
+    rootCart?.clearCart();
   };
-
-  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const total = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   return (
     <HaatzaLiteCartContext.Provider
       value={{
         cart,
-        itemCount,
-        total,
+        itemCount: rootCart?.itemCount || 0,
+        total: rootCart?.total || 0,
         addToCart,
         updateQuantity,
         removeFromCart,
@@ -92,7 +122,15 @@ export const HaatzaLiteCartProvider: React.FC<{ children: ReactNode }> = ({ chil
 export function useHaatzaLiteCart(): HaatzaLiteCartContextType {
   const context = useContext(HaatzaLiteCartContext);
   if (!context) {
-    throw new Error('useHaatzaLiteCart must be used within a HaatzaLiteCartProvider');
+    return {
+      cart: [],
+      itemCount: 0,
+      total: 0,
+      addToCart: () => {},
+      updateQuantity: () => {},
+      removeFromCart: () => {},
+      clearCart: () => {},
+    };
   }
   return context;
 }

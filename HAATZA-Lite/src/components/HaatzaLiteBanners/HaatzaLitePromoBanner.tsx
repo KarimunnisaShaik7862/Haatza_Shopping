@@ -11,7 +11,7 @@ export const HaatzaLitePromoBanner: React.FC<HaatzaLitePromoBannerProps> = ({ ba
   if (!banners || banners.length === 0) return null;
 
   return (
-    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-3">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {banners.map((b) => (
           <div
