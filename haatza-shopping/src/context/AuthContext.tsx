@@ -82,6 +82,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       avatar: defaultDemoUser.avatar,
     };
     setUser(demoUser);
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(demoUser));
+    try {
+      sessionStorage.removeItem('haatza_nest_session_location');
+      localStorage.removeItem('haatza_nest_location');
+    } catch {}
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('haatza_auth_change'));
+    window.dispatchEvent(new CustomEvent('haatza_login'));
     showToast(`Welcome back, ${demoUser.name}!`, 'success');
     return true;
   };
@@ -95,12 +103,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       avatar: defaultDemoUser.avatar,
     };
     setUser(newUser);
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
+    try {
+      sessionStorage.removeItem('haatza_nest_session_location');
+      localStorage.removeItem('haatza_nest_location');
+    } catch {}
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('haatza_auth_change'));
+    window.dispatchEvent(new CustomEvent('haatza_login'));
     showToast(`Account created! Welcome to HAATZA, ${name}!`, 'success');
     return true;
   };
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem(USER_STORAGE_KEY);
+    try {
+      sessionStorage.removeItem('haatza_nest_session_location');
+      localStorage.removeItem('haatza_nest_location');
+      localStorage.removeItem('haatza_nest_location_unauth');
+      localStorage.removeItem('haatza_nest_location_guest');
+      Object.keys(sessionStorage).forEach((k) => {
+        if (k.startsWith('haatza_nest_location')) sessionStorage.removeItem(k);
+      });
+      Object.keys(localStorage).forEach((k) => {
+        if (k.startsWith('haatza_nest_location')) localStorage.removeItem(k);
+      });
+    } catch {}
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('haatza_auth_change'));
+    window.dispatchEvent(new CustomEvent('haatza_logout'));
     showToast('You have been logged out safely.', 'info');
   };
 

@@ -10,7 +10,7 @@ import { HaatzaApiException, getApiErrorMessage } from './haatzaNestBookingApi';
 const PENDING_PASS_KEY = 'haatza_nest_pending_pass_confirmation';
 const REQUEST_TIMEOUT_MS = 30000;
 
-const API_BASE = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+const API_BASE = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? '/_functions'
   : 'https://haatza.com/_functions';
 

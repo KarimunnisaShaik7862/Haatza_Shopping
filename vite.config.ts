@@ -17,6 +17,18 @@ export default defineConfig({
       '@nest': path.resolve(__dirname, './HAATZA-Nest/src'),
     },
   },
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: false,
+    proxy: {
+      '/_functions': {
+        target: 'https://haatza.com',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
   build: {
     rollupOptions: {
       output: {
@@ -28,4 +40,5 @@ export default defineConfig({
     },
   },
 })
+
 

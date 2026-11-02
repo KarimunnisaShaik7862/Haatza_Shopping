@@ -31,7 +31,7 @@ export function getApiErrorMessage(d: any): string {
   return 'Something went wrong. Please try again.';
 }
 
-const API_BASE = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+const API_BASE = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? '/_functions'
   : 'https://haatza.com/_functions';
 const REQUEST_TIMEOUT_MS = 30000;

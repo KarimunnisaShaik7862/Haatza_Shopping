@@ -68,7 +68,7 @@ export const DestinationSwitcher: React.FC<DestinationSwitcherProps> = ({ classN
             key={dest.id}
             to={dest.id === 'haatza' ? '/' : `/${dest.id}`}
             onClick={() => setDestination(dest.id)}
-            className={`group relative flex items-center gap-2 w-[122px] sm:w-[138px] h-9 sm:h-10 px-2.5 sm:px-3 rounded-md sm:rounded-lg border transition-all duration-200 cursor-pointer select-none text-left shadow-2xs shrink-0 ${
+            className={`group relative flex items-center gap-2 min-w-[128px] sm:min-w-[146px] px-3 sm:px-3.5 h-9 sm:h-10 rounded-md sm:rounded-lg border transition-all duration-200 cursor-pointer select-none text-left shadow-2xs shrink-0 ${
               isActive
                 ? `${dest.activeBg} ${dest.activeBorder} text-white shadow-xs scale-[1.01]`
                 : `bg-white border-zinc-200/90 text-zinc-800 ${dest.hoverBorder} hover:shadow-xs`

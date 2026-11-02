@@ -39,10 +39,12 @@ const HaatzaLiteSearchPage = lazy(() => import('@lite/pages/search/HaatzaLiteSea
 // Nest Layout, Providers & Pages
 import { HaatzaNestLayout } from '@nest/app/HaatzaNestLayout';
 import { HaatzaNestLocationProvider } from '@nest/context/HaatzaNestLocationContext';
+import { HaatzaNestDashboardProvider } from '@nest/context/HaatzaNestDashboardContext';
 import { HaatzaNestBookingProvider } from '@nest/context/HaatzaNestBookingContext';
 import { HaatzaNestHomePage } from '@nest/pages/HaatzaNestHome/HaatzaNestHomePage';
 const HaatzaNestServicesPage = lazy(() => import('@nest/pages/services/HaatzaNestServicesPage').then(m => ({ default: m.HaatzaNestServicesPage })));
 const HaatzaNestBookingsPage = lazy(() => import('@nest/pages/bookings/HaatzaNestBookingsPage').then(m => ({ default: m.HaatzaNestBookingsPage })));
+const HaatzaNestProfilePage = lazy(() => import('@nest/pages/profile/HaatzaNestProfilePage').then(m => ({ default: m.HaatzaNestProfilePage })));
 
 // Root container for Lite with isolated provider context
 const HaatzaLiteRoot: React.FC = () => (
@@ -56,9 +58,11 @@ const HaatzaLiteRoot: React.FC = () => (
 // Root container for Nest with isolated provider context
 const HaatzaNestRoot: React.FC = () => (
   <HaatzaNestLocationProvider>
-    <HaatzaNestBookingProvider>
-      <HaatzaNestLayout />
-    </HaatzaNestBookingProvider>
+    <HaatzaNestDashboardProvider>
+      <HaatzaNestBookingProvider>
+        <HaatzaNestLayout />
+      </HaatzaNestBookingProvider>
+    </HaatzaNestDashboardProvider>
   </HaatzaNestLocationProvider>
 );
 
@@ -85,6 +89,8 @@ export const AppRouter: React.FC = () => {
         <Route index element={<HaatzaNestHomePage />} />
         <Route path="services" element={<HaatzaNestServicesPage />} />
         <Route path="bookings" element={<HaatzaNestBookingsPage />} />
+        <Route path="profile" element={<HaatzaNestProfilePage />} />
+        <Route path="account" element={<HaatzaNestProfilePage />} />
       </Route>
       {/* Nest compatibility redirects */}
       <Route path="/next" element={<Navigate to="/nest" replace />} />

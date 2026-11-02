@@ -12,6 +12,10 @@ import { UnifiedMainNavigation } from './components/navigation/UnifiedMainNaviga
 import { AppRouter } from './router';
 
 export function App() {
+  if (typeof window !== 'undefined') {
+    (window as any).__HAATZA_UNIFIED__ = true;
+  }
+
   return (
     <BrowserRouter>
       <ToastProvider>
