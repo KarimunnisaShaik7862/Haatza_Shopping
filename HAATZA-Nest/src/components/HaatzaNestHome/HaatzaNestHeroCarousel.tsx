@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  CheckCircle2, 
-  ChevronLeft, 
-  ChevronRight 
+import {
+  Sparkles,
+  ArrowRight,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import heroBannerNestFamily from '../../assets/haatza_nest_hero_banner_nest_family.png';
 import { HaatzaNestCouponDrawer } from './HaatzaNestCouponDrawer';
@@ -27,9 +27,9 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
   const { nestpass, nestpassData, coupons } = useHaatzaNestDashboard();
   const activePass = nestpass && nestpassData.length > 0 ? nestpassData[0] : null;
   const passBannerImg = activePass?.dashboardBanner || (coupons.length > 0 ? coupons[0].image : heroBannerNestFamily);
-  const passAltText = activePass 
+  const passAltText = activePass
     ? `HAATZA Nest Pass ${activePass.packId} - ${activePass.visits} visits at ₹${activePass.price} (${activePass.validityDays} days)`
-    : 'HAATZA Nest Family Pass - Get 15 + 2 visits at ₹1099';
+    : 'HAATZA Nest Family Pass - Get 25 + 5 visits at ₹1099';
 
   // Retain the remaining promotional hero banner (Family Pass / Coupons)
   const realSlides: HeroSlideData[] = [
@@ -44,10 +44,10 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
   // Extended slides array with prepended and appended clones for seamless infinite looping when multiple slides exist
   const extendedSlides = realSlides.length > 1
     ? [
-        realSlides[realSlides.length - 1],
-        ...realSlides,
-        realSlides[0],
-      ]
+      realSlides[realSlides.length - 1],
+      ...realSlides,
+      realSlides[0],
+    ]
     : realSlides;
 
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -139,7 +139,7 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
     const singleSlide = realSlides[0];
     return (
       <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-3 sm:pt-4">
-        <div 
+        <div
           className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-gradient-to-r from-[#ECE5FD] via-[#F6F0FE] to-[#F4EDFD] border border-[#EBE4DC] shadow-[0_12px_36px_-12px_rgba(76,29,149,0.08)] min-h-[300px] sm:min-h-[340px] md:min-h-[360px] flex items-center justify-center group select-none cursor-pointer"
           onClick={() => setIsCouponDrawerOpen(true)}
           role="button"
@@ -173,7 +173,7 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
   // Multi-Banner Carousel Display
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-3 sm:pt-4">
-      <div 
+      <div
         className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-[#FAF8F5] border border-[#EBE4DC] shadow-[0_12px_36px_-12px_rgba(76,29,149,0.08)] min-h-[330px] sm:min-h-[350px] md:min-h-[370px] flex items-center group select-none"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -183,12 +183,12 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
         aria-label="HAATZA Nest Home Services Highlights"
       >
         {/* Horizontal Slide Track */}
-        <div 
+        <div
           className="flex w-full h-full min-h-[330px] sm:min-h-[350px] md:min-h-[370px]"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
-            transition: isTransitioning 
-              ? 'transform 700ms cubic-bezier(0.25, 1, 0.5, 1)' 
+            transition: isTransitioning
+              ? 'transform 700ms cubic-bezier(0.25, 1, 0.5, 1)'
               : 'none',
             willChange: 'transform',
           }}
@@ -197,7 +197,7 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
           {extendedSlides.map((slide, idx) => {
             if (slide.isImageOnly) {
               return (
-                <div 
+                <div
                   key={`${slide.id}-${idx}`}
                   className="w-full shrink-0 relative min-h-[330px] sm:min-h-[350px] md:min-h-[370px] flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#ECE5FD] via-[#F6F0FE] to-[#F4EDFD] cursor-pointer group/coupon transition-colors duration-200"
                   aria-hidden={idx !== currentIndex}
@@ -222,7 +222,7 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
             }
 
             return (
-              <div 
+              <div
                 key={`${slide.id}-${idx}`}
                 className="w-full shrink-0 relative min-h-[330px] sm:min-h-[350px] md:min-h-[370px] flex items-center overflow-hidden"
                 aria-hidden={idx !== currentIndex}
@@ -299,7 +299,7 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
         </button>
 
         {/* Carousel Indicators */}
-        <div 
+        <div
           className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-purple-100/80 shadow-2xs"
           role="tablist"
           aria-label="Carousel pagination"
@@ -314,11 +314,10 @@ export const HaatzaNestHeroCarousel: React.FC = () => {
                 aria-selected={isActive}
                 aria-label={`Go to slide ${dotIdx + 1}`}
                 onClick={() => handleDotClick(dotIdx)}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  isActive
+                className={`transition-all duration-300 rounded-full cursor-pointer ${isActive
                     ? 'w-7 h-2 bg-[#7027C9] shadow-xs'
                     : 'w-2 h-2 bg-purple-200 hover:bg-[#7027C9]/40'
-                }`}
+                  }`}
               />
             );
           })}
