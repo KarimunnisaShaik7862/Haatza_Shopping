@@ -4,24 +4,867 @@
    ========================================================================== */
 
 :root {
-  --haatza-nest-purple: #6C3FC5;
-  --haatza-nest-purple-hover: #572fa8;
+  --haatza-nest-purple: #7027C9;
+  --haatza-nest-purple-deep: #351064;
+  --haatza-nest-purple-accent: #9138F5;
+  --haatza-nest-yellow: #FFD83D;
+  --haatza-nest-yellow-hover: #F0C419;
+  --haatza-nest-lavender: #F7F1FF;
   --haatza-nest-purple-light: #F2ECFC;
-  --haatza-nest-purple-surface: #F6F2FC;
-  --haatza-nest-yellow: #FFD54F;
-  --haatza-nest-yellow-hover: #ffca28;
-  --haatza-nest-bg: #FAF8FD;
+  --haatza-nest-purple-surface: #FAF8FD;
+  --haatza-nest-bg: #F7F1FF;
   --haatza-nest-surface: #FFFFFF;
-  --haatza-nest-text: #172033;
-  --haatza-nest-text-muted: #64748B;
-  --haatza-nest-border: #E8E2F2;
+  --haatza-nest-text: #25212D;
+  --haatza-nest-text-muted: #625D6E;
+  --haatza-nest-border: #E8E0F3;
 }
 
 @keyframes haatzaNestGlow {
-  0%, 100% { box-shadow: 0 0 15px rgba(108, 63, 197, 0.2); }
-  50% { box-shadow: 0 0 25px rgba(108, 63, 197, 0.35); }
+  0%, 100% { box-shadow: 0 0 15px rgba(112, 39, 201, 0.2); }
+  50% { box-shadow: 0 0 28px rgba(112, 39, 201, 0.38); }
+}
+
+@keyframes haatzaNestPulseBadge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
 }
 
 .haatza-nest-glow {
   animation: haatzaNestGlow 2.5s ease-in-out infinite;
 }
+
+.haatza-nest-pulse {
+  animation: haatzaNestPulseBadge 3s ease-in-out infinite;
+}
+
+@keyframes haatzaFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes haatzaSparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.haatza-float {
+  animation: haatzaFloat 4s ease-in-out infinite;
+}
+
+.haatza-sparkle {
+  animation: haatzaSparkle 2.5s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   HAATZA NEST HERO BANNER SPECIFICATION RULES
+   Container heights: Desktop 480px-520px, Tablet 420px, Mobile 520px-580px
+   Padding: Desktop 56px/40px, Tablet 36px/32px, Mobile 24px
+   Border Radius: Desktop 24px, Mobile 16px
+   ========================================================================== */
+.haatza-nest-hero-banner {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #4A0E4E 0%, #6A1B9A 38%, #7B2CBF 72%, #9D4EDD 100%);
+  min-height: 520px;
+  padding: 28px 24px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .haatza-nest-hero-banner {
+    min-height: 540px;
+    padding: 32px 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  .haatza-nest-hero-banner {
+    height: 420px;
+    min-height: 420px;
+    padding: 32px 36px;
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .haatza-nest-hero-banner {
+    height: 480px;
+    min-height: 480px;
+    padding: 40px 56px;
+    border-radius: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .haatza-nest-hero-banner {
+    height: 520px;
+    min-height: 520px;
+    padding: 40px 56px;
+    border-radius: 24px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Fade-Up Reveal and Scrollbar Utilities
+   -------------------------------------------------------------------------- */
+@keyframes haatzaFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.haatza-fade-up {
+  animation: haatzaFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   SMOOTH IMAGE CARD HOVER ANIMATIONS
+   Reference-compliant floating information panel animation:
+/* ==========================================================================
+   LAYERED FLOATING CARD HOVER ANIMATION (Partial Boundary Overlap)
+   - Root Card: position: relative; pb-7 sm:pb-8 for outside overlap clearance
+   - Image Frame: position: relative; overflow: hidden; rounded-2xl
+   - White Content Card: position: absolute; z-index: 30; partially outside
+   - Default: Content card hidden (opacity: 0, translateY(24px))
+   - Hover: Smoothly slides upward, partially outside bottom boundary of image
+   - Mouse Leave: Smoothly slides back inside/down and hides
+   ========================================================================== */
+.haatza-layered-card {
+  position: relative;
+  isolation: isolate;
+  padding-bottom: 1.25rem; /* 20px clearance for compact box extending outside the image */
+}
+
+@media (min-width: 640px) {
+  .haatza-layered-card {
+    padding-bottom: 1.5rem; /* 24px */
+  }
+}
+
+.haatza-card-image-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem; /* 20px */
+  background-color: #FAF8FD;
+  border: 1px solid rgba(232, 224, 243, 0.9);
+  box-shadow: 0 4px 16px -4px rgba(76, 29, 149, 0.06);
+  transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.haatza-layered-card:hover .haatza-card-image-frame {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -6px rgba(76, 29, 149, 0.18);
+  border-color: rgba(145, 56, 245, 0.4);
+}
+
+.haatza-layered-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.haatza-layered-card:hover .haatza-layered-card-img,
+.haatza-layered-card:focus-within .haatza-layered-card-img {
+  transform: scale(1.05);
+}
+
+/* Compact Purple Content Box - Overlaps image bottom edge & partially extends outside */
+.haatza-layered-floating-panel {
+  position: absolute;
+  bottom: 0.25rem; /* Extends outside the image frame */
+  left: 1rem;
+  right: 1rem;
+  z-index: 30;
+  background: #7027C9;
+  color: #ffffff;
+  border-radius: 0.875rem; /* 14px rounded corners */
+  padding: 0.625rem 1rem; /* Compact padding for small box */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 28px -4px rgba(112, 39, 201, 0.5), 0 4px 12px -2px rgba(112, 39, 201, 0.3);
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+@media (min-width: 640px) {
+  .haatza-layered-floating-panel {
+    bottom: 0.375rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 1rem; /* 16px */
+  }
+}
+
+/* Desktop Hover & Focus State: Smoothly slide upward and partially outside */
+@media (hover: hover) and (pointer: fine) {
+  .haatza-layered-card:hover .haatza-layered-floating-panel,
+  .haatza-layered-card:focus-within .haatza-layered-floating-panel,
+  .haatza-layered-floating-panel.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* Touch / Mobile State: Accessible via tap */
+@media (hover: none) or (pointer: coarse) {
+  .haatza-layered-floating-panel.is-active,
+  .haatza-layered-card:focus-within .haatza-layered-floating-panel {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .haatza-layered-card-img,
+  .haatza-card-image-frame,
+  .haatza-layered-floating-panel {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   ONE HOUSE HELP EXPERT TO DO IT ALL (.category-list & .inclusion-grid)
+   ========================================================================== */
+
+/* 1. Category Cards Row (.category-list) */
+.category-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  padding-left: 4px;
+  padding-right: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  justify-content: flex-start;
+}
+
+@media (min-width: 640px) {
+  .category-list {
+    gap: 14px;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .category-list {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .category-list {
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
+.category-list::-webkit-scrollbar {
+  height: 6px;
+}
+.category-list::-webkit-scrollbar-track {
+  background: #f4f4f5;
+  border-radius: 9999px;
+}
+.category-list::-webkit-scrollbar-thumb {
+  background: #e4e4e7;
+  border-radius: 9999px;
+}
+
+.category-card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 1.125rem; /* 18px */
+  background: #ffffff;
+  border: 2px solid #e5e7eb; /* 2px subtle border */
+  cursor: pointer;
+  width: 118px;
+  height: 160px;
+  transition: background-color 380ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 380ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .category-card {
+    width: 132px;
+    height: 178px;
+    padding: 0;
+    border-radius: 1.25rem; /* 20px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .category-card {
+    width: 140px;
+    height: 190px;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .category-card {
+    width: 148px;
+    height: 200px;
+    padding: 0;
+  }
+}
+
+.category-card:hover {
+  border-color: #d8b4fe;
+  transform: translateY(-2.5px);
+  box-shadow: 0 8px 20px -4px rgba(112, 36, 199, 0.14);
+}
+
+.category-card.is-active,
+.category-card.is-rotated-active {
+  background: #ffffff !important;
+  border-color: #7b2cbf !important; /* single clean outer purple border */
+  box-shadow: 0 8px 24px -2px rgba(112, 36, 199, 0.22),
+              0 2px 8px rgba(112, 36, 199, 0.10) !important;
+  transform: translateY(-3px);
+  outline: none !important;
+}
+
+@keyframes nestLivingFrameRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.nest-living-frame-beam {
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    transparent 260deg,
+    rgba(157, 78, 221, 0.45) 305deg,
+    rgba(216, 180, 254, 0.65) 335deg,
+    transparent 360deg
+  );
+  animation: nestLivingFrameRotate 4s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nest-living-frame-beam {
+    animation: none !important;
+  }
+  .category-card {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* 2. Included / Not Included Comparison Section (.inclusion-grid) */
+.inclusion-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .inclusion-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .inclusion-grid {
+    gap: 24px;
+  }
+}
+
+.inclusion-card {
+  width: 100%;
+  border-radius: 1.25rem; /* 20px */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: border-color 280ms ease, box-shadow 280ms ease;
+  will-change: border-color, box-shadow;
+}
+
+@media (min-width: 640px) {
+  .inclusion-card {
+    padding: 26px;
+    border-radius: 1.5rem; /* 24px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .inclusion-card {
+    padding: 32px;
+  }
+}
+
+.inclusion-card-included {
+  background-color: #eefbf4; /* light mint background */
+  border: 1.5px solid rgba(16, 185, 129, 0.25);
+  color: #064e3b; /* dark green text */
+}
+
+/* On desktop hover, use only a very subtle border and shadow enhancement (no vertical jumping to keep boxes balanced) */
+@media (hover: hover) and (pointer: fine) {
+  .inclusion-card-included:hover {
+    border-color: rgba(16, 185, 129, 0.55);
+    box-shadow: 0 8px 24px -4px rgba(16, 185, 129, 0.16), 0 2px 6px rgba(16, 185, 129, 0.08);
+  }
+}
+
+.inclusion-card-excluded {
+  background-color: #fff5f5; /* light pink background */
+  border: 1.5px solid rgba(239, 68, 68, 0.25);
+  color: #7f1d1d; /* dark red text */
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .inclusion-card-excluded:hover {
+    border-color: rgba(239, 68, 68, 0.55);
+    box-shadow: 0 8px 24px -4px rgba(239, 68, 68, 0.16), 0 2px 6px rgba(239, 68, 68, 0.08);
+  }
+}
+
+/* Staggered list item base styling - visible by default so content is never blank */
+.inclusion-list-item {
+  position: relative;
+  border-radius: 0.75rem;
+  padding: 6px 10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: background-color 220ms ease;
+  will-change: opacity, transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .inclusion-card-included .inclusion-list-item:hover {
+    background-color: rgba(16, 185, 129, 0.07);
+  }
+
+  .inclusion-card-excluded .inclusion-list-item:hover {
+    background-color: rgba(239, 68, 68, 0.07);
+  }
+}
+
+/* Base icon state */
+.inclusion-check-icon,
+.inclusion-cross-icon,
+.inclusion-header-icon {
+  opacity: 1;
+  transform: scale(1);
+  will-change: opacity, transform, box-shadow;
+}
+
+/* Smooth Entrance Keyframes */
+@keyframes inclusionBoxReveal {
+  0% {
+    opacity: 0.85;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes inclusionItemSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 1. Included box: Subtle green scale-and-fade reveal with soft green highlight */
+@keyframes inclusionCheckReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.65);
+    box-shadow: 0 0 0 rgba(22, 163, 74, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+    box-shadow: 0 0 10px 2px rgba(34, 197, 94, 0.45);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 2px 6px rgba(22, 163, 74, 0.22);
+  }
+}
+
+/* 2. Not Included box: Subtle red cross fade-and-scale effect with soft red/pink accent */
+@keyframes inclusionCrossReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.65);
+    box-shadow: 0 0 0 rgba(220, 38, 38, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.06);
+    box-shadow: 0 0 8px 1px rgba(244, 63, 94, 0.35);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
+  }
+}
+
+/* When the boxes enter viewport, activate smooth staggered reveals */
+.inclusion-revealed .inclusion-card-included {
+  animation: inclusionBoxReveal 380ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.inclusion-revealed .inclusion-card-excluded {
+  animation: inclusionBoxReveal 380ms cubic-bezier(0.16, 1, 0.3, 1) 50ms forwards;
+}
+
+.inclusion-revealed .inclusion-card-included .inclusion-header-icon {
+  animation: inclusionCheckReveal 460ms cubic-bezier(0.16, 1, 0.3, 1) 30ms forwards;
+}
+
+.inclusion-revealed .inclusion-card-excluded .inclusion-header-icon {
+  animation: inclusionCrossReveal 460ms cubic-bezier(0.16, 1, 0.3, 1) 60ms forwards;
+}
+
+.inclusion-revealed .inclusion-card-included .inclusion-list-item {
+  animation: inclusionItemSlideUp 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.inclusion-revealed .inclusion-card-included .inclusion-check-icon {
+  animation: inclusionCheckReveal 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.inclusion-revealed .inclusion-card-excluded .inclusion-list-item {
+  animation: inclusionItemSlideUp 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.inclusion-revealed .inclusion-card-excluded .inclusion-cross-icon {
+  animation: inclusionCrossReveal 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .inclusion-card,
+  .inclusion-list-item,
+  .inclusion-check-icon,
+  .inclusion-cross-icon,
+  .inclusion-header-icon,
+  .inclusion-revealed .inclusion-card-included,
+  .inclusion-revealed .inclusion-card-excluded,
+  .inclusion-revealed .inclusion-card-included .inclusion-header-icon,
+  .inclusion-revealed .inclusion-card-excluded .inclusion-header-icon,
+  .inclusion-revealed .inclusion-card-included .inclusion-list-item,
+  .inclusion-revealed .inclusion-card-included .inclusion-check-icon,
+  .inclusion-revealed .inclusion-card-excluded .inclusion-list-item,
+  .inclusion-revealed .inclusion-card-excluded .inclusion-cross-icon {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ==========================================================================
+   HOW HAATZA NEST WORKS - 3-CARD CONTINUOUS 6s ANIMATION
+   ========================================================================== */
+
+.haatza-step-card {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 300ms ease,
+              box-shadow 300ms ease;
+  will-change: transform, border-color, box-shadow;
+}
+
+.haatza-step-card-active {
+  transform: translateY(-4px) scale(1.02) !important;
+  border-color: #7027C9 !important;
+  box-shadow: 0 12px 28px -6px rgba(112, 39, 201, 0.22) !important;
+}
+
+.haatza-step-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: #7027C9;
+  box-shadow: 0 12px 28px -6px rgba(112, 39, 201, 0.22);
+}
+
+@keyframes lineBeamPulse {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0.2;
+  }
+}
+
+.animate-line-beam {
+  animation: lineBeamPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haatza-step-card,
+  .haatza-step-card-active,
+  .animate-line-beam {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   FOOTER BACKGROUND WATERMARK ("Haatza Nest")
+   - Centered behind footer content horizontally & vertically
+   - Subtle lighter-purple blend with #240643 background
+   - Responsive fluid typography with zero horizontal overflow
+   ========================================================================== */
+.haatza-footer-watermark-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.haatza-footer-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 900;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  color: #8B35EA;
+  opacity: 0.085;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  font-size: clamp(2.75rem, 11vw, 5rem);
+  text-transform: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 480px) {
+  .haatza-footer-watermark {
+    font-size: clamp(4rem, 11.5vw, 6.5rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .haatza-footer-watermark {
+    font-size: clamp(5.5rem, 9.5vw, 8rem);
+    opacity: 0.085;
+  }
+}
+
+@media (min-width: 1024px) {
+  .haatza-footer-watermark {
+    font-size: clamp(7.5rem, 9vw, 11rem);
+    opacity: 0.09;
+    letter-spacing: -0.04em;
+  }
+}
+
+@media (min-width: 1440px) {
+  .haatza-footer-watermark {
+    font-size: 11.5rem;
+    opacity: 0.09;
+  }
+}
+
+/* ==========================================================================
+   HERO TYPOGRAPHY & MICRO-ANIMATION STYLES
+   - Modern, premium bold rounded geometric sans-serif + elegant playful script
+   - Smooth fade-up and word-by-word reveal animations
+   - Subtle purple text glow & gradient shimmer
+   - Respects prefers-reduced-motion
+   ========================================================================== */
+
+.nest-hero-heading {
+  font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.025em;
+  animation: nestFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.nest-hero-charcoal {
+  color: #1A1523;
+  font-weight: 800;
+}
+
+.nest-hero-home-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.nest-hero-home-gradient {
+  background: linear-gradient(135deg, #7027C9 0%, #8E38F5 45%, #B066FE 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(112, 39, 201, 0.2));
+  animation: nestGradientShimmer 7s ease-in-out infinite;
+}
+
+.nest-hero-home-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #7027C9, #C084FC);
+  border-radius: 9999px;
+  opacity: 0.85;
+}
+
+.nest-hero-playful {
+  font-family: 'Caveat', 'Playfair Display', cursive, serif;
+  font-weight: 700;
+  font-size: 1.15em;
+  letter-spacing: 0.01em;
+  color: #7027C9;
+  display: inline-block;
+  vertical-align: baseline;
+  text-shadow: 0 1px 12px rgba(112, 39, 201, 0.12);
+}
+
+.nest-hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: nestWordReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  margin-right: 0.22em;
+}
+
+.nest-hero-word:last-child {
+  margin-right: 0;
+}
+
+.nest-hero-word-1 {
+  animation-delay: 0.18s;
+}
+
+.nest-hero-word-2 {
+  animation-delay: 0.32s;
+}
+
+.nest-hero-word-3 {
+  animation-delay: 0.46s;
+}
+
+@keyframes nestFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nestWordReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nestGradientShimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nest-hero-heading,
+  .nest-hero-home-gradient,
+  .nest-hero-word {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+

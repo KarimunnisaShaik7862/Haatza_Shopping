@@ -24,10 +24,10 @@ export const HaatzaNestButton: React.FC<HaatzaNestButtonProps> = ({
   }[size];
 
   const variantStyles = {
-    primary: 'bg-[#6C3FC5] hover:bg-[#572fa8] text-white shadow-sm hover:shadow',
-    secondary: 'bg-[#F2ECFC] hover:bg-[#e4d7f9] text-[#6C3FC5]',
-    outline: 'border border-[#6C3FC5] text-[#6C3FC5] hover:bg-[#F2ECFC]',
-    yellow: 'bg-[#FFD54F] hover:bg-[#ffca28] text-zinc-900 shadow-sm font-black',
+    primary: 'bg-[#7027C9] hover:bg-[#5A1EAA] text-white shadow-md shadow-purple-900/15',
+    secondary: 'bg-[#F2ECFC] hover:bg-[#e4d7f9] text-[#7027C9]',
+    outline: 'border border-[#7027C9] text-[#7027C9] hover:bg-[#F2ECFC]',
+    yellow: 'bg-[#FFD83D] hover:bg-[#F0C419] text-[#25212D] shadow-md shadow-amber-900/10 font-black',
   }[variant];
 
   return (

@@ -10,7 +10,7 @@ export const HaatzaNestCategoryNav: React.FC = () => {
           <Link
             key={cat.id}
             to={`/nest/services?category=${cat.slug}`}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-zinc-200/80 hover:border-purple-400 hover:bg-purple-50/50 transition-all text-xs font-bold text-zinc-700 hover:text-[#6C3FC5] shrink-0"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[#E8E0F3] hover:border-[#7027C9] hover:bg-[#F2ECFC] transition-all text-xs font-bold text-[#625D6E] hover:text-[#7027C9] shrink-0"
           >
             <img
               src={cat.image}
