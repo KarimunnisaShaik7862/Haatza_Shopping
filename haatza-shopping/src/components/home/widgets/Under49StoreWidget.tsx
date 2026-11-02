@@ -6,14 +6,14 @@ import { useWishlist } from '../../../context/WishlistContext';
 import { mockUnder49Products } from '../../../services/mock/data/promotions';
 import { optimizeImageUrl } from '../../../utils/imageOptimizer';
 
-// Assets imported directly so Vite bundles and resolves them without 404s
-import storeBannerImg from '../../../assets/images/banners/49-store1.png';
-import shirtImg from '../../../assets/images/store49/shirt.png';
-import sunglassesImg from '../../../assets/images/store49/sunglasses.png';
-import sneakersImg from '../../../assets/images/store49/sneakers.png';
-import handbagImg from '../../../assets/images/store49/handbag.png';
-import bottleImg from '../../../assets/images/store49/bottle.png';
-import walletImg from '../../../assets/images/store49/wallet.png';
+// Canonical media paths served cleanly via Vite's public images directory
+const storeBannerImg = '/images/banners/49-store1.png';
+const shirtImg = '/images/store49/shirt.png';
+const sunglassesImg = '/images/store49/sunglasses.png';
+const sneakersImg = '/images/store49/sneakers.png';
+const handbagImg = '/images/store49/handbag.png';
+const bottleImg = '/images/store49/bottle.png';
+const walletImg = '/images/store49/wallet.png';
 
 // Transparent stage showcase asset mapping for the 3D podium
 const STAGE_IMAGES: Record<string, string> = {
@@ -421,11 +421,11 @@ export const Under49StoreWidget: React.FC<Under49StoreWidgetProps> = ({
       {/* -------------------------------------------------- */}
       {/* 2. PRODUCT SHOWCASE DIRECTLY BELOW THE BANNER      */}
       {/* -------------------------------------------------- */}
-      <div className="flex flex-col md:flex-row items-start justify-between gap-5 sm:gap-6 pt-3 sm:pt-5">
+      <div className="flex flex-row items-center md:items-start justify-between gap-3 sm:gap-6 pt-3 sm:pt-5">
         {/* Left Side: Premium 3D Typography for ₹49 Store (Center-aligned, brought down to align with products) */}
         <div
           ref={textSectionRef}
-          className="w-full md:w-[220px] lg:w-[250px] xl:w-[270px] shrink-0 flex flex-col items-center text-center justify-start select-none pt-4 md:pt-8.5"
+          className="w-[105px] xs:w-[125px] sm:w-[160px] md:w-[220px] lg:w-[250px] xl:w-[270px] shrink-0 flex flex-col items-center text-center justify-center md:justify-start select-none pt-1 md:pt-8.5"
         >
           {/* Main 3D Heading: ₹49 STORE (Center Aligned) */}
           <h2
@@ -433,45 +433,45 @@ export const Under49StoreWidget: React.FC<Under49StoreWidgetProps> = ({
               textInView ? 'haatza-3d-entrance' : 'opacity-0'
             }`}
           >
-            <span className="haatza-3d-price haatza-3d-shimmer block text-5xl sm:text-6xl lg:text-[62px] xl:text-[66px] font-black tracking-tighter text-center">
+            <span className="haatza-3d-price haatza-3d-shimmer block text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[62px] xl:text-[66px] font-black tracking-tighter text-center">
               ₹49
             </span>
-            <span className="haatza-3d-store block text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-black tracking-tight mt-1 text-center">
+            <span className="haatza-3d-store block text-lg xs:text-2xl sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[46px] font-black tracking-tight mt-0.5 sm:mt-1 text-center">
               STORE
             </span>
           </h2>
 
           {/* Short Description (Center Aligned) */}
-          <p className="text-xs sm:text-sm text-slate-600 font-normal font-sans mt-2.5 sm:mt-3 leading-snug text-center max-w-[210px] mx-auto">
+          <p className="text-[10px] xs:text-xs sm:text-sm text-slate-600 font-normal font-sans mt-1 sm:mt-3 leading-snug text-center max-w-[105px] xs:max-w-[125px] sm:max-w-[160px] md:max-w-[210px] mx-auto line-clamp-2 sm:line-clamp-none">
             Everyday essentials at prices you'll love.
           </p>
 
           {/* Arrow Link Only (Center Aligned) */}
-          <div className="mt-3 sm:mt-3.5 flex justify-center">
+          <div className="mt-1 sm:mt-3.5 flex justify-center">
             <Link
               to="/category/under-49"
               aria-label="Explore ₹49 Store Collection"
               title="Explore ₹49 Store Collection"
               className="group inline-flex items-center justify-center text-[#2962FF] hover:text-[#1E40AF] transition-colors p-1"
             >
-              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:translate-x-1.5" />
+              <ArrowRight className="w-4 h-4 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:translate-x-1.5" />
             </Link>
           </div>
         </div>
 
         {/* Right Side: Header with Reduced-Size Arrows on Top + Five Product Items */}
-        <div className="flex-1 w-full flex flex-col">
-          {/* Top Arrows Row - placed at top of products, aligned to the right */}
-          <div className="flex items-center justify-end gap-1.5 mb-2.5 select-none">
+        <div className="flex-1 min-w-0 flex flex-col">
+          {/* Top Arrows Row - placed at top of products, aligned to the right (Hidden on mobile) */}
+          <div className="hidden sm:flex items-center justify-end gap-1 sm:gap-1.5 mb-1.5 sm:mb-2.5 select-none">
             {/* Functional Previous Arrow (Reduced size: 28px) */}
             <button
               type="button"
               onClick={handlePrev}
               aria-label="Previous 5 products"
-              className="w-7 h-7 rounded-full border border-slate-200 hover:border-blue-300 bg-white hover:bg-blue-50/80 flex items-center justify-center text-[#2962FF] shadow-2xs transition-all duration-200 cursor-pointer active:scale-95"
+              className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-slate-200 hover:border-blue-300 bg-white hover:bg-blue-50/80 flex items-center justify-center text-[#2962FF] shadow-2xs transition-all duration-200 cursor-pointer active:scale-95"
               title="Previous 5 products"
             >
-              <ChevronLeft className="w-3.5 h-3.5" />
+              <ChevronLeft className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </button>
 
             {/* Functional Next Arrow (Reduced size: 28px) */}
@@ -479,17 +479,17 @@ export const Under49StoreWidget: React.FC<Under49StoreWidgetProps> = ({
               type="button"
               onClick={handleNext}
               aria-label="Next 5 products"
-              className="w-7 h-7 rounded-full border border-slate-200 hover:border-blue-300 bg-white hover:bg-blue-50/80 flex items-center justify-center text-[#2962FF] shadow-2xs transition-all duration-200 cursor-pointer active:scale-95"
+              className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-slate-200 hover:border-blue-300 bg-white hover:bg-blue-50/80 flex items-center justify-center text-[#2962FF] shadow-2xs transition-all duration-200 cursor-pointer active:scale-95"
               title="Next 5 products"
             >
-              <ChevronRight className="w-3.5 h-3.5" />
+              <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </button>
           </div>
 
           {/* Strictly Single Row of 5 Products - Never wraps into 2 rows */}
           <div className="w-full overflow-x-auto no-scrollbar pb-1">
             <div
-              className={`grid grid-cols-5 min-w-[540px] sm:min-w-0 gap-3 sm:gap-4 lg:gap-5 w-full transition-all duration-300 ease-out ${
+              className={`flex flex-row flex-nowrap sm:grid sm:grid-cols-5 gap-2.5 sm:gap-4 lg:gap-5 w-full transition-all duration-300 ease-out ${
                 isTransitioning
                   ? 'opacity-0 scale-98 -translate-x-2'
                   : 'opacity-100 scale-100 translate-x-0'
@@ -501,7 +501,7 @@ export const Under49StoreWidget: React.FC<Under49StoreWidgetProps> = ({
               return (
                 <div
                   key={product.id}
-                  className="flex flex-col group cursor-pointer text-left select-none"
+                  className="w-[96px] xs:w-[108px] sm:w-auto shrink-0 sm:shrink flex flex-col group cursor-pointer text-left select-none"
                 >
                   {/* Clean rounded image container WITHOUT grey background box */}
                   <div className="relative w-full aspect-square rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 group-hover:scale-[1.02]">
@@ -520,18 +520,18 @@ export const Under49StoreWidget: React.FC<Under49StoreWidgetProps> = ({
                       />
                     </Link>
 
-                    {/* Wishlist Heart Toggle */}
+                    {/* Wishlist Heart Toggle (Small, sleek badge on mobile) */}
                     <button
                       type="button"
                       onClick={(e) => handleWishlistToggle(e, product)}
-                      className={`absolute top-2 right-2 w-7 sm:w-7.5 h-7 sm:h-7.5 rounded-full flex items-center justify-center transition-all z-10 cursor-pointer ${
+                      className={`absolute top-1.5 sm:top-2 right-1.5 sm:right-2 w-5.5 h-5.5 sm:w-7.5 sm:h-7.5 rounded-full flex items-center justify-center transition-all z-10 cursor-pointer ${
                         isInWishlist(product.id)
                           ? 'bg-[#2962FF] text-white shadow-xs'
                           : 'bg-white/90 text-zinc-600 hover:text-[#2962FF] hover:bg-white border border-[#E5EAF3]'
                       }`}
                       aria-label={isInWishlist(product.id) ? 'Remove from wishlist' : 'Save to wishlist'}
                     >
-                      <Heart className={`w-3.5 h-3.5 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
+                      <Heart className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
                     </button>
                   </div>
 

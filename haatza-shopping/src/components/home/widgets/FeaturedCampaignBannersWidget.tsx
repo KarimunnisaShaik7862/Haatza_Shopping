@@ -25,10 +25,6 @@ export const FeaturedCampaignBannersWidget: React.FC<FeaturedCampaignBannersWidg
     >
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#2962FF] mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-[#2962FF]" />
-            <span>Curated Seasonal Edits</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight font-heading">
             Featured Campaigns
           </h2>

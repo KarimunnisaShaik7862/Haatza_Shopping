@@ -52,14 +52,18 @@ export const LocationSelectorModal: React.FC = () => {
     }
   }, [isModalOpen, modalInitialMode]);
 
-  // Handle Escape key to close
+  // Handle Escape key to close & lock body scroll
   useEffect(() => {
     if (!isModalOpen) return;
+    document.body.style.overflow = 'hidden';
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeLocationModal();
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isModalOpen, closeLocationModal]);
 
   if (!isModalOpen) return null;

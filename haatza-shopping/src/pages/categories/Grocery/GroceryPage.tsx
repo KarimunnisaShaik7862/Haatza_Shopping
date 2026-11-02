@@ -28,8 +28,6 @@ export const GroceryPage: React.FC = () => {
       <Breadcrumbs items={[{ label: 'Categories', link: '/products' }, { label: 'Daily Groceries' }]} className="mb-4" />
       <SectionHeading
         title="Daily Groceries & Pantry Staples"
-        subtitle="Fresh fruits, organic veggies, dairy produce, and pantry staples in 10-15 minutes."
-        badge="10-15 MIN EXPRESS"
       />
       {loading ? (
         <Loading type="grid" count={8} />

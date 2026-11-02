@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Product } from '../../types';
 import { ProductCard } from './ProductCard';

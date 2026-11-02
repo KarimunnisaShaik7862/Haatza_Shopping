@@ -28,8 +28,6 @@ export const BeautyPage: React.FC = () => {
       <Breadcrumbs items={[{ label: 'Categories', link: '/products' }, { label: 'Beauty & Skincare' }]} className="mb-4" />
       <SectionHeading
         title="Luxury Beauty, Derma Serums & Fragrances"
-        subtitle="Clinically tested Vitamin C serums, French evening perfumes, and clean skincare."
-        badge="DERMA APPROVED"
       />
       {loading ? (
         <Loading type="grid" count={8} />

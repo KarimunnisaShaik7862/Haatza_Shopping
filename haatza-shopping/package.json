@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "organize-assets": "node organize_shopping_assets.cjs",
+    "consolidate-assets": "node consolidate_assets.cjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

@@ -136,3 +136,349 @@
   }
 }
 
+/* ==========================================================================
+   SECTION ENTRANCE & HIGHLIGHT REVEAL ANIMATIONS
+   Clean, coordinated fade-in + slight upward translation (0 to 10px)
+   Without individual card cascading or lag
+   ========================================================================== */
+.haatza-section-reveal-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+.haatza-section-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.haatza-products-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.08s, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.08s;
+  will-change: opacity, transform;
+}
+
+/* Optional one-time elegant light sweep for Limited-Time Deals only */
+@keyframes haatza-deals-light-sweep {
+  0% {
+    transform: translateX(-100%) skewX(-20deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.haatza-deals-sweep {
+  animation: haatza-deals-light-sweep 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s forwards;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haatza-section-reveal-hidden,
+  .haatza-section-reveal-visible,
+  .haatza-products-reveal-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .haatza-deals-sweep {
+    animation: none !important;
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   ROTATING BLUE NEON SHIMMER BORDER HOVER EFFECT
+   - Uses CSS conic-gradient with smooth @property angle rotation
+   - Dual-layer mask-composite (content-box exclusion) for a hollow 1.5px border
+   - Strict Haatza Blue palette: #2962FF, #60A5FA, #A5D8FF
+   - Starts rotation & fades in on hover/focus, smoothly fades out on leave
+   - 100% transparent center, zero layout impact, pointer-events: none
+   ========================================================================== */
+
+@property --haatza-shimmer-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes haatza-shimmer-spin {
+  from {
+    --haatza-shimmer-angle: 0deg;
+  }
+  to {
+    --haatza-shimmer-angle: 360deg;
+  }
+}
+
+/* =========================================================================
+   LIKED BY YOU SECTION - ROTATING BLUE NEON SHIMMER BORDER HOVER EFFECT
+   ========================================================================= */
+
+@property --haatza-card-glow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes haatza-card-glow-spin {
+  from {
+    --haatza-card-glow-angle: 0deg;
+  }
+  to {
+    --haatza-card-glow-angle: 360deg;
+  }
+}
+
+.haatza-card-shimmer-border {
+  position: relative;
+  border: 1px solid #E2E8F0; /* subtle grey border in normal state */
+  border-radius: 1rem; /* matches rounded-2xl (16px) */
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.haatza-card-shimmer-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--haatza-card-glow-angle, 0deg),
+    transparent 0deg,
+    transparent 60deg,
+    rgba(41, 98, 255, 0.25) 90deg,
+    #2962FF 115deg,
+    #60A5FA 135deg,
+    #A5D8FF 150deg,
+    #60A5FA 165deg,
+    #2962FF 185deg,
+    rgba(41, 98, 255, 0.25) 210deg,
+    transparent 240deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 30;
+  box-sizing: border-box;
+}
+
+.haatza-card-shimmer-border:hover::before,
+.haatza-card-shimmer-border:focus-within::before,
+.group:hover .haatza-card-shimmer-border::before,
+.group:focus-within .haatza-card-shimmer-border::before {
+  opacity: 1;
+  animation: haatza-card-glow-spin 2.8s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(41, 98, 255, 0.55)) drop-shadow(0 0 8px rgba(96, 165, 250, 0.3));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haatza-card-shimmer-border:hover::before,
+  .haatza-card-shimmer-border:focus-within::before,
+  .group:hover .haatza-card-shimmer-border::before,
+  .group:focus-within .haatza-card-shimmer-border::before {
+    animation: none !important;
+    opacity: 0.85;
+  }
+}
+
+/* =========================================================================
+   RECENTLY VIEWED BY YOU - MINIMALIST ELEVATION & DYNAMIC SHADOW
+   - Flat subtle presence in normal state
+   - Smooth 0.35s cubic-bezier upward lift (-8px) on hover
+   - Realistic multi-layered neutral diffused shadow
+   - Product image and content move harmoniously together
+   ========================================================================= */
+
+.haatza-elevation-card {
+  transform: translateY(0);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+              filter 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+              box-shadow 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform, filter;
+  /* Normal state: subtle flat presence */
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.05))
+          drop-shadow(0 1px 1px rgba(15, 23, 42, 0.03));
+}
+
+.haatza-elevation-card .haatza-elevation-image {
+  transition: box-shadow 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+/* Hover & Focus state: gentle upward lift + layered natural depth shadows */
+.haatza-elevation-card:hover,
+.group:hover .haatza-elevation-card,
+.haatza-elevation-card:focus-within {
+  transform: translateY(-8px);
+  filter: drop-shadow(0 4px 6px rgba(15, 23, 42, 0.04))
+          drop-shadow(0 10px 15px rgba(15, 23, 42, 0.07))
+          drop-shadow(0 20px 25px rgba(15, 23, 42, 0.06))
+          drop-shadow(0 25px 35px rgba(15, 23, 42, 0.04));
+  z-index: 25;
+}
+
+.haatza-elevation-card:hover .haatza-elevation-image,
+.group:hover .haatza-elevation-card .haatza-elevation-image,
+.haatza-elevation-card:focus-within .haatza-elevation-image {
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.09),
+              0 6px 12px -3px rgba(15, 23, 42, 0.05);
+}
+
+/* Accessible reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .haatza-elevation-card,
+  .haatza-elevation-card:hover,
+  .group:hover .haatza-elevation-card,
+  .haatza-elevation-card:focus-within {
+    transform: none !important;
+    transition: filter 0.35s ease, box-shadow 0.35s ease !important;
+  }
+}
+
+/* =========================================================================
+   FRESH NEW ARRIVALS - PRODUCT CARD LIFT & PRE-RENDERED BLUE SHADOW (.hc-lift)
+   - Smooth 6px upward lift on hover & :focus-within
+   - Pre-rendered vibrant Haatza blue shadow using ::before with opacity fade
+   - Multi-layer luminous blue floating depth (#2962FF / #60A5FA)
+   - Keyboard navigation with visible :focus-visible outline
+   - Respects prefers-reduced-motion & touch devices
+   ========================================================================= */
+
+.hc-lift,
+.haatza-lift-card {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+              filter 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform, filter;
+}
+
+/* Pre-rendered vibrant blue shadow on ::before pseudo-element */
+.hc-lift::before,
+.haatza-lift-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 1rem;
+  box-shadow: 0 14px 30px -2px rgba(41, 98, 255, 0.30),
+              0 8px 18px -3px rgba(41, 98, 255, 0.22),
+              0 4px 10px -1px rgba(96, 165, 250, 0.25),
+              0 0 14px 2px rgba(41, 98, 255, 0.16);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Internal image pre-rendered blue depth shadow */
+.hc-lift-image {
+  position: relative;
+}
+
+.hc-lift-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 12px 26px -3px rgba(41, 98, 255, 0.28),
+              0 6px 14px -2px rgba(96, 165, 250, 0.22),
+              0 2px 8px -1px rgba(41, 98, 255, 0.16);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* On hover (desktop hover capability): Lift upward by 6px & fade in radiant blue shadow */
+@media (hover: hover) and (pointer: fine) {
+  .hc-lift:hover,
+  .group:hover .hc-lift,
+  .haatza-lift-card:hover,
+  .group:hover .haatza-lift-card {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 6px 16px rgba(41, 98, 255, 0.22));
+  }
+
+  .hc-lift:hover::before,
+  .group:hover .hc-lift::before,
+  .haatza-lift-card:hover::before,
+  .group:hover .haatza-lift-card::before {
+    opacity: 1;
+  }
+
+  .hc-lift:hover .hc-lift-image::before,
+  .group:hover .hc-lift .hc-lift-image::before,
+  .haatza-lift-card:hover .hc-lift-image::before,
+  .group:hover .haatza-lift-card .hc-lift-image::before {
+    opacity: 1;
+  }
+}
+
+/* Focus-within: Smooth 6px lift and blue shadow on keyboard navigation */
+.hc-lift:focus-within,
+.haatza-lift-card:focus-within {
+  transform: translateY(-6px);
+  filter: drop-shadow(0 6px 16px rgba(41, 98, 255, 0.22));
+}
+
+.hc-lift:focus-within::before,
+.haatza-lift-card:focus-within::before {
+  opacity: 1;
+}
+
+.hc-lift:focus-within .hc-lift-image::before,
+.haatza-lift-card:focus-within .hc-lift-image::before {
+  opacity: 1;
+}
+
+/* Clearly visible :focus-visible outline for keyboard accessibility */
+.hc-lift:focus-visible,
+.hc-lift:has(:focus-visible),
+.haatza-lift-card:focus-visible,
+.haatza-lift-card:has(:focus-visible) {
+  outline: 2px solid #2962FF;
+  outline-offset: 3px;
+  border-radius: 1rem;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hc-lift,
+  .hc-lift:hover,
+  .group:hover .hc-lift,
+  .hc-lift:focus-within,
+  .haatza-lift-card,
+  .haatza-lift-card:hover,
+  .group:hover .haatza-lift-card,
+  .haatza-lift-card:focus-within {
+    transform: none !important;
+    transition: opacity 0.3s ease !important;
+  }
+}
+
+
+
+
+
+

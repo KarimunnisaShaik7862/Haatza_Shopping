@@ -30,16 +30,9 @@ export const CashbackOffersWidget: React.FC<CashbackOffersWidgetProps> = ({
     >
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#2962FF] mb-1">
-            <CreditCard className="w-3.5 h-3.5 text-[#2962FF]" />
-            <span>Bank & Wallet Privileges</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight font-heading">
             Cashback & Payment Offers
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Save extra at checkout with authorized UPI, credit card, and No-Cost EMI partnerships.
-          </p>
         </div>
       </div>
 

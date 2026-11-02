@@ -10,7 +10,7 @@ import { CartButton } from './CartButton';
 import { OrdersButton } from './OrdersButton';
 import { CategoryNavigation } from './CategoryNavigation';
 import { LocationSelectorModal } from '../layout/LocationSelectorModal';
-import { Menu, X, Package, Heart, MapPin, HelpCircle } from 'lucide-react';
+import { Menu, X, Package, Heart, MapPin, HelpCircle, ChevronRight } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { destination, setDestination, theme } = useDestination();
@@ -19,6 +19,17 @@ export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     let ticking = false;
@@ -56,23 +67,87 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className={`sticky top-[49px] sm:top-[53px] ${isSearchOpen ? 'z-50' : 'z-40'} bg-white transition-shadow duration-200`}
+        className={`sticky top-0 ${isSearchOpen ? 'z-50' : 'z-40'} bg-white transition-shadow duration-200 border-b border-[#E5EAF3]`}
       >
-        {/* ROW: Search Bar | User Actions (Profile, Wishlist, Cart) */}
-        <div className="bg-white">
-          <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-3 sm:gap-4 lg:gap-6">
-            {/* Left side: Mobile Drawer Trigger + Search Bar */}
-            <div className="flex-1 flex items-center gap-2 sm:gap-3 min-w-0">
-              <button
-                type="button"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-1.5 -ml-1 text-zinc-600 hover:text-zinc-900 rounded-lg hover:bg-zinc-100 transition-colors shrink-0"
-                aria-label="Toggle mobile menu"
-              >
-                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
+        {/* =========================================================================
+            MOBILE NAVBAR (Under lg screens: < 1024px)
+            Clean 3-Row Structure:
+            Row 1: Haatza, Nest, Lite boxes (Left) + Location Icon Only (Right)
+            Row 2: Search bar (1) + Wishlist (2) + Profile (3) + Orders (4)
+            Row 3: Category Navigation
+            ========================================================================= */}
+        <div className="lg:hidden bg-white">
+          {/* Mobile Row 1: Haatza, Nest, Lite (Left) + Location Icon Only (Right) */}
+          <div className="flex items-center justify-between px-3 py-1.5 border-b border-zinc-100">
+            {/* Left: HAATZA, LITE, NEST Navigation Boxes (Same uniform size across all three) */}
+            <div className="flex items-center gap-1.5">
+              {[
+                { id: 'haatza', label: 'HAATZA', path: '/', activeBg: 'bg-[#2962FF] text-white border-[#2962FF]' },
+                { id: 'lite', label: 'LITE', path: '/lite', activeBg: 'bg-[#238636] text-white border-[#238636]' },
+                { id: 'nest', label: 'NEST', path: '/nest', activeBg: 'bg-[#6C3FC5] text-white border-[#6C3FC5]' },
+              ].map((dest) => {
+                const isActive = destination === dest.id;
+                return (
+                  <Link
+                    key={dest.id}
+                    to={dest.path}
+                    onClick={() => setDestination(dest.id as any)}
+                    className={`w-[60px] h-[26px] flex items-center justify-center rounded-md text-[11px] font-black tracking-tight border transition-colors select-none font-heading ${
+                      isActive
+                        ? `${dest.activeBg} shadow-2xs`
+                        : 'bg-zinc-50 text-zinc-800 border-zinc-200/90 hover:bg-zinc-100'
+                    }`}
+                  >
+                    {dest.label}
+                  </Link>
+                );
+              })}
+            </div>
 
-              {/* Search Bar */}
+            {/* Right: Clean Location Icon Only */}
+            <button
+              type="button"
+              onClick={openLocationModal}
+              className="p-1.5 -mr-1 text-zinc-700 hover:text-[#2962FF] hover:bg-zinc-100 rounded-lg transition-colors flex items-center justify-center cursor-pointer focus:outline-hidden"
+              aria-label="Select delivery location"
+              title="Select delivery location"
+            >
+              <MapPin className="w-4.5 h-4.5 text-[#2962FF]" />
+            </button>
+          </div>
+
+          {/* Mobile Row 2: Search bar (1) + Wishlist icon (2) + Profile icon (3) + My Orders (4) */}
+          <div className="flex items-center justify-between gap-1 px-3 py-1.5 border-b border-[#E5EAF3]">
+            {/* 1. Search Bar taking flexible available width */}
+            <div className="flex-1 min-w-0">
+              <SearchBar isScrolled={isScrolled} onOpenChange={setIsSearchOpen} />
+            </div>
+
+            {/* 2. Wishlist Icon */}
+            <div className="shrink-0">
+              <WishlistButton />
+            </div>
+
+            {/* 3. Profile Icon */}
+            <div className="shrink-0">
+              <ProfileMenu />
+            </div>
+
+            {/* 4. My Orders */}
+            <div className="shrink-0">
+              <OrdersButton />
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            DESKTOP & TABLET NAVBAR (lg screens and up: >= 1024px)
+            Completely Preserved Master Reference Layout
+            ========================================================================= */}
+        <div className="hidden lg:block bg-white">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-3 sm:gap-4 lg:gap-6">
+            {/* Left side: Search Bar */}
+            <div className="flex-1 flex items-center gap-2 sm:gap-3 min-w-0">
               <div className="flex-1 max-w-xl lg:max-w-2xl">
                 <SearchBar isScrolled={isScrolled} onOpenChange={setIsSearchOpen} />
               </div>
@@ -101,7 +176,7 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* ROW 3: Category Navigation */}
+        {/* ROW 4: Category Navigation */}
         <CategoryNavigation isScrolled={isScrolled} />
       </header>
 

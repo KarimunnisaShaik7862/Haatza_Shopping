@@ -8,7 +8,8 @@ import { CartProvider } from './providers/CartProvider';
 import { WishlistProvider } from './providers/WishlistProvider';
 import { RecentlyViewedProvider } from './providers/RecentlyViewedProvider';
 import { ActivityProvider } from './providers/ActivityProvider';
-import { AppRouter } from './router';
+import { AppRoutes } from './AppRoutes';
+
 
 export function App() {
   return (
@@ -21,8 +22,9 @@ export function App() {
                 <WishlistProvider>
                   <RecentlyViewedProvider>
                     <ActivityProvider>
-                      <AppRouter />
+                      <AppRoutes />
                     </ActivityProvider>
+
                   </RecentlyViewedProvider>
                 </WishlistProvider>
               </CartProvider>

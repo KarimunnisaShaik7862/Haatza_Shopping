@@ -1,59 +1,53 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
-import { cn } from '../../utils/formatters';
+import { defaultTypography, formatBicolorHeading, BicolorHeadingOptions } from '../../theme/typography';
 
-export interface SectionHeadingProps {
+export interface SectionHeadingProps extends BicolorHeadingOptions {
   title: string;
   subtitle?: string;
+  eyebrow?: string;
   badge?: string;
-  viewAllLink?: string;
-  viewAllText?: string;
+  eyebrowIcon?: React.ReactNode;
+  align?: 'left' | 'center' | 'right';
   className?: string;
-  children?: React.ReactNode;
+  titleClassName?: string;
+  subtitleClassName?: string;
 }
 
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
   title,
   subtitle,
+  eyebrow,
   badge,
-  viewAllLink,
-  viewAllText = 'View All',
-  className,
-  children,
+  eyebrowIcon,
+  highlightWords,
+  colorMode = 'default',
+  accentEffect = 'none',
+  align = 'left',
+  className = '',
+  titleClassName = '',
+  subtitleClassName = '',
 }) => {
-  return (
-    <div className={cn('flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5', className)}>
-      <div>
-        <div className="flex items-center gap-2">
-          <h2 className="text-xl sm:text-2xl font-black text-[#172033] tracking-tight font-heading">
-            {title}
-          </h2>
-          {badge && (
-            <span className="text-[10px] font-black uppercase tracking-wider bg-[#DBEAFE] text-[#2962FF] px-2 py-0.5 rounded-full font-heading">
-              {badge}
-            </span>
-          )}
-        </div>
-        {subtitle && (
-          <p className="text-xs sm:text-sm text-[#64748B] mt-1 font-body">
-            {subtitle}
-          </p>
-        )}
-      </div>
+  const alignClass =
+    align === 'center'
+      ? 'text-center items-center'
+      : align === 'right'
+      ? 'text-right items-end'
+      : 'text-left items-start';
 
-      <div className="flex items-center gap-3">
-        {children}
-        {viewAllLink && (
-          <Link
-            to={viewAllLink}
-            className="group inline-flex items-center gap-1 text-xs font-bold text-[#2962FF] hover:text-[#1E4ED8] hover:underline font-heading transition-colors"
-          >
-            <span>{viewAllText}</span>
-            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-        )}
-      </div>
+  return (
+    <div className={`flex flex-col ${alignClass} ${className}`}>
+      {/* Main Section Heading */}
+      <h2
+        className={`${defaultTypography.styles.sectionHeading.className} ${titleClassName}`}
+      >
+        {formatBicolorHeading(title, {
+          highlightWords,
+          colorMode,
+          accentEffect,
+        })}
+      </h2>
     </div>
   );
 };
+
+export default SectionHeading;

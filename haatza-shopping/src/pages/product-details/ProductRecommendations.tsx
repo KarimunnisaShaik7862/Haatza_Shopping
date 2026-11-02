@@ -50,13 +50,10 @@ const RecommendationRow: React.FC<RecommendationRowProps> = ({
           <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight font-heading">
             {title}
           </h3>
-          <p className="text-xs text-slate-500 font-body">
-            {subtitle}
-          </p>
         </div>
 
         {products.length > 3 && (
-          <div className="flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-2">
             <button
               type="button"
               onClick={scrollLeft}

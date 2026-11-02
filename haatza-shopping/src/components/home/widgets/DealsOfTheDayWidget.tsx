@@ -261,7 +261,7 @@ export const DealsOfTheDayWidget: React.FC<DealsOfTheDayWidgetProps> = ({
               ref={(el) => {
                 itemRefs.current[index] = el;
               }}
-              className="w-[168px] sm:w-[185px] md:w-[200px] lg:w-[212px] shrink-0"
+              className="w-[124px] xs:w-[130px] sm:w-[160px] md:w-[172px] lg:w-[184px] shrink-0"
             >
               <DealProductCard
                 product={product}

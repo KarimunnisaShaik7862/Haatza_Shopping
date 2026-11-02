@@ -28,8 +28,6 @@ export const HomeAndKitchenPage: React.FC = () => {
       <Breadcrumbs items={[{ label: 'Categories', link: '/products' }, { label: 'Home & Kitchen' }]} className="mb-4" />
       <SectionHeading
         title="Home, Living & Smart Kitchenware"
-        subtitle="Egyptian cotton bedsheets, air fryers, ambient lamps, and cookware."
-        badge="HOME ESSENTIALS"
       />
       {loading ? (
         <Loading type="grid" count={8} />

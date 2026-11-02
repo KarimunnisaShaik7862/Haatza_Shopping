@@ -1,13 +1,3 @@
-import React from 'react';
-import { PageContainer } from '../../../components/layout/PageContainer';
-import { MensFashionDepartmentView } from '../../../components/fashion/MensFashionDepartmentView';
-
-export const MenFashionPage: React.FC = () => {
-  return (
-    <PageContainer className="py-6">
-      <MensFashionDepartmentView />
-    </PageContainer>
-  );
-};
-
+import { MenFashionPage } from '../../../features/men-fashion/pages/MenFashionPage';
+export { MenFashionPage };
 export default MenFashionPage;

@@ -101,10 +101,6 @@ export const ProductPromosSection: React.FC<ProductPromosSectionProps> = ({
           <h3 className="text-sm sm:text-base font-bold text-[#111827] tracking-tight font-heading leading-tight">
             Promos for you
           </h3>
-          <span className="hidden sm:inline-block text-slate-300">•</span>
-          <p className="hidden sm:inline-block text-xs text-slate-500 font-body">
-            Curated campaign spotlights with floating product displays & verified savings
-          </p>
         </div>
 
         {/* Small Dot Nav Indicator for rotating featured items */}
@@ -263,12 +259,12 @@ const RightPromotionalGallery: React.FC<RightPromotionalGalleryProps> = ({ items
   const row2Items = items.slice(3, 5);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-3.5 h-full items-stretch">
+    <div className="flex sm:grid sm:grid-cols-6 overflow-x-auto no-scrollbar gap-2.5 sm:gap-3.5 h-full items-stretch pb-1">
       {/* =====================================================================
           FIRST ROW: EXACTLY THREE GRIDS (Each col-span-2 in 6-col grid)
           ===================================================================== */}
       {row1Items.map((item) => (
-        <div key={item.id} className="col-span-1 sm:col-span-2 flex flex-col">
+        <div key={item.id} className="min-w-[155px] xs:min-w-[175px] sm:min-w-0 sm:col-span-2 flex flex-col shrink-0 sm:shrink">
           <RightGalleryTile item={item} isRow2={false} />
         </div>
       ))}
@@ -277,7 +273,7 @@ const RightPromotionalGallery: React.FC<RightPromotionalGalleryProps> = ({ items
           SECOND ROW: EXACTLY TWO GRIDS (Each col-span-3 in 6-col grid)
           ===================================================================== */}
       {row2Items.map((item) => (
-        <div key={item.id} className="col-span-1 sm:col-span-3 flex flex-col">
+        <div key={item.id} className="min-w-[155px] xs:min-w-[175px] sm:min-w-0 sm:col-span-3 flex flex-col shrink-0 sm:shrink">
           <RightGalleryTile item={item} isRow2={true} />
         </div>
       ))}

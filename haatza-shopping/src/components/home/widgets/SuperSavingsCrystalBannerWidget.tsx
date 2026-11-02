@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import glossyBannerImg from '../../../assets/images/banners/glossy-blue-super-savings-banner.png';
+const glossyBannerImg = '/images/banners/glossy-blue-super-savings-banner.png';
 
 export interface PromotionalOffer {
   id: string;

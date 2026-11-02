@@ -541,6 +541,8 @@ export const productService = {
             p.categoryName.toLowerCase().includes(catSlug) ||
             p.subcategoryId?.toLowerCase().includes(catSlug) ||
             p.subcategoryName?.toLowerCase().includes(catSlug) ||
+            p.brand.toLowerCase().includes(catSlug) ||
+            p.name.toLowerCase().includes(catSlug) ||
             p.tags?.some((t) => t.toLowerCase().includes(catSlug))
         );
       }

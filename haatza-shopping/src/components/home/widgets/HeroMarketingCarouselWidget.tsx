@@ -107,34 +107,34 @@ export const HeroMarketingCarouselWidget: React.FC<HeroMarketingCarouselWidgetPr
                 </div>
 
                 {/* Main Headline */}
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight sm:leading-[1.15] text-white font-heading drop-shadow-xs">
+                <h2 className="text-base xs:text-lg sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight sm:leading-[1.15] text-white font-heading drop-shadow-xs">
                   {slide.headline}
                 </h2>
 
                 {/* Subtitle */}
-                <p className="mt-2 text-base sm:text-lg font-medium text-blue-100/95 tracking-wide font-sans drop-shadow-xs">
+                <p className="mt-0.5 sm:mt-2 text-xs xs:text-sm sm:text-lg font-medium text-blue-100/95 tracking-wide font-sans drop-shadow-xs">
                   {slide.subtitle}
                 </p>
 
                 {/* Editorial Description */}
-                <p className="mt-3 text-xs sm:text-sm text-slate-200 max-w-lg leading-relaxed line-clamp-2 sm:line-clamp-3">
+                <p className="mt-0.5 sm:mt-3 text-[10px] xs:text-[11px] sm:text-sm text-slate-200 max-w-lg leading-relaxed line-clamp-2 sm:line-clamp-3">
                   {slide.description}
                 </p>
 
                 {/* CTAs */}
-                <div className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
+                <div className="mt-2.5 sm:mt-6 flex flex-wrap items-center gap-2 sm:gap-4">
                   <Link
                     to={slide.ctaLink}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#0B132B] hover:bg-[#EEF3FF] hover:text-[#2962FF] font-bold text-sm tracking-wide shadow-md transition-all duration-200 active:scale-95 group"
+                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl bg-white text-[#0B132B] hover:bg-[#EEF3FF] hover:text-[#2962FF] font-bold text-[11px] xs:text-xs sm:text-sm tracking-wide shadow-md transition-all duration-200 active:scale-95 group"
                   >
                     <span>{slide.ctaText}</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
 
                   {slide.secondaryCtaText && slide.secondaryCtaLink && (
                     <Link
                       to={slide.secondaryCtaLink}
-                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-xs font-semibold text-sm tracking-wide transition-all duration-200"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-5 sm:py-3 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-xs font-semibold text-[11px] xs:text-xs sm:text-sm tracking-wide transition-all duration-200"
                     >
                       <span>{slide.secondaryCtaText}</span>
                     </Link>
@@ -146,12 +146,12 @@ export const HeroMarketingCarouselWidget: React.FC<HeroMarketingCarouselWidgetPr
         })}
       </div>
 
-      {/* Manual Navigation Controls (Left & Right Arrows) */}
+      {/* Manual Navigation Controls (Left & Right Arrows - Hidden on Mobile) */}
       <button
         type="button"
         onClick={prevSlide}
         aria-label="Previous Campaign"
-        className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs border border-white/20 flex items-center justify-center transition-all duration-200 active:scale-90 focus:outline-hidden cursor-pointer"
+        className="hidden sm:flex absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs border border-white/20 items-center justify-center transition-all duration-200 active:scale-90 focus:outline-hidden cursor-pointer"
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
@@ -160,7 +160,7 @@ export const HeroMarketingCarouselWidget: React.FC<HeroMarketingCarouselWidgetPr
         type="button"
         onClick={nextSlide}
         aria-label="Next Campaign"
-        className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs border border-white/20 flex items-center justify-center transition-all duration-200 active:scale-90 focus:outline-hidden cursor-pointer"
+        className="hidden sm:flex absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs border border-white/20 items-center justify-center transition-all duration-200 active:scale-90 focus:outline-hidden cursor-pointer"
       >
         <ChevronRight className="w-5 h-5" />
       </button>

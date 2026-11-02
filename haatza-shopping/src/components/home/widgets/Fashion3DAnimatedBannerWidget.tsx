@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import homePageGirlImg from '../../../assets/images/banners/home-page-girl.png';
+const homePageGirlImg = '/images/banners/home-page-girl.png';
 
 export interface Fashion3DPromoSlide {
   id: string;
@@ -156,6 +156,23 @@ export const Fashion3DAnimatedBannerWidget: React.FC<Fashion3DAnimatedBannerWidg
             4px 6px 16px rgba(37, 99, 235, 0.32);
         }
 
+        /* Mobile Scoped Crisp 3D Text Shadow - Eliminates Heavy Murkiness */
+        @media (max-width: 639px) {
+          .haatza-3d-headline {
+            text-shadow:
+              0.5px 0.5px 0px #cbd5e1,
+              1px 1px 0px #94a3b8,
+              1.5px 1.5px 0px #64748b,
+              2px 3px 6px rgba(15, 23, 42, 0.18);
+          }
+          .haatza-3d-secondline {
+            text-shadow:
+              0.5px 0.5px 0px #93c5fd,
+              1px 1px 0px #3b82f6,
+              1.5px 2px 5px rgba(37, 99, 235, 0.25);
+          }
+        }
+
         /* 3D Perspective Rotation Stages */
         .haatza-flip-stage {
           perspective: 1200px;
@@ -289,22 +306,22 @@ export const Fashion3DAnimatedBannerWidget: React.FC<Fashion3DAnimatedBannerWidg
       `}</style>
 
       {/* Main Content Layout (Sitting directly on the page background with NO boxes or cards) */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 min-h-[440px] sm:min-h-[480px] lg:min-h-[520px]">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
+        <div className="flex flex-row items-center justify-between gap-2.5 sm:gap-6 lg:gap-10 min-h-[220px] sm:min-h-[420px] lg:min-h-[520px]">
           {/* =========================================================================
               01. LEFT: STATIONARY GIRL IMAGE
               - Preserves exact original image proportions & appearance
               - No zoom, no movement, no parallax, no animation
               - No card, no frame, no border, no background box
               ========================================================================= */}
-          <div className="w-full lg:w-[42%] xl:w-[40%] shrink-0 flex items-end justify-center lg:justify-start pointer-events-none select-none">
+          <div className="w-[42%] sm:w-[42%] xl:w-[40%] shrink-0 flex items-end justify-center lg:justify-start pointer-events-none select-none">
             <img
               src={homePageGirlImg}
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).src = '/images/banners/home-page-girl.png';
               }}
               alt="HAATZA Fashion — Trending Collection"
-              className="h-[360px] sm:h-[420px] md:h-[480px] lg:h-[530px] xl:h-[560px] w-auto max-w-none object-contain select-none pointer-events-none -ml-6 sm:-ml-10 lg:-ml-14"
+              className="h-[210px] xs:h-[240px] sm:h-[420px] md:h-[480px] lg:h-[530px] xl:h-[560px] w-auto max-w-none object-contain select-none pointer-events-none -ml-2 sm:-ml-10 lg:-ml-14"
               loading="eager"
             />
           </div>
@@ -316,22 +333,22 @@ export const Fashion3DAnimatedBannerWidget: React.FC<Fashion3DAnimatedBannerWidg
               - Staggered entrance timing
               - Clean, spacious visual hierarchy
               ========================================================================= */}
-          <div className="w-full lg:w-[58%] xl:w-[60%] flex flex-col justify-center py-4 lg:py-8 pl-0 lg:pl-2 text-left haatza-flip-stage">
+          <div className="w-[58%] sm:w-[58%] xl:w-[60%] flex flex-col justify-center py-2 sm:py-4 lg:py-8 pl-1 sm:pl-2 text-left haatza-flip-stage">
             {/* Badge / Spotlight Tag */}
             <div
-              className={`mb-3 sm:mb-4 flex items-center gap-2 ${
+              className={`mb-1.5 sm:mb-4 flex items-center gap-2 ${
                 phase === 'exiting' ? 'anim-exit-support' : phase === 'entering' ? 'anim-enter-support' : ''
               }`}
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-black tracking-wider uppercase bg-[#2962FF]/10 text-[#2962FF] border border-[#2962FF]/20">
-                <Sparkles className="w-3.5 h-3.5" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black tracking-wider uppercase bg-[#2962FF]/10 text-[#2962FF] border border-[#2962FF]/20">
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 {activeSlide.badge || 'EDITORIAL SPOTLIGHT'}
               </span>
             </div>
 
             {/* Line 1: Main Headline with 3D Depth */}
             <h2
-              className={`haatza-3d-headline text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] font-black tracking-tight uppercase leading-[1.0] sm:leading-[0.95] font-heading ${
+              className={`haatza-3d-headline text-lg xs:text-xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[80px] font-black tracking-tight uppercase leading-[1.05] sm:leading-[0.95] font-heading ${
                 phase === 'exiting' ? 'anim-exit-headline' : phase === 'entering' ? 'anim-enter-headline' : ''
               }`}
             >
@@ -340,7 +357,7 @@ export const Fashion3DAnimatedBannerWidget: React.FC<Fashion3DAnimatedBannerWidg
 
             {/* Line 2: Second Line with Electric 3D Extrusion */}
             <h3
-              className={`haatza-3d-secondline text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-wide uppercase leading-tight sm:leading-snug mt-2 sm:mt-3 font-heading ${
+              className={`haatza-3d-secondline text-sm xs:text-base sm:text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-wide uppercase leading-tight sm:leading-snug mt-1 sm:mt-2 lg:mt-3 font-heading ${
                 phase === 'exiting' ? 'anim-exit-secondline' : phase === 'entering' ? 'anim-enter-secondline' : ''
               }`}
             >
@@ -349,7 +366,7 @@ export const Fashion3DAnimatedBannerWidget: React.FC<Fashion3DAnimatedBannerWidg
 
             {/* Short Description */}
             <p
-              className={`mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-700 font-medium leading-relaxed max-w-xl font-sans ${
+              className={`mt-1.5 sm:mt-4 text-[11px] sm:text-base md:text-lg text-slate-700 font-medium leading-snug sm:leading-relaxed max-w-xl font-sans line-clamp-2 sm:line-clamp-none ${
                 phase === 'exiting' ? 'anim-exit-desc' : phase === 'entering' ? 'anim-enter-desc' : ''
               }`}
             >
@@ -358,26 +375,26 @@ export const Fashion3DAnimatedBannerWidget: React.FC<Fashion3DAnimatedBannerWidg
 
             {/* Small Supporting Text & Interactive CTA */}
             <div
-              className={`mt-4 sm:mt-6 flex flex-wrap items-center gap-4 ${
+              className={`mt-2.5 sm:mt-6 flex flex-wrap items-center gap-2 sm:gap-4 ${
                 phase === 'exiting' ? 'anim-exit-support' : phase === 'entering' ? 'anim-enter-support' : ''
               }`}
             >
               <Link
                 to={activeSlide.ctaLink}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#0F172A] hover:bg-[#1E293B] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 group cursor-pointer"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-6 sm:py-3 rounded-md bg-[#0F172A] hover:bg-[#1E293B] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 group cursor-pointer"
               >
                 <span>{activeSlide.ctaText}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 
-              <span className="text-xs sm:text-sm font-semibold tracking-wide text-slate-600 flex items-center gap-1.5">
+              <span className="hidden sm:flex text-xs sm:text-sm font-semibold tracking-wide text-slate-600 items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#2962FF]" />
                 {activeSlide.supportingText}
               </span>
             </div>
 
             {/* Subtle Slide Indicators */}
-            <div className="mt-8 flex items-center gap-2 pointer-events-auto">
+            <div className="mt-3.5 sm:mt-8 flex items-center gap-1.5 sm:gap-2 pointer-events-auto">
               {slides.map((slide, idx) => {
                 const isActive = idx === currentIndex;
                 return (

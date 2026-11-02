@@ -84,17 +84,9 @@ export const MoreToExploreSection: React.FC<MoreToExploreSectionProps> = React.m
             <Compass className="w-5 h-5" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight font-heading">
-                More to Explore
-              </h2>
-              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-[#EEF3FF] text-[#2962FF] border border-[#DBEAFE] text-[10px] font-black uppercase tracking-wider font-heading">
-                Endless Discovery
-              </span>
-            </div>
-            <p className="text-xs text-zinc-500 mt-0.5 font-body">
-              Endless exploration awaits. Discover diverse handpicked curations across fashion, tech & home.
-            </p>
+            <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight font-heading">
+              More to Explore
+            </h2>
           </div>
         </div>
       </div>

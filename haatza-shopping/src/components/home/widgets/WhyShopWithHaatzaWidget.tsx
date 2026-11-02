@@ -33,16 +33,9 @@ export const WhyShopWithHaatzaWidget: React.FC<WhyShopWithHaatzaWidgetProps> = (
       className={`w-full py-8 sm:py-10 px-6 sm:px-10 rounded-3xl bg-white border border-[#E5EAF3] shadow-xs ${className}`}
     >
       <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-blue-50 text-[#2962FF] border border-blue-200 mb-2">
-          <Award className="w-3.5 h-3.5" />
-          <span>The HAATZA Standard</span>
-        </div>
         <h2 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight font-heading">
           Why Shop with HAATZA?
         </h2>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Designed from the ground up for Indian shoppers with authentic products and verified care.
-        </p>
       </div>
 
       {/* 4 Benefits Cards Grid */}

@@ -93,14 +93,14 @@ export const FixedDiscountSideTab: React.FC = () => {
         onClick={() => setIsOpen(true)}
         aria-label="Open Promotional Discounts panel"
         aria-expanded={isOpen}
-        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-[#1E293B] hover:bg-[#0F172A] text-white py-3.5 px-2 rounded-l-md shadow-xl border-l-2 border-y border-slate-700/80 flex flex-col items-center gap-2.5 cursor-pointer transition-all duration-300 hover:pr-3 group select-none focus:outline-hidden focus:ring-2 focus:ring-[#2962FF]"
+        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-[#1E293B] hover:bg-[#0F172A] text-white py-2 sm:py-3.5 px-1 sm:px-2 rounded-l-md shadow-xl border-l-2 border-y border-slate-700/80 flex flex-col items-center gap-1.5 sm:gap-2.5 cursor-pointer transition-all duration-300 hover:pr-2.5 sm:hover:pr-3 group select-none focus:outline-hidden focus:ring-2 focus:ring-[#2962FF]"
       >
         {/* Leftward-pointing triangle arrow */}
-        <span className="w-0 h-0 border-y-4 border-y-transparent border-r-6 border-r-white group-hover:-translate-x-0.5 transition-transform" />
+        <span className="w-0 h-0 border-y-[3px] border-y-transparent border-r-[4px] sm:border-y-4 sm:border-r-6 border-r-white group-hover:-translate-x-0.5 transition-transform" />
 
         {/* Vertical Text */}
         <span
-          className="text-[10px] sm:text-[11px] font-black tracking-widest uppercase text-white whitespace-nowrap"
+          className="text-[8.5px] sm:text-[11px] font-black tracking-widest uppercase text-white whitespace-nowrap"
           style={{
             writingMode: 'vertical-rl',
             transform: 'rotate(180deg)',
@@ -124,12 +124,12 @@ export const FixedDiscountSideTab: React.FC = () => {
       {/* Drawer Panel */}
       <aside
         aria-label="Available Promotional Discounts"
-        className={`fixed top-0 right-0 bottom-0 w-[90vw] max-w-sm sm:max-w-md bg-white z-50 shadow-2xl flex flex-col transition-transform duration-300 ease-out transform ${
+        className={`fixed top-0 right-0 bottom-0 w-[85vw] max-w-[320px] sm:max-w-md bg-white z-50 shadow-2xl flex flex-col transition-transform duration-300 ease-out transform ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Drawer Header */}
-        <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+        <div className="p-3 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-[#2962FF] text-white flex items-center justify-center shadow-xs">
               <Percent className="w-4 h-4" />

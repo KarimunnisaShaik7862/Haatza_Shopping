@@ -28,8 +28,6 @@ export const ElectronicsPage: React.FC = () => {
       <Breadcrumbs items={[{ label: 'Categories', link: '/products' }, { label: 'Electronics & Audio' }]} className="mb-4" />
       <SectionHeading
         title="Next-Gen Electronics & Hi-Res Audio"
-        subtitle="Hybrid ANC headphones, smartphones, wearables, and fast accessories."
-        badge="TOP TECH"
       />
       {loading ? (
         <Loading type="grid" count={8} />

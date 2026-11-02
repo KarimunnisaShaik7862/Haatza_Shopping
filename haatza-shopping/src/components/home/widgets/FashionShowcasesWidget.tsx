@@ -30,16 +30,9 @@ export const FashionShowcasesWidget: React.FC<FashionShowcasesWidgetProps> = ({
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#2962FF] mb-1">
-              <Shirt className="w-3.5 h-3.5 text-[#2962FF]" />
-              <span>{menData.eyebrow}</span>
-            </div>
             <h3 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight font-heading">
               {menData.title}
             </h3>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              {menData.subtitle}
-            </p>
           </div>
 
           <Link
@@ -126,16 +119,9 @@ export const FashionShowcasesWidget: React.FC<FashionShowcasesWidgetProps> = ({
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#2962FF] mb-1">
-              <Sparkles className="w-3.5 h-3.5 text-[#2962FF]" />
-              <span>{womenData.eyebrow}</span>
-            </div>
             <h3 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight font-heading">
               {womenData.title}
             </h3>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              {womenData.subtitle}
-            </p>
           </div>
 
           <Link

@@ -32,6 +32,14 @@
 
 html {
   scrollbar-gutter: stable;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+  position: relative;
 }
 
 /* --------------------------------------------------------------------------
@@ -149,3 +157,29 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* --------------------------------------------------------------------------
+   Suggested For You: The Classic "Lift & Glow" (Subtle Elevation) Transition
+   -------------------------------------------------------------------------- */
+.suggested-product-card {
+  width: 300px;
+  max-width: calc(100vw - 32px);
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  
+  /* 1. Define the transition property, duration, and easing function */
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  will-change: transform; /* Optimizes browser rendering performance */
+}
+
+/* Hover State */
+.suggested-product-card:hover {
+  /* 2. Lift the card upward slightly */
+  transform: translateY(-8px);
+  
+  /* 3. Deepen the shadow to imply height */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12);
+}
+

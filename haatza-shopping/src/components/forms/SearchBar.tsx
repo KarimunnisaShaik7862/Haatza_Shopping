@@ -558,7 +558,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           - Dynamic two-column layout: suggestions & stores (left) + products (right)
           ==================================================================== */}
       {isOpen && hasQuery && (
-        <div className="absolute top-full left-0 w-full md:min-w-[560px] md:max-w-[85vw] mt-2 bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+        <div className="absolute top-full left-0 w-full sm:w-[480px] md:w-[620px] max-w-[calc(100vw-24px)] sm:max-w-[85vw] mt-2 bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden z-50 animate-in fade-in slide-in-from-top-1 duration-150">
           
           {/* TOP HEADER BAR WITH PROMINENT CLOSE (X) BUTTON */}
           <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-zinc-100 bg-zinc-50/70">

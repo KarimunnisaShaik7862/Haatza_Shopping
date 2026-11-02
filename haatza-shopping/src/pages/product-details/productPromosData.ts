@@ -1,11 +1,11 @@
 import { Product } from '../../types';
-import ghostMannequinKurtaPng from '../../assets/promos/gallery/ghost-mannequin-kurta.png';
-import ghostMannequinBlazerPng from '../../assets/promos/gallery/ghost-mannequin-blazer.png';
-import floatingHandbagPng from '../../assets/promos/gallery/floating-luxury-handbag.png';
-import floatingSunglassesPng from '../../assets/promos/gallery/floating-designer-sunglasses.png';
-import floatingSkincarePng from '../../assets/promos/gallery/floating-skincare-serum.png';
-import floatingWatchPng from '../../assets/promos/gallery/floating-chronograph-watch.png';
-import floatingSneakersPng from '../../assets/images/store49/sneakers.png';
+const ghostMannequinKurtaPng = '/images/promos/gallery/ghost-mannequin-kurta.png';
+const ghostMannequinBlazerPng = '/images/promos/gallery/ghost-mannequin-blazer.png';
+const floatingHandbagPng = '/images/promos/gallery/floating-luxury-handbag.png';
+const floatingSunglassesPng = '/images/promos/gallery/floating-designer-sunglasses.png';
+const floatingSkincarePng = '/images/promos/gallery/floating-skincare-serum.png';
+const floatingWatchPng = '/images/promos/gallery/floating-chronograph-watch.png';
+const floatingSneakersPng = '/images/store49/sneakers.png';
 
 export interface PromotionalProductItem {
   id: string;
