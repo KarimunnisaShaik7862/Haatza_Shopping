@@ -90,6 +90,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
               discountPercentage={product.discountPercentage}
               unit={product.unit}
               size="lg"
+              productName={product.name}
             />
 
             <p className="text-xs text-[#5F6368] line-clamp-3 leading-relaxed">

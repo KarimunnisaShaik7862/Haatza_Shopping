@@ -12,7 +12,7 @@ export const WishlistButton: React.FC = () => {
   return (
     <Link
       to="/wishlist"
-      className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold text-zinc-800 hover:text-zinc-950 hover:bg-zinc-100 transition-colors group cursor-pointer"
+      className="relative flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold text-zinc-800 hover:text-zinc-950 hover:bg-zinc-100 transition-colors group cursor-pointer"
       aria-label={`My List with ${wishlistCount} items`}
     >
       <div className="relative">

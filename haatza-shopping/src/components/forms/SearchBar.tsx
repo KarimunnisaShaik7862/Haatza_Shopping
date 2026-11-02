@@ -1,22 +1,44 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Search, Mic, MicOff, X, Clock, ArrowRight, Tag, ShoppingBag } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Search, Mic, MicOff, X, Clock, ArrowRight, Tag, ShoppingBag, Zap, Sparkles } from 'lucide-react';
 import { useDestination } from '../../context/DestinationContext';
 import { useToast } from '../../context/ToastContext';
 import { useActivity } from '../../context/ActivityContext';
 import { mockProducts } from '../../services/mock/data/products';
 import { mockCategories } from '../../services/mock/data/categories';
+import { ALL_LITE_PRODUCTS } from '@lite/data/allProductsRegistry';
+import { haatzaLiteCategories } from '@lite/data/liteData';
+import { haatzaNestServices } from '@nest/data/nestData';
 
 const RECENT_SEARCHES_KEY = 'haatza_recent_searches';
 
 interface SearchSuggestion {
   id: string;
-  type: 'recent' | 'product' | 'category' | 'brand' | 'query';
+  type: 'recent' | 'product' | 'lite' | 'service' | 'category' | 'brand' | 'query';
   title: string;
   subtitle?: string;
+  badge?: string;
+  image?: string;
+  price?: number;
   slug?: string;
   categorySlug?: string;
+  destinationType?: 'haatza' | 'lite' | 'nest';
 }
+
+// Popular grocery keywords for instant autocomplete query suggestions in Lite
+const LITE_POPULAR_KEYWORDS = [
+  'Apple', 'Apples', 'Amul Milk', 'Amul Butter', 'Atta', 'Aashirvaad Atta', 'Avocado', 'Almonds',
+  'Banana', 'Bread', 'Butter', 'Broccoli', 'Basmati Rice', 'Biscuits', 'Baby Food',
+  'Cheese', 'Curd', 'Coffee', 'Chilli', 'Carrot', 'Cookies', 'Chips', 'Coconut Oil', 'Cerelac',
+  'Dairy Milk', 'Dark Chocolate', 'Eggs', 'Fresh Fruits', 'Fresh Vegetables', 'Frozen Peas',
+  'Ghee', 'Green Tea', 'Grapes', 'Garlic', 'Ginger',
+  'Honey', 'Ice Cream', 'Juice', 'Ketchup',
+  'Milk', 'Mango', 'Mint', 'Maggi Noodles', 'Mustard Oil',
+  'Noodles', 'Nutella', 'Oil', 'Olive Oil', 'Onion', 'Orange', 'Oats',
+  'Potato', 'Paneer', 'Peanut Butter', 'Pasta', 'Papaya',
+  'Rice', 'Rusk', 'Sugar', 'Salt', 'Sunflower Oil', 'Spices',
+  'Tea', 'Tomato', 'Toothpaste', 'Wheat Flour', 'Yogurt'
+];
 
 export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) => {
   const { destination, theme } = useDestination();
@@ -68,21 +90,175 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
     return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, []);
 
-  // Destination theme-aware focus styles
-  const activeColor = theme?.primary || (destination === 'lite' ? '#238636' : destination === 'nest' ? '#6C3FC5' : '#2962FF');
-  const activeRingClass = destination === 'lite'
-    ? 'focus:border-[#238636] focus:ring-2 focus:ring-[#238636]/20'
-    : destination === 'nest'
-    ? 'focus:border-[#6C3FC5] focus:ring-2 focus:ring-[#6C3FC5]/20'
-    : 'focus:border-[#2962FF] focus:ring-3 focus:ring-[#2962FF]/14';
+  const location = useLocation();
 
-  // Compute matched autocomplete suggestions
+  // Resolve current platform dynamically based on route and destination context
+  const currentPlatform: 'shopping' | 'lite' | 'nest' = useMemo(() => {
+    const path = location.pathname.toLowerCase();
+    if (
+      destination === 'lite' ||
+      path.startsWith('/lite') ||
+      path.startsWith('/light') ||
+      path.startsWith('/categories')
+    ) {
+      return 'lite';
+    }
+    if (
+      destination === 'nest' ||
+      path.startsWith('/nest') ||
+      path.startsWith('/next') ||
+      path.startsWith('/services') ||
+      path.startsWith('/bookings')
+    ) {
+      return 'nest';
+    }
+    return 'shopping';
+  }, [destination, location.pathname]);
+
+  // Destination page-specific border and ring styles (Shopping: Blue, Lite: Green, Nest: Purple)
+  const platformThemes = {
+    shopping: {
+      color: '#2962FF',
+      className: 'border-2 border-[#2962FF] focus:border-[#2962FF] focus:ring-2 focus:ring-[#2962FF]/20',
+    },
+    lite: {
+      color: '#00C853',
+      className: 'border-2 border-[#00C853] focus:border-[#00C853] focus:ring-2 focus:ring-[#00C853]/20',
+    },
+    nest: {
+      color: '#7C3AED',
+      className: 'border-2 border-[#7C3AED] focus:border-[#7C3AED] focus:ring-2 focus:ring-[#7C3AED]/20',
+    },
+  };
+
+  const activeTheme = platformThemes[currentPlatform];
+  const activeColor = activeTheme.color;
+
+  // Compute matched autocomplete suggestions with intelligent relevance ranking
   const suggestions: SearchSuggestion[] = useMemo(() => {
-    const q = debouncedQuery.toLowerCase();
+    const q = (query.trim() || debouncedQuery).toLowerCase();
     if (!q) return [];
 
     const results: SearchSuggestion[] = [];
 
+    // Helper: calculate match score
+    const getRelevanceScore = (title: string, tags?: string[], category?: string) => {
+      const lower = title.toLowerCase();
+      let score = 0;
+      if (lower === q) score += 1000;
+      else if (lower.startsWith(q)) score += 800;
+      else if (lower.split(/[\s\-•,/]+/).some((w) => w.startsWith(q))) score += 600;
+      else if (tags?.some((t) => t.toLowerCase().startsWith(q))) score += 500;
+      else if (category?.toLowerCase().startsWith(q)) score += 400;
+      else if (lower.includes(q)) score += 200;
+      else if (tags?.some((t) => t.toLowerCase().includes(q))) score += 150;
+      else if (category?.toLowerCase().includes(q)) score += 100;
+      return score;
+    };
+
+    // -------------------------------------------------------------
+    // PLATFORM: HAATZA LITE (Grocery, Instant Delivery)
+    // -------------------------------------------------------------
+    if (currentPlatform === 'lite') {
+      // 1. Direct Keyword Autocomplete (e.g. typing 'a' -> 'Apple', 'Atta', 'Amul Milk')
+      const matchedKeywords = LITE_POPULAR_KEYWORDS.filter(
+        (kw) => kw.toLowerCase().startsWith(q) || kw.toLowerCase().includes(q)
+      ).sort((a, b) => {
+        const aStarts = a.toLowerCase().startsWith(q);
+        const bStarts = b.toLowerCase().startsWith(q);
+        if (aStarts && !bStarts) return -1;
+        if (!aStarts && bStarts) return 1;
+        return a.localeCompare(b);
+      }).slice(0, 2);
+
+      matchedKeywords.forEach((kw) => {
+        results.push({
+          id: `query-${kw}`,
+          type: 'query',
+          title: kw,
+          subtitle: 'in Groceries & Essentials',
+          destinationType: 'lite',
+        });
+      });
+
+      // 2. Scored & Ranked Lite Products
+      const scoredLite = (ALL_LITE_PRODUCTS as any[])
+        .filter((p) => (p as any).destination !== 'haatza' && (p as any).destination !== 'nest')
+        .map((p) => {
+          const tags = Array.isArray(p.tags) ? p.tags : [];
+          const score = getRelevanceScore(p.name || '', tags, p.categoryName || '');
+          return { product: p, score };
+        })
+        .filter((item) => item.score > 0)
+        .sort((a, b) => b.score - a.score);
+
+      scoredLite.slice(0, 5).forEach(({ product: prod }) => {
+        const prodImg =
+          prod.mainImage ||
+          prod.image ||
+          (Array.isArray(prod.images) ? prod.images[0] : undefined);
+
+        results.push({
+          id: `lite-${prod.id}`,
+          type: 'lite',
+          title: prod.name,
+          image: prodImg,
+          price: prod.price,
+          subtitle: `₹${prod.price} • ${prod.categoryName || 'Lite'}`,
+          badge: '⚡ 10m Delivery',
+          slug: prod.id || prod.slug,
+          destinationType: 'lite',
+        });
+      });
+
+      // 3. Matched Categories (strictly Haatza Lite categories)
+      haatzaLiteCategories
+        .filter((c) => c.name.toLowerCase().includes(q))
+        .slice(0, 1)
+        .forEach((c) => {
+          results.push({
+            id: `cat-${c.id}`,
+            type: 'category',
+            title: c.name,
+            categorySlug: c.slug,
+            subtitle: 'in Categories',
+            destinationType: 'lite',
+          });
+        });
+
+      return results.slice(0, 8);
+    }
+
+    // -------------------------------------------------------------
+    // PLATFORM: HAATZA NEST (Home Services)
+    // -------------------------------------------------------------
+    if (currentPlatform === 'nest') {
+      const matchedServices = (haatzaNestServices as any[])
+        .map((s) => {
+          const score = getRelevanceScore(s.name || '', [], s.category || '');
+          return { service: s, score };
+        })
+        .filter((item) => item.score > 0)
+        .sort((a, b) => b.score - a.score);
+
+      matchedServices.slice(0, 5).forEach(({ service: srv }) => {
+        results.push({
+          id: `srv-${srv.id}`,
+          type: 'service',
+          title: srv.name,
+          subtitle: `From ₹${srv.price?.toLocaleString('en-IN')} • ${srv.category}`,
+          badge: '🏠 Nest Service',
+          slug: srv.slug,
+          destinationType: 'nest',
+        });
+      });
+
+      return results.slice(0, 8);
+    }
+
+    // -------------------------------------------------------------
+    // PLATFORM: SHOPPING MARKETPLACE
+    // -------------------------------------------------------------
     // 1. Matched previous searches
     recentSearches
       .filter((s) => s.toLowerCase().includes(q) && s.toLowerCase() !== q)
@@ -98,7 +274,7 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
 
     // 2. Matched Categories
     mockCategories
-      .filter((c) => c.destination === destination && c.name.toLowerCase().includes(q))
+      .filter((c) => (c.destination === 'haatza' || !c.destination) && (c as any).destination !== 'lite' && (c as any).destination !== 'nest' && c.name.toLowerCase().includes(q))
       .slice(0, 2)
       .forEach((c) => {
         results.push({
@@ -107,49 +283,37 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
           title: c.name,
           categorySlug: c.slug,
           subtitle: 'in Categories',
+          destinationType: 'haatza',
         });
       });
 
-    // 3. Matched Brands
-    const brandSet = new Set<string>();
-    mockProducts
-      .filter((p) => p.destination === destination && p.brand.toLowerCase().includes(q))
-      .forEach((p) => brandSet.add(p.brand));
-
-    Array.from(brandSet)
-      .slice(0, 2)
-      .forEach((brand) => {
-        results.push({
-          id: `brand-${brand}`,
-          type: 'brand',
-          title: brand,
-          subtitle: 'in Brands',
-        });
-      });
-
-    // 4. Matched Products
-    mockProducts
-      .filter((p) => {
-        if (p.destination !== destination) return false;
-        return (
-          p.name.toLowerCase().includes(q) ||
-          p.categoryName.toLowerCase().includes(q) ||
-          p.tags.some((t) => t.toLowerCase().includes(q))
-        );
+    // 3. Matched Shopping Marketplace Products
+    const scoredShopping = mockProducts
+      .filter((p) => p.destination === 'haatza' || (!p.destination && (p as any).destination !== 'lite' && (p as any).destination !== 'nest'))
+      .map((p) => {
+        const tags = Array.isArray(p.tags) ? p.tags : [];
+        const score = getRelevanceScore(p.name || '', tags, p.categoryName || '');
+        return { product: p, score };
       })
-      .slice(0, 4)
-      .forEach((prod) => {
-        results.push({
-          id: `prod-${prod.id}`,
-          type: 'product',
-          title: prod.name,
-          subtitle: `₹${prod.price.toLocaleString('en-IN')} • ${prod.categoryName}`,
-          slug: prod.slug,
-        });
-      });
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score);
 
-    return results;
-  }, [debouncedQuery, destination, recentSearches]);
+    scoredShopping.slice(0, 4).forEach(({ product: prod }) => {
+      results.push({
+        id: `prod-${prod.id}`,
+        type: 'product',
+        title: prod.name,
+        image: (prod as any).image || prod.mainImage || (Array.isArray(prod.images) ? prod.images[0] : undefined),
+        price: prod.price,
+        subtitle: `₹${prod.price?.toLocaleString('en-IN')} • ${prod.categoryName}`,
+        badge: 'Shopping',
+        slug: prod.slug,
+        destinationType: 'haatza',
+      });
+    });
+
+    return results.slice(0, 8);
+  }, [query, debouncedQuery, currentPlatform, recentSearches]);
 
   const saveRecentSearch = useCallback(
     (term: string) => {
@@ -176,22 +340,33 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
     setIsOpen(false);
     setSelectedIndex(-1);
 
-    if (destination === 'nest') {
-      navigate(`/nest?search=${encodeURIComponent(term)}`);
+    if (currentPlatform === 'nest') {
+      navigate(`/nest/services?q=${encodeURIComponent(term)}`);
+    } else if (currentPlatform === 'lite') {
+      navigate(`/lite/search?q=${encodeURIComponent(term)}`);
     } else {
       navigate(`/search?q=${encodeURIComponent(term)}`);
     }
   };
 
   const handleSelectSuggestion = (sugg: SearchSuggestion) => {
-    if (sugg.type === 'product' && sugg.slug) {
-      saveRecentSearch(sugg.title);
-      setIsOpen(false);
+    saveRecentSearch(sugg.title);
+    setIsOpen(false);
+
+    if (sugg.type === 'lite') {
+      navigate(`/lite/product/${sugg.slug || sugg.id}`);
+    } else if (sugg.type === 'service') {
+      navigate(`/nest/services?q=${encodeURIComponent(sugg.title)}`);
+    } else if (sugg.type === 'product' && sugg.slug) {
       navigate(`/product/${sugg.slug}`);
     } else if (sugg.type === 'category' && sugg.categorySlug) {
-      saveRecentSearch(sugg.title);
-      setIsOpen(false);
-      navigate(`/category/${sugg.categorySlug}`);
+      if (sugg.destinationType === 'lite' || currentPlatform === 'lite') {
+        navigate(`/lite/${sugg.categorySlug}`);
+      } else if (sugg.destinationType === 'nest' || currentPlatform === 'nest') {
+        navigate(`/nest/services?category=${sugg.categorySlug}`);
+      } else {
+        navigate(`/category/${sugg.categorySlug}`);
+      }
     } else {
       handleExecuteSearch(sugg.title);
     }
@@ -308,14 +483,14 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
   };
 
   const getPlaceholder = () => {
-    switch (destination) {
+    switch (currentPlatform) {
       case 'lite':
-        return 'Search for groceries, fresh fruits, dairy, snacks...';
+        return 'Search groceries, milk, fruits...';
       case 'nest':
-        return 'Search for home cleaning, kitchen scrub, laundry & home help...';
-      case 'haatza':
+        return 'Search cleaning, home services...';
+      case 'shopping':
       default:
-        return 'Search for Products, Brands and More';
+        return 'Search products, brands and more...';
     }
   };
 
@@ -336,17 +511,19 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
         className="relative flex items-center"
       >
         {/* Left search icon */}
-        <div className="absolute left-3.5 text-zinc-400 pointer-events-none">
+        <div className="absolute left-3 sm:left-3.5 text-zinc-400 pointer-events-none">
           <Search className="w-4 h-4" />
         </div>
 
-        {/* Square / rectangular search bar with destination-specific focus styling (No blue!) */}
+        {/* Square / rectangular search bar with destination-specific outer surrounding layer */}
         <input
           ref={inputRef}
           type="text"
           value={query}
           onChange={(e) => {
-            setQuery(e.target.value);
+            const val = e.target.value;
+            setQuery(val);
+            setDebouncedQuery(val.trim());
             setIsOpen(true);
             setSelectedIndex(-1);
           }}
@@ -359,11 +536,12 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
           onKeyDown={handleKeyDown}
           placeholder={getPlaceholder()}
           aria-label="Search products, brands and categories"
-          className={`w-full pl-10 pr-20 py-2 bg-white hover:bg-zinc-50/50 focus:bg-white text-sm text-[#172033] rounded-xl border border-[#E5EAF3] focus:outline-hidden transition-all shadow-2xs placeholder:text-slate-400 font-normal ${activeRingClass}`}
+          className={`w-full pl-9 sm:pl-10 ${query ? 'pr-16 sm:pr-20' : 'pr-9 sm:pr-20'} py-1.5 sm:py-2 bg-white hover:bg-zinc-50/50 focus:bg-white text-xs sm:text-sm text-[#172033] rounded-xl focus:outline-hidden transition-all shadow-2xs placeholder:text-slate-400 font-normal ${activeTheme.className}`}
+          style={{ borderColor: activeTheme.color }}
         />
 
         {/* Right action buttons container (Clear + Microphone) */}
-        <div className="absolute right-2.5 flex items-center gap-1">
+        <div className="absolute right-2 sm:right-2.5 flex items-center gap-0.5 sm:gap-1">
           {/* Clear query button */}
           {query && (
             <button
@@ -447,7 +625,7 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
                         key={item.id}
                         type="button"
                         onClick={() => handleSelectSuggestion(item)}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-left rounded-lg transition-colors group ${
+                        className={`w-full flex items-center justify-between px-3 py-2 text-left rounded-lg transition-colors group cursor-pointer ${
                           isSelected ? 'bg-zinc-100' : 'hover:bg-zinc-50'
                         }`}
                         style={{
@@ -455,25 +633,53 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className = '' }) 
                         }}
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
-                          {item.type === 'recent' && (
-                            <Clock className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                          )}
-                          {item.type === 'product' && (
-                            <ShoppingBag className="w-3.5 h-3.5 text-zinc-400 shrink-0 group-hover:text-zinc-800" />
-                          )}
-                          {item.type === 'category' && (
-                            <Tag className="w-3.5 h-3.5 text-zinc-400 shrink-0 group-hover:text-zinc-800" />
-                          )}
-                          {item.type === 'brand' && (
-                            <Search className="w-3.5 h-3.5 text-zinc-400 shrink-0 group-hover:text-zinc-800" />
+                          {item.image ? (
+                            <div className="w-8 h-8 rounded-lg bg-emerald-50/50 border border-emerald-100/70 p-0.5 shrink-0 flex items-center justify-center overflow-hidden">
+                              <img src={item.image} alt="" className="w-full h-full object-contain" />
+                            </div>
+                          ) : item.type === 'query' ? (
+                            <div className="w-7 h-7 rounded-lg bg-zinc-100 flex items-center justify-center shrink-0 text-zinc-500">
+                              <Search className="w-3.5 h-3.5" />
+                            </div>
+                          ) : item.type === 'recent' ? (
+                            <div className="w-7 h-7 rounded-lg bg-zinc-100 flex items-center justify-center shrink-0 text-zinc-400">
+                              <Clock className="w-3.5 h-3.5" />
+                            </div>
+                          ) : item.type === 'lite' ? (
+                            <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                              <Zap className="w-3.5 h-3.5" />
+                            </div>
+                          ) : item.type === 'service' ? (
+                            <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                              <Sparkles className="w-3.5 h-3.5" />
+                            </div>
+                          ) : item.type === 'category' ? (
+                            <div className="w-7 h-7 rounded-lg bg-zinc-100 text-zinc-600 flex items-center justify-center shrink-0">
+                              <Tag className="w-3.5 h-3.5" />
+                            </div>
+                          ) : (
+                            <div className="w-7 h-7 rounded-lg bg-zinc-100 text-zinc-600 flex items-center justify-center shrink-0">
+                              <ShoppingBag className="w-3.5 h-3.5" />
+                            </div>
                           )}
 
-                          <div className="truncate">
-                            <span className="text-xs sm:text-sm font-medium text-zinc-800 group-hover:text-black">
+                          <div className="truncate flex items-center gap-1.5 flex-wrap">
+                            <span className="text-xs sm:text-sm font-semibold text-zinc-800 group-hover:text-black">
                               {item.title}
                             </span>
+                            {item.badge && (
+                              <span className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded-md ${
+                                item.type === 'lite'
+                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
+                                  : item.type === 'service'
+                                  ? 'bg-purple-50 text-purple-700 border border-purple-200/60'
+                                  : 'bg-zinc-100 text-zinc-600'
+                              }`}>
+                                {item.badge}
+                              </span>
+                            )}
                             {item.subtitle && (
-                              <span className="ml-2 text-[11px] text-zinc-400">
+                              <span className="text-[11px] text-zinc-400">
                                 {item.subtitle}
                               </span>
                             )}

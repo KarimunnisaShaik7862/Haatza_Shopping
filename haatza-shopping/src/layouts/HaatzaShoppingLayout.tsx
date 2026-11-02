@@ -14,7 +14,7 @@ export const HaatzaShoppingLayout: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F7F9FC] via-[#F5F7FF] to-[#FFFFFF] text-[#172033] haatza-shopping-root">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-[#F0FDF4]/40 to-white text-[#111D15] haatza-shopping-root">
       <Navbar />
       <main className="flex-1 pb-16 md:pb-0">
         <ErrorBoundary>

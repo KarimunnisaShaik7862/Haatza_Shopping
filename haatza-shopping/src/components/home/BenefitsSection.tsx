@@ -27,7 +27,7 @@ export const BenefitsSection: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 sm:p-8 bg-white rounded-3xl border border-[#E5EAF3] shadow-soft-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 sm:p-8 bg-white rounded-3xl border border-[#E5EAF3] shadow-soft-sm">
         {benefits.map((b, i) => (
           <div key={i} className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-2xl bg-[#EEF3FF] border border-[#DBEAFE] flex items-center justify-center shrink-0 shadow-2xs">

@@ -9,6 +9,7 @@ import { WishlistProvider } from './providers/WishlistProvider';
 import { RecentlyViewedProvider } from './providers/RecentlyViewedProvider';
 import { ActivityProvider } from './providers/ActivityProvider';
 import { AppRouter } from './router';
+import { AppInstallModal } from '../components/common/AppInstallModal';
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
                   <RecentlyViewedProvider>
                     <ActivityProvider>
                       <AppRouter />
+                      <AppInstallModal />
                     </ActivityProvider>
                   </RecentlyViewedProvider>
                 </WishlistProvider>

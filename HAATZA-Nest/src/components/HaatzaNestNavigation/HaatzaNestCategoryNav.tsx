@@ -5,7 +5,7 @@ import { haatzaNestCategories } from '../../data/nestData';
 export const HaatzaNestCategoryNav: React.FC = () => {
   return (
     <nav className="bg-white border-b border-zinc-200/70 overflow-x-auto scrollbar-none py-2">
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 flex items-center gap-2 sm:gap-3 shrink-0">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16 flex items-center gap-2 sm:gap-3 shrink-0">
         {haatzaNestCategories.map((cat) => (
           <Link
             key={cat.id}

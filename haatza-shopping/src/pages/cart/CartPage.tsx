@@ -6,6 +6,7 @@ import { CartSummary } from '../../components/cart/CartSummary';
 import { EmptyState } from '../../components/common/EmptyState';
 import { Breadcrumbs } from '../../components/common/Breadcrumbs';
 import { ShoppingBag, ArrowLeft, Bookmark, Trash2 } from 'lucide-react';
+import { RatingDisplay } from '../../components/common/RatingDisplay';
 import { optimizeImageUrl } from '../../utils/imageOptimizer';
 
 export const CartPage: React.FC = () => {
@@ -15,7 +16,7 @@ export const CartPage: React.FC = () => {
 
   if (cart.length === 0 && savedForLater.length === 0) {
     return (
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-12">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16 py-12">
         <EmptyState
           icon={ShoppingBag}
           title="Your Shopping Cart is Empty"
@@ -28,7 +29,7 @@ export const CartPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} className="mb-4" />
 
       <div className="flex items-center justify-between pb-6 border-b border-zinc-200">
@@ -103,6 +104,12 @@ export const CartPage: React.FC = () => {
                           className="w-14 h-14 rounded-lg object-cover"
                         />
                         <div>
+                          <div className="flex items-center gap-1.5 mb-0.5">
+                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider truncate max-w-[120px]">
+                              {product.brand || 'HAATZA'}
+                            </span>
+                            <RatingDisplay rating={product.rating || 4.5} size="sm" showCount={false} />
+                          </div>
                           <h4 className="text-xs font-bold text-zinc-900 line-clamp-1">
                             {product.name || 'Product'}
                           </h4>

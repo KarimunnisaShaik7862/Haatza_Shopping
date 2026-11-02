@@ -18,11 +18,22 @@ export default defineConfig({
     },
   },
   build: {
+    target: 'esnext',
+    cssCodeSplit: true,
+    minify: 'esbuild',
+    chunkSizeWarningLimit: 800,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-core': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-icons': ['lucide-react'],
+        manualChunks(id) {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
+            return 'vendor-core';
+          }
+          if (id.includes('node_modules/lucide-react')) {
+            return 'vendor-icons';
+          }
+          if (id.includes('node_modules/framer-motion')) {
+            return 'vendor-motion';
+          }
         },
       },
     },

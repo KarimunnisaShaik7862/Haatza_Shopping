@@ -249,7 +249,7 @@ export const ProductListingPage: React.FC = () => {
   }, [products]);
 
   return (
-    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16 space-y-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-14 xl:px-16 py-4 sm:py-6 pb-24 sm:pb-16 space-y-6">
       {/* 01. Breadcrumbs */}
       <Breadcrumbs items={breadcrumbs} className="mb-2" />
 
@@ -272,8 +272,8 @@ export const ProductListingPage: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:w-3/4" />
         </div>
 
-        {/* Banner Content with Lite Header Banner padding p-6 sm:p-12 */}
-        <div className="relative z-10 p-6 sm:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-6 w-full">
+        {/* Banner Content with Lite Header Banner padding p-5 sm:p-12 */}
+        <div className="relative z-10 p-5 sm:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-6 w-full">
           <div className="max-w-2xl space-y-3">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] sm:text-xs font-black tracking-wider uppercase text-white shadow-2xs font-heading">

@@ -19,7 +19,7 @@ export const NewsletterSection: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0B1A3A] via-[#1E40AF] to-[#2962FF] text-white p-8 sm:p-12 shadow-xl border border-white/20">
+      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0B1A3A] via-[#1E40AF] to-[#2962FF] text-white p-5 sm:p-12 shadow-xl border border-white/20">
         {/* Background ambient glow */}
         <div className="absolute -top-24 -right-24 w-72 h-72 bg-[#2962FF]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#DBEAFE]/15 rounded-full blur-3xl pointer-events-none" />

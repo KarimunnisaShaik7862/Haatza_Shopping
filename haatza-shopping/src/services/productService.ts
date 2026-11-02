@@ -142,22 +142,27 @@ export const productService = {
     return related.slice(0, limit);
   },
 
-  async searchProducts(query: string, destination?: DestinationType): Promise<Product[]> {
+  async searchProducts(query: string, destination: DestinationType = 'haatza'): Promise<Product[]> {
     const q = query.trim().toLowerCase();
-    if (!q) return [];
-
-    let list = ALL_MOCK_PRODUCTS.filter((p) => {
-      return (
-        p.name.toLowerCase().includes(q) ||
-        p.brand.toLowerCase().includes(q) ||
-        p.categoryName.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.tags.some((t) => t.toLowerCase().includes(q))
-      );
-    });
+    let list = ALL_MOCK_PRODUCTS;
 
     if (destination) {
       list = list.filter((p) => p.destination === destination);
+    } else {
+      list = list.filter((p) => p.destination === 'haatza' || (!p.destination && (p as any).destination !== 'lite' && (p as any).destination !== 'nest'));
+    }
+
+    if (q) {
+      list = list.filter((p) => {
+        return (
+          p.name.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q) ||
+          p.categoryName.toLowerCase().includes(q) ||
+          (p.subcategoryName && p.subcategoryName.toLowerCase().includes(q)) ||
+          p.description.toLowerCase().includes(q) ||
+          p.tags.some((t) => t.toLowerCase().includes(q))
+        );
+      });
     }
 
     return list;

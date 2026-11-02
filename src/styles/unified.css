@@ -14,128 +14,239 @@
 @import "../../HAATZA-Nest/src/styles/HaatzaNestPadding.css";
 
 @theme {
-  /* Shopping Colors */
-  --color-haatza-blue: #2962FF;
-  --color-haatza-blue-hover: #1E4ED8;
-  --color-haatza-blue-light: #F5F7FF;
-  --color-haatza-blue-surface: #EEF3FF;
-  --color-haatza-blue-highlight: #DBEAFE;
-  --color-haatza-page-bg: #F7F9FC;
+  /* Glowing Green & Crisp White Palette */
+  --color-haatza-blue: #00C853;
+  --color-haatza-blue-hover: #00B348;
+  --color-haatza-blue-light: #F0FDF4;
+  --color-haatza-blue-surface: #E8F8EE;
+  --color-haatza-blue-highlight: #DCFCE7;
+  --color-haatza-page-bg: #FFFFFF;
   --color-haatza-surface: #FFFFFF;
-  --color-haatza-text: #172033;
-  --color-haatza-text-muted: #64748B;
-  --color-haatza-border: #E5EAF3;
-  --color-haatza-success: #16A34A;
+  --color-haatza-text: #111D15;
+  --color-haatza-text-muted: #5E6E64;
+  --color-haatza-border: #E2ECE5;
+  --color-haatza-success: #00E676;
   --color-haatza-error: #DC2626;
 
-  --color-haatza-shopping-primary: #2962FF;
-  --color-haatza-shopping-hover: #1E4ED8;
-  --color-haatza-shopping-bg: #F7F9FC;
+  --color-haatza-shopping-primary: #00C853;
+  --color-haatza-shopping-hover: #00B348;
+  --color-haatza-shopping-bg: #FFFFFF;
   --color-haatza-shopping-surface: #FFFFFF;
 
   /* Lite Colors */
-  --color-haatza-lite-green: #238636;
-  --color-haatza-lite-green-hover: #1c6d2c;
-  --color-haatza-lite-light: #EAF6EC;
-  --color-haatza-lite-surface: #F2FAF4;
-  --color-haatza-lite-yellow: #FFD54F;
-  --color-haatza-lite-bg: #F8FCF9;
-  --color-haatza-lite-dark: #172033;
-  --color-haatza-lite-muted: #64748B;
+  --color-haatza-lite-green: #00C853;
+  --color-haatza-lite-green-hover: #00B348;
+  --color-haatza-lite-light: #F0FDF4;
+  --color-haatza-lite-surface: #E8F8EE;
+  --color-haatza-lite-yellow: #00E676;
+  --color-haatza-lite-bg: #FFFFFF;
+  --color-haatza-lite-dark: #111D15;
+  --color-haatza-lite-muted: #5E6E64;
   --color-haatza-lite-border: #E2ECE5;
 
   /* Nest Colors */
-  --color-haatza-nest-purple: #6C3FC5;
-  --color-haatza-nest-purple-hover: #572fa8;
-  --color-haatza-nest-light: #F2ECFC;
-  --color-haatza-nest-surface: #F6F2FC;
-  --color-haatza-nest-yellow: #FFD54F;
-  --color-haatza-nest-bg: #FAF8FD;
-  --color-haatza-nest-dark: #172033;
-  --color-haatza-nest-muted: #64748B;
-  --color-haatza-nest-border: #E8E2F2;
+  --color-haatza-nest-purple: #00C853;
+  --color-haatza-nest-purple-hover: #00B348;
+  --color-haatza-nest-light: #F0FDF4;
+  --color-haatza-nest-surface: #E8F8EE;
+  --color-haatza-nest-yellow: #00E676;
+  --color-haatza-nest-bg: #FFFFFF;
+  --color-haatza-nest-dark: #111D15;
+  --color-haatza-nest-muted: #5E6E64;
+  --color-haatza-nest-border: #E2ECE5;
 
   /* Typography */
   --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Scale tokens */
+  --scale-104: 1.04;
 }
 
 /* --------------------------------------------------------------------------
    Scoped Container Classes for HAATZA Shopping
-   Unified Responsive Horizontal Spacing System
+   Unified Responsive Horizontal Spacing System & Smooth Scroll
    -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* GPU Acceleration for silky smooth 60fps scrolling & micro-animations */
+.smooth-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
 .haatza-shopping-container,
 .shopping-container,
-.haatza-container {
+.haatza-container,
+.haatza-lite-container,
+.lite-container,
+.haatza-nest-container,
+.nest-container {
   width: 100%;
-  max-width: var(--haatza-shopping-container-max, 1440px);
+  max-width: var(--haatza-shopping-container-max, 1520px);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--haatza-shopping-pad-mobile, 24px);
-  padding-right: var(--haatza-shopping-pad-mobile, 24px);
+  padding-left: var(--haatza-shopping-pad-mobile, 16px);
+  padding-right: var(--haatza-shopping-pad-mobile, 16px);
   box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
   .haatza-shopping-container,
   .shopping-container,
-  .haatza-container {
-    padding-left: var(--haatza-shopping-pad-tablet, 40px);
-    padding-right: var(--haatza-shopping-pad-tablet, 40px);
+  .haatza-container,
+  .haatza-lite-container,
+  .lite-container,
+  .haatza-nest-container,
+  .nest-container {
+    padding-left: var(--haatza-shopping-pad-tablet, 24px);
+    padding-right: var(--haatza-shopping-pad-tablet, 24px);
   }
 }
 
 @media (min-width: 1024px) {
   .haatza-shopping-container,
   .shopping-container,
-  .haatza-container {
-    padding-left: var(--haatza-shopping-pad-desktop, 56px);
-    padding-right: var(--haatza-shopping-pad-desktop, 56px);
+  .haatza-container,
+  .haatza-lite-container,
+  .lite-container,
+  .haatza-nest-container,
+  .nest-container {
+    padding-left: var(--haatza-shopping-pad-desktop, 32px);
+    padding-right: var(--haatza-shopping-pad-desktop, 32px);
   }
 }
 
 @media (min-width: 1280px) {
   .haatza-shopping-container,
   .shopping-container,
-  .haatza-container {
-    padding-left: var(--haatza-shopping-pad-xl, 64px);
-    padding-right: var(--haatza-shopping-pad-xl, 64px);
+  .haatza-container,
+  .haatza-lite-container,
+  .lite-container,
+  .haatza-nest-container,
+  .nest-container {
+    padding-left: var(--haatza-shopping-pad-xl, 40px);
+    padding-right: var(--haatza-shopping-pad-xl, 40px);
   }
 }
 
 /* Banner container */
 .haatza-shopping-banner-container,
-.shopping-banner-container {
+.shopping-banner-container,
+.haatza-lite-banner-container,
+.lite-banner-container,
+.haatza-nest-banner-container,
+.nest-banner-container {
   width: 100%;
-  max-width: var(--haatza-shopping-container-max, 1440px);
+  max-width: var(--haatza-shopping-container-max, 1520px);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--haatza-shopping-pad-mobile, 24px);
-  padding-right: var(--haatza-shopping-pad-mobile, 24px);
+  padding-left: var(--haatza-shopping-pad-mobile, 16px);
+  padding-right: var(--haatza-shopping-pad-mobile, 16px);
   box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
   .haatza-shopping-banner-container,
-  .shopping-banner-container {
-    padding-left: var(--haatza-shopping-pad-tablet, 40px);
-    padding-right: var(--haatza-shopping-pad-tablet, 40px);
+  .shopping-banner-container,
+  .haatza-lite-banner-container,
+  .lite-banner-container,
+  .haatza-nest-banner-container,
+  .nest-banner-container {
+    padding-left: var(--haatza-shopping-pad-tablet, 24px);
+    padding-right: var(--haatza-shopping-pad-tablet, 24px);
   }
 }
 
 @media (min-width: 1024px) {
   .haatza-shopping-banner-container,
-  .shopping-banner-container {
-    padding-left: var(--haatza-shopping-pad-desktop, 56px);
-    padding-right: var(--haatza-shopping-pad-desktop, 56px);
+  .shopping-banner-container,
+  .haatza-lite-banner-container,
+  .lite-banner-container,
+  .haatza-nest-banner-container,
+  .nest-banner-container {
+    padding-left: var(--haatza-shopping-pad-desktop, 32px);
+    padding-right: var(--haatza-shopping-pad-desktop, 32px);
   }
 }
 
 @media (min-width: 1280px) {
   .haatza-shopping-banner-container,
-  .shopping-banner-container {
-    padding-left: var(--haatza-shopping-pad-xl, 64px);
-    padding-right: var(--haatza-shopping-pad-xl, 64px);
+  .shopping-banner-container,
+  .haatza-lite-banner-container,
+  .lite-banner-container,
+  .haatza-nest-banner-container,
+  .nest-banner-container {
+    padding-left: var(--haatza-shopping-pad-xl, 40px);
+    padding-right: var(--haatza-shopping-pad-xl, 40px);
+  }
+}
+
+/* Global container width & side space normalization for whole website */
+.max-w-\[1440px\],
+.max-w-7xl,
+.max-w-\[1720px\],
+.max-w-\[1600px\] {
+  max-width: min(94vw, 1520px) !important;
+}
+
+/* Comfortable, visible side padding on containers across whole website */
+.max-w-\[1440px\].px-3,
+.max-w-\[1440px\].px-4,
+.max-w-\[1440px\].px-6,
+.max-w-7xl.px-4,
+.max-w-7xl.px-6,
+.max-w-\[1720px\].px-2,
+.max-w-\[1720px\].px-4,
+.max-w-\[1720px\].px-6 {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+@media (min-width: 640px) {
+  .max-w-\[1440px\].sm\:px-6,
+  .max-w-\[1440px\].sm\:px-10,
+  .max-w-7xl.sm\:px-6,
+  .max-w-7xl.sm\:px-10,
+  .max-w-\[1720px\].sm\:px-4,
+  .max-w-\[1720px\].sm\:px-6,
+  .sm\:px-10 {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .max-w-\[1440px\].lg\:px-8,
+  .max-w-\[1440px\].lg\:px-14,
+  .max-w-7xl.lg\:px-8,
+  .max-w-7xl.lg\:px-14,
+  .max-w-\[1720px\].lg\:px-6,
+  .lg\:px-14 {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .max-w-\[1440px\].xl\:px-16,
+  .max-w-7xl.xl\:px-16,
+  .max-w-\[1720px\].xl\:px-16,
+  .xl\:px-16 {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
   }
 }
 

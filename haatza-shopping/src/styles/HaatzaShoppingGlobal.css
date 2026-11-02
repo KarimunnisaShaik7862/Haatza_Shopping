@@ -38,11 +38,11 @@
 .shopping-container,
 .haatza-container {
   width: 100%;
-  max-width: var(--haatza-shopping-container-max, 1440px);
+  max-width: var(--haatza-shopping-container-max, 1520px);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--haatza-shopping-pad-mobile, 24px);
-  padding-right: var(--haatza-shopping-pad-mobile, 24px);
+  padding-left: var(--haatza-shopping-pad-mobile, 16px);
+  padding-right: var(--haatza-shopping-pad-mobile, 16px);
   box-sizing: border-box;
 }
 
@@ -50,8 +50,8 @@
   .haatza-shopping-container,
   .shopping-container,
   .haatza-container {
-    padding-left: var(--haatza-shopping-pad-tablet, 40px);
-    padding-right: var(--haatza-shopping-pad-tablet, 40px);
+    padding-left: var(--haatza-shopping-pad-tablet, 24px);
+    padding-right: var(--haatza-shopping-pad-tablet, 24px);
   }
 }
 
@@ -59,8 +59,8 @@
   .haatza-shopping-container,
   .shopping-container,
   .haatza-container {
-    padding-left: var(--haatza-shopping-pad-desktop, 56px);
-    padding-right: var(--haatza-shopping-pad-desktop, 56px);
+    padding-left: var(--haatza-shopping-pad-desktop, 32px);
+    padding-right: var(--haatza-shopping-pad-desktop, 32px);
   }
 }
 
@@ -68,8 +68,8 @@
   .haatza-shopping-container,
   .shopping-container,
   .haatza-container {
-    padding-left: var(--haatza-shopping-pad-xl, 64px);
-    padding-right: var(--haatza-shopping-pad-xl, 64px);
+    padding-left: var(--haatza-shopping-pad-xl, 40px);
+    padding-right: var(--haatza-shopping-pad-xl, 40px);
   }
 }
 
@@ -77,35 +77,35 @@
 .haatza-shopping-banner-container,
 .shopping-banner-container {
   width: 100%;
-  max-width: var(--haatza-shopping-container-max, 1440px);
+  max-width: var(--haatza-shopping-container-max, 1520px);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--haatza-shopping-pad-mobile, 24px);
-  padding-right: var(--haatza-shopping-pad-mobile, 24px);
+  padding-left: var(--haatza-shopping-pad-mobile, 16px);
+  padding-right: var(--haatza-shopping-pad-mobile, 16px);
   box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
   .haatza-shopping-banner-container,
   .shopping-banner-container {
-    padding-left: var(--haatza-shopping-pad-tablet, 40px);
-    padding-right: var(--haatza-shopping-pad-tablet, 40px);
+    padding-left: var(--haatza-shopping-pad-tablet, 24px);
+    padding-right: var(--haatza-shopping-pad-tablet, 24px);
   }
 }
 
 @media (min-width: 1024px) {
   .haatza-shopping-banner-container,
   .shopping-banner-container {
-    padding-left: var(--haatza-shopping-pad-desktop, 56px);
-    padding-right: var(--haatza-shopping-pad-desktop, 56px);
+    padding-left: var(--haatza-shopping-pad-desktop, 32px);
+    padding-right: var(--haatza-shopping-pad-desktop, 32px);
   }
 }
 
 @media (min-width: 1280px) {
   .haatza-shopping-banner-container,
   .shopping-banner-container {
-    padding-left: var(--haatza-shopping-pad-xl, 64px);
-    padding-right: var(--haatza-shopping-pad-xl, 64px);
+    padding-left: var(--haatza-shopping-pad-xl, 40px);
+    padding-right: var(--haatza-shopping-pad-xl, 40px);
   }
 }
 

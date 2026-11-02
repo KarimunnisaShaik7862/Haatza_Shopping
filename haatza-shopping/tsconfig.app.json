@@ -23,7 +23,15 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "erasableSyntaxOnly": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../src/*"],
+      "@shopping/*": ["src/*"],
+      "@lite/*": ["../HAATZA-Lite/src/*"],
+      "@nest/*": ["../HAATZA-Nest/src/*"]
+    }
   },
   "include": ["src"]
 }

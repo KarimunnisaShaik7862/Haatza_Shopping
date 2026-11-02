@@ -1,4 +1,5 @@
 import { Product } from '../../../types';
+import { mockShoppingMilkProducts } from '@/data/searchMockProducts';
 
 export const mockProducts: Product[] = [
   // ==========================================
@@ -863,4 +864,5 @@ export const mockProducts: Product[] = [
     sellerName: 'Haatza Lite DarkStore #14',
     sellerRating: 4.9,
   },
+  ...mockShoppingMilkProducts,
 ];

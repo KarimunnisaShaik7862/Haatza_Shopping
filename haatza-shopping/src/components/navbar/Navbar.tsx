@@ -24,9 +24,9 @@ export const Navbar: React.FC = () => {
       <header className="sticky top-[49px] sm:top-[53px] z-40 bg-white border-b border-[#E5EAF3] shadow-soft-sm">
         {/* ROW: Search Bar | User Actions (Profile, Wishlist, Cart) */}
         <div className="bg-white">
-          <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-3 sm:gap-4 lg:gap-8">
+          <div className="max-w-[1440px] mx-auto px-2.5 sm:px-6 lg:px-14 xl:px-16 py-1.5 sm:py-2 flex items-center justify-between gap-1.5 sm:gap-4 lg:gap-8">
             {/* Search Bar + Mobile Drawer Trigger */}
-            <div className="flex-1 max-w-4xl flex items-center gap-2">
+            <div className="flex-1 min-w-0 max-w-4xl flex items-center gap-1 sm:gap-2">
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -36,17 +36,17 @@ export const Navbar: React.FC = () => {
                 {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
 
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <SearchBar />
               </div>
             </div>
 
             {/* Actions */}
-            <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
+            <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
               <ProfileMenu />
-              <div className="h-5 w-px bg-[#E5EAF3]" />
+              <div className="h-4 w-px bg-[#E5EAF3] hidden sm:block" />
               <WishlistButton />
-              <div className="h-5 w-px bg-[#E5EAF3]" />
+              <div className="h-4 w-px bg-[#E5EAF3] hidden sm:block" />
               <CartButton />
             </div>
           </div>

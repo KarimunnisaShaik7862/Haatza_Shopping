@@ -5,6 +5,8 @@ import { Product } from '../../types';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 
+import { RatingDisplay } from '../common/RatingDisplay';
+
 interface Under49StoreSectionProps {
   products: Product[];
 }
@@ -84,7 +86,7 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
                     <img
                       src={item.mainImage}
                       alt={item.name}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                      className="w-full h-full object-cover object-center scale-[1.08] group-hover:scale-[1.14] transition-transform duration-500 ease-out"
                       loading="lazy"
                     />
                   </Link>
@@ -120,9 +122,12 @@ export const Under49StoreSection: React.FC<Under49StoreSectionProps> = ({ produc
                 {/* Details */}
                 <div className="p-3 flex-1 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block truncate">
-                      {item.brand}
-                    </span>
+                    <div className="flex items-center justify-between gap-1 mb-1">
+                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider truncate font-heading">
+                        {item.brand}
+                      </span>
+                      <RatingDisplay rating={item.rating || 4.5} size="sm" showCount={false} />
+                    </div>
                     <Link
                       to={`/product/${item.slug}`}
                       className="block text-xs sm:text-sm font-bold text-zinc-900 hover:text-[#2962FF] line-clamp-2 leading-snug mt-0.5"

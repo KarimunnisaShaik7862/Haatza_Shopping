@@ -44,7 +44,7 @@ export const ProfileMenu: React.FC = () => {
               navigate('/account');
               setIsAccountMenuOpen(false);
             }}
-            className="flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-full hover:bg-zinc-100 text-zinc-800 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 p-1 sm:px-2.5 sm:py-1.5 rounded-full hover:bg-zinc-100 text-zinc-800 transition-colors cursor-pointer"
             title="View My Profile & Account"
             aria-label="View My Profile and Account"
           >

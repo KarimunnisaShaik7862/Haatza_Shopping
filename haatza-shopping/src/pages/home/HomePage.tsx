@@ -6,7 +6,11 @@ import {
   MainCarouselBanner,
   DealEndingItem,
   TrendingItemWithAnalytics,
+  mockMainCarouselBanners,
+  mockDealsEndingSoon,
+  mockTrendingWithAnalytics,
 } from '../../services/mock/data/promotions';
+import { mockProducts } from '../../services/mock/data/products';
 
 // Modular Sections
 import { FestivalPromotions } from './sections/FestivalPromotions/FestivalPromotions';
@@ -26,11 +30,15 @@ import { LoadingSkeleton } from '../../components/common/LoadingSkeleton';
 import { QuickViewModal } from '../../components/products/QuickViewModal';
 
 export const HomePage: React.FC = () => {
-  const [carouselBanners, setCarouselBanners] = useState<MainCarouselBanner[]>([]);
-  const [dealsEnding, setDealsEnding] = useState<DealEndingItem[]>([]);
-  const [dealsOfDay, setDealsOfDay] = useState<Product[]>([]);
-  const [trendingAnalytics, setTrendingAnalytics] = useState<TrendingItemWithAnalytics[]>([]);
-  const [newArrivals, setNewArrivals] = useState<Product[]>([]);
+  const [carouselBanners, setCarouselBanners] = useState<MainCarouselBanner[]>(() => mockMainCarouselBanners);
+  const [dealsEnding, setDealsEnding] = useState<DealEndingItem[]>(() => mockDealsEndingSoon);
+  const [dealsOfDay, setDealsOfDay] = useState<Product[]>(() => 
+    mockProducts.filter((p) => (p.isDealOfTheDay || p.discountPercentage >= 35) && p.destination === 'haatza').slice(0, 8)
+  );
+  const [trendingAnalytics, setTrendingAnalytics] = useState<TrendingItemWithAnalytics[]>(() => mockTrendingWithAnalytics);
+  const [newArrivals, setNewArrivals] = useState<Product[]>(() => 
+    mockProducts.filter((p) => p.isNewArrival && p.destination === 'haatza').slice(0, 8)
+  );
 
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
@@ -42,7 +50,7 @@ export const HomePage: React.FC = () => {
     setQuickViewProduct(null);
   }, []);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadHomepageData() {
@@ -88,62 +96,62 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-6 pb-24 sm:pb-16 pt-2 sm:pt-4">
       {/* 01. Festival Banner */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <FestivalPromotions />
       </div>
 
       {/* 02. Hero Campaign */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <HeroPromotions banners={carouselBanners} autoplayInterval={3000} />
       </div>
 
       {/* 03. Cashback & Offers */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <CashbackOffers />
       </div>
 
       {/* 04. Hurry! Deals Ending Soon */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <HurryDeals deals={dealsEnding} onQuickView={handleQuickView} />
       </div>
 
       {/* 05. Deals of the Day */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <DealsOfTheDay deals={dealsOfDay} onQuickView={handleQuickView} />
       </div>
 
       {/* 06. Recommended Products (Perfect Picks) */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <RecommendedProducts onQuickView={handleQuickView} />
       </div>
 
       {/* 07. Trending Products */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <TrendingProducts items={trendingAnalytics} onQuickView={handleQuickView} />
       </div>
 
       {/* 08. Just Landed (New Arrivals) */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <NewArrivals products={newArrivals} onQuickView={handleQuickView} />
       </div>
 
       {/* 09. Campaign Banner */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <ShoppingOffers />
       </div>
 
       {/* 10. Recently Viewed */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <RecentlyViewed onQuickView={handleQuickView} />
       </div>
 
       {/* 11. More to Explore */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16">
         <MoreToExplore onQuickView={handleQuickView} />
       </div>
 
       {/* 12. Benefits & Newsletter */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 space-y-6">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-10 lg:px-14 xl:px-16 space-y-6">
         <BenefitsSection />
         <NewsletterSection />
       </div>

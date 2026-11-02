@@ -8,6 +8,7 @@ import { RatingDisplay } from '../common/RatingDisplay';
 import { Badge } from '../common/Badge';
 import { Heart, ShoppingBag, Eye, Zap, Check, Flame } from 'lucide-react';
 import { optimizeImageUrl } from '../../utils/imageOptimizer';
+import { PriceInfoButton } from '../common/PriceInfoModal';
 
 export interface ProductCardProps {
   product: Product;
@@ -72,7 +73,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
     >
       {/* Product Image Container (Clean, Bright, Natural without dark shadows) */}
       <div className="relative aspect-square w-full bg-[#FAFAFA] overflow-hidden">
-        <Link to={`/product/${product.slug}`} className="block w-full h-full p-2">
+        <Link to={`/product/${product.slug}`} className="block w-full h-full p-0.5">
           <img
             src={optimizedImage}
             alt={product.name}
@@ -80,7 +81,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
             height="240"
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+            className="w-full h-full object-contain object-center scale-[1.08] group-hover:scale-[1.14] transition-transform duration-500 ease-out"
           />
         </Link>
 
@@ -152,7 +153,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
             <span className="text-[10px] sm:text-[11px] font-bold text-zinc-400 uppercase tracking-wider truncate font-heading">
               {product.brand}
             </span>
-            <RatingDisplay rating={product.rating} size="sm" showCount={false} />
+            <RatingDisplay rating={product.rating || 4.5} size="sm" showCount={false} />
           </div>
 
           {/* Product Name */}
@@ -167,15 +168,27 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
 
         {/* Price & Add to Cart button */}
         <div className="pt-2 border-t border-zinc-100 mt-2">
-          <div className="flex items-baseline gap-1.5 mb-2.5">
-            <span className="text-sm sm:text-base font-black text-zinc-950 font-heading">
-              ₹{product.price.toLocaleString('en-IN')}
-            </span>
-            {product.mrp > product.price && (
-              <span className="text-xs text-zinc-400 line-through">
-                ₹{product.mrp.toLocaleString('en-IN')}
+          <div className="flex items-center justify-between gap-1 mb-2.5">
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-sm sm:text-base font-black text-zinc-950 font-heading">
+                ₹{product.price.toLocaleString('en-IN')}
               </span>
-            )}
+              {product.mrp > product.price && (
+                <span className="text-xs text-zinc-400 line-through">
+                  ₹{product.mrp.toLocaleString('en-IN')}
+                </span>
+              )}
+            </div>
+            <PriceInfoButton
+              productName={product.name}
+              price={product.price}
+              mrp={product.mrp}
+              discountPercentage={product.discountPercentage}
+              unit={product.unit}
+              brand={product.brand}
+              size="xs"
+              theme="blue"
+            />
           </div>
 
           <button

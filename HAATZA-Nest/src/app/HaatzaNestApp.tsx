@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { HaatzaNestLocationProvider } from '../context/HaatzaNestLocationContext';
 import { HaatzaNestBookingProvider } from '../context/HaatzaNestBookingContext';
 import { HaatzaNestRouter } from './HaatzaNestRouter';
+import { AppInstallModal } from '../components/common/AppInstallModal';
 
 export const HaatzaNestApp: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ export const HaatzaNestApp: React.FC = () => {
       <HaatzaNestLocationProvider>
         <HaatzaNestBookingProvider>
           <HaatzaNestRouter />
+          <AppInstallModal />
         </HaatzaNestBookingProvider>
       </HaatzaNestLocationProvider>
     </BrowserRouter>

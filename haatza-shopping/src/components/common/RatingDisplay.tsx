@@ -2,7 +2,7 @@ import React from 'react';
 import { Star } from 'lucide-react';
 
 interface RatingDisplayProps {
-  rating: number;
+  rating?: number;
   reviewCount?: number;
   size?: 'sm' | 'md' | 'lg';
   showCount?: boolean;
@@ -14,6 +14,8 @@ export const RatingDisplay: React.FC<RatingDisplayProps> = ({
   size = 'sm',
   showCount = true,
 }) => {
+  const safeRating = typeof rating === 'number' && !isNaN(rating) && rating > 0 ? rating : 4.5;
+
   const starSizes = {
     sm: 'w-3.5 h-3.5',
     md: 'w-4 h-4',
@@ -27,9 +29,9 @@ export const RatingDisplay: React.FC<RatingDisplayProps> = ({
   };
 
   return (
-    <div className="inline-flex items-center gap-1.5">
+    <div className="inline-flex items-center gap-1.5 shrink-0">
       <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-700 text-white font-semibold text-xs leading-none">
-        <span>{rating.toFixed(1)}</span>
+        <span>{safeRating.toFixed(1)}</span>
         <Star className={`${starSizes[size]} fill-white stroke-none`} />
       </div>
       {showCount && reviewCount !== undefined && (

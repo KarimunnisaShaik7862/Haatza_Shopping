@@ -108,7 +108,7 @@ export const ProductDetailsPage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-14 xl:px-16 py-4 sm:py-6 pb-24 sm:pb-16">
       <Breadcrumbs items={breadcrumbs} className="mb-6" />
 
       {/* Main Product Showcase Grid */}
@@ -157,6 +157,7 @@ export const ProductDetailsPage: React.FC = () => {
               discountPercentage={product.discountPercentage}
               unit={product.unit}
               size="xl"
+              productName={product.name}
             />
             <p className="text-[11px] text-[#64748B] mt-1 font-body">
               Inclusive of all taxes. Free delivery on orders above ₹499.

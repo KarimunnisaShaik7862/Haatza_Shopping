@@ -4,22 +4,22 @@
    ========================================================================== */
 
 :root {
-  --haatza-nest-purple: #6C3FC5;
-  --haatza-nest-purple-hover: #572fa8;
-  --haatza-nest-purple-light: #F2ECFC;
-  --haatza-nest-purple-surface: #F6F2FC;
-  --haatza-nest-yellow: #FFD54F;
-  --haatza-nest-yellow-hover: #ffca28;
-  --haatza-nest-bg: #FAF8FD;
+  --haatza-nest-purple: #00C853;
+  --haatza-nest-purple-hover: #00B348;
+  --haatza-nest-purple-light: #F0FDF4;
+  --haatza-nest-purple-surface: #E8F8EE;
+  --haatza-nest-yellow: #00E676;
+  --haatza-nest-yellow-hover: #00C853;
+  --haatza-nest-bg: #FFFFFF;
   --haatza-nest-surface: #FFFFFF;
-  --haatza-nest-text: #172033;
-  --haatza-nest-text-muted: #64748B;
-  --haatza-nest-border: #E8E2F2;
+  --haatza-nest-text: #111D15;
+  --haatza-nest-text-muted: #5E6E64;
+  --haatza-nest-border: #E2ECE5;
 }
 
 @keyframes haatzaNestGlow {
-  0%, 100% { box-shadow: 0 0 15px rgba(108, 63, 197, 0.2); }
-  50% { box-shadow: 0 0 25px rgba(108, 63, 197, 0.35); }
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 230, 118, 0.35); }
+  50% { box-shadow: 0 0 25px rgba(0, 230, 118, 0.55); }
 }
 
 .haatza-nest-glow {

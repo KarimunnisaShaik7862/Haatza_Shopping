@@ -152,9 +152,9 @@ export const FestivalBanner: React.FC = React.memo(() => {
       aria-roledescription="carousel"
       aria-label="Festival Promotional Banners"
     >
-      {/* Background slide container with exact Lite Header Banner padding (p-6 sm:p-12) */}
+      {/* Background slide container with exact Lite Header Banner padding (p-4 sm:p-12) */}
       <div
-        className={`relative w-full bg-gradient-to-r ${current.bgGradient} text-white p-6 sm:p-12 flex flex-col sm:flex-row sm:items-center justify-between gap-6 transition-all duration-500 overflow-hidden`}
+        className={`relative w-full bg-gradient-to-r ${current.bgGradient} text-white p-4 sm:p-12 flex flex-col sm:flex-row sm:items-center justify-between gap-6 transition-all duration-500 overflow-hidden`}
       >
         {/* Decorative background image overlay */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">

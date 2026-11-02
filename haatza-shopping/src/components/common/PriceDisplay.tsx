@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatINR } from '../../utils/formatters';
+import { PriceInfoButton } from './PriceInfoModal';
 
 interface PriceDisplayProps {
   price: number;
@@ -8,6 +9,8 @@ interface PriceDisplayProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   unit?: string;
   className?: string;
+  productName?: string;
+  showInfo?: boolean;
 }
 
 export const PriceDisplay: React.FC<PriceDisplayProps> = ({
@@ -17,6 +20,8 @@ export const PriceDisplay: React.FC<PriceDisplayProps> = ({
   size = 'md',
   unit,
   className = '',
+  productName,
+  showInfo = true,
 }) => {
   const sizeConfig = {
     sm: {
@@ -45,7 +50,7 @@ export const PriceDisplay: React.FC<PriceDisplayProps> = ({
   const hasDiscount = mrp && mrp > price;
 
   return (
-    <div className={`flex items-baseline flex-wrap gap-x-2 gap-y-0.5 ${className}`}>
+    <div className={`flex items-center flex-wrap gap-x-1.5 gap-y-0.5 ${className}`}>
       <span className={current.price}>
         {formatINR(price)}
         {unit && <span className="text-xs font-normal text-[#5F6368] ml-1">/{unit}</span>}
@@ -58,6 +63,18 @@ export const PriceDisplay: React.FC<PriceDisplayProps> = ({
             <span className={current.discount}>{discountPercentage}% OFF</span>
           )}
         </>
+      )}
+
+      {showInfo && (
+        <PriceInfoButton
+          productName={productName || 'Product'}
+          price={price}
+          mrp={mrp || price}
+          discountPercentage={discountPercentage}
+          unit={unit}
+          size={size === 'xl' ? 'md' : size === 'lg' ? 'sm' : 'xs'}
+          theme="blue"
+        />
       )}
     </div>
   );

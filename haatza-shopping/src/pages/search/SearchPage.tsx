@@ -1,64 +1,86 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Product } from '../../types';
 import { productService } from '../../services/productService';
-import { Breadcrumbs } from '../../components/common/Breadcrumbs';
-import { Search } from 'lucide-react';
-import { SearchSort } from './SearchSort';
-import { SearchResults } from './SearchResults';
-import { SearchFilters } from './SearchFilters';
+import { useCart } from '../../context/CartContext';
+import { UnifiedSearchResultsView, GenericSearchResultProduct } from '@/components/search/UnifiedSearchResultsView';
 
 export const SearchPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const query = searchParams.get('q') || '';
+
   const [products, setProducts] = useState<Product[]>([]);
-  const [sortBy, setSortBy] = useState<'featured' | 'price_low' | 'price_high' | 'rating' | 'newest'>('featured');
   const [loading, setLoading] = useState(true);
+
+  const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
 
   useEffect(() => {
     async function doSearch() {
       setLoading(true);
-      const results = await productService.searchProducts(query);
-      
-      if (sortBy === 'price_low') results.sort((a, b) => a.price - b.price);
-      else if (sortBy === 'price_high') results.sort((a, b) => b.price - a.price);
-      else if (sortBy === 'rating') results.sort((a, b) => b.rating - a.rating);
-
-      setProducts(results);
-      setLoading(false);
+      try {
+        const results = await productService.searchProducts(query, 'haatza');
+        const shoppingOnly = results.filter(
+          (p) => p.destination === 'haatza' || (!p.destination && (p as any).destination !== 'lite' && (p as any).destination !== 'nest')
+        );
+        setProducts(shoppingOnly);
+      } catch (e) {
+        console.error('Search failed', e);
+      } finally {
+        setLoading(false);
+      }
     }
     doSearch();
-  }, [query, sortBy]);
+  }, [query]);
 
-  const breadcrumbs = [
-    { label: 'Search', link: '/search' },
-    { label: query ? `"${query}"` : 'All' },
-  ];
+  const getCartQuantity = (productId: string) => {
+    const item = cart.find((c) => c.productId === productId || c.product?.id === productId);
+    return item ? item.quantity : 0;
+  };
+
+  const handleAddToCart = (product: GenericSearchResultProduct, qty: number) => {
+    const original = products.find((p) => p.id === product.id);
+    if (original) {
+      addToCart(original, qty);
+    }
+  };
+
+  const handleUpdateQuantity = (productId: string, qty: number) => {
+    const item = cart.find((c) => c.productId === productId || c.product?.id === productId);
+    if (item) {
+      if (qty <= 0) {
+        removeFromCart(item.id);
+      } else {
+        updateQuantity(item.id, qty);
+      }
+    } else {
+      const original = products.find((p) => p.id === productId);
+      if (original && qty > 0) {
+        addToCart(original, qty);
+      }
+    }
+  };
+
+  const handleProductClick = (product: GenericSearchResultProduct) => {
+    navigate(`/product/${product.slug || product.id}`);
+  };
+
+  const handleSearchChange = (newQuery: string) => {
+    setSearchParams({ q: newQuery });
+  };
 
   return (
-    <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 py-6 pb-24 sm:pb-16">
-      <Breadcrumbs items={breadcrumbs} className="mb-4" />
-
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#E5EAF3] gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <Search className="w-6 h-6 text-[#2962FF]" />
-            <h1 className="text-2xl sm:text-3xl font-black text-[#172033] tracking-tight font-heading">
-              Search Results for "{query}"
-            </h1>
-          </div>
-          <div className="mt-1">
-            <SearchFilters totalResults={products.length} query={query} />
-          </div>
-        </div>
-
-        <SearchSort sortBy={sortBy} onChange={setSortBy} />
-      </div>
-
-      <div className="pt-6">
-        <SearchResults products={products} loading={loading} query={query} />
-      </div>
-    </div>
+    <UnifiedSearchResultsView
+      platform="shopping"
+      query={query}
+      products={products}
+      loading={loading}
+      getCartQuantity={getCartQuantity}
+      onAddToCart={handleAddToCart}
+      onUpdateQuantity={handleUpdateQuantity}
+      onProductClick={handleProductClick}
+      onSearchChange={handleSearchChange}
+    />
   );
 };
 

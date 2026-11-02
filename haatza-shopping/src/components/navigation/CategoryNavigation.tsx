@@ -273,12 +273,39 @@ export const CategoryNavigation: React.FC = () => {
           {/* Category Links */}
           {visibleCategories.map((cat, idx) => {
             const isAll = cat.slug === 'all';
-            const isActive =
-              (isAll && (location.pathname === `/${destination}` || location.pathname === '/')) ||
-              location.pathname.includes(`/category/${cat.slug}`);
+            const isSearchPage = location.pathname.includes('/search');
+            const searchParams = new URLSearchParams(location.search);
+            const searchQuery = (searchParams.get('q') || '').trim().toLowerCase();
+
+            const isSearchMatch = Boolean(
+              isSearchPage &&
+              searchQuery &&
+              (
+                cat.slug.toLowerCase().includes(searchQuery) ||
+                cat.name.toLowerCase().includes(searchQuery) ||
+                searchQuery.includes(cat.slug.toLowerCase()) ||
+                (searchQuery.includes('milk') && (cat.slug.includes('dairy') || cat.slug.includes('grocer') || cat.slug.includes('staple'))) ||
+                (searchQuery.includes('bread') && (cat.slug.includes('bakery') || cat.slug.includes('dairy') || cat.slug.includes('grocer'))) ||
+                ((searchQuery.includes('fruit') || searchQuery.includes('apple') || searchQuery.includes('mango')) && cat.slug.includes('fruit')) ||
+                ((searchQuery.includes('snack') || searchQuery.includes('chip') || searchQuery.includes('coffee') || searchQuery.includes('tea')) && cat.slug.includes('snack')) ||
+                ((searchQuery.includes('shirt') || searchQuery.includes('dress') || searchQuery.includes('cloth') || searchQuery.includes('fashion')) && cat.slug.includes('fashion')) ||
+                ((searchQuery.includes('phone') || searchQuery.includes('headphone') || searchQuery.includes('laptop') || searchQuery.includes('audio')) && cat.slug.includes('electron'))
+              )
+            );
+
+            const isActive = isSearchPage
+              ? isSearchMatch
+              : (isAll && (location.pathname === `/${destination}` || location.pathname === '/')) ||
+                location.pathname.includes(`/category/${cat.slug}`);
 
             const targetLink =
-              isAll
+              destination === 'lite'
+                ? isAll
+                  ? '/lite/all-for-you'
+                  : cat.slug === 'fruits-vegetables'
+                  ? '/lite/fruits-vegetables'
+                  : `/lite/categories/${cat.slug}`
+                : isAll
                 ? `/${destination}`
                 : destination === 'nest'
                 ? `/nest?category=${cat.slug}`
@@ -290,44 +317,65 @@ export const CategoryNavigation: React.FC = () => {
               <Link
                 key={cat.id || idx}
                 to={targetLink}
-                className="group flex flex-col items-center shrink-0 text-center py-0.5 transition-all select-none relative focus:outline-hidden"
+                onClick={() => {
+                  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                  document.documentElement.scrollTop = 0;
+                  document.body.scrollTop = 0;
+                }}
+                className={`group flex items-center justify-center shrink-0 text-center transition-all select-none relative focus:outline-hidden ${
+                  isSearchPage
+                    ? `px-3 py-1 rounded-full text-xs transition-all ${
+                        isActive
+                          ? 'bg-[#2962FF] text-white font-bold shadow-xs'
+                          : 'bg-slate-100/90 text-slate-700 hover:bg-slate-200/90 font-semibold'
+                      }`
+                    : 'flex-col py-0.5'
+                }`}
               >
-                {/* Icon box - matching reference screenshot */}
-                <div
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center transition-all duration-200 mb-1 ${
-                    isAll && isActive
-                      ? 'shadow-xs scale-105'
-                      : isActive
-                      ? 'ring-2 ring-offset-1 scale-105 shadow-2xs'
-                      : 'hover:scale-105 transition-transform'
-                  } ${
-                    isAll
-                      ? destination === 'haatza'
-                        ? 'bg-[#2962FF] text-white shadow-xs'
-                        : destination === 'lite'
-                        ? 'bg-[#238636] text-white shadow-xs'
-                        : 'bg-[#6C3FC5] text-white shadow-xs'
-                      : style.bg
-                  }`}
-                  style={{
-                    outlineColor: isActive ? activeColor : undefined,
-                  }}
-                >
-                  {ICON_MAP[cat.iconName] || <LayoutGrid className="w-4.5 h-4.5 sm:w-5 sm:h-5" />}
-                </div>
+                {/* Icon box - hidden when searching so only category name is shown */}
+                {!isSearchPage && (
+                  <div
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center transition-all duration-200 mb-1 ${
+                      isAll && isActive
+                        ? 'shadow-xs scale-105'
+                        : isActive
+                        ? 'ring-2 ring-offset-1 scale-105 shadow-2xs'
+                        : 'hover:scale-105 transition-transform'
+                    } ${
+                      isAll
+                        ? destination === 'haatza'
+                          ? 'bg-[#2962FF] text-white shadow-xs'
+                          : destination === 'lite'
+                          ? 'bg-[#238636] text-white shadow-xs'
+                          : 'bg-[#6C3FC5] text-white shadow-xs'
+                        : style.bg
+                    }`}
+                    style={{
+                      outlineColor: isActive ? activeColor : undefined,
+                    }}
+                  >
+                    {ICON_MAP[cat.iconName] || <LayoutGrid className="w-4.5 h-4.5 sm:w-5 sm:h-5" />}
+                  </div>
+                )}
 
-                {/* Label text */}
+                {/* Label text - only category name shown */}
                 <span
-                  className={`text-[10px] sm:text-[11px] font-semibold whitespace-nowrap transition-colors leading-tight ${
-                    isActive ? 'font-black' : 'text-zinc-700 group-hover:text-zinc-950'
+                  className={`text-[10px] sm:text-[11px] whitespace-nowrap transition-all leading-tight ${
+                    isSearchPage
+                      ? isActive
+                        ? 'text-white font-bold'
+                        : 'text-slate-700 font-semibold group-hover:text-slate-900'
+                      : isActive
+                      ? 'font-black'
+                      : 'text-zinc-700 font-semibold group-hover:font-extrabold group-hover:text-[#0C831F]'
                   }`}
-                  style={{ color: isActive ? activeColor : undefined }}
+                  style={{ color: !isSearchPage && isActive ? activeColor : undefined }}
                 >
                   {cat.name}
                 </span>
 
-                {/* Active Underline Indicator Bar - spans horizontally across content area */}
-                {isActive && (
+                {/* Active Underline Indicator Bar - only shown when not in search pill mode */}
+                {!isSearchPage && isActive && (
                   <span
                     className="absolute -bottom-1.5 inset-x-0 h-0.5 rounded-full transition-all"
                     style={{ backgroundColor: activeColor }}

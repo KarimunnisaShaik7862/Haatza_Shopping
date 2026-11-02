@@ -83,7 +83,7 @@ export const TrendingItemsSection: React.FC<TrendingItemsSectionProps> = ({ item
                   <img
                     src={item.mainImage}
                     alt={item.name}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className="w-full h-full object-cover object-center scale-[1.08] group-hover:scale-[1.14] transition-transform duration-500 ease-out"
                     loading="lazy"
                   />
                 </Link>

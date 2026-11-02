@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../types';
 import { PriceDisplay } from '../../components/common/PriceDisplay';
+import { RatingDisplay } from '../../components/common/RatingDisplay';
 import { ShoppingBag, Trash2 } from 'lucide-react';
 import { optimizeImageUrl } from '../../utils/imageOptimizer';
 
@@ -42,9 +43,12 @@ export const WishlistItem: React.FC<WishlistItemProps> = ({
 
       <div className="p-3.5 flex flex-col justify-between flex-1 space-y-3">
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-[#64748B] font-heading">
-            {product.brand}
-          </span>
+          <div className="flex items-center justify-between gap-1 mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#64748B] font-heading truncate">
+              {product.brand}
+            </span>
+            <RatingDisplay rating={product.rating || 4.6} size="sm" showCount={false} />
+          </div>
           <Link
             to={`/product/${product.slug || product.id}`}
             className="block text-xs sm:text-sm font-bold text-[#172033] hover:text-[#2962FF] line-clamp-2 transition-colors font-heading"
